@@ -40,7 +40,7 @@ struct MovieDetailView: View {
                     Text("4.4K Ratings")
                         .font(.caption)
                         .foregroundStyle(.secondary)
-                    Text(movie.voteAverage ?? 0.0, format: .number)
+                    Text(movie.voteAverage ?? 0.0, format: .number.precision(.fractionLength(1)))
                         .font(.title)
                         .fontWeight(.bold)
                     StarsView(rating: (movie.voteAverage ?? 0.0) / 2 , maxRating: 5)

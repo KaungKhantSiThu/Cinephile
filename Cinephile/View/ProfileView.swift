@@ -10,7 +10,7 @@ import SDWebImageSwiftUI
 
 enum ProfileViewCategory: String, Equatable, CaseIterable {
     case posts = "My Posts"
-    case list = "List"
+    case list = "Watch List"
     
     var localizedName: LocalizedStringKey { LocalizedStringKey(rawValue) }
 }
