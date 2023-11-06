@@ -24,6 +24,9 @@ struct TimelineView: View {
             }
             .navigationTitle(Text("Cinephile"))
             .navigationBarTitleDisplayMode(.inline)
+            .refreshable {
+                print("refreshed")
+            }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {

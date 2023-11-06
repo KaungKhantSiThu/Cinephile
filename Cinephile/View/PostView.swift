@@ -35,7 +35,7 @@ struct PostView: View {
                 Text(timeAgoString(from: Date(timeIntervalSinceNow: -36000)))
             }
             
-            Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.")
+            Text("Top Gun: Maverick is a thrilling sequel that surpasses the original. Tom Cruise delivers a stellar performance as the fearless and rebellious pilot who faces his demons and mentors a new generation of aviators. The action scenes are breathtaking and realistic, showcasing the best of modern fighter jets.")
                 .font(.body)
             
             MovieRow(movie: PreviewData.mockMovie)

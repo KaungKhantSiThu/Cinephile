@@ -23,7 +23,23 @@ struct DiscoverMoviesView: View {
                     MovieDetailView(movie: $0, addButtonAction: addAction(id:))
                 }
             }
-            .navigationTitle(Text("Tracker"))
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        print("search")
+                    } label: {
+                        Image(systemName: "magnifyingglass")
+                            .tint(.red)
+                    }
+                }
+                
+                ToolbarItem(placement: .topBarLeading) {
+                    Text("Tracker")
+                        .font(.largeTitle)
+                        .font(.system(size: 60))
+                        .fontWeight(.bold)
+                }
+            }
         }
     }
     

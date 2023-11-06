@@ -9,11 +9,11 @@ import SwiftUI
 import TMDb
 
 enum Tabs: Hashable {
-case home, social, profile, notifications
+case tracker, social, profile, notifications
 }
 
 struct ContentView: View {
-    @State private var selectedTab: Tabs = .home
+    @State private var selectedTab: Tabs = .social
     var body: some View {
         TabView(selection: self.$selectedTab) {
             Group {
@@ -27,7 +27,7 @@ struct ContentView: View {
                     .tabItem {
                         Label("Tracker", systemImage: "popcorn")
                     }
-                    .tag(Tabs.home)
+                    .tag(Tabs.tracker)
                 
                 NotificationsView()
                     .tabItem {
