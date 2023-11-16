@@ -23,6 +23,8 @@ struct DiscoverMoviesView: View {
                     MovieDetailView(id: $0.id, addButtonAction: addAction(id:))
                 }
             }
+            .navigationTitle("Tracker")
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
@@ -31,13 +33,6 @@ struct DiscoverMoviesView: View {
                         Image(systemName: "magnifyingglass")
                             .tint(.red)
                     }
-                }
-                
-                ToolbarItem(placement: .topBarLeading) {
-                    Text("Tracker")
-                        .font(.largeTitle)
-                        .font(.system(size: 60))
-                        .fontWeight(.bold)
                 }
             }
         }
