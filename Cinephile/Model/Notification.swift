@@ -20,6 +20,7 @@ struct Notification: Identifiable, Equatable {
     
     static let mock = [
         Notification(message: "Loki S2 EP6 is streaming tonight", date: .now, category: .release),
+        Notification(message: "Loki S2 EP8 is streaming tonight", date: .distantFuture, category: .release),
         Notification(message: "Somchai quoted your post: Lorem ipsum", date: .now, category: .post),
         Notification(message: "Invincible S2 EP2 is streaming tonight", date: .distantPast.addingTimeInterval(36000), category: .release)
     ]
