@@ -48,3 +48,5 @@ struct DiscoverMoviesView: View {
         .environmentObject(ViewModel(loader: MovieLoader()))
 
 }
+
+
