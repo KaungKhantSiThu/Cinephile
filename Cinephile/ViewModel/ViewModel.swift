@@ -16,6 +16,7 @@ protocol DataLoader {
 
 struct MovieLoader: DataLoader {
     
+    
     private let tmdb = TMDbAPI.init(apiKey: "a03aa105bd50498abba5719ade062653")
     
     let configuration = APIConfiguration.init(images: ImagesConfiguration(
@@ -28,7 +29,6 @@ struct MovieLoader: DataLoader {
         stillSizes: ["w92", "w185", "w300", "original"]), changeKeys: ["genres", "budget"])
     
     func loadMovie(withID id: Movie.ID) async throws -> Movie {
-
         return try await tmdb.movies.details(forMovie: id)
     }
     
@@ -58,7 +58,7 @@ class ViewModel<Loader: DataLoader>: ObservableObject, LoadableObject {
         Task {
             do {
                 let items = try await loader.loadSuggestedItems()
-                print(items)
+                print(items.first ?? "No value in the array")
                 self.state = .loaded(items)
             } catch {
                 self.state = .failed(error)

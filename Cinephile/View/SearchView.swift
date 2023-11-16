@@ -22,7 +22,7 @@ struct SearchView: View {
                 }
                 .listStyle(.plain)
                 .navigationDestination(for: Movie.self) {
-                    MovieDetailView(movie: $0, addButtonAction: addAction(id:))
+                    MovieDetailView(id: $0.id, addButtonAction: addAction(id:))
                 }
             }
             .searchable(text: $searchText, prompt: "Search Movies, Series, Cast")

@@ -9,8 +9,10 @@ import SwiftUI
 import TMDb
 
 struct MovieDetailView: View {
-    let movie: Movie
+    let id: Movie.ID
+    private let loader = MovieLoader()
     @State private var castMembers: [CastMember] = []
+    @State private var movie: Movie = PreviewData.mockMovie
     var addButtonAction: (Movie.ID) -> Void
     @State private var isMovieAdded = false
     var body: some View {
@@ -67,9 +69,10 @@ struct MovieDetailView: View {
             CastMemberView(castMembers: castMembers)
         }
         .task {
-            let movieLoader = MovieLoader()
             do {
-                let casts = try await movieLoader.loadCastMembers(withID: movie.id).cast.prefix(upTo: 5)
+                let casts = try await self.loader.loadCastMembers(withID: movie.id).cast.prefix(upTo: 5)
+                self.movie = try await self.loader.loadMovie(withID: self.id)
+                print(self.movie)
                 castMembers = Array(casts)
             } catch {
                 print(error.localizedDescription)
@@ -86,7 +89,7 @@ struct MovieDetailView: View {
     func addedList(id: Movie.ID) {
         print("\(id) is added")
     }
-    return MovieDetailView(movie: PreviewData.mockMovie, addButtonAction: addedList(id:))
+    return MovieDetailView(id: PreviewData.mockMovie.id, addButtonAction: addedList(id:))
 }
 
 struct CastMemberView: View {

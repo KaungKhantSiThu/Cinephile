@@ -55,7 +55,7 @@ struct CarousalView: View {
     NavigationStack {
         CarousalView(title: .discover, movies: PreviewData.mockMovieArray)
             .navigationDestination(for: Movie.self) {
-                MovieDetailView(movie: $0, addButtonAction: { (id: Movie.ID) -> Void in
+                MovieDetailView(id: $0.id, addButtonAction: { (id: Movie.ID) -> Void in
                     print(id)
                   })
         }
