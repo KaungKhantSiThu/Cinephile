@@ -59,13 +59,6 @@ struct MovieDetailView: View {
             Text(movie.overview ?? "No overview")
                 .padding()
             
-            Button{
-                
-            } label: {
-                Label("Post a review", systemImage: "pencil.and.outline")
-            }
-            .buttonStyle(CustomButtonStyle())
-            
             CastMemberView(castMembers: castMembers)
         }
         .task {
