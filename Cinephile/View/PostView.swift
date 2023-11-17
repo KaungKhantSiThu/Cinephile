@@ -12,28 +12,7 @@ struct PostView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            HStack(alignment: .top) {
-                WebImage(url: URL(string: "https://picsum.photos/seed/picsum/200"))
-                    .resizable() // Resizable like SwiftUI.Image
-                    .aspectRatio(contentMode: .fit)
-                    .frame(height: 50)
-                    .clipShape(
-                        Circle()
-                    )
-                
-                VStack(alignment: .leading) {
-                    Text("Mg Kaung")
-                        .font(.title3)
-                        .foregroundStyle(.primary)
-                    Text("@mgkaung")
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
-                }
-                
-                Spacer()
-                
-                Text(timeAgoString(from: Date(timeIntervalSinceNow: -36000)))
-            }
+            ProfileWithTimeStamp()
             
             Text("Top Gun: Maverick is a thrilling sequel that surpasses the original. Tom Cruise delivers a stellar performance as the fearless and rebellious pilot who faces his demons and mentors a new generation of aviators. The action scenes are breathtaking and realistic, showcasing the best of modern fighter jets.")
                 .font(.body)
@@ -79,26 +58,6 @@ struct PostView: View {
         }
         .padding()
     }
-    
-    func timeAgoString(from date: Date) -> String {
-        let secondsAgo = Int(Date().timeIntervalSince(date))
-        let minute = 60
-        let hour = 60 * minute
-        let day = 24 * hour
-
-        if secondsAgo < minute {
-            return "\(secondsAgo) s"
-        } else if secondsAgo < hour {
-            let minutes = secondsAgo / minute
-            return "\(minutes) m"
-        } else if secondsAgo < day {
-            let hours = secondsAgo / hour
-            return "\(hours) h"
-        } else {
-            let days = secondsAgo / day
-            return "\(days) days ago"
-        }
-    }
 
 }
 
@@ -106,5 +65,32 @@ struct PostView_Preview: PreviewProvider {
     static var previews: some View {
         PostView()
             .previewLayout(.sizeThatFits)
+    }
+}
+
+struct ProfileWithTimeStamp: View {
+    var body: some View {
+        HStack(alignment: .top) {
+            WebImage(url: URL(string: "https://picsum.photos/seed/picsum/200"))
+                .resizable() // Resizable like SwiftUI.Image
+                .aspectRatio(contentMode: .fit)
+                .frame(height: 50)
+                .clipShape(
+                    Circle()
+                )
+            
+            VStack(alignment: .leading) {
+                Text("Mg Kaung")
+                    .font(.title3)
+                    .foregroundStyle(.primary)
+                Text("@mgkaung")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+            }
+            
+            Spacer()
+            
+            Text(Date(timeIntervalSinceNow: -36000).timeAgo)
+        }
     }
 }
