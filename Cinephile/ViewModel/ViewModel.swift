@@ -17,7 +17,7 @@ protocol DataLoader {
 struct MovieLoader: DataLoader {
     
     
-    private let tmdb = TMDbAPI.init(apiKey: "a03aa105bd50498abba5719ade062653")
+    private let tmdb = TMDbAPI.init(apiKey: TMDB_API_Key)
     
     let configuration = APIConfiguration.init(images: ImagesConfiguration(
         baseURL: URL(string: "http://image.tmdb.org/t/p/")!,

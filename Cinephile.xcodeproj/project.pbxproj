@@ -34,6 +34,7 @@
 		7084D70A2AEE8D64008EF753 /* MovieDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7084D7092AEE8D64008EF753 /* MovieDetailView.swift */; };
 		7084D70E2AEE9876008EF753 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7084D70D2AEE9876008EF753 /* Helper.swift */; };
 		7084D7A12AEFA719008EF753 /* DiscoverMoviesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7084D7A02AEFA719008EF753 /* DiscoverMoviesView.swift */; };
+		7094DFBA2B0BA318008DF25E /* API_Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7094DFB92B0BA318008DF25E /* API_Key.swift */; };
 		70DFE2752AEBEBFE009AE124 /* MovieRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70DFE2742AEBEBFE009AE124 /* MovieRow.swift */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +66,7 @@
 		7084D7092AEE8D64008EF753 /* MovieDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailView.swift; sourceTree = "<group>"; };
 		7084D70D2AEE9876008EF753 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		7084D7A02AEFA719008EF753 /* DiscoverMoviesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverMoviesView.swift; sourceTree = "<group>"; };
+		7094DFB92B0BA318008DF25E /* API_Key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API_Key.swift; sourceTree = "<group>"; };
 		70DFE2742AEBEBFE009AE124 /* MovieRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -102,6 +104,7 @@
 			children = (
 				7084D70D2AEE9876008EF753 /* Helper.swift */,
 				707ABEF72AF3ABEB001B88FE /* API+extensions.swift */,
+				7094DFB92B0BA318008DF25E /* API_Key.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -268,6 +271,7 @@
 				707960422AEBA5E200AB748D /* ViewModel.swift in Sources */,
 				707ABEFA2AF3B013001B88FE /* CarousalView.swift in Sources */,
 				707ABF002AF644CC001B88FE /* CustomStyle.swift in Sources */,
+				7094DFBA2B0BA318008DF25E /* API_Key.swift in Sources */,
 				7062A2C52AF2512F00B99324 /* MovieCoverView.swift in Sources */,
 				707ABEFE2AF64223001B88FE /* StarsView.swift in Sources */,
 				7062A2C72AF2524A00B99324 /* MovieCoverViewModel.swift in Sources */,
