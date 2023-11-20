@@ -25,7 +25,7 @@ struct CustomButtonStyle: ButtonStyle {
     Button {
             // Delete
         } label: {
-            Label("Add Moive", systemImage: "plus.circle.fill")
+            Label("Kelvin Gao", systemImage: "plus.circle.fill")
         }
         .buttonStyle(CustomButtonStyle())
 }
