@@ -49,6 +49,13 @@
             ReferencedContainer = "container:Cinephile.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "TMDB_API_KEY"
+            value = "a03aa105bd50498abba5719ade062653"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"

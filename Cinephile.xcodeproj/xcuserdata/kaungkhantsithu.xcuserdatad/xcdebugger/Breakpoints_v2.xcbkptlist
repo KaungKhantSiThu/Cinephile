@@ -18,6 +18,68 @@
             endingLineNumber = "32"
             landmarkName = "loadMovie(withID:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "76C31F08-F382-48C3-AAC7-9EADAD7399B5 - dd4e3e263854372a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for Cinephile.MovieLoader.loadMovie(withID: Swift.Int) async throws -&gt; TMDb.Movie"
+                  moduleName = "Cinephile"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kaungkhantsithu/Desktop/Cinephile/Cinephile/ViewModel/ViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "32"
+                  endingLineNumber = "32"
+                  offsetFromSymbolStart = "72">
+               </Location>
+               <Location
+                  uuid = "76C31F08-F382-48C3-AAC7-9EADAD7399B5 - 19f542c3b6cdef3b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(2) await resume partial function for Cinephile.MovieLoader.loadMovie(withID: Swift.Int) async throws -&gt; TMDb.Movie"
+                  moduleName = "Cinephile"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kaungkhantsithu/Desktop/Cinephile/Cinephile/ViewModel/ViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "32"
+                  endingLineNumber = "32"
+                  offsetFromSymbolStart = "36">
+               </Location>
+               <Location
+                  uuid = "76C31F08-F382-48C3-AAC7-9EADAD7399B5 - a8fa7d211ffbf2d4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for Cinephile.MovieLoader.loadMovie(withID: Swift.Int) async throws -&gt; TMDb.Movie"
+                  moduleName = "Cinephile"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kaungkhantsithu/Desktop/Cinephile/Cinephile/ViewModel/ViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "32"
+                  endingLineNumber = "32"
+                  offsetFromSymbolStart = "36">
+               </Location>
+               <Location
+                  uuid = "76C31F08-F382-48C3-AAC7-9EADAD7399B5 - 42409dae702e50d5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for Cinephile.MovieLoader.loadMovie(withID: Swift.Int) async throws -&gt; TMDb.Movie"
+                  moduleName = "Cinephile"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kaungkhantsithu/Desktop/Cinephile/Cinephile/ViewModel/ViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "32"
+                  endingLineNumber = "32"
+                  offsetFromSymbolStart = "40">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

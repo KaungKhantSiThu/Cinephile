@@ -7,4 +7,4 @@
 
 import Foundation
 
-let TMDB_API_Key = "a03aa105bd50498abba5719ade062653"
+let TMDB_API_Key = ProcessInfo.processInfo.environment["TMDB_API_KEY"] ?? ""
