@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		39632EA22B0E6E0900390743 /* Movie.json in Sources */ = {isa = PBXBuildFile; fileRef = 39632EA12B0E6E0900390743 /* Movie.json */; };
+		39632EA52B0E6F8D00390743 /* MoviePreviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39632EA42B0E6F8D00390743 /* MoviePreviewModel.swift */; };
+		39632EA72B0E6FC800390743 /* MoviePreviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39632EA62B0E6FC800390743 /* MoviePreviewViewModel.swift */; };
 		7035F6672AF7587E00F42910 /* TimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7035F6662AF7587E00F42910 /* TimelineView.swift */; };
 		7035F6692AF75A3700F42910 /* GentyDemo-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7035F6682AF75A3700F42910 /* GentyDemo-Regular.otf */; };
 		7051983C2AEFF7D400452564 /* PreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7051983B2AEFF7D400452564 /* PreviewData.swift */; };
@@ -38,6 +41,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		39632EA12B0E6E0900390743 /* Movie.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Movie.json; sourceTree = "<group>"; };
+		39632EA42B0E6F8D00390743 /* MoviePreviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviePreviewModel.swift; sourceTree = "<group>"; };
+		39632EA62B0E6FC800390743 /* MoviePreviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviePreviewViewModel.swift; sourceTree = "<group>"; };
 		7035F6662AF7587E00F42910 /* TimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineView.swift; sourceTree = "<group>"; };
 		7035F6682AF75A3700F42910 /* GentyDemo-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GentyDemo-Regular.otf"; sourceTree = "<group>"; };
 		7035F66A2AF75A6F00F42910 /* Cinephile-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Cinephile-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -81,6 +87,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		39632EA32B0E6E1E00390743 /* MovieJson */ = {
+			isa = PBXGroup;
+			children = (
+				39632EA12B0E6E0900390743 /* Movie.json */,
+			);
+			path = MovieJson;
+			sourceTree = "<group>";
+		};
 		7035F66B2AF75A9800F42910 /* fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -173,8 +187,11 @@
 		707960352AEBA0A900AB748D /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
+				39632EA32B0E6E1E00390743 /* MovieJson */,
 				707960362AEBA0A900AB748D /* Preview Assets.xcassets */,
 				7051983B2AEFF7D400452564 /* PreviewData.swift */,
+				39632EA42B0E6F8D00390743 /* MoviePreviewModel.swift */,
+				39632EA62B0E6FC800390743 /* MoviePreviewViewModel.swift */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -266,9 +283,11 @@
 				707ABEF82AF3ABEB001B88FE /* API+extensions.swift in Sources */,
 				7035F6672AF7587E00F42910 /* TimelineView.swift in Sources */,
 				707960422AEBA5E200AB748D /* ViewModel.swift in Sources */,
+				39632EA72B0E6FC800390743 /* MoviePreviewViewModel.swift in Sources */,
 				707ABEFA2AF3B013001B88FE /* CarousalView.swift in Sources */,
 				707ABF002AF644CC001B88FE /* CustomStyle.swift in Sources */,
 				7062A2C52AF2512F00B99324 /* MovieCoverView.swift in Sources */,
+				39632EA52B0E6F8D00390743 /* MoviePreviewModel.swift in Sources */,
 				707ABEFE2AF64223001B88FE /* StarsView.swift in Sources */,
 				7062A2C72AF2524A00B99324 /* MovieCoverViewModel.swift in Sources */,
 				7084D7A12AEFA719008EF753 /* DiscoverMoviesView.swift in Sources */,
@@ -278,6 +297,7 @@
 				707ABEF62AF3A7D6001B88FE /* MovieDetailViewModel.swift in Sources */,
 				707960322AEBA0A700AB748D /* ContentView.swift in Sources */,
 				70525BB12AF77DD6006E7CD6 /* Notification.swift in Sources */,
+				39632EA22B0E6E0900390743 /* Movie.json in Sources */,
 				707960302AEBA0A700AB748D /* CinephileApp.swift in Sources */,
 				707ABF022AF68665001B88FE /* ProfileView.swift in Sources */,
 				7084D70E2AEE9876008EF753 /* Helper.swift in Sources */,
