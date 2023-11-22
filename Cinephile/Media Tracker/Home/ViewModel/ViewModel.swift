@@ -15,8 +15,7 @@ protocol DataLoader {
 }
 
 struct MovieLoader: DataLoader {
-    
-    
+
     private let tmdb = TMDbAPI.init(apiKey: TMDB_API_Key)
     
     let configuration = APIConfiguration.init(images: ImagesConfiguration(

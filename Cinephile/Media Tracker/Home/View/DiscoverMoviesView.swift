@@ -1,10 +1,3 @@
-//
-//  DiscoverMoviesView.swift
-//  TMDB Test
-//
-//  Created by Kaung Khant Si Thu on 30/10/2023.
-//
-
 import SwiftUI
 import TMDb
 
