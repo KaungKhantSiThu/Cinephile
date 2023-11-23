@@ -12,7 +12,7 @@ class MovieDetailViewModel: ObservableObject {
     let movieID: Movie.ID
 //   @Published private(set) var showProvider: [WatchProvider]
     
-    private let tmdb = TMDbAPI.init(apiKey: "a03aa105bd50498abba5719ade062653")
+//    private let tmdb = TMDbAPI.init(apiKey: "a03aa105bd50498abba5719ade062653")
     
     init(movieID: Movie.ID) {
         self.movieID = movieID
