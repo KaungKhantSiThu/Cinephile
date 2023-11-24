@@ -63,7 +63,7 @@ struct MovieDetailView: View {
         }
         .task {
             do {
-                let casts = try await self.loader.loadCastMembers(withID: movie.id).cast.prefix(upTo: 5)
+                let casts = try await self.loader.loadCastMembers(withID: movie.id).prefix(upTo: 5)
                 self.movie = try await self.loader.loadItem(withID: self.id)
                 print(self.movie)
                 castMembers = Array(casts)

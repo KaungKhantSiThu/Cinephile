@@ -6,9 +6,16 @@
 //
 
 import SwiftUI
+import TMDb
 
 @main
 struct CinephileApp: App {
+    
+    init() {
+        let tmdbConfiguration = TMDbConfiguration(apiKey: TMDB_API_Key)
+        TMDb.configure(tmdbConfiguration)
+    }
+    
     var body: some Scene {
         WindowGroup {
             ContentView()

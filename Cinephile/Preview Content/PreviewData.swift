@@ -8,18 +8,18 @@
 import Foundation
 import TMDb
 
-struct MockMovieLoader: DataLoader {
-    
-    func loadItem(withID id: Int) async throws -> Movie {
-        return PreviewData.mockMovie
-    }
-    
-    typealias Output = Movie
-    
-    func loadTrendingItems() async throws -> [Movie] {
-        return [PreviewData.mockMovie, PreviewData.mockMovie, PreviewData.mockMovie, PreviewData.mockMovie]
-    }
-}
+//struct MockMovieLoader: DataLoader {
+//    
+//    func loadItem(withID id: Int) async throws -> Movie {
+//        return PreviewData.mockMovie
+//    }
+//    
+//    typealias Output = Movie
+//    
+//    func loadTrendingItems() async throws -> [Movie] {
+//        return [PreviewData.mockMovie, PreviewData.mockMovie, PreviewData.mockMovie, PreviewData.mockMovie]
+//    }
+//}
 
 struct PreviewData {
     static var mockMovie = Movie(id: Int.random(in: 10000...99999),
