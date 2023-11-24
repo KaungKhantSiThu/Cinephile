@@ -27,5 +27,5 @@ struct CategorialMovieView: View {
 }
 
 #Preview {
-    CategorialMovieView(movies: PreviewData.mockMovieArray)
+    CategorialMovieView(movies: .preview)
 }

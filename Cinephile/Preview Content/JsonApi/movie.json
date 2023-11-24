@@ -1,0 +1,405 @@
+{
+  "page": 1,
+  "results": [
+    {
+      "adult": false,
+      "backdrop_path": "/kjQBrc00fB2RjHZB3PGR4w9ibpz.jpg",
+      "genre_ids": [
+        878,
+        28,
+        53
+      ],
+      "id": 670292,
+      "original_language": "en",
+      "original_title": "The Creator",
+      "overview": "Amid a future war between the human race and the forces of artificial intelligence, a hardened ex-special forces agent grieving the disappearance of his wife, is recruited to hunt down and kill the Creator, the elusive architect of advanced AI who has developed a mysterious weapon with the power to end the war—and mankind itself.",
+      "popularity": 1686.721,
+      "posterPath": "/vBZ0qvaRxqEhZwl6LWmruJqWE8Z.jpg",
+      "release_date": "2023-09-27",
+      "title": "The Creator",
+      "video": false,
+      "vote_average": 7.2,
+      "vote_count": 996
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/fm6KqXpk3M2HVveHwCrBSSBaO0V.jpg",
+      "genre_ids": [
+        18,
+        36
+      ],
+      "id": 872585,
+      "original_language": "en",
+      "original_title": "Oppenheimer",
+      "overview": "The story of J. Robert Oppenheimer's role in the development of the atomic bomb during World War II.",
+      "popularity": 1645.023,
+      "posterPath": "/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg",
+      "release_date": "2023-07-19",
+      "title": "Oppenheimer",
+      "video": false,
+      "vote_average": 8.2,
+      "vote_count": 4768
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/t5zCBSB5xMDKcDqe91qahCOUYVV.jpg",
+      "genre_ids": [
+        27,
+        9648
+      ],
+      "id": 507089,
+      "original_language": "en",
+      "original_title": "Five Nights at Freddy's",
+      "overview": "Recently fired and desperate for work, a troubled young man named Mike agrees to take a position as a night security guard at an abandoned theme restaurant: Freddy Fazbear's Pizzeria. But he soon discovers that nothing at Freddy's is what it seems.",
+      "popularity": 1042.832,
+      "posterPath": "/j9mH1pr3IahtraTWxVEMANmPSGR.jpg",
+      "release_date": "2023-10-25",
+      "title": "Five Nights at Freddy's",
+      "video": false,
+      "vote_average": 7.9,
+      "vote_count": 2419
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/rMvPXy8PUjj1o8o1pzgQbdNCsvj.jpg",
+      "genre_ids": [
+        28,
+        12,
+        53
+      ],
+      "id": 299054,
+      "original_language": "en",
+      "original_title": "Expend4bles",
+      "overview": "Armed with every weapon they can get their hands on and the skills to use them, The Expendables are the world’s last line of defense and the team that gets called when all other options are off the table. But new team members with new styles and tactics are going to give “new blood” a whole new meaning.",
+      "popularity": 822.337,
+      "posterPath": "/iwsMu0ehRPbtaSxqiaUDQB9qMWT.jpg",
+      "release_date": "2023-09-15",
+      "title": "Expend4bles",
+      "video": false,
+      "vote_average": 6.4,
+      "vote_count": 773
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/xgGGinKRL8xeRkaAR9RMbtyk60y.jpg",
+      "genre_ids": [
+        16,
+        10751,
+        10402,
+        14,
+        35
+      ],
+      "id": 901362,
+      "original_language": "en",
+      "original_title": "Trolls Band Together",
+      "overview": "When Branch’s brother, Floyd, is kidnapped for his musical talents by a pair of nefarious pop-star villains, Branch and Poppy embark on a harrowing and emotional journey to reunite the other brothers and rescue Floyd from a fate even worse than pop-culture obscurity.",
+      "popularity": 1194.21,
+      "posterPath": "/bkpPTZUdq31UGDovmszsg2CchiI.jpg",
+      "release_date": "2023-10-12",
+      "title": "Trolls Band Together",
+      "video": false,
+      "vote_average": 6.5,
+      "vote_count": 61
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/4XM8DUTQb3lhLemJC51Jx4a2EuA.jpg",
+      "genre_ids": [
+        28,
+        80,
+        53
+      ],
+      "id": 385687,
+      "original_language": "en",
+      "original_title": "Fast X",
+      "overview": "Over many missions and against impossible odds, Dom Toretto and his family have outsmarted, out-nerved and outdriven every foe in their path. Now, they confront the most lethal opponent they've ever faced: A terrifying threat emerging from the shadows of the past who's fueled by blood revenge, and who is determined to shatter this family and destroy everything—and everyone—that Dom loves, forever.",
+      "popularity": 670.224,
+      "poster_path": "/fiVW06jE7z9YnO4trhaMEdclSiC.jpg",
+      "release_date": "2023-05-17",
+      "title": "Fast X",
+      "video": false,
+      "vote_average": 7.2,
+      "vote_count": 4311
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/628Dep6AxEtDxjZoGP78TsOxYbK.jpg",
+      "genre_ids": [
+        28,
+        53
+      ],
+      "id": 575264,
+      "original_language": "en",
+      "original_title": "Mission: Impossible - Dead Reckoning Part One",
+      "overview": "Ethan Hunt and his IMF team embark on their most dangerous mission yet: To track down a terrifying new weapon that threatens all of humanity before it falls into the wrong hands. With control of the future and the world's fate at stake and dark forces from Ethan's past closing in, a deadly race around the globe begins. Confronted by a mysterious, all-powerful enemy, Ethan must consider that nothing can matter more than his mission—not even the lives of those he cares about most.",
+      "popularity": 652.999,
+      "poster_path": "/NNxYkU70HPurnNCSiCjYAmacwm.jpg",
+      "release_date": "2023-07-08",
+      "title": "Mission: Impossible - Dead Reckoning Part One",
+      "video": false,
+      "vote_average": 7.6,
+      "vote_count": 2499
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/5a4JdoFwll5DRtKMe7JLuGQ9yJm.jpg",
+      "genre_ids": [
+        28,
+        12,
+        878
+      ],
+      "id": 695721,
+      "original_language": "en",
+      "original_title": "The Hunger Games: The Ballad of Songbirds & Snakes",
+      "overview": "64 years before he becomes the tyrannical president of Panem, Coriolanus Snow sees a chance for a change in fortunes when he mentors Lucy Gray Baird, the female tribute from District 12.",
+      "popularity": 653.128,
+      "poster_path": "/mBaXZ95R2OxueZhvQbcEWy2DqyO.jpg",
+      "release_date": "2023-11-15",
+      "title": "The Hunger Games: The Ballad of Songbirds & Snakes",
+      "video": false,
+      "vote_average": 7.3,
+      "vote_count": 308
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/tC78Pck2YCsUAtEdZwuHYUFYtOj.jpg",
+      "genre_ids": [
+        28,
+        53,
+        80
+      ],
+      "id": 926393,
+      "original_language": "en",
+      "original_title": "The Equalizer 3",
+      "overview": "Robert McCall finds himself at home in Southern Italy but he discovers his friends are under the control of local crime bosses. As events turn deadly, McCall knows what he has to do: become his friends' protector by taking on the mafia.",
+      "popularity": 510.604,
+      "poster_path": "/b0Ej6fnXAP8fK75hlyi2jKqdhHz.jpg",
+      "release_date": "2023-08-30",
+      "title": "The Equalizer 3",
+      "video": false,
+      "vote_average": 7.4,
+      "vote_count": 1680
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/agJTpYOjSSG9uZe5xVZHL8nE6nj.jpg",
+      "genre_ids": [
+        27,
+        9648,
+        53
+      ],
+      "id": 841742,
+      "original_language": "fr",
+      "original_title": "Megalomaniac",
+      "overview": "Felix and Martha, the two offspring of legendary serial murderer The Skinner of Mons, grapple with the grotesque legacy bequeathed to them. While Martha works a menial janitorial job, Felix continues his father's reign of terror. But following a brutal attack at work, Martha quickly descends into madness, finding she must come to terms with the infamous blood that flows through her veins.",
+      "popularity": 382.366,
+      "poster_path": "/8HKjrjwTjvDscC9uZNk6dCRHcfd.jpg",
+      "release_date": "2023-09-08",
+      "title": "Megalomaniac",
+      "video": false,
+      "vote_average": 6.2,
+      "vote_count": 13
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/dZbLqRjjiiNCpTYzhzL2NMvz4J0.jpg",
+      "genre_ids": [
+        27,
+        53
+      ],
+      "id": 951491,
+      "original_language": "en",
+      "original_title": "Saw X",
+      "overview": "Between the events of 'Saw' and 'Saw II', a sick and desperate John Kramer travels to Mexico for a risky and experimental medical procedure in hopes of a miracle cure for his cancer, only to discover the entire operation is a scam to defraud the most vulnerable. Armed with a newfound purpose, the infamous serial killer returns to his work, turning the tables on the con artists in his signature visceral way through devious, deranged, and ingenious traps.",
+      "popularity": 432.263,
+      "poster_path": "/aQPeznSu7XDTrrdCtT5eLiu52Yu.jpg",
+      "release_date": "2023-09-26",
+      "title": "Saw X",
+      "video": false,
+      "vote_average": 7.4,
+      "vote_count": 1110
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/feSiISwgEpVzR1v3zv2n2AU4ANJ.jpg",
+      "genre_ids": [
+        28,
+        12,
+        878,
+        35
+      ],
+      "id": 609681,
+      "original_language": "en",
+      "original_title": "The Marvels",
+      "overview": "Carol Danvers, aka Captain Marvel, has reclaimed her identity from the tyrannical Kree and taken revenge on the Supreme Intelligence. But unintended consequences see Carol shouldering the burden of a destabilized universe. When her duties send her to an anomalous wormhole linked to a Kree revolutionary, her powers become entangled with that of Jersey City super-fan Kamala Khan, aka Ms. Marvel, and Carol’s estranged niece, now S.A.B.E.R. astronaut Captain Monica Rambeau. Together, this unlikely trio must team up and learn to work in concert to save the universe.",
+      "popularity": 477.246,
+      "poster_path": "/y4YMYsGSMwu8e985g0Zbumvqxld.jpg",
+      "release_date": "2023-11-08",
+      "title": "The Marvels",
+      "video": false,
+      "vote_average": 6.5,
+      "vote_count": 500
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/k8sRDJV5CFx91N4gPXh57dthPvx.jpg",
+      "genre_ids": [
+        28,
+        53,
+        80
+      ],
+      "id": 14979,
+      "original_language": "en",
+      "original_title": "Thick as Thieves",
+      "overview": "A master thief recruits a notorious thief to help him steal two famous Faberge eggs from an impenetrable vault in an effort to pull off one final job and repay his debt to the Russian mob.",
+      "popularity": 491.367,
+      "poster_path": "/sgRY2ie8koJxfOScMuvzHQ9TuZX.jpg",
+      "release_date": "2009-01-09",
+      "title": "Thick as Thieves",
+      "video": false,
+      "vote_average": 6,
+      "vote_count": 726
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/pA3vdhadJPxF5GA1uo8OPTiNQDT.jpg",
+      "genre_ids": [
+        28,
+        18
+      ],
+      "id": 678512,
+      "original_language": "en",
+      "original_title": "Sound of Freedom",
+      "overview": "The story of Tim Ballard, a former US government agent, who quits his job in order to devote his life to rescuing children from global sex traffickers.",
+      "popularity": 419.664,
+      "poster_path": "/qA5kPYZA7FkVvqcEfJRoOy4kpHg.jpg",
+      "release_date": "2023-07-03",
+      "title": "Sound of Freedom",
+      "video": false,
+      "vote_average": 8.1,
+      "vote_count": 1491
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/ipVCoRWrrw2Xuupo6UQ2bOOZHmi.jpg",
+      "genre_ids": [
+        27,
+        53,
+        9648
+      ],
+      "id": 1118595,
+      "original_language": "en",
+      "original_title": "The Jester",
+      "overview": "A malevolent being known as The Jester terrorizes the inhabitants of a small town on Halloween night, including two estranged sisters who must come together to find a way to defeat this evil entity.",
+      "popularity": 478.611,
+      "poster_path": "/lQchkNOo6iYSt73GWIxRP151JnY.jpg",
+      "release_date": "2023-09-20",
+      "title": "The Jester",
+      "video": false,
+      "vote_average": 3.4,
+      "vote_count": 9
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/3H9NA1KWEQN0ItL3Wl3SFZYP6yV.jpg",
+      "genre_ids": [
+        28,
+        878,
+        12
+      ],
+      "id": 565770,
+      "original_language": "en",
+      "original_title": "Blue Beetle",
+      "overview": "Recent college grad Jaime Reyes returns home full of aspirations for his future, only to find that home is not quite as he left it. As he searches to find his purpose in the world, fate intervenes when Jaime unexpectedly finds himself in possession of an ancient relic of alien biotechnology: the Scarab.",
+      "popularity": 442.567,
+      "poster_path": "/mXLOHHc1Zeuwsl4xYKjKh2280oL.jpg",
+      "release_date": "2023-08-16",
+      "title": "Blue Beetle",
+      "video": false,
+      "vote_average": 7,
+      "vote_count": 1682
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/28er4p7B5zMSxUDQKPF1hBsgnys.jpg",
+      "genre_ids": [
+        28,
+        12,
+        53
+      ],
+      "id": 872906,
+      "original_language": "hi",
+      "original_title": "जवान",
+      "overview": "An emotional journey of a prison warden, driven by a personal vendetta while keeping up to a promise made years ago, recruits inmates to commit outrageous crimes that shed light on corruption and injustice, in an attempt to get even with his past,  and that leads him to an unexpected reunion.",
+      "popularity": 651.699,
+      "poster_path": "/jFt1gS4BGHlK8xt76Y81Alp4dbt.jpg",
+      "release_date": "2023-09-07",
+      "title": "Jawan",
+      "video": false,
+      "vote_average": 7.1,
+      "vote_count": 111
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/5mzr6JZbrqnqD8rCEvPhuCE5Fw2.jpg",
+      "genre_ids": [
+        28,
+        878,
+        27
+      ],
+      "id": 615656,
+      "original_language": "en",
+      "original_title": "Meg 2: The Trench",
+      "overview": "An exploratory dive into the deepest depths of the ocean of a daring research team spirals into chaos when a malevolent mining operation threatens their mission and forces them into a high-stakes battle for survival.",
+      "popularity": 419.777,
+      "poster_path": "/4m1Au3YkjqsxF8iwQy0fPYSxE0h.jpg",
+      "release_date": "2023-08-02",
+      "title": "Meg 2: The Trench",
+      "video": false,
+      "vote_average": 6.8,
+      "vote_count": 2569
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/pLm9j7o5InoWaG2tlaQABYR2cAx.jpg",
+      "genre_ids": [
+        27,
+        9648,
+        53
+      ],
+      "id": 968051,
+      "original_language": "en",
+      "original_title": "The Nun II",
+      "overview": "In 1956 France, a priest is violently murdered, and Sister Irene begins to investigate. She once again comes face-to-face with a powerful evil.",
+      "popularity": 402.249,
+      "poster_path": "/5gzzkR7y3hnY8AD1wXjCnVlHba5.jpg",
+      "release_date": "2023-09-06",
+      "title": "The Nun II",
+      "video": false,
+      "vote_average": 6.9,
+      "vote_count": 1441
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/iiXliCeykkzmJ0Eg9RYJ7F2CWSz.jpg",
+      "genre_ids": [
+        28,
+        53,
+        80
+      ],
+      "id": 762430,
+      "original_language": "en",
+      "original_title": "Retribution",
+      "overview": "When a mysterious caller puts a bomb under his car seat, Matt Turner begins a high-speed chase across the city to complete a specific series of tasks- all with his kids trapped in the back seat.",
+      "popularity": 400.441,
+      "poster_path": "/oUmmY7QWWn7OhKlcPOnirHJpP1F.jpg",
+      "release_date": "2023-08-23",
+      "title": "Retribution",
+      "video": false,
+      "vote_average": 7,
+      "vote_count": 678
+    }
+  ],
+  "total_pages": 41130,
+  "total_results": 822590
+}

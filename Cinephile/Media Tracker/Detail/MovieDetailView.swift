@@ -82,7 +82,7 @@ struct MovieDetailView: View {
     func addedList(id: Movie.ID) {
         print("\(id) is added")
     }
-    return MovieDetailView(id: PreviewData.mockMovie.id, addButtonAction: addedList(id:))
+    return MovieDetailView(id: Movie.preview!.id, addButtonAction: addedList(id:))
 }
 
 struct CastMemberView: View {
@@ -113,3 +113,5 @@ struct CastMemberView: View {
         }
     }
 }
+
+
