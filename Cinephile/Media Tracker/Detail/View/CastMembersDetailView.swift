@@ -6,13 +6,17 @@
 //
 
 import SwiftUI
+import TMDb
 
 struct CastMembersDetailView: View {
+    var castMembers: [CastMember]
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List(castMembers) { cast in
+            CastView(cast: cast)
+        }
     }
 }
 
 #Preview {
-    CastMembersDetailView()
+    CastMembersDetailView(castMembers: .preview)
 }

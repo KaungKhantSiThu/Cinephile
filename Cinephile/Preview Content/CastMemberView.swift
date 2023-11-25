@@ -7,25 +7,15 @@ struct CastMemberView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text("Cast")
-                .font(.title2)
+                .font(.title)
                 .fontWeight(.semibold)
                 .padding([.leading, .bottom], 10)
-            ForEach(castMembers) { cast in
-                HStack(spacing: 20) {
-                    Image(systemName: "person")
-                        .background(in: Circle().inset(by: -8))
-                        .backgroundStyle(.red.gradient)
-                        .foregroundStyle(.white.shadow(.drop(radius: 1, y: 1.5)))
-                    VStack(alignment: .leading) {
-                        Text(cast.name)
-                        Text(cast.character)
-                            .font(.caption2)
-                            .foregroundStyle(.secondary)
+            ScrollView(.horizontal) {
+                HStack {
+                    ForEach(castMembers) { cast in
+                        CastView(cast: cast)
                     }
                 }
-                .padding(.leading, 20)
-                
-                Divider()
             }
         }
     }
@@ -33,8 +23,7 @@ struct CastMemberView: View {
 
 #Preview {
     CastMemberView(castMembers: .preview)
-        .onAppear {
-            print(CastMember.preview)
-        }
 }
+
+
 

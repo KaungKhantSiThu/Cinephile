@@ -45,7 +45,7 @@ struct DiscoverMoviesView: View {
 
 #Preview {
     DiscoverMoviesView()
-        .environmentObject(ViewModel(loader: MovieLoader()))
+        .environmentObject(ViewModel(loader: PreviewMovieLoader()))
 
 }
 
