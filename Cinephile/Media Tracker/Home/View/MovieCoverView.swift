@@ -21,6 +21,7 @@ struct MovieCoverView: View {
                 .clipShape(
                     RoundedRectangle(cornerRadius: 10)
                 )
+
                 
             VStack(alignment: .leading, spacing: 5) {
                 Text(movie.title)
@@ -60,7 +61,10 @@ struct MovieCoverView: View {
 
 struct MovieCoverView_Previews: PreviewProvider {
     static var previews: some View {
-        MovieCoverView(movie: PreviewData.mockMovie)
+        MovieCoverView(movie: Movie.preview!)
+            .onAppear {
+                print([Movie].preview)
+            }
             .previewLayout(.sizeThatFits)
     }
 }

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		39AB4F3A2B10FAD4005F4B51 /* cast.json in Resources */ = {isa = PBXBuildFile; fileRef = 39AB4F382B10FAD4005F4B51 /* cast.json */; };
+		39AB4F3B2B10FAD4005F4B51 /* movie.json in Resources */ = {isa = PBXBuildFile; fileRef = 39AB4F392B10FAD4005F4B51 /* movie.json */; };
+		39AB4F3D2B10FAE2005F4B51 /* Extension+Previews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AB4F3C2B10FAE2005F4B51 /* Extension+Previews.swift */; };
+		39FAA7472B11D3A60049AA72 /* CastMemberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FAA7462B11D3A60049AA72 /* CastMemberView.swift */; };
 		7035F6672AF7587E00F42910 /* TimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7035F6662AF7587E00F42910 /* TimelineView.swift */; };
 		7035F6692AF75A3700F42910 /* GentyDemo-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7035F6682AF75A3700F42910 /* GentyDemo-Regular.otf */; };
 		703AEDF42B0F893500E9ED76 /* URL+TMDb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703AEDF32B0F893500E9ED76 /* URL+TMDb.swift */; };
@@ -40,6 +44,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		39AB4F382B10FAD4005F4B51 /* cast.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cast.json; sourceTree = "<group>"; };
+		39AB4F392B10FAD4005F4B51 /* movie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = movie.json; sourceTree = "<group>"; };
+		39AB4F3C2B10FAE2005F4B51 /* Extension+Previews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension+Previews.swift"; sourceTree = "<group>"; };
+		39FAA7462B11D3A60049AA72 /* CastMemberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CastMemberView.swift; path = "Cinephile/Preview Content/CastMemberView.swift"; sourceTree = SOURCE_ROOT; };
 		7035F6662AF7587E00F42910 /* TimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineView.swift; sourceTree = "<group>"; };
 		7035F6682AF75A3700F42910 /* GentyDemo-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GentyDemo-Regular.otf"; sourceTree = "<group>"; };
 		7035F66A2AF75A6F00F42910 /* Cinephile-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Cinephile-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -208,6 +216,7 @@
 		703AEDEC2B0CFE4C00E9ED76 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				39FAA7462B11D3A60049AA72 /* CastMemberView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -291,8 +300,11 @@
 		707960352AEBA0A900AB748D /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
+				39AB4F382B10FAD4005F4B51 /* cast.json */,
+				39AB4F392B10FAD4005F4B51 /* movie.json */,
 				707960362AEBA0A900AB748D /* Preview Assets.xcassets */,
 				7051983B2AEFF7D400452564 /* PreviewData.swift */,
+				39AB4F3C2B10FAE2005F4B51 /* Extension+Previews.swift */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -371,8 +383,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39AB4F3A2B10FAD4005F4B51 /* cast.json in Resources */,
 				707960372AEBA0A900AB748D /* Preview Assets.xcassets in Resources */,
 				707960342AEBA0A900AB748D /* Assets.xcassets in Resources */,
+				39AB4F3B2B10FAD4005F4B51 /* movie.json in Resources */,
 				7035F6692AF75A3700F42910 /* GentyDemo-Regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -387,6 +401,7 @@
 				7062A2CA2AF290B000B99324 /* PostView.swift in Sources */,
 				7062A2BB2AF107BD00B99324 /* SearchViewModel.swift in Sources */,
 				7051983C2AEFF7D400452564 /* PreviewData.swift in Sources */,
+				39AB4F3D2B10FAE2005F4B51 /* Extension+Previews.swift in Sources */,
 				7062A2B62AF0F98600B99324 /* SearchView.swift in Sources */,
 				70525BAE2AF7635F006E7CD6 /* NotificationsView.swift in Sources */,
 				7035F6672AF7587E00F42910 /* TimelineView.swift in Sources */,
@@ -401,6 +416,7 @@
 				703AEDF42B0F893500E9ED76 /* URL+TMDb.swift in Sources */,
 				70DFE2752AEBEBFE009AE124 /* MovieRow.swift in Sources */,
 				707ABEFC2AF3B616001B88FE /* CategorialMovieView.swift in Sources */,
+				39FAA7472B11D3A60049AA72 /* CastMemberView.swift in Sources */,
 				7084D70A2AEE8D64008EF753 /* MovieDetailView.swift in Sources */,
 				707ABEF62AF3A7D6001B88FE /* MovieDetailViewModel.swift in Sources */,
 				707960322AEBA0A700AB748D /* ContentView.swift in Sources */,
