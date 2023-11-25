@@ -11,9 +11,10 @@ import SDWebImageSwiftUI
 
 struct MovieCoverView: View {
     let movie: Movie
+    @State private var posterImage = URL(string: "https://picsum.photos/200/300")!
     var body: some View {
         VStack(alignment: .leading) {
-            WebImage(url: URL(string: formatPosterPath(path: movie.posterPath!.absoluteString)))
+            WebImage(url: posterImage)
                 .placeholder(Image(systemName: "photo"))
                 .resizable()
                 .aspectRatio(contentMode: .fit)
@@ -37,6 +38,13 @@ struct MovieCoverView: View {
 
         }
         .padding()
+        .task {
+            do {
+                posterImage = try await ImageLoader.generate(from: movie.posterPath, width: 200)
+            } catch {
+                print("poster URL is nil")
+            }
+        }
     }
     
     private func formatPosterPath(path: String) -> String {
