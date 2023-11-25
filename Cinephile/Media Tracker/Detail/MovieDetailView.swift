@@ -1,10 +1,3 @@
-//
-//  MovieDetail.swift
-//  TMDB Test
-//
-//  Created by Kaung Khant Si Thu on 29/10/2023.
-//
-
 import SwiftUI
 import TMDb
 
@@ -82,6 +75,6 @@ struct MovieDetailView: View {
     func addedList(id: Movie.ID) {
         print("\(id) is added")
     }
-    return MovieDetailView(id: PreviewData.mockMovie.id, addButtonAction: addedList(id:))
+    return MovieDetailView(id: Movie.preview.id, addButtonAction: addedList(id:))
 }
 

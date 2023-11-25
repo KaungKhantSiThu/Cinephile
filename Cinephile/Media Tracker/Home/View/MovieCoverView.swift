@@ -69,10 +69,6 @@ struct MovieCoverView: View {
 
 struct MovieCoverView_Previews: PreviewProvider {
     static var previews: some View {
-        MovieCoverView(movie: Movie.preview!)
-            .onAppear {
-                print([Movie].preview)
-            }
-            .previewLayout(.sizeThatFits)
+        MovieCoverView(movie: .preview)
     }
 }

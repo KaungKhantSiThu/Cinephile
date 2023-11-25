@@ -1,0 +1,135 @@
+{
+  "adult": false,
+  "backdrop_path": "/218ZehBKlH8efPRRccmB7bu0oLQ.jpg",
+  "created_by": [
+    {
+      "id": 1585782,
+      "credit_id": "63d26f49cb71b80085ddc435",
+      "name": "Alessandro Marson",
+      "gender": 2,
+      "profile_path": "/1HFvTSXJBgzuqq8uNZYf60M5vUL.jpg"
+    },
+    {
+      "id": 1787189,
+      "credit_id": "63d26f43a410c811f192ef51",
+      "name": "Thereza Falcão",
+      "gender": 1,
+      "profile_path": "/Aqc0ZdSh5ExMAzqLl3rnLsnXZPP.jpg"
+    }
+  ],
+  "episode_run_time": [],
+  "first_air_date": "2023-09-25",
+  "genres": [
+    {
+      "id": 35,
+      "name": "Comedy"
+    },
+    {
+      "id": 9648,
+      "name": "Mystery"
+    },
+    {
+      "id": 10766,
+      "name": "Soap"
+    },
+    {
+      "id": 18,
+      "name": "Drama"
+    }
+  ],
+  "homepage": "https://gshow.globo.com/novelas/elas-por-elas/",
+  "id": 219109,
+  "in_production": true,
+  "languages": [
+    "pt"
+  ],
+  "last_air_date": "2023-11-24",
+  "last_episode_to_air": {
+    "id": 4910520,
+    "name": "Chapter 52",
+    "overview": "",
+    "vote_average": 0,
+    "vote_count": 0,
+    "air_date": "2023-11-24",
+    "episode_number": 52,
+    "episode_type": "standard",
+    "production_code": "",
+    "runtime": null,
+    "season_number": 1,
+    "show_id": 219109,
+    "still_path": "/yBrLiR7LiwknGCNCZbkubjErKDK.jpg"
+  },
+  "name": "Elas por Elas",
+  "next_episode_to_air": {
+    "id": 4910521,
+    "name": "Chapter 53",
+    "overview": "",
+    "vote_average": 0,
+    "vote_count": 0,
+    "air_date": "2023-11-25",
+    "episode_number": 53,
+    "episode_type": "standard",
+    "production_code": "",
+    "runtime": null,
+    "season_number": 1,
+    "show_id": 219109,
+    "still_path": null
+  },
+  "networks": [
+    {
+      "id": 60,
+      "logo_path": "/w5KLywO8bPe98prvv0UewMBAZHO.png",
+      "name": "TV Globo",
+      "origin_country": "BR"
+    }
+  ],
+  "number_of_episodes": 59,
+  "number_of_seasons": 1,
+  "origin_country": [
+    "BR"
+  ],
+  "original_language": "pt",
+  "original_name": "Elas por Elas",
+  "overview": "Seven friends who met in their youth at an English course meet again 25 years later; Lara, Taís, Helena, Adriana, Renée, Natália and Carol, each of them has a different personality and origin, but they share a deep affection.",
+  "popularity": 3148.084,
+  "poster_path": "/m0cvvnhnRXdQhLARx7qt9lz7hTE.jpg",
+  "production_companies": [
+    {
+      "id": 46430,
+      "logo_path": "/tQZIt59BLw3b0b6rHJRqv4Dvrpd.png",
+      "name": "Estúdios Globo",
+      "origin_country": "BR"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "BR",
+      "name": "Brazil"
+    }
+  ],
+  "seasons": [
+    {
+      "air_date": "2023-09-25",
+      "episode_count": 59,
+      "id": 326158,
+      "name": "Season 1",
+      "overview": "",
+      "poster_path": "/7MzO0UYKP7V9B0ls9TH77p5WAiy.jpg",
+      "season_number": 1,
+      "vote_average": 6
+    }
+  ],
+  "spoken_languages": [
+    {
+      "english_name": "Portuguese",
+      "iso_639_1": "pt",
+      "name": "Português"
+    }
+  ],
+  "status": "Returning Series",
+  "tagline": "",
+  "type": "Scripted",
+  "vote_average": 6.8,
+  "vote_count": 12
+}
+

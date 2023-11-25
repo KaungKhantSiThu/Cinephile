@@ -3,7 +3,7 @@ import TMDb
 
 
 extension Array where Element == Movie {
-    static let preview: [Movie] = {
+    static let preview = {
         if let fileURL = Bundle.main.path(forResource: "movie", ofType: "json") {
             do {
                 let jsonData = try Data(contentsOf: URL(fileURLWithPath: fileURL))
@@ -20,7 +20,20 @@ extension Array where Element == Movie {
 }
 
 extension Movie {
-    static let preview = Array<Movie>.preview.first
+    static let preview = {
+        if let fileURL = Bundle.main.path(forResource: "movie-detail", ofType: "json") {
+            do {
+                let jsonData = try Data(contentsOf: URL(fileURLWithPath: fileURL))
+                let loadedData = try JSONDecoder().decode(Movie.self, from: jsonData)
+                return loadedData
+            } catch {
+                print("Error loading data from JSON: \(error.localizedDescription)")
+            }
+        } else {
+            print("File not found.")
+        }
+        return PreviewData.mockMovie
+    }()
 }
 
 extension Array where Element == CastMember {
@@ -43,3 +56,74 @@ extension Array where Element == CastMember {
 extension CastMember {
     static let preview = Array<CastMember>.preview.first
 }
+
+extension Array where Element == TVSeries {
+    static let preview: [TVSeries] = {
+        if let fileURL = Bundle.main.path(forResource: "cast", ofType: "json") {
+            do {
+                let jsonData = try Data(contentsOf: URL(fileURLWithPath: fileURL))
+                let loadedData = try JSONDecoder().decode([TVSeries].self, from: jsonData)
+                return loadedData
+            } catch {
+                print(String(describing: error))
+            }
+        } else {
+            print("File not found.")
+        }
+        return []
+    }()
+}
+
+extension TVSeries {
+    static let preview: TVSeries? = {
+        if let fileURL = Bundle.main.path(forResource: "series-detail", ofType: "json") {
+            do {
+                let jsonData = try Data(contentsOf: URL(fileURLWithPath: fileURL))
+                let loadedData = try JSONDecoder().decode(TVSeries.self, from: jsonData)
+                return loadedData
+            } catch {
+                print("Error loading data from JSON: \(error.localizedDescription)")
+            }
+        } else {
+            print("File not found.")
+        }
+        return nil
+    }()
+}
+
+extension Array where Element == VideoMetadata {
+    static let preview = {
+        if let fileURL = Bundle.main.path(forResource: "movie-video", ofType: "json") {
+            do {
+                let jsonData = try Data(contentsOf: URL(fileURLWithPath: fileURL))
+                let loadedData = try JSONDecoder().decode(VideoCollection.self, from: jsonData)
+                return loadedData.results
+            } catch {
+                print("Error loading data from JSON: \(error.localizedDescription)")
+            }
+        } else {
+            print("File not found.")
+        }
+        return []
+    }()
+}
+
+extension Array where Element == WatchProvider {
+    static let preview = {
+        if let fileURL = Bundle.main.path(forResource: "movie-video", ofType: "json") {
+            do {
+                let jsonData = try Data(contentsOf: URL(fileURLWithPath: fileURL))
+                let loadedData = try JSONDecoder().decode([WatchProvider].self, from: jsonData)
+                return loadedData
+            } catch {
+                print("Error loading data from JSON: \(error.localizedDescription)")
+            }
+        } else {
+            print("File not found.")
+        }
+        return []
+    }()
+}
+
+
+
