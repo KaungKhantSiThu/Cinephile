@@ -5,12 +5,14 @@ struct MovieDetailView: View {
     let id: Movie.ID
     private let loader = MovieLoader()
     @State private var castMembers: [CastMember] = []
-    @State private var movie: Movie = PreviewData.mockMovie
+    @State private var videos: [VideoMetadata] = []
+    @State private var movie: Movie = .preview
+    @State private var posterImage = URL(string: "https://picsum.photos/200/300")!
     var addButtonAction: (Movie.ID) -> Void
     @State private var isMovieAdded = false
     var body: some View {
         ScrollView {
-            AsyncImage(url: URL(string: formatPosterPath(path: movie.posterPath!.absoluteString))) { image in
+            AsyncImage(url: posterImage) { image in
                 image
                     .resizable()
                     .scaledToFit()
@@ -27,7 +29,7 @@ struct MovieDetailView: View {
                 .font(.title)
                 .fontWeight(.bold)
             
-            Text(movie.releaseDate!, format: .dateTime.year())
+            Text(movie.releaseDate ?? Date.now, format: .dateTime.year())
             Text(movie.genres?.map(\.name).joined(separator: ", ") ?? "No genre")
             
             HStack(spacing: 30) {
@@ -52,22 +54,23 @@ struct MovieDetailView: View {
             Text(movie.overview ?? "No overview")
                 .padding()
             
+            VideosRowView(videos: videos)
+            
             CastMemberView(castMembers: castMembers)
         }
         .task {
             do {
-                let casts = try await self.loader.loadCastMembers(withID: movie.id).prefix(upTo: 10)
+                let casts = try await self.loader.loadCastMembers(withID: self.id).prefix(upTo: 10)
+                self.videos = try await self.loader.loadVideos(withID: self.id)
                 self.movie = try await self.loader.loadItem(withID: self.id)
+                posterImage = try await ImageLoader.generate(from: movie.posterPath, width: 200)
                 print(self.movie)
                 castMembers = Array(casts)
             } catch {
+                print("Something wrong")
                 print(error.localizedDescription)
             }
         }
-    }
-    
-    private func formatPosterPath(path: String) -> String {
-        return "https://image.tmdb.org/t/p/original" + path
     }
 }
 

@@ -8,14 +8,35 @@
 import SwiftUI
 import TMDb
 
-class MovieDetailViewModel: ObservableObject {
+class MovieDetailViewModel<Loader: DataLoader>: ObservableObject, LoadableObject {
+    @Published private(set) var state: LoadingState<Movie> = .idle
+    
+    @Published var castMembers: [CastMember] = []
+    @Published var videos: [VideoMetadata] = []
+    
+    
     let movieID: Movie.ID
-//   @Published private(set) var showProvider: [WatchProvider]
+
+    private let loader: MovieLoader
     
-//    private let tmdb = TMDbAPI.init(apiKey: "a03aa105bd50498abba5719ade062653")
-    
-    init(movieID: Movie.ID) {
+    init(movieID: Movie.ID, loader: MovieLoader = MovieLoader()) {
         self.movieID = movieID
+        self.loader = loader
+    }
+    
+    @MainActor
+    func load() {
+        state = .loading
+        Task {
+            do {
+                let movie = try await loader.loadItem(withID: movieID)
+                self.castMembers = try await loader.loadCastMembers(withID: movieID)
+                self.videos = try await loader.loadVideos(withID: movieID)
+                self.state = .loaded(movie)
+            } catch {
+                self.state = .failed(error)
+            }
+        }
     }
     
 }

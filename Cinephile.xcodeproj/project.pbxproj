@@ -51,6 +51,7 @@
 		70F4AD1C2B11EBB400A83C8F /* CastMembersDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F4AD1B2B11EBB400A83C8F /* CastMembersDetailView.swift */; };
 		70F4AD1E2B11F50200A83C8F /* PreviewLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F4AD1D2B11F50200A83C8F /* PreviewLoader.swift */; };
 		70F4AD202B11F70600A83C8F /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F4AD1F2B11F70600A83C8F /* VideoView.swift */; };
+		70F4AD242B14D71A00A83C8F /* VideosRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F4AD232B14D71A00A83C8F /* VideosRowView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -98,6 +99,7 @@
 		70F4AD1B2B11EBB400A83C8F /* CastMembersDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastMembersDetailView.swift; sourceTree = "<group>"; };
 		70F4AD1D2B11F50200A83C8F /* PreviewLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewLoader.swift; sourceTree = "<group>"; };
 		70F4AD1F2B11F70600A83C8F /* VideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
+		70F4AD232B14D71A00A83C8F /* VideosRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosRowView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -240,6 +242,7 @@
 				70F4AD192B11E78900A83C8F /* CastView.swift */,
 				70F4AD1B2B11EBB400A83C8F /* CastMembersDetailView.swift */,
 				70F4AD1F2B11F70600A83C8F /* VideoView.swift */,
+				70F4AD232B14D71A00A83C8F /* VideosRowView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -437,6 +440,7 @@
 				7062A2BB2AF107BD00B99324 /* SearchViewModel.swift in Sources */,
 				7051983C2AEFF7D400452564 /* PreviewData.swift in Sources */,
 				39AB4F3D2B10FAE2005F4B51 /* Extension+Previews.swift in Sources */,
+				70F4AD242B14D71A00A83C8F /* VideosRowView.swift in Sources */,
 				7062A2B62AF0F98600B99324 /* SearchView.swift in Sources */,
 				70525BAE2AF7635F006E7CD6 /* NotificationsView.swift in Sources */,
 				7035F6672AF7587E00F42910 /* TimelineView.swift in Sources */,

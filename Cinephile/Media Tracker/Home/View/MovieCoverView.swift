@@ -46,6 +46,9 @@ struct MovieCoverView: View {
                 print("poster URL is nil")
             }
         }
+        .onAppear {
+            print(Movie.preview)
+        }
     }
     
     private func formatPosterPath(path: String) -> String {
@@ -70,5 +73,6 @@ struct MovieCoverView: View {
 struct MovieCoverView_Previews: PreviewProvider {
     static var previews: some View {
         MovieCoverView(movie: .preview)
+            .previewLayout(.sizeThatFits)
     }
 }

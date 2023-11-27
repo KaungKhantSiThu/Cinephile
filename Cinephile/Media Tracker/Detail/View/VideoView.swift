@@ -6,32 +6,41 @@
 //
 
 import SwiftUI
+import WebKit
 import AVKit
+import TMDb
 
 struct VideoView: View {
-    let player = AVPlayer(url: URL(string: "https://www.youtube.com/watch?v=NxW_X4kzeus")!)
-    let endMonitor = NotificationCenter.default.publisher(for: NSNotification.Name.AVPlayerItemDidPlayToEndTime)
+    let metaData: VideoMetadata
 
     var body: some View {
         
         VStack(alignment: .leading) {
-            VideoPlayer(player: player)
-                .frame(width: 300, height: 200)
-                .onAppear {
-                    player.play()
-                }
-                .onReceive(endMonitor) { _ in
-                    player.seek(to: .zero)
-                    player.play()
-                }
+            YouTubeView(videoId: metaData.key)
+                .clipShape(RoundedRectangle(cornerRadius: 25))
+                .frame(width: 320, height: 180)
             
-            Text("Footage: ChristianBodhi")
+            Text(metaData.name)
                 .font(.headline)
+                .frame(width: 300)
         }
+    }
+}
+
+struct YouTubeView: UIViewRepresentable {
+    let videoId: String
+    
+    func makeUIView(context: Context) ->  WKWebView {
+        return WKWebView()
+    }
+    func updateUIView(_ uiView: WKWebView, context: Context) {
+        guard let demoURL = URL(string: "https://www.youtube.com/embed/\(videoId)") else { return }
+        uiView.scrollView.isScrollEnabled = false
+        uiView.load(URLRequest(url: demoURL))
     }
 }
 
 
 #Preview {
-    VideoView()
+    VideoView(metaData: .preview)
 }

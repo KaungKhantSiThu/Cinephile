@@ -11,7 +11,7 @@ import TMDb
 struct PreviewMovieLoader: DataLoader {
     
     func loadItem(withID id: Int) async throws -> Movie {
-        return Movie.preview!
+        return Movie.preview
     }
     
     func loadTrendingItems() async throws -> [Movie] {

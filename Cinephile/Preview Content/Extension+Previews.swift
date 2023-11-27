@@ -25,6 +25,7 @@ extension Movie {
             do {
                 let jsonData = try Data(contentsOf: URL(fileURLWithPath: fileURL))
                 let loadedData = try JSONDecoder().decode(Movie.self, from: jsonData)
+                print("Successful")
                 return loadedData
             } catch {
                 print("Error loading data from JSON: \(error.localizedDescription)")
@@ -106,6 +107,10 @@ extension Array where Element == VideoMetadata {
         }
         return []
     }()
+}
+
+extension VideoMetadata {
+    static let preview = Array<Self>.preview[5]
 }
 
 extension Array where Element == WatchProvider {

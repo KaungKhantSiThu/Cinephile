@@ -47,6 +47,10 @@ struct MovieLoader: DataLoader {
     func upcomingItems() async throws -> [Movie] {
         return try await movieService.upcoming().results
     }
+    
+    func loadVideos(withID id: Movie.ID) async throws -> [VideoMetadata] {
+        return try await movieService.videos(forMovie: id).results
+    }
 }
 
 struct TVSeriesLoader: DataLoader {
