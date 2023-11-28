@@ -17,6 +17,7 @@ struct CastMemberView: View {
                     }
                 }
             }
+            .scrollIndicators(.hidden)
         }
     }
 }

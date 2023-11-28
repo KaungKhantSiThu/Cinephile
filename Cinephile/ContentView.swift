@@ -17,17 +17,18 @@ struct ContentView: View {
     var body: some View {
         TabView(selection: self.$selectedTab) {
             Group {
-                TimelineView()
-                    .tabItem {
-                        Label("Home", systemImage: "house")
-                    }
-                    .tag(Tabs.social)
                 
                 DiscoverMoviesView()
                     .tabItem {
-                        Label("Tracker", systemImage: "popcorn")
+                        Label("Home", systemImage: "house")
                     }
                     .tag(Tabs.tracker)
+                
+                TimelineView()
+                    .tabItem {
+                        Label("Social", systemImage: "person.3")
+                    }
+                    .tag(Tabs.social)
                 
                 NotificationsView()
                     .tabItem {
