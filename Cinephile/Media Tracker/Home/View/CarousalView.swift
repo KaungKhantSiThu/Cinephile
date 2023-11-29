@@ -8,16 +8,8 @@
 import SwiftUI
 import TMDb
 
-enum ViewCategory: String {
-    case discover = "Discover"
-    case recommended = "Recommended"
-    case upcomming = "Upcoming"
-    case movie = "Movies"
-    case series = "Series"
-}
-
 struct CarousalView: View {
-    let title: ViewCategory
+    let title: String
     let movies: [Movie]
     var body: some View {
         VStack(alignment: .leading) {
@@ -25,7 +17,7 @@ struct CarousalView: View {
                 CategorialMovieView(movies: movies)
             } label: {
                 HStack {
-                    Text(title.rawValue)
+                    Text(title)
                         .font(.title2)
                         .fontWeight(.semibold)
                     
@@ -39,7 +31,8 @@ struct CarousalView: View {
                 HStack {
                     ForEach(movies.prefix(5)) { movie in
                         NavigationLink(value: movie) {
-                            MovieCoverView(movie: movie)
+                            MediaCoverView(movie: movie)
+                                .frame(width: 100)
                         }
                         .buttonStyle(.plain)
                     }
@@ -53,7 +46,7 @@ struct CarousalView: View {
 
 #Preview {
 //    NavigationStack {
-        CarousalView(title: .discover, movies: .preview)
+        CarousalView(title: "Trending Movies", movies: .preview)
 //            .navigationDestination(for: Movie.self) {
 //                MovieDetailView(id: $0.id, addButtonAction: { (id: Movie.ID) -> Void in
 //                    print(id)

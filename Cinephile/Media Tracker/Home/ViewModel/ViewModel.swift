@@ -31,6 +31,7 @@ class ViewModel<Loader: DataLoader>: ObservableObject, LoadableObject {
             }
         }
     }
+
 }
 
 

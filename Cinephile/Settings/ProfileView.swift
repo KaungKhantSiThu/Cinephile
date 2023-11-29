@@ -82,9 +82,9 @@ struct ProfileView: View {
                         }
                     case .list:
                         VStack {
-                            CarousalView(title: .movie, movies: PreviewData.mockMovieArray)
+                            CarousalView(title: ".movie", movies: PreviewData.mockMovieArray)
                             
-                            CarousalView(title: .series, movies: PreviewData.mockMovieArray)
+                            CarousalView(title: ".series", movies: PreviewData.mockMovieArray)
                         }
                     }
                 }

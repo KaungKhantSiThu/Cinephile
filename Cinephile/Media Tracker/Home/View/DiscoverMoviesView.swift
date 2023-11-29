@@ -14,10 +14,9 @@ struct DiscoverMoviesView: View {
         NavigationStack {
             ScrollView {
                 AsyncContentView(source: model) { movies in
-                    CarousalView(title: .discover, movies: movies)
-                    CarousalView(title: .recommended, movies: movies)
-                    CarousalView(title: .upcomming, movies: movies)
-
+                    CarousalView(title: "Trending Movies", movies: movies)
+                    CarousalView(title: "Trending Movies", movies: movies)
+                    CarousalView(title: "Trending Movies", movies: movies)
                 }
                 .navigationDestination(for: Movie.self) {
                     MovieDetailView(id: $0.id)
@@ -46,7 +45,6 @@ struct DiscoverMoviesView: View {
 #Preview {
     DiscoverMoviesView()
         .environmentObject(ViewModel(loader: PreviewMovieLoader()))
-
 }
 
 
