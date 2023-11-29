@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		397998112B17A4CB00AB6594 /* season-detail.json in Resources */ = {isa = PBXBuildFile; fileRef = 397998102B17A4CB00AB6594 /* season-detail.json */; };
+		397998132B17A4EC00AB6594 /* episode-detail.json in Resources */ = {isa = PBXBuildFile; fileRef = 397998122B17A4EC00AB6594 /* episode-detail.json */; };
+		397998152B17A9DD00AB6594 /* SeasonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397998142B17A9DD00AB6594 /* SeasonView.swift */; };
+		397998172B17A9E400AB6594 /* EpisodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397998162B17A9E400AB6594 /* EpisodeView.swift */; };
 		397D96D72B11E99E00D87895 /* movie-detail.json in Resources */ = {isa = PBXBuildFile; fileRef = 397D96D62B11E99E00D87895 /* movie-detail.json */; };
 		397D96DD2B11F2D200D87895 /* movie-video.json in Resources */ = {isa = PBXBuildFile; fileRef = 397D96DC2B11F2D200D87895 /* movie-video.json */; };
 		397D96DF2B11F30300D87895 /* series.json in Resources */ = {isa = PBXBuildFile; fileRef = 397D96DE2B11F30300D87895 /* series.json */; };
@@ -15,6 +19,7 @@
 		39AB4F3A2B10FAD4005F4B51 /* cast.json in Resources */ = {isa = PBXBuildFile; fileRef = 39AB4F382B10FAD4005F4B51 /* cast.json */; };
 		39AB4F3B2B10FAD4005F4B51 /* movie.json in Resources */ = {isa = PBXBuildFile; fileRef = 39AB4F392B10FAD4005F4B51 /* movie.json */; };
 		39AB4F3D2B10FAE2005F4B51 /* Extension+Previews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AB4F3C2B10FAE2005F4B51 /* Extension+Previews.swift */; };
+		39EC05B12B179C1D009D9567 /* SeriesDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EC05B02B179C1D009D9567 /* SeriesDetailView.swift */; };
 		39FAA7472B11D3A60049AA72 /* CastMemberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FAA7462B11D3A60049AA72 /* CastMemberView.swift */; };
 		7035F6672AF7587E00F42910 /* TimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7035F6662AF7587E00F42910 /* TimelineView.swift */; };
 		7035F6692AF75A3700F42910 /* GentyDemo-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7035F6682AF75A3700F42910 /* GentyDemo-Regular.otf */; };
@@ -50,6 +55,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		397998102B17A4CB00AB6594 /* season-detail.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "season-detail.json"; sourceTree = "<group>"; };
+		397998122B17A4EC00AB6594 /* episode-detail.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "episode-detail.json"; sourceTree = "<group>"; };
+		397998142B17A9DD00AB6594 /* SeasonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SeasonView.swift; path = "Cinephile/Preview Content/SeasonView.swift"; sourceTree = SOURCE_ROOT; };
+		397998162B17A9E400AB6594 /* EpisodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EpisodeView.swift; path = "Cinephile/Preview Content/EpisodeView.swift"; sourceTree = SOURCE_ROOT; };
 		397D96D62B11E99E00D87895 /* movie-detail.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "movie-detail.json"; sourceTree = "<group>"; };
 		397D96DC2B11F2D200D87895 /* movie-video.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "movie-video.json"; sourceTree = "<group>"; };
 		397D96DE2B11F30300D87895 /* series.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = series.json; sourceTree = "<group>"; };
@@ -58,6 +67,7 @@
 		39AB4F382B10FAD4005F4B51 /* cast.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cast.json; sourceTree = "<group>"; };
 		39AB4F392B10FAD4005F4B51 /* movie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = movie.json; sourceTree = "<group>"; };
 		39AB4F3C2B10FAE2005F4B51 /* Extension+Previews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension+Previews.swift"; sourceTree = "<group>"; };
+		39EC05B02B179C1D009D9567 /* SeriesDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesDetailView.swift; sourceTree = "<group>"; };
 		39FAA7462B11D3A60049AA72 /* CastMemberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CastMemberView.swift; path = "Cinephile/Preview Content/CastMemberView.swift"; sourceTree = SOURCE_ROOT; };
 		7035F6662AF7587E00F42910 /* TimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineView.swift; sourceTree = "<group>"; };
 		7035F6682AF75A3700F42910 /* GentyDemo-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GentyDemo-Regular.otf"; sourceTree = "<group>"; };
@@ -148,6 +158,7 @@
 				703AEDEC2B0CFE4C00E9ED76 /* View */,
 				7084D7092AEE8D64008EF753 /* MovieDetailView.swift */,
 				707ABEFD2AF64223001B88FE /* StarsView.swift */,
+				39EC05B02B179C1D009D9567 /* SeriesDetailView.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -229,6 +240,8 @@
 			isa = PBXGroup;
 			children = (
 				39FAA7462B11D3A60049AA72 /* CastMemberView.swift */,
+				397998142B17A9DD00AB6594 /* SeasonView.swift */,
+				397998162B17A9E400AB6594 /* EpisodeView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -319,6 +332,8 @@
 				397D96E22B11F8EE00D87895 /* movie-watch-provider.json */,
 				397D96DE2B11F30300D87895 /* series.json */,
 				397D96E02B11F31800D87895 /* series-detail.json */,
+				397998102B17A4CB00AB6594 /* season-detail.json */,
+				397998122B17A4EC00AB6594 /* episode-detail.json */,
 				707960362AEBA0A900AB748D /* Preview Assets.xcassets */,
 				7051983B2AEFF7D400452564 /* PreviewData.swift */,
 				39AB4F3C2B10FAE2005F4B51 /* Extension+Previews.swift */,
@@ -402,7 +417,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				397D96DD2B11F2D200D87895 /* movie-video.json in Resources */,
+				397998112B17A4CB00AB6594 /* season-detail.json in Resources */,
 				397D96E32B11F8EE00D87895 /* movie-watch-provider.json in Resources */,
+				397998132B17A4EC00AB6594 /* episode-detail.json in Resources */,
 				39AB4F3A2B10FAD4005F4B51 /* cast.json in Resources */,
 				707960372AEBA0A900AB748D /* Preview Assets.xcassets in Resources */,
 				707960342AEBA0A900AB748D /* Assets.xcassets in Resources */,
@@ -434,8 +451,10 @@
 				7094DFBA2B0BA318008DF25E /* API_Key.swift in Sources */,
 				7062A2C52AF2512F00B99324 /* MovieCoverView.swift in Sources */,
 				707ABEFE2AF64223001B88FE /* StarsView.swift in Sources */,
+				397998172B17A9E400AB6594 /* EpisodeView.swift in Sources */,
 				70F4AD182B11CFE500A83C8F /* ImageLoader.swift in Sources */,
 				7062A2C72AF2524A00B99324 /* MovieCoverViewModel.swift in Sources */,
+				397998152B17A9DD00AB6594 /* SeasonView.swift in Sources */,
 				7084D7A12AEFA719008EF753 /* DiscoverMoviesView.swift in Sources */,
 				703AEDF42B0F893500E9ED76 /* URL+TMDb.swift in Sources */,
 				70DFE2752AEBEBFE009AE124 /* MovieRow.swift in Sources */,
@@ -444,6 +463,7 @@
 				7084D70A2AEE8D64008EF753 /* MovieDetailView.swift in Sources */,
 				707ABEF62AF3A7D6001B88FE /* MovieDetailViewModel.swift in Sources */,
 				707960322AEBA0A700AB748D /* ContentView.swift in Sources */,
+				39EC05B12B179C1D009D9567 /* SeriesDetailView.swift in Sources */,
 				70F4AD162B1045D300A83C8F /* DataLoader.swift in Sources */,
 				70525BB12AF77DD6006E7CD6 /* Notification.swift in Sources */,
 				707960302AEBA0A700AB748D /* CinephileApp.swift in Sources */,
