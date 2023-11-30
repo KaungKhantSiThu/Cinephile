@@ -47,10 +47,6 @@ struct MediaCoverView: View {
         }
     }
     
-    private func formatPosterPath(path: String) -> String {
-        return "https://image.tmdb.org/t/p/original" + path
-    }
-    
     private func formatReleasedDate(date: Date?) -> String {
         let dateFormatter = {
             let formatter = DateFormatter()

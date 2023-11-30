@@ -44,6 +44,32 @@ struct CarousalView: View {
     }
 }
 
+struct CarousalSeriesView: View {
+    let title: String
+    let series: [TVSeries]
+    var body: some View {
+        VStack(alignment: .leading) {
+            HStack {
+                Text(title)
+                    .font(.title2)
+                    .fontWeight(.semibold)
+                
+                Image(systemName: "chevron.right")
+            }
+            
+            ScrollView(.horizontal) {
+                HStack {
+                    ForEach(series.prefix(5)) { series in
+                        MediaCoverView(tvSeries: series)
+                            .frame(width: 100)
+                    }
+                }
+            }
+            .scrollIndicators(.hidden)
+        }
+        .padding()
+    }
+}
 #Preview {
 //    NavigationStack {
         CarousalView(title: "Trending Movies", movies: .preview)

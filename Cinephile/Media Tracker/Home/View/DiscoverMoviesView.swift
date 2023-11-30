@@ -15,7 +15,7 @@ struct DiscoverMoviesView: View {
             ScrollView {
                 AsyncContentView(source: model) { movies in
                     CarousalView(title: "Trending Movies", movies: movies)
-                    CarousalView(title: "Trending Movies", movies: movies)
+                    CarousalSeriesView(title: "Trending Series", series: model.series)
                     CarousalView(title: "Trending Movies", movies: movies)
                 }
                 .navigationDestination(for: Movie.self) {

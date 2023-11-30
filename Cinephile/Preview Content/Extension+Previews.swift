@@ -130,5 +130,9 @@ extension Array where Element == WatchProvider {
     }()
 }
 
+extension Media {
+    static let moviePreview = Media.movie(.preview)
+}
+
 
 
