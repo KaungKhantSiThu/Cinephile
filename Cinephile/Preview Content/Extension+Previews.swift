@@ -131,7 +131,6 @@ extension Array where Element == TVEpisode {
             do {
                 let jsonData = try Data(contentsOf: URL(fileURLWithPath: fileURL))
                 let loadedData = try JSONDecoder().decode(TVSeason.self, from: jsonData)
-                print("Hi again")
                 return loadedData.episodes
             } catch {
                 print(error)

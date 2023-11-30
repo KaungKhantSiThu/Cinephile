@@ -7,7 +7,7 @@ struct EpisodeView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
-                Text("Episodes")
+                Text("Episode")
                     .font(.title2)
                     .fontWeight(.semibold)
                     .padding([.leading, .bottom], 10)
@@ -35,9 +35,6 @@ struct EpisodeView: View {
 
 #Preview {
     EpisodeView(episodes: .preview!)
-        .onAppear {
-            print(CastMember.preview)
-        }
 }
 
 
