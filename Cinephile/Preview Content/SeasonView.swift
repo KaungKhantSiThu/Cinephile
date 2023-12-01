@@ -9,6 +9,7 @@ struct SeasonView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text("Seasons")
+                .foregroundStyle(.black)
                 .font(.title2)
                 .fontWeight(.semibold)
                 .padding([.leading, .bottom], 10)

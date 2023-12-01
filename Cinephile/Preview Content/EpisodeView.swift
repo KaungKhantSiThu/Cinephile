@@ -7,19 +7,28 @@ struct EpisodeView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
-                Text("Episode")
+                Text("Episodes")
                     .font(.title2)
                     .fontWeight(.semibold)
                     .padding([.leading, .bottom], 10)
                 ForEach(episodes) { episode in
                     HStack(spacing: 20) {
-                        Image(systemName: "person")
-                            .background(in: Circle().inset(by: -8))
-                            .backgroundStyle(.red.gradient)
-                            .foregroundStyle(.white.shadow(.drop(radius: 1, y: 1.5)))
+                        AsyncImage(url: URL(string: formatPosterPath(path: episode.stillPath!.absoluteString))) { image in
+                            image
+                                .resizable()
+                                .scaledToFit()
+                        } placeholder: {
+                            Rectangle()
+                                .overlay {
+                                    ProgressView()
+                                }
+                                .frame(width: 30, height: 30)
+                        }
+                        .frame(height: 70)
                         VStack(alignment: .leading) {
                             Text(episode.name)
-                                .font(.caption)
+                                .foregroundStyle(.black)
+                                .font(.headline)
                                 .foregroundStyle(.secondary)
                         }
                     }
@@ -30,6 +39,9 @@ struct EpisodeView: View {
                 }
             }
         }
+    }
+    private func formatPosterPath(path: String) -> String {
+        return "https://image.tmdb.org/t/p/original" + path
     }
 }
 
