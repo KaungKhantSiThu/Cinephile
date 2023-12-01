@@ -1,5 +1,5 @@
 //
-//  MovieCoverView.swift
+//  MediaCoverView.swift
 //  TMDB Test
 //
 //  Created by Kaung Khant Si Thu on 01/11/2023.
@@ -9,8 +9,10 @@ import SwiftUI
 import TMDb
 import SDWebImageSwiftUI
 
-struct MovieCoverView: View {
-    let movie: Movie
+struct MediaCoverView: View {
+    let title: String
+    let releaseDate: Date?
+    let posterPath: URL?
     @State private var posterImage = URL(string: "https://picsum.photos/200/300")!
     var body: some View {
         VStack(alignment: .leading) {
@@ -18,38 +20,31 @@ struct MovieCoverView: View {
                 .placeholder(Image(systemName: "photo"))
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(height: 120)
+                .frame(height: 150)
                 .clipShape(
-                    RoundedRectangle(cornerRadius: 10)
+                    RoundedRectangle(cornerRadius: 7.5)
                 )
 
                 
             VStack(alignment: .leading, spacing: 5) {
-                Text(movie.title)
+                Text(title)
                     .fontWeight(.semibold)
-                    .frame(width: 80)
                     .lineLimit(1)
                     .font(.caption)
                     .foregroundStyle(.primary)
                     
-                Text(formatReleasedDate(date: movie.releaseDate))
+                Text(formatReleasedDate(date: releaseDate))
                     .font(.caption2)
                     .foregroundStyle(.secondary)
             }
-
         }
-        .padding()
         .task {
             do {
-                posterImage = try await ImageLoader.generate(from: movie.posterPath, width: 200)
+                posterImage = try await ImageLoader.generate(from: posterPath, width: 200)
             } catch {
                 print("poster URL is nil")
             }
         }
-    }
-    
-    private func formatPosterPath(path: String) -> String {
-        return "https://image.tmdb.org/t/p/original" + path
     }
     
     private func formatReleasedDate(date: Date?) -> String {
@@ -67,8 +62,23 @@ struct MovieCoverView: View {
     }
 }
 
+extension MediaCoverView {
+    init(movie: Movie) {
+        self.title = movie.title
+        self.posterPath = movie.posterPath
+        self.releaseDate = movie.releaseDate
+    }
+    
+    init(tvSeries: TVSeries) {
+        self.title = tvSeries.name
+        self.posterPath = tvSeries.posterPath
+        self.releaseDate = tvSeries.firstAirDate
+    }
+}
+
 struct MovieCoverView_Previews: PreviewProvider {
     static var previews: some View {
-        MovieCoverView(movie: .preview)
+        MediaCoverView(movie: .preview)
+            .previewLayout(.sizeThatFits)
     }
 }

@@ -25,6 +25,7 @@ extension Movie {
             do {
                 let jsonData = try Data(contentsOf: URL(fileURLWithPath: fileURL))
                 let loadedData = try JSONDecoder().decode(Movie.self, from: jsonData)
+                print("Successful")
                 return loadedData
             } catch {
                 print("Error loading data from JSON: \(error.localizedDescription)")
@@ -108,6 +109,10 @@ extension Array where Element == VideoMetadata {
     }()
 }
 
+extension VideoMetadata {
+    static let preview = Array<Self>.preview[5]
+}
+
 extension Array where Element == WatchProvider {
     static let preview = {
         if let fileURL = Bundle.main.path(forResource: "movie-video", ofType: "json") {
@@ -124,7 +129,6 @@ extension Array where Element == WatchProvider {
         return []
     }()
 }
-
 extension Array where Element == TVEpisode {
     static let preview = {
         if let fileURL = Bundle.main.path(forResource: "season-detail", ofType: "json") {
@@ -140,6 +144,9 @@ extension Array where Element == TVEpisode {
         }
         return []
     }()
+}
+extension Media {
+    static let moviePreview = Media.movie(.preview)
 }
 
 

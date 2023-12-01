@@ -14,25 +14,25 @@ struct DiscoverMoviesView: View {
         NavigationStack {
             ScrollView {
                 AsyncContentView(source: model) { movies in
-                    CarousalView(title: .discover, movies: movies)
-                    CarousalView(title: .recommended, movies: movies)
-                    CarousalView(title: .upcomming, movies: movies)
-
+                    CarousalView(title: "Trending Movies", movies: movies)
+                    CarousalSeriesView(title: "Trending Series", series: model.series)
+                    CarousalView(title: "Upcoming Movies", movies: model.upcomingMovies)
                 }
                 .navigationDestination(for: Movie.self) {
-                    MovieDetailView(id: $0.id, addButtonAction: addAction(id:))
+                    MovieDetailView(id: $0.id)
                 }
             }
             .navigationTitle("Tracker")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        print("search")
+                    NavigationLink {
+                        SearchView()
                     } label: {
                         Image(systemName: "magnifyingglass")
                             .tint(.red)
                     }
+
                 }
             }
         }
@@ -45,8 +45,7 @@ struct DiscoverMoviesView: View {
 
 #Preview {
     DiscoverMoviesView()
-        .environmentObject(ViewModel(loader: MovieLoader()))
-
+        .environmentObject(ViewModel(loader: PreviewMovieLoader()))
 }
 
 

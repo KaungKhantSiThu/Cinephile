@@ -16,7 +16,7 @@ struct CategorialMovieView: View {
             LazyVGrid(columns: columns) {
                 ForEach(movies) { movie in
                     NavigationLink(value: movie) {
-                        MovieCoverView(movie: movie)
+                        MediaCoverView(movie: movie)
                     }
                     .buttonStyle(.plain)
                 }
