@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3962DE0A2B1A221200F6D67A /* SeriesDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3962DE092B1A221200F6D67A /* SeriesDetailViewModel.swift */; };
 		397998112B17A4CB00AB6594 /* season-detail.json in Resources */ = {isa = PBXBuildFile; fileRef = 397998102B17A4CB00AB6594 /* season-detail.json */; };
 		397998132B17A4EC00AB6594 /* episode-detail.json in Resources */ = {isa = PBXBuildFile; fileRef = 397998122B17A4EC00AB6594 /* episode-detail.json */; };
 		397998152B17A9DD00AB6594 /* SeasonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397998142B17A9DD00AB6594 /* SeasonView.swift */; };
@@ -64,6 +65,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3962DE092B1A221200F6D67A /* SeriesDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesDetailViewModel.swift; sourceTree = "<group>"; };
 		397998102B17A4CB00AB6594 /* season-detail.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "season-detail.json"; sourceTree = "<group>"; };
 		397998122B17A4EC00AB6594 /* episode-detail.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "episode-detail.json"; sourceTree = "<group>"; };
 		397998142B17A9DD00AB6594 /* SeasonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SeasonView.swift; path = "Cinephile/Preview Content/SeasonView.swift"; sourceTree = SOURCE_ROOT; };
@@ -274,6 +276,7 @@
 			isa = PBXGroup;
 			children = (
 				707ABEF52AF3A7D5001B88FE /* MovieDetailViewModel.swift */,
+				3962DE092B1A221200F6D67A /* SeriesDetailViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -499,6 +502,7 @@
 				39EC05B12B179C1D009D9567 /* SeriesDetailView.swift in Sources */,
 				70F4AD162B1045D300A83C8F /* DataLoader.swift in Sources */,
 				70525BB12AF77DD6006E7CD6 /* Notification.swift in Sources */,
+				3962DE0A2B1A221200F6D67A /* SeriesDetailViewModel.swift in Sources */,
 				70F4AD282B17233400A83C8F /* TitledRowView.swift in Sources */,
 				70F4AD202B11F70600A83C8F /* VideoView.swift in Sources */,
 				707960302AEBA0A700AB748D /* CinephileApp.swift in Sources */,

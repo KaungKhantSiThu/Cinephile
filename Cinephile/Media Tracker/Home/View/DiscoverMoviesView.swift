@@ -22,9 +22,7 @@ struct DiscoverMoviesView: View {
                     MovieDetailView(id: $0.id)
                 }
                 .navigationDestination(for: TVSeries.self) {
-                    SeriesDetailView(id: $0.id) { id in
-                        print(id)
-                    }
+                    SeriesDetailView(id: $0.id)
                 }
             }
             .navigationTitle("Tracker")

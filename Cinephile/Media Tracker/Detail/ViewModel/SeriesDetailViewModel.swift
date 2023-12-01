@@ -1,19 +1,21 @@
+import Foundation
 import SwiftUI
 import TMDb
 
-class MovieDetailViewModel<Loader: DataLoader>: ObservableObject, LoadableObject {
-    @Published private(set) var state: LoadingState<Movie> = .idle
+
+class SeriesDetailViewModel<Loader: DataLoader>: ObservableObject, LoadableObject {
+    
+    @Published private(set) var state: LoadingState<TVSeries> = .idle
     
     @Published var castMembers: [CastMember] = []
     @Published var videos: [VideoMetadata] = []
     @Published var posterImageURL: URL = URL(string: "https://picsum.photos/200/300")!
     
-    
     let id: Movie.ID
 
-    private let loader: MovieLoader
+    private let loader: TVSeriesLoader
     
-    init(id: Movie.ID, loader: MovieLoader = MovieLoader()) {
+    init(id: TVSeries.ID, loader: TVSeriesLoader = TVSeriesLoader()) {
         self.id = id
         self.loader = loader
     }
@@ -23,11 +25,10 @@ class MovieDetailViewModel<Loader: DataLoader>: ObservableObject, LoadableObject
         state = .loading
         Task {
             do {
-                let movie = try await loader.loadItem(withID: id)
+                let serires = try await loader.loadItem(withID: id)
                 self.castMembers = try await loader.loadCastMembers(withID: id)
-                self.videos = try await loader.loadVideos(withID: id)
-                self.state = .loaded(movie)
-                self.posterImageURL = try await ImageLoader.generate(from: movie.posterPath, width: 200)
+                self.state = .loaded(serires)
+                self.posterImageURL = try await ImageLoader.generate(from: serires.posterPath, width: 200)
             } catch {
                 self.state = .failed(error)
             }
