@@ -1,135 +1,167 @@
 {
   "adult": false,
-  "backdrop_path": "/218ZehBKlH8efPRRccmB7bu0oLQ.jpg",
+  "backdropPath": "/9faGSFi5jam6pDWGNd0p8JcJgXQ.jpg",
   "created_by": [
     {
-      "id": 1585782,
-      "credit_id": "63d26f49cb71b80085ddc435",
-      "name": "Alessandro Marson",
+      "id": 66633,
+      "credit_id": "52542286760ee31328001a7b",
+      "name": "Vince Gilligan",
       "gender": 2,
-      "profile_path": "/1HFvTSXJBgzuqq8uNZYf60M5vUL.jpg"
-    },
-    {
-      "id": 1787189,
-      "credit_id": "63d26f43a410c811f192ef51",
-      "name": "Thereza Falcão",
-      "gender": 1,
-      "profile_path": "/Aqc0ZdSh5ExMAzqLl3rnLsnXZPP.jpg"
+      "profile_path": "/z3E0DhBg1V1PZVEtS9vfFPzOWYB.jpg"
     }
   ],
   "episode_run_time": [],
-  "first_air_date": "2023-09-25",
   "genres": [
-    {
-      "id": 35,
-      "name": "Comedy"
-    },
-    {
-      "id": 9648,
-      "name": "Mystery"
-    },
-    {
-      "id": 10766,
-      "name": "Soap"
-    },
     {
       "id": 18,
       "name": "Drama"
+    },
+    {
+      "id": 80,
+      "name": "Crime"
     }
   ],
-  "homepage": "https://gshow.globo.com/novelas/elas-por-elas/",
-  "id": 219109,
-  "in_production": true,
+  "homepage": "http://www.amc.com/shows/breaking-bad",
+  "id": 1396,
+  "in_production": false,
   "languages": [
-    "pt"
+    "en",
+    "de",
+    "es"
   ],
-  "last_air_date": "2023-11-24",
   "last_episode_to_air": {
-    "id": 4910520,
-    "name": "Chapter 52",
-    "overview": "",
-    "vote_average": 0,
-    "vote_count": 0,
-    "air_date": "2023-11-24",
-    "episode_number": 52,
-    "episode_type": "standard",
+    "id": 62161,
+    "name": "Felina",
+    "overview": "All bad things must come to an end.",
+    "voteAverage": 9.284,
+    "vote_count": 201,
+    "air_date": "2013-09-29",
+    "episode_number": 16,
+    "episode_type": "finale",
     "production_code": "",
-    "runtime": null,
-    "season_number": 1,
-    "show_id": 219109,
-    "still_path": "/yBrLiR7LiwknGCNCZbkubjErKDK.jpg"
+    "runtime": 56,
+    "seasonNumber": 5,
+    "show_id": 1396,
+    "still_path": "/pA0YwyhvdDXP3BEGL2grrIhq8aM.jpg"
   },
-  "name": "Elas por Elas",
-  "next_episode_to_air": {
-    "id": 4910521,
-    "name": "Chapter 53",
-    "overview": "",
-    "vote_average": 0,
-    "vote_count": 0,
-    "air_date": "2023-11-25",
-    "episode_number": 53,
-    "episode_type": "standard",
-    "production_code": "",
-    "runtime": null,
-    "season_number": 1,
-    "show_id": 219109,
-    "still_path": null
-  },
+  "name": "Breaking Bad",
+  "next_episode_to_air": null,
   "networks": [
     {
-      "id": 60,
-      "logo_path": "/w5KLywO8bPe98prvv0UewMBAZHO.png",
-      "name": "TV Globo",
-      "origin_country": "BR"
+      "id": 174,
+      "logo_path": "/alqLicR1ZMHMaZGP3xRQxn9sq7p.png",
+      "name": "AMC",
+      "origin_country": "US"
     }
   ],
-  "number_of_episodes": 59,
-  "number_of_seasons": 1,
+  "number_of_episodes": 62,
+  "number_of_seasons": 5,
   "origin_country": [
-    "BR"
+    "US"
   ],
-  "original_language": "pt",
-  "original_name": "Elas por Elas",
-  "overview": "Seven friends who met in their youth at an English course meet again 25 years later; Lara, Taís, Helena, Adriana, Renée, Natália and Carol, each of them has a different personality and origin, but they share a deep affection.",
-  "popularity": 3148.084,
-  "poster_path": "/m0cvvnhnRXdQhLARx7qt9lz7hTE.jpg",
+  "original_language": "en",
+  "original_name": "Breaking Bad",
+  "overview": "When Walter White, a New Mexico chemistry teacher, is diagnosed with Stage III cancer and given a prognosis of only two years left to live. He becomes filled with a sense of fearlessness and an unrelenting desire to secure his family's financial future at any cost as he enters the dangerous world of drugs and crime.",
+  "popularity": 382.597,
+  "posterPath": "/3xnWaLQjelJDDF7LT1WBo6f4BRe.jpg",
   "production_companies": [
     {
-      "id": 46430,
-      "logo_path": "/tQZIt59BLw3b0b6rHJRqv4Dvrpd.png",
-      "name": "Estúdios Globo",
-      "origin_country": "BR"
+      "id": 11073,
+      "logo_path": "/aCbASRcI1MI7DXjPbSW9Fcv9uGR.png",
+      "name": "Sony Pictures Television Studios",
+      "origin_country": "US"
+    },
+    {
+      "id": 33742,
+      "logo_path": null,
+      "name": "High Bridge Productions",
+      "origin_country": "US"
+    },
+    {
+      "id": 2605,
+      "logo_path": null,
+      "name": "Gran Via Productions",
+      "origin_country": "US"
     }
   ],
   "production_countries": [
     {
-      "iso_3166_1": "BR",
-      "name": "Brazil"
+      "iso_3166_1": "US",
+      "name": "United States of America"
     }
   ],
   "seasons": [
     {
-      "air_date": "2023-09-25",
-      "episode_count": 59,
-      "id": 326158,
+      "air_date": "2008-01-20",
+      "episode_count": 7,
+      "id": 3572,
       "name": "Season 1",
-      "overview": "",
-      "poster_path": "/7MzO0UYKP7V9B0ls9TH77p5WAiy.jpg",
-      "season_number": 1,
-      "vote_average": 6
+      "overview": "High school chemistry teacher Walter White's life is suddenly transformed by a dire medical diagnosis. Street-savvy former student Jesse Pinkman \"teaches\" Walter a new trade.",
+      "posterPath": "/1BP4xYv9ZG4ZVHkL7ocOziBbSYH.jpg",
+      "seasonNumber": 1,
+      "voteAverage": 8.2
+    },
+    {
+      "air_date": "2009-03-08",
+      "episode_count": 13,
+      "id": 3573,
+      "name": "Season 2",
+      "overview": "Walt must deal with the chain reaction of his choice, as he and Jesse face new and severe consequences. When danger and suspicion around Walt escalate, he is pushed to new levels of desperation. Just how much higher will the stakes rise? How far is Walt willing to go to ensure his family's security? Will his grand plan spiral out of control?",
+      "posterPath": "/e3oGYpoTUhOFK0BJfloru5ZmGV.jpg",
+      "seasonNumber": 2,
+      "voteAverage": 8.4
+    },
+    {
+      "air_date": "2010-03-21",
+      "episode_count": 13,
+      "id": 3575,
+      "name": "Season 3",
+      "overview": "Walt continues to battle dueling identities: a desperate husband and father trying to provide for his family, and a newly appointed key player in the Albuquerque drug trade. As the danger around him escalates, Walt is now entrenched in the complex worlds of an angst-ridden family on the verge of dissolution, and the ruthless and unrelenting drug cartel.",
+      "posterPath": "/ffP8Q8ew048YofHRnFVM18B2fPG.jpg",
+      "seasonNumber": 3,
+      "voteAverage": 8.4
+    },
+    {
+      "air_date": "2011-07-17",
+      "episode_count": 13,
+      "id": 3576,
+      "name": "Season 4",
+      "overview": "Walt and Jesse must cope with the fallout of their previous actions, both personally and professionally. Tension mounts as Walt faces a true standoff with his employer, Gus, with neither side willing or able to back down. Walt must also adjust to a new relationship with Skyler, whom while still reconciling her relationship with Walt, is committed to properly laundering Walt’s money and ensuring her sister Marie and an ailing Hank are financially stable.",
+      "posterPath": "/5ewrnKp4TboU4hTLT5cWO350mHj.jpg",
+      "seasonNumber": 4,
+      "voteAverage": 8.5
+    },
+    {
+      "air_date": "2012-07-15",
+      "episode_count": 16,
+      "id": 3578,
+      "name": "Season 5",
+      "overview": "Walt is faced with the prospect of moving on in a world without his enemy. As the pressure of a criminal life starts to build, Skyler struggles to keep Walt’s terrible secrets. Facing resistance from sometime adversary and former Fring lieutenant Mike, Walt tries to keep his world from falling apart even as his DEA Agent brother in law, Hank, finds numerous leads that could blaze a path straight to Walt. ",
+      "posterPath": "/r3z70vunihrAkjILQKWHX0G2xzO.jpg",
+      "seasonNumber": 5,
+      "voteAverage": 8.9
     }
   ],
   "spoken_languages": [
     {
-      "english_name": "Portuguese",
-      "iso_639_1": "pt",
-      "name": "Português"
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    },
+    {
+      "english_name": "German",
+      "iso_639_1": "de",
+      "name": "Deutsch"
+    },
+    {
+      "english_name": "Spanish",
+      "iso_639_1": "es",
+      "name": "Español"
     }
   ],
-  "status": "Returning Series",
-  "tagline": "",
+  "status": "Ended",
+  "tagline": "Change the equation.",
   "type": "Scripted",
-  "vote_average": 6.8,
-  "vote_count": 12
+  "voteAverage": 8.895,
+  "vote_count": 12698
 }
-
