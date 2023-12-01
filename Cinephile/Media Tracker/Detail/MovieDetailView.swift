@@ -64,15 +64,3 @@ struct Rating: View {
         }
     }
 }
-
-//VStack {
-//    Text((movie.voteCount ?? 0), format: .number)
-//        .font(.caption)
-//        .foregroundStyle(.secondary)
-//    Text(movie.voteAverage ?? 0.0, format: .number.precision(.fractionLength(1)))
-//        .font(.title)
-//        .fontWeight(.bold)
-//    StarsView(rating: (movie.voteAverage ?? 0.0) / 2 , maxRating: 5)
-//        .frame(width: 80)
-//        .padding(.top, -10)
-//}

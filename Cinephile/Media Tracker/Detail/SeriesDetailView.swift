@@ -3,7 +3,6 @@ import TMDb
 
 struct SeriesDetailView: View {
     let id: TVSeries.ID
-    var episodes: [TVEpisode]
     private let loader = TVSeriesLoader()
     @State private var castMembers: [CastMember] = []
     @State private var series: TVSeries = TVSeries.preview!
@@ -54,9 +53,9 @@ struct SeriesDetailView: View {
                     .padding()
                 
                 //            CastMemberView(castMembers: castMembers)
-                NavigationLink(destination: EpisodeView(episodes: episodes)) {
-                    SeasonView(seasons: series.seasons ?? [])
-                }
+//                NavigationLink(destination: EpisodeView(episodes: episodes)) {
+//                    SeasonView(seasons: series.seasons ?? [])
+//                }
             }
         }
         .task {
@@ -79,7 +78,7 @@ struct SeriesDetailView: View {
     func addedList(id: TVSeries.ID) {
         print("\(id) is added")
     }
-    return SeriesDetailView(id: Int(TVSeries.preview?.id ?? 1), episodes: .preview!, addButtonAction: addedList(id:))
+    return SeriesDetailView(id: Int(TVSeries.preview?.id ?? 1), addButtonAction: addedList(id:))
 }
 
 

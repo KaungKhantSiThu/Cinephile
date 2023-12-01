@@ -60,8 +60,11 @@ struct CarousalSeriesView: View {
             ScrollView(.horizontal) {
                 HStack {
                     ForEach(series.prefix(5)) { series in
-                        MediaCoverView(tvSeries: series)
-                            .frame(width: 100)
+                        NavigationLink(value: series) {
+                            MediaCoverView(tvSeries: series)
+                                .frame(width: 100)
+                        }
+                        .buttonStyle(.plain)
                     }
                 }
             }

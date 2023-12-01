@@ -21,6 +21,11 @@ struct DiscoverMoviesView: View {
                 .navigationDestination(for: Movie.self) {
                     MovieDetailView(id: $0.id)
                 }
+                .navigationDestination(for: TVSeries.self) {
+                    SeriesDetailView(id: $0.id) { id in
+                        print(id)
+                    }
+                }
             }
             .navigationTitle("Tracker")
             .navigationBarTitleDisplayMode(.inline)
