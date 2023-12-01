@@ -12,6 +12,7 @@ import TMDb
 class ViewModel<Loader: DataLoader>: ObservableObject, LoadableObject {
     @Published private(set) var state: LoadingState<[Loader.Output]> = .idle
     @Published var series: [TVSeries] = []
+    @Published var upcomingMovies: [Loader.Output] = []
     
     private let loader: Loader
     private let seriesLoader: TVSeriesLoader
@@ -29,6 +30,7 @@ class ViewModel<Loader: DataLoader>: ObservableObject, LoadableObject {
                 let items = try await loader.loadTrendingItems()
                 print(items.first ?? "No value in the array")
                 self.series = try await seriesLoader.loadTrendingItems()
+                self.upcomingMovies = try await loader.loadUpcomingItems()
                 self.state = .loaded(items)
             } catch {
                 self.state = .failed(error)

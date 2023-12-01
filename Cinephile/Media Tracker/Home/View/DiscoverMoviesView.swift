@@ -16,7 +16,7 @@ struct DiscoverMoviesView: View {
                 AsyncContentView(source: model) { movies in
                     CarousalView(title: "Trending Movies", movies: movies)
                     CarousalSeriesView(title: "Trending Series", series: model.series)
-                    CarousalView(title: "Trending Movies", movies: movies)
+                    CarousalView(title: "Upcoming Movies", movies: model.upcomingMovies)
                 }
                 .navigationDestination(for: Movie.self) {
                     MovieDetailView(id: $0.id)
@@ -26,12 +26,13 @@ struct DiscoverMoviesView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        print("search")
+                    NavigationLink {
+                        SearchView()
                     } label: {
                         Image(systemName: "magnifyingglass")
                             .tint(.red)
                     }
+
                 }
             }
         }

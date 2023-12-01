@@ -9,6 +9,10 @@ import Foundation
 import TMDb
 
 struct PreviewMovieLoader: DataLoader {
+    func loadUpcomingItems() async throws -> [Movie] {
+        return [Movie].preview
+    }
+    
     
     func loadItem(withID id: Int) async throws -> Movie {
         return Movie.preview

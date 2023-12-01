@@ -13,7 +13,7 @@ case tracker, social, profile, notifications
 }
 
 struct ContentView: View {
-    @State private var selectedTab: Tabs = .social
+    @State private var selectedTab: Tabs = .tracker
     var body: some View {
         TabView(selection: self.$selectedTab) {
             Group {

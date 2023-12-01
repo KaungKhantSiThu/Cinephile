@@ -9,7 +9,7 @@ import SwiftUI
 import TMDb
 import SDWebImageSwiftUI
 
-struct MediaRowView: View {
+struct MediaRow: View {
     let id: Int
     let name: String
     let releaseDate: Date?
@@ -22,15 +22,7 @@ struct MediaRowView: View {
     
     var body: some View {
         HStack {
-            WebImage(url: posterImage)
-                .placeholder(Image(systemName: "photo"))
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(height: 150)
-                .clipShape(
-                    RoundedRectangle(cornerRadius: 7.5)
-                )
-            
+            PosterImage(url: posterImage)
             
             VStack(alignment: .leading, spacing: 15) {
                 Text(type.rawValue)
@@ -38,20 +30,25 @@ struct MediaRowView: View {
                 
                 Text(name)
                     .font(.title3)
+                    .lineLimit(2)
                     .bold()
                 
                 Text(releaseDate?.formattedDate() ?? "No Date")
                     .foregroundStyle(.secondary)
                 
             }
-            
-            Spacer()
-            
-            Button("Add") {
-                handler(id)
-            }
+//            
+//            Spacer()
+//            
+//            Button(action: { handler(id) }, label: {
+//                Image(systemName: "plus.circle")
+//                    .resizable()
+//                    .frame(width: 30, height: 30)
+//            })
+//            .padding(.trailing, 10)
         }
         .padding()
+        .frame(height: 150)
         .task {
             do {
                 posterImage = try await ImageLoader.generate(from: posterPath, width: 200)
@@ -62,7 +59,7 @@ struct MediaRowView: View {
     }
 }
 
-extension MediaRowView {
+extension MediaRow {
     init(movie: Movie, handler: @escaping (Int) -> Void) {
         self.id = movie.id
         self.name = movie.title
@@ -91,7 +88,7 @@ extension MediaRowView {
     }
 }
 
-extension MediaRowView {
+extension MediaRow {
     enum MediaType: String {
         case movie = "Movie"
         case tvSeries = "Series"
@@ -101,7 +98,31 @@ extension MediaRowView {
 
 
 #Preview {
-    MediaRowView(movie: .preview) {
+    MediaRow(movie: .preview) {
         print($0)
+    }
+}
+
+struct PosterImage: View {
+    let url: URL
+    let height: CGFloat
+    let roundedCorner:  Bool
+    
+    init(url: URL, height: CGFloat = 150, roundedCorner: Bool = true) {
+        self.url = url
+        self.height = height
+        self.roundedCorner = roundedCorner
+    }
+    
+    var body: some View {
+        WebImage(url: url)
+            .placeholder(Image(systemName: "photo"))
+            .resizable()
+            .scaledToFit()
+            .aspectRatio(contentMode: .fit)
+            .frame(height: height)
+            .clipShape(
+                RoundedRectangle(cornerRadius: roundedCorner ? 10 : 0)
+            )
     }
 }

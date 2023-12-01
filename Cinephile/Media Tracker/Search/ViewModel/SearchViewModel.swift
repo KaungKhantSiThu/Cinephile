@@ -10,6 +10,7 @@ import SwiftUI
 
 class SearchViewModel: ObservableObject {
     @Published var medias: [Media] = []
+//    @Published var searchText: String = ""
 
     private let service: SearchService
     
@@ -17,14 +18,16 @@ class SearchViewModel: ObservableObject {
         self.service = SearchService()
     }
     
-    func searchMovies(using query: String) async {
+    @MainActor
+    func searchMovies(using searchText: String) async {
         do {
-            self.medias = try await service.searchAll(query: query).results
+            self.medias = try await service.searchAll(query: searchText).results
             print(medias.count)
         } catch {
             print("Search failed: \(error.localizedDescription)")
         }
     }
+
     
     func remove() {
         self.medias.removeAll()
