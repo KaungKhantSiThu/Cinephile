@@ -8,38 +8,13 @@ struct SeasonView: View {
     @State private var posterImage = URL(string: "https://picsum.photos/200/300")!
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Seasons")
+            Text("All Episodes")
                 .foregroundStyle(.black)
                 .font(.title2)
                 .fontWeight(.semibold)
                 .padding([.leading, .bottom], 10)
             ForEach(seasons) { season in
-                NavigationLink(destination: EpisodeView(episodes: season.episodes ?? [])) {
-                    HStack(spacing: 20) {
-                        WebImage(url: posterImage)
-                            .placeholder(Image(systemName: "photo"))
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(height: 80)
-                            .clipShape(
-                                RoundedRectangle(cornerRadius: 10)
-                            )
-                        VStack(alignment: .leading) {
-                            Text(season.name)
-                                .font(.subheadline)
-                                .foregroundStyle(.black)
-                        }
-                        .frame(maxWidth: 100)
-                    }
-                }
-                .padding(.leading, 20)
-                .task {
-                    do {
-                        posterImage = try await ImageLoader.generate(from: season.posterPath, width: 200)
-                    } catch {
-                        print("poster URL is nil")
-                    }
-                }
+                SeasonRow(season: season)
                 Divider()
             }
         }
@@ -48,9 +23,39 @@ struct SeasonView: View {
 
 #Preview {
     SeasonView(seasons: (TVSeries.preview?.seasons)!)
-        .onAppear {
-            print(CastMember.preview)
-        }
 }
 
 
+
+struct SeasonRow: View {
+    let name: String
+    let posterPath: URL?
+    @State private var posterImage = URL(string: "https://picsum.photos/200/300")!
+    var body: some View {
+        HStack(spacing: 20) {
+            
+            PosterImage(url: posterImage, height: 100)
+            VStack(alignment: .leading) {
+                Text(name)
+                    .font(.title2)
+                    .bold()
+            }
+            
+        }
+        .padding(.leading, 20)
+        .task {
+            do {
+                posterImage = try await ImageLoader.generate(from: posterPath, width: 200)
+            } catch {
+                print("poster URL is nil")
+            }
+        }
+    }
+}
+
+extension SeasonRow {
+    init(season: TVSeason) {
+        self.name = season.name
+        self.posterPath = season.posterPath
+    }
+}

@@ -1,76 +1,67 @@
 import SwiftUI
 import TMDb
 
+enum SeriesPage: String, Equatable, CaseIterable {
+    case detail = "Details"
+    case season = "Seasons"
+    
+    var localizedName: LocalizedStringKey { LocalizedStringKey(rawValue) }
+}
+
 struct SeriesDetailView: View {
-    let id: TVSeries.ID
     private let loader = TVSeriesLoader()
-    @State private var castMembers: [CastMember] = []
-    @State private var series: TVSeries = TVSeries.preview!
+    @StateObject private var model: TVSeriesDetailViewModel<TVSeriesLoader>
     var addButtonAction: (Movie.ID) -> Void
-    @State private var isMovieAdded = false
+    @State private var selectedPage: SeriesPage = .detail
+    
+    init(id: TVSeries.ID, addButtonAction: @escaping (Movie.ID) -> Void) {
+        _model = StateObject(wrappedValue: TVSeriesDetailViewModel(id: id))
+        self.addButtonAction = addButtonAction
+    }
     var body: some View {
-        NavigationView {
+        AsyncContentView(source: model) { series in
             ScrollView {
-                AsyncImage(url: URL(string: formatPosterPath(path: series.posterPath!.absoluteString))) { image in
-                    image
-                        .resizable()
-                        .scaledToFit()
-                } placeholder: {
-                    Rectangle()
-                        .overlay {
-                            ProgressView()
-                        }
-                        .frame(width: 120, height: 180)
-                }
-                .frame(height: 180)
+                PosterImage(url: model.posterImageURL, height: 240)
                 
                 Text(series.name)
                     .font(.title)
                     .fontWeight(.bold)
                 
-                //            Text(movie.releaseDate!, format: .dateTime.year())
+                Text(series.firstAirDate ?? Date.now, format: .dateTime.year())
+                
                 Text(series.genres?.map(\.name).joined(separator: ", ") ?? "No genre")
                 
                 HStack(spacing: 30) {
-                    VStack {
-                        Text("4.4K Ratings")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                        Text(series.voteAverage ?? 0.0, format: .number.precision(.fractionLength(1)))
-                            .font(.title)
-                            .fontWeight(.bold)
-                        StarsView(rating: (series.voteAverage ?? 0.0) / 2 , maxRating: 5)
-                            .frame(width: 80)
-                            .padding(.top, -10)
-                    }
+                    Rating(voteCount: series.voteCount ?? 0, voteAverage: series.voteAverage ?? 0.0)
+                    
                     Button {
                     } label: {
-                        Label("Add Moive", systemImage: "plus.circle.fill")
+                        Label("Add Series", systemImage: "plus.circle.fill")
                     }
                     .buttonStyle(CustomButtonStyle())
                 }
-                Text(series.overview ?? "No overview")
-                    .padding()
                 
-                //            CastMemberView(castMembers: castMembers)
-//                NavigationLink(destination: EpisodeView(episodes: episodes)) {
-//                    SeasonView(seasons: series.seasons ?? [])
-//                }
+                Picker("", selection: $selectedPage) {
+                    ForEach(SeriesPage.allCases, id: \.self) {
+                        Text($0.rawValue)
+                    }
+                }
+                .pickerStyle(SegmentedPickerStyle())
+                .padding(20)
+                
+                switch selectedPage {
+                case .detail:
+                    Text(series.overview ?? "No overview")
+                        .padding()
+                    VideosRowView(videos: model.videos)
+                    
+                    CastMemberView(castMembers: model.castMembers)
+                case .season:
+                    SeasonView(seasons: series.seasons ?? [])
+                }
+                
             }
         }
-        .task {
-            do {
-                let casts = try await self.loader.loadCastMembers(withID: series.id).prefix(upTo: 5)
-                self.series = try await self.loader.loadItem(withID: self.id)
-                castMembers = Array(casts)
-            } catch {
-                print(error.localizedDescription)
-            }
-        }
-    }
-    
-    private func formatPosterPath(path: String) -> String {
-        return "https://image.tmdb.org/t/p/original" + path
     }
 }
 
@@ -78,7 +69,7 @@ struct SeriesDetailView: View {
     func addedList(id: TVSeries.ID) {
         print("\(id) is added")
     }
-    return SeriesDetailView(id: Int(TVSeries.preview?.id ?? 1), addButtonAction: addedList(id:))
+    return SeriesDetailView(id: TVSeries.preview!.id, addButtonAction: addedList(id:))
 }
 
 
