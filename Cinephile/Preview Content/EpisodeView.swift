@@ -12,7 +12,7 @@ struct EpisodeView: View {
                     .fontWeight(.semibold)
                     .padding([.leading, .bottom], 10)
                 ForEach(episodes) { episode in
-                    EpisodeSubView(episode: episode)
+                    EpisodeRow(episode: episode)
                     Divider()
                 }
             }
@@ -24,7 +24,7 @@ struct EpisodeView: View {
     EpisodeView(episodes: .preview!)
 }
 
-struct EpisodeSubView: View {
+struct EpisodeRow: View {
     var episode : TVEpisode
     @State var isSelected = false
     

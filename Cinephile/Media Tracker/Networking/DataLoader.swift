@@ -90,40 +90,16 @@ struct TVSeriesLoader: DataLoader {
     }
 }
 
-struct TVEpisodeLoader: DataLoader {
-    func loadCastMembers(withID id: Int) async throws -> [CastMember] {
-        return try await tvSeriesService.credits(forTVSeries: id).cast
+struct TVEpisodeLoader {
+    func loadItem(episodeId: TVEpisode.ID, seasonId: TVSeason.ID, sereisId: TVSeries.ID) async throws -> TVEpisode {
+        return try await episodeService.details(forEpisode: episodeId, inSeason: seasonId, inTVSeries: sereisId)
     }
-    
-    func loadVideos(withID id: Int) async throws -> [VideoMetadata] {
-        return try await tvSeriesService.videos(forTVSeries: id).results
-    }
-    
-    func loadItem(withID id: TVEpisode.ID) async throws -> TVEpisode {
-        return try await episodeService.details(forEpisode: id, inSeason: id, inTVSeries: id)
-    }
-    
-    func loadTrendingItems() async throws -> [TVEpisode] {
-        return []
-    }
-    
-    func loadRecommendedItems(withID id: Int) async throws -> [TVEpisode] {
-        return []
-    }
-    
-    func loadUpcomingItems() async throws -> [TVEpisode] {
-        return []
-    }
-    
-    typealias Output = TVEpisode
     
     var tvSeriesService: TVSeriesService!
-    var trendingService: TrendingService!
     var episodeService: TVEpisodeService!
     
     init() {
         tvSeriesService = TVSeriesService()
-        trendingService = TrendingService()
         episodeService = TVEpisodeService()
     }
 }

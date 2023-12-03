@@ -1,19 +1,23 @@
 import SwiftUI
 import TMDb
 
-class EpisodeDetailViewModel<Loader: DataLoader>: ObservableObject, LoadableObject {
+class EpisodeDetailViewModel: ObservableObject, LoadableObject {
     @Published private(set) var state: LoadingState<TVEpisode> = .idle
     
     @Published var castMembers: [CastMember] = []
     @Published var videos: [VideoMetadata] = []
     @Published var posterImageURL: URL = URL(string: "https://picsum.photos/200/300")!
     
-    let id: TVEpisode.ID
+    let episodeId: TVEpisode.ID
+    let seasonId : TVSeason.ID
+    let seriesId : TVSeries.ID
 
     private let loader: TVEpisodeLoader
     
-    init(id: TVEpisode.ID, loader: TVEpisodeLoader = TVEpisodeLoader()) {
-        self.id = id
+    init(episodeId: TVEpisode.ID, seasonId: TVSeason.ID, seriesId: TVSeries.ID, loader: TVEpisodeLoader = TVEpisodeLoader()) {
+        self.episodeId = episodeId
+        self.seasonId = seasonId
+        self.seriesId = seriesId
         self.loader = loader
     }
     
@@ -22,9 +26,7 @@ class EpisodeDetailViewModel<Loader: DataLoader>: ObservableObject, LoadableObje
         state = .loading
         Task {
             do {
-                let tvEpisode = try await loader.loadItem(withID: id)
-                self.castMembers = try await loader.loadCastMembers(withID: id)
-                self.videos = try await loader.loadVideos(withID: id)
+                let tvEpisode = try await loader.loadItem(episodeId: episodeId, seasonId: seasonId, sereisId: seriesId)
                 self.state = .loaded(tvEpisode)
                 self.posterImageURL = try await ImageLoader.generate(from: tvEpisode.stillPath, width: 200)
             } catch {
