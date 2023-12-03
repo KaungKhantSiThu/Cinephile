@@ -129,6 +129,7 @@ extension Array where Element == WatchProvider {
         return []
     }()
 }
+
 extension Array where Element == TVEpisode {
     static let preview = {
         if let fileURL = Bundle.main.path(forResource: "season-detail", ofType: "json") {
@@ -145,6 +146,24 @@ extension Array where Element == TVEpisode {
         return []
     }()
 }
+
+extension TVEpisode {
+    static let preview : TVEpisode? = {
+        if let fileURL = Bundle.main.path(forResource: "episode-detail", ofType: "json") {
+            do {
+                let jsonData = try Data(contentsOf: URL(fileURLWithPath: fileURL))
+                let loadedData = try JSONDecoder().decode(TVEpisode.self, from: jsonData)
+                return loadedData
+            } catch {
+                print(error)
+            }
+        } else {
+            print("File not found.")
+        }
+        return nil
+    }()
+}
+
 extension Media {
     static let moviePreview = Media.movie(.preview)
 }

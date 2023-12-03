@@ -12,41 +12,77 @@ struct EpisodeView: View {
                     .fontWeight(.semibold)
                     .padding([.leading, .bottom], 10)
                 ForEach(episodes) { episode in
-                    HStack(spacing: 20) {
-                        AsyncImage(url: URL(string: formatPosterPath(path: episode.stillPath!.absoluteString))) { image in
-                            image
-                                .resizable()
-                                .scaledToFit()
-                        } placeholder: {
-                            Rectangle()
-                                .overlay {
-                                    ProgressView()
-                                }
-                                .frame(width: 30, height: 30)
-                        }
-                        .frame(height: 70)
-                        VStack(alignment: .leading) {
-                            Text(episode.name)
-                                .foregroundStyle(.black)
-                                .font(.headline)
-                                .foregroundStyle(.secondary)
-                        }
-                    }
-                    .padding(.leading, 20)
-                    .padding()
-                    
+                    EpisodeSubView(episode: episode)
                     Divider()
                 }
             }
         }
     }
-    private func formatPosterPath(path: String) -> String {
-        return "https://image.tmdb.org/t/p/original" + path
-    }
 }
 
 #Preview {
     EpisodeView(episodes: .preview!)
+}
+
+struct EpisodeSubView: View {
+    var episode : TVEpisode
+    @State var isSelected = false
+    
+    var body: some View {
+        HStack(spacing: 20) {
+            AsyncImage(url: URL(string: formatPosterPath(path: episode.stillPath!.absoluteString))) { image in
+                image
+                    .resizable()
+                    .scaledToFit()
+                    .clipShape(RoundedRectangle(cornerRadius: 5))
+            } placeholder: {
+                Rectangle()
+                    .overlay {
+                        ProgressView()
+                    }
+                    .frame(width: 122, height: 70)
+            }
+            .frame(height: 70)
+            HStack {
+                VStack(alignment: .leading) {
+                    HStack {
+                        Text("\(episode.episodeNumber)")
+                            .foregroundStyle(.black)
+                            .font(.system(size: 15))
+                        
+                        Text(episode.name)
+                            .foregroundStyle(.black)
+                            .font(.headline)
+                            .foregroundStyle(.secondary)
+                    }
+                    
+                    Text(episode.airDate ?? Date.now, format: .dateTime.year())
+                        .foregroundStyle(.black)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+                
+                Spacer()
+                
+                VStack() {
+                    Button(action: {
+                        isSelected.toggle()
+                    }) {
+                        Image(systemName: isSelected ? "largecircle.fill.circle" : "circle")
+                             .resizable()
+                             .frame(width: 13, height: 13)
+                             .foregroundColor(isSelected ? .blue : .gray)
+                    }
+                }
+            }
+        }
+        .padding(.leading, 20)
+        .padding()
+    }
+    
+    private func formatPosterPath(path: String) -> String {
+        return "https://image.tmdb.org/t/p/original" + path
+    }
 }
 
 
