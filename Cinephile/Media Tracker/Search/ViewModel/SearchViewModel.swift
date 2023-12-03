@@ -10,7 +10,19 @@ import SwiftUI
 
 class SearchViewModel: ObservableObject {
     @Published var medias: [Media] = []
-//    @Published var searchText: String = ""
+    @Published var searchText: String = ""
+    
+//    {
+//        didSet {
+//            Task {
+//                if !searchText.isEmpty {
+//                    await self.searchMovies(using: searchText)
+//                } else {
+//                    self.remove()
+//                }
+//            }
+//        }
+//    }
 
     private let service: SearchService
     
@@ -25,6 +37,16 @@ class SearchViewModel: ObservableObject {
             print(medias.count)
         } catch {
             print("Search failed: \(error.localizedDescription)")
+        }
+    }
+    
+    func performSearch(using searchText: String) {
+        Task {
+            if !searchText.isEmpty {
+                await self.searchMovies(using: searchText)
+            } else {
+                self.remove()
+            }
         }
     }
 

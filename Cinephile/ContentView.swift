@@ -18,7 +18,7 @@ struct ContentView: View {
         TabView(selection: self.$selectedTab) {
             Group {
                 
-                DiscoverMoviesView()
+                DiscoverMediaView()
                     .tabItem {
                         Label("Home", systemImage: "house")
                     }

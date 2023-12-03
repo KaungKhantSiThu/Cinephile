@@ -10,8 +10,6 @@ import TMDb
 
 struct SearchView: View {
     @StateObject var model = SearchViewModel()
-    @State private var searchText = ""
-    @State private var showList = false
         var body: some View {
             List(model.medias) { media in
                 switch media {
@@ -20,7 +18,9 @@ struct SearchView: View {
                         MediaRow(movie: movie, handler: addAction(id:))
                     }
                 case .tvSeries(let series):
-                    MediaRow(tvSeries: series, handler: addAction(id:))
+                    NavigationLink(value: series) {
+                        MediaRow(tvSeries: series, handler: addAction(id:))
+                    }
                 case .person(let person):
                     MediaRow(person: person, handler: addAction(id:))
                 }
@@ -28,17 +28,15 @@ struct SearchView: View {
             .navigationDestination(for: Movie.self) {
                 MovieDetailView(id: $0.id)
             }
-            .listStyle(.plain)
-            .searchable(text: $searchText, prompt: "Search Movies, Series, Cast")
-            .onChange(of: searchText) { value in
-                Task {
-                    if !value.isEmpty && value.count > 1 {
-                        await model.searchMovies(using: searchText)
-                        print(model.medias.prefix(3))
-                    } else {
-                        model.remove()
-                    }
+            .navigationDestination(for: TVSeries.self) {
+                SeriesDetailView(id: $0.id) {
+                    print($0)
                 }
+            }
+            .listStyle(.plain)
+            .searchable(text: $model.searchText, prompt: "Search Movies, Series, Cast")
+            .onChange(of: model.searchText) { value in
+                model.performSearch(using: value)
             }
         }
     

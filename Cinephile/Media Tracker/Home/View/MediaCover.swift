@@ -9,21 +9,14 @@ import SwiftUI
 import TMDb
 import SDWebImageSwiftUI
 
-struct MediaCoverView: View {
+struct MediaCover: View {
     let title: String
     let releaseDate: Date?
     let posterPath: URL?
     @State private var posterImage = URL(string: "https://picsum.photos/200/300")!
     var body: some View {
         VStack(alignment: .leading) {
-            WebImage(url: posterImage)
-                .placeholder(Image(systemName: "photo"))
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(height: 150)
-                .clipShape(
-                    RoundedRectangle(cornerRadius: 7.5)
-                )
+            PosterImage(url: posterImage)
 
                 
             VStack(alignment: .leading, spacing: 5) {
@@ -62,7 +55,7 @@ struct MediaCoverView: View {
     }
 }
 
-extension MediaCoverView {
+extension MediaCover {
     init(movie: Movie) {
         self.title = movie.title
         self.posterPath = movie.posterPath
@@ -78,7 +71,7 @@ extension MediaCoverView {
 
 struct MovieCoverView_Previews: PreviewProvider {
     static var previews: some View {
-        MediaCoverView(movie: .preview)
+        MediaCover(movie: .preview)
             .previewLayout(.sizeThatFits)
     }
 }

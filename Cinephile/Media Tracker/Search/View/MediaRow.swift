@@ -116,7 +116,9 @@ struct PosterImage: View {
     
     var body: some View {
         WebImage(url: url)
-            .placeholder(Image(systemName: "photo"))
+            .placeholder(content: {
+                ProgressView()
+            })
             .resizable()
             .scaledToFit()
             .aspectRatio(contentMode: .fit)

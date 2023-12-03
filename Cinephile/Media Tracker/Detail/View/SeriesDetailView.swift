@@ -35,6 +35,7 @@ struct SeriesDetailView: View {
                     Rating(voteCount: series.voteCount ?? 0, voteAverage: series.voteAverage ?? 0.0)
                     
                     Button {
+                        addButtonAction(series.id)
                     } label: {
                         Label("Add Series", systemImage: "plus.circle.fill")
                     }

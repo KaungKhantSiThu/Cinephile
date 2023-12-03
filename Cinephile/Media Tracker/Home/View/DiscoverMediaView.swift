@@ -8,8 +8,9 @@
 import SwiftUI
 import TMDb
 
-struct DiscoverMoviesView: View {
-    @StateObject private var model = ViewModel(loader: MovieLoader())
+struct DiscoverMediaView: View {
+    @StateObject private var model = DiscoverMediaViewModel(loader: MovieLoader())
+    
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -49,8 +50,7 @@ struct DiscoverMoviesView: View {
 }
 
 #Preview {
-    DiscoverMoviesView()
-        .environmentObject(ViewModel(loader: PreviewMovieLoader()))
+    DiscoverMediaView()
 }
 
 

@@ -43,7 +43,9 @@ struct MovieDetailView: View {
 }
 
 #Preview {
-    MovieDetailView(id: Movie.preview.id)
+    NavigationStack {
+        MovieDetailView(id: Movie.preview.id)
+    }
 }
 
 
