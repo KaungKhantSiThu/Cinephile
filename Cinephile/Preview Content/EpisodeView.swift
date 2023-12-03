@@ -47,17 +47,17 @@ struct EpisodeRow: View {
                 VStack(alignment: .leading) {
                     HStack {
                         Text("\(episode.episodeNumber)")
-                            .foregroundStyle(.black)
+                            .foregroundStyle(.primary)
                             .font(.system(size: 15))
                         
                         Text(episode.name)
-                            .foregroundStyle(.black)
+                            .foregroundStyle(.primary)
                             .font(.headline)
                             .foregroundStyle(.secondary)
                     }
                     
                     Text(episode.airDate ?? Date.now, format: .dateTime.year())
-                        .foregroundStyle(.black)
+                        .foregroundStyle(.primary)
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
