@@ -25,14 +25,14 @@ struct SearchView: View {
                     MediaRow(person: person, handler: addAction(id:))
                 }
             }
-            .navigationDestination(for: Movie.self) {
-                MovieDetailView(id: $0.id)
-            }
-            .navigationDestination(for: TVSeries.self) {
-                SeriesDetailView(id: $0.id) {
-                    print($0)
-                }
-            }
+//            .navigationDestination(for: Movie.self) {
+//                MovieDetailView(id: $0.id)
+//            }
+//            .navigationDestination(for: TVSeries.self) {
+//                SeriesDetailView(id: $0.id) {
+//                    print($0)
+//                }
+//            }
             .listStyle(.plain)
             .searchable(text: $model.searchText, prompt: "Search Movies, Series, Cast")
             .onChange(of: model.searchText) { value in

@@ -47,22 +47,3 @@ struct MovieDetailView: View {
         MovieDetailView(id: Movie.preview.id)
     }
 }
-
-
-struct Rating: View {
-    let voteCount: Int
-    let voteAverage: Double
-    var body: some View {
-        VStack {
-            Text(voteCount, format: .number)
-                .font(.caption)
-                .foregroundStyle(.secondary)
-            Text(voteAverage, format: .number.precision(.fractionLength(1)))
-                .font(.title)
-                .fontWeight(.bold)
-            StarsView(rating: voteAverage / 2 , maxRating: 5)
-                .frame(width: 80)
-                .padding(.top, -10)
-        }
-    }
-}
