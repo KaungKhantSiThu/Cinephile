@@ -22,6 +22,10 @@
 		39EC05B12B179C1D009D9567 /* SeriesDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EC05B02B179C1D009D9567 /* SeriesDetailView.swift */; };
 		39FAA7472B11D3A60049AA72 /* CastMemberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FAA7462B11D3A60049AA72 /* CastMemberView.swift */; };
 		7002F7092B1C780D006DD407 /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7002F7082B1C780D006DD407 /* Rating.swift */; };
+		7002F70C2B1F4877006DD407 /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7002F70B2B1F4877006DD407 /* LocalNotificationManager.swift */; };
+		7002F7112B1F4CD6006DD407 /* LocalNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7002F7102B1F4CD6006DD407 /* LocalNotification.swift */; };
+		7002F7142B1F5A1E006DD407 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7002F7132B1F5A1E006DD407 /* Router.swift */; };
+		7002F7162B1F5C99006DD407 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7002F7152B1F5C99006DD407 /* AppRouter.swift */; };
 		7035F6672AF7587E00F42910 /* TimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7035F6662AF7587E00F42910 /* TimelineView.swift */; };
 		7035F6692AF75A3700F42910 /* GentyDemo-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7035F6682AF75A3700F42910 /* GentyDemo-Regular.otf */; };
 		7051983C2AEFF7D400452564 /* PreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7051983B2AEFF7D400452564 /* PreviewData.swift */; };
@@ -78,6 +82,10 @@
 		39EC05B02B179C1D009D9567 /* SeriesDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesDetailView.swift; sourceTree = "<group>"; };
 		39FAA7462B11D3A60049AA72 /* CastMemberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CastMemberView.swift; path = "Cinephile/Preview Content/CastMemberView.swift"; sourceTree = SOURCE_ROOT; };
 		7002F7082B1C780D006DD407 /* Rating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rating.swift; sourceTree = "<group>"; };
+		7002F70B2B1F4877006DD407 /* LocalNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
+		7002F7102B1F4CD6006DD407 /* LocalNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotification.swift; sourceTree = "<group>"; };
+		7002F7132B1F5A1E006DD407 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		7002F7152B1F5C99006DD407 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		7035F6662AF7587E00F42910 /* TimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineView.swift; sourceTree = "<group>"; };
 		7035F6682AF75A3700F42910 /* GentyDemo-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GentyDemo-Regular.otf"; sourceTree = "<group>"; };
 		7035F66A2AF75A6F00F42910 /* Cinephile-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Cinephile-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -131,6 +139,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7002F70A2B1F4859006DD407 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				7002F70B2B1F4877006DD407 /* LocalNotificationManager.swift */,
+				7002F7102B1F4CD6006DD407 /* LocalNotification.swift */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
+		7002F7122B1F5A0C006DD407 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				7002F7132B1F5A1E006DD407 /* Router.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
 		7035F66B2AF75A9800F42910 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -142,6 +167,7 @@
 		703AEDE02B0CFC5900E9ED76 /* Media Tracker */ = {
 			isa = PBXGroup;
 			children = (
+				7002F70A2B1F4859006DD407 /* Notifications */,
 				70F4AD142B1045BE00A83C8F /* Networking */,
 				703AEDE42B0CFD2F00E9ED76 /* Search */,
 				703AEDE32B0CFC9400E9ED76 /* Detail */,
@@ -329,6 +355,7 @@
 		7079602E2AEBA0A700AB748D /* Cinephile */ = {
 			isa = PBXGroup;
 			children = (
+				7002F7122B1F5A0C006DD407 /* Router */,
 				703AEDE72B0CFDB400E9ED76 /* Notifications */,
 				703AEDE62B0CFD8700E9ED76 /* Settings */,
 				703AEDE12B0CFC6B00E9ED76 /* Social Network */,
@@ -341,6 +368,7 @@
 				707960312AEBA0A700AB748D /* ContentView.swift */,
 				707960332AEBA0A900AB748D /* Assets.xcassets */,
 				707960352AEBA0A900AB748D /* Preview Content */,
+				7002F7152B1F5C99006DD407 /* AppRouter.swift */,
 			);
 			path = Cinephile;
 			sourceTree = "<group>";
@@ -472,12 +500,15 @@
 				7035F6672AF7587E00F42910 /* TimelineView.swift in Sources */,
 				707960422AEBA5E200AB748D /* DiscoverMediaViewModel.swift in Sources */,
 				707ABEFA2AF3B013001B88FE /* CarousalView.swift in Sources */,
+				7002F7142B1F5A1E006DD407 /* Router.swift in Sources */,
 				707ABF002AF644CC001B88FE /* CustomStyle.swift in Sources */,
 				7094DFBA2B0BA318008DF25E /* API_Key.swift in Sources */,
 				7002F7092B1C780D006DD407 /* Rating.swift in Sources */,
 				7062A2C52AF2512F00B99324 /* MediaCover.swift in Sources */,
 				70F4AD2C2B18577100A83C8F /* Date+Formatter.swift in Sources */,
 				707ABEFE2AF64223001B88FE /* StarsView.swift in Sources */,
+				7002F7162B1F5C99006DD407 /* AppRouter.swift in Sources */,
+				7002F70C2B1F4877006DD407 /* LocalNotificationManager.swift in Sources */,
 				397998172B17A9E400AB6594 /* EpisodeView.swift in Sources */,
 				70F4AD182B11CFE500A83C8F /* ImageLoader.swift in Sources */,
 				397998152B17A9DD00AB6594 /* SeasonView.swift in Sources */,
@@ -500,6 +531,7 @@
 				70F4AD202B11F70600A83C8F /* VideoView.swift in Sources */,
 				707960302AEBA0A700AB748D /* CinephileApp.swift in Sources */,
 				707ABF022AF68665001B88FE /* ProfileView.swift in Sources */,
+				7002F7112B1F4CD6006DD407 /* LocalNotification.swift in Sources */,
 				7084D70E2AEE9876008EF753 /* Helper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

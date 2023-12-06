@@ -14,11 +14,11 @@ struct SearchView: View {
             List(model.medias) { media in
                 switch media {
                 case .movie(let movie):
-                    NavigationLink(value: movie) {
+                    NavigationLink(value: RouterDestination.movieDetail(id: movie.id)) {
                         MediaRow(movie: movie, handler: addAction(id:))
                     }
                 case .tvSeries(let series):
-                    NavigationLink(value: series) {
+                    NavigationLink(value: RouterDestination.seriesDetail(id: series.id)) {
                         MediaRow(tvSeries: series, handler: addAction(id:))
                     }
                 case .person(let person):

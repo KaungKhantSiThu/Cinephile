@@ -26,7 +26,7 @@ struct CarousalView: View {
             ScrollView(.horizontal) {
                 HStack {
                     ForEach(movies.prefix(5)) { movie in
-                        NavigationLink(value: movie) {
+                        NavigationLink(value: RouterDestination.movieDetail(id: movie.id)) {
                             MediaCover(movie: movie)
                                 .frame(width: 100)
                         }
@@ -58,7 +58,7 @@ struct CarousalSeriesView: View {
             ScrollView(.horizontal) {
                 HStack {
                     ForEach(series.prefix(5)) { series in
-                        NavigationLink(value: series) {
+                        NavigationLink(value: RouterDestination.seriesDetail(id: series.id)) {
                             MediaCover(tvSeries: series)
                                 .frame(width: 100)
                         }

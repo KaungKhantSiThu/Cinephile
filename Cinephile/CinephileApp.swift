@@ -10,6 +10,7 @@ import TMDb
 
 @main
 struct CinephileApp: App {
+    @StateObject var notificationManager = LocalNotificationManager()
     
     init() {
         let tmdbConfiguration = TMDbConfiguration(apiKey: TMDB_API_Key)
@@ -19,6 +20,15 @@ struct CinephileApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .task {
+                    do {
+                        try await notificationManager.requestAuthorization()
+                    } catch {
+                        print("Notification request error")
+                    }
+                    
+                }
+                .environmentObject(notificationManager)
         }
     }
 }

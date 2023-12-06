@@ -11,12 +11,10 @@ enum SeriesPage: String, Equatable, CaseIterable {
 struct SeriesDetailView: View {
     private let loader = TVSeriesLoader()
     @StateObject private var model: TVSeriesDetailViewModel<TVSeriesLoader>
-    var addButtonAction: (Movie.ID) -> Void
     @State private var selectedPage: SeriesPage = .detail
     
-    init(id: TVSeries.ID, addButtonAction: @escaping (Movie.ID) -> Void) {
+    init(id: TVSeries.ID) {
         _model = StateObject(wrappedValue: TVSeriesDetailViewModel(id: id))
-        self.addButtonAction = addButtonAction
     }
     var body: some View {
         AsyncContentView(source: model) { series in
@@ -35,7 +33,7 @@ struct SeriesDetailView: View {
                     Rating(voteCount: series.voteCount ?? 0, voteAverage: series.voteAverage ?? 0.0)
                     
                     Button {
-                        addButtonAction(series.id)
+                        // something
                     } label: {
                         Label("Add Series", systemImage: "plus.circle.fill")
                     }
@@ -67,10 +65,7 @@ struct SeriesDetailView: View {
 }
 
 #Preview {
-    func addedList(id: TVSeries.ID) {
-        print("\(id) is added")
-    }
-    return SeriesDetailView(id: TVSeries.preview!.id, addButtonAction: addedList(id:))
+    SeriesDetailView(id: TVSeries.preview!.id)
 }
 
 

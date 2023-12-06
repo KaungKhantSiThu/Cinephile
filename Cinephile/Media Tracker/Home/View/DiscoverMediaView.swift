@@ -10,23 +10,17 @@ import TMDb
 
 struct DiscoverMediaView: View {
     @StateObject private var model = DiscoverMediaViewModel(loader: MovieLoader())
+    @State private var routerPath = RouterPath()
     
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $routerPath.path) {
             ScrollView {
                 AsyncContentView(source: model) { movies in
                     CarousalView(title: "Trending Movies", movies: movies)
                     CarousalSeriesView(title: "Trending Series", series: model.series)
                     CarousalView(title: "Upcoming Movies", movies: model.upcomingMovies)
                 }
-                .navigationDestination(for: Movie.self) {
-                    MovieDetailView(id: $0.id)
-                }
-                .navigationDestination(for: TVSeries.self) {
-                    SeriesDetailView(id: $0.id) { id in
-                        print(id)
-                    }
-                }
+                .withAppRouter()
             }
             .navigationTitle("Tracker")
             .navigationBarTitleDisplayMode(.inline)
@@ -42,15 +36,13 @@ struct DiscoverMediaView: View {
                 }
             }
         }
-    }
-    
-    func addAction(id: Movie.ID) {
-        print("\(id) is added!")
+        .environmentObject(routerPath)
     }
 }
 
 #Preview {
     DiscoverMediaView()
+        .environmentObject(RouterPath())
 }
 
 
