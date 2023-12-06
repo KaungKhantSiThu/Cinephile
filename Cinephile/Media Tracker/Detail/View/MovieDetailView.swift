@@ -3,7 +3,6 @@ import TMDb
 
 struct MovieDetailView: View {
     @EnvironmentObject var notificationManager: LocalNotificationManager
-    @EnvironmentObject private var routerPath: RouterPath
     private let loader = MovieLoader()
     @State private var isMovieAdded = false
     @StateObject private var viewModel: MovieDetailViewModel<MovieLoader>

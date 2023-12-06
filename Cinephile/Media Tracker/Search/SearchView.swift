@@ -8,40 +8,106 @@
 import SwiftUI
 import TMDb
 
+@MainActor
 struct SearchView: View {
-    @StateObject var model = SearchViewModel()
+    @State var model = SearchViewModel()
         var body: some View {
-            List(model.medias) { media in
+            ScrollViewReader { proxy in
+                List {
+                    if !model.isLoaded {
+                        HStack {
+                            Spacer()
+                            ProgressView()
+                            Spacer()
+                        }
+                        
+                    } else if !model.searchText.isEmpty {
+                        searchResultsView
+                    } else {
+                        popularMoviesView
+                        popularTVSeriesView
+                    }
+                }
+            }
+            .listStyle(.plain)
+            .task {
+                await model.fetchTrending()
+            }
+            .refreshable {
+                await model.fetchTrending()
+            }
+            .searchable(text: $model.searchText,
+                        isPresented: $model.isSearchPresented,
+                        placement: .navigationBarDrawer(displayMode: .always),
+                        prompt: Text("Search Movies, Series, Cast"))
+            .task(id: model.searchText) {
+                do {
+                  try await Task.sleep(for: .milliseconds(150))
+                  await model.search()
+                } catch {
+                    print("Search Failed")
+                }
+            }
+            
+}
+    
+    
+    private var searchResultsView: some View {
+        ForEach(model.medias) {
+            media in
                 switch media {
                 case .movie(let movie):
                     NavigationLink(value: RouterDestination.movieDetail(id: movie.id)) {
-                        MediaRow(movie: movie, handler: addAction(id:))
+                        MediaRow(movie: movie)
                     }
                 case .tvSeries(let series):
                     NavigationLink(value: RouterDestination.seriesDetail(id: series.id)) {
-                        MediaRow(tvSeries: series, handler: addAction(id:))
+                        MediaRow(tvSeries: series)
                     }
                 case .person(let person):
-                    MediaRow(person: person, handler: addAction(id:))
+                    MediaRow(person: person)
+                }
+        }
+    }
+    
+    private var popularMoviesView: some View {
+        Section {
+            ScrollView(.horizontal) {
+                HStack {
+                    ForEach(model.trendingMovies.prefix(5)) { movie in
+                        NavigationLink(value: RouterDestination.movieDetail(id: movie.id)) {
+                            MediaCover(movie: movie)
+                                .frame(width: 100)
+                        }
+                        .buttonStyle(.plain)
+                    }
                 }
             }
-//            .navigationDestination(for: Movie.self) {
-//                MovieDetailView(id: $0.id)
-//            }
-//            .navigationDestination(for: TVSeries.self) {
-//                SeriesDetailView(id: $0.id) {
-//                    print($0)
-//                }
-//            }
-            .listStyle(.plain)
-            .searchable(text: $model.searchText, prompt: "Search Movies, Series, Cast")
-            .onChange(of: model.searchText) { value in
-                model.performSearch(using: value)
-            }
+            .scrollIndicators(.hidden)
+        } header: {
+            Text("Popular Movie")
+                .font(.title).bold()
         }
+    }
     
-    func addAction(id: Int) {
-        print("\(id) is added!")
+    private var popularTVSeriesView: some View {
+        Section {
+            ScrollView(.horizontal) {
+                HStack {
+                    ForEach(model.trendingSeries.prefix(5)) { series in
+                        NavigationLink(value: RouterDestination.seriesDetail(id: series.id)) {
+                            MediaCover(tvSeries: series)
+                                .frame(width: 100)
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
+            }
+            .scrollIndicators(.hidden)
+        } header: {
+            Text("Popular TV Series")
+                .font(.title).bold()
+        }
     }
 }
 

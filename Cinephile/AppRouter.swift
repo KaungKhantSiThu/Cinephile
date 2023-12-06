@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+@MainActor
 extension View {
     func withAppRouter() -> some View {
         navigationDestination(for: RouterDestination.self) { destination in
@@ -16,6 +17,8 @@ extension View {
                 MovieDetailView(id: id)
             case let .seriesDetail(id):
                 SeriesDetailView(id: id)
+            case .trackerSearchView:
+                SearchView()
             }
         }
     }

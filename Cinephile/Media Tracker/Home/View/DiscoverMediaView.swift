@@ -9,40 +9,16 @@ import SwiftUI
 import TMDb
 
 struct DiscoverMediaView: View {
-    @StateObject private var model = DiscoverMediaViewModel(loader: MovieLoader())
-    @State private var routerPath = RouterPath()
     
     var body: some View {
-        NavigationStack(path: $routerPath.path) {
-            ScrollView {
-                AsyncContentView(source: model) { movies in
-                    CarousalView(title: "Trending Movies", movies: movies)
-                    CarousalSeriesView(title: "Trending Series", series: model.series)
-                    CarousalView(title: "Upcoming Movies", movies: model.upcomingMovies)
-                }
-                .withAppRouter()
-            }
+        Text("Views for showing Movie, Series Collection")
             .navigationTitle("Tracker")
             .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    NavigationLink {
-                        SearchView()
-                    } label: {
-                        Image(systemName: "magnifyingglass")
-                            .tint(.red)
-                    }
-
-                }
-            }
-        }
-        .environmentObject(routerPath)
     }
 }
 
 #Preview {
     DiscoverMediaView()
-        .environmentObject(RouterPath())
 }
 
 

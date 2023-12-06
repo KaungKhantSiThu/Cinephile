@@ -18,7 +18,7 @@ struct CarousalView: View {
                     .font(.title2)
                     .fontWeight(.semibold)
                 Spacer()
-                NavigationLink("See all") {
+                NavigationLink("") {
                     CategorialMovieView(movies: movies)
                 }
             }

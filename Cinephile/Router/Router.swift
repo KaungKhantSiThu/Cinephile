@@ -12,11 +12,12 @@ import TMDb
 public enum RouterDestination: Hashable {
     case movieDetail(id: Movie.ID)
     case seriesDetail(id: TVSeries.ID)
+    case trackerSearchView
 }
 
 @MainActor
-public class RouterPath: ObservableObject {
-    @Published public var path: [RouterDestination] = []
+@Observable public class RouterPath {
+    public var path: [RouterDestination] = []
     
     public init() {}
 

@@ -26,6 +26,8 @@
 		7002F7112B1F4CD6006DD407 /* LocalNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7002F7102B1F4CD6006DD407 /* LocalNotification.swift */; };
 		7002F7142B1F5A1E006DD407 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7002F7132B1F5A1E006DD407 /* Router.swift */; };
 		7002F7162B1F5C99006DD407 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7002F7152B1F5C99006DD407 /* AppRouter.swift */; };
+		7002F72C2B2070F6006DD407 /* TrackerTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7002F72B2B2070F6006DD407 /* TrackerTab.swift */; };
+		7002F72E2B20740A006DD407 /* TrackerSearchToolBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7002F72D2B20740A006DD407 /* TrackerSearchToolBarItem.swift */; };
 		7035F6672AF7587E00F42910 /* TimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7035F6662AF7587E00F42910 /* TimelineView.swift */; };
 		7035F6692AF75A3700F42910 /* GentyDemo-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7035F6682AF75A3700F42910 /* GentyDemo-Regular.otf */; };
 		7051983C2AEFF7D400452564 /* PreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7051983B2AEFF7D400452564 /* PreviewData.swift */; };
@@ -86,6 +88,8 @@
 		7002F7102B1F4CD6006DD407 /* LocalNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotification.swift; sourceTree = "<group>"; };
 		7002F7132B1F5A1E006DD407 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		7002F7152B1F5C99006DD407 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
+		7002F72B2B2070F6006DD407 /* TrackerTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerTab.swift; sourceTree = "<group>"; };
+		7002F72D2B20740A006DD407 /* TrackerSearchToolBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerSearchToolBarItem.swift; sourceTree = "<group>"; };
 		7035F6662AF7587E00F42910 /* TimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineView.swift; sourceTree = "<group>"; };
 		7035F6682AF75A3700F42910 /* GentyDemo-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GentyDemo-Regular.otf"; sourceTree = "<group>"; };
 		7035F66A2AF75A6F00F42910 /* Cinephile-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Cinephile-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -154,6 +158,15 @@
 				7002F7132B1F5A1E006DD407 /* Router.swift */,
 			);
 			path = Router;
+			sourceTree = "<group>";
+		};
+		7002F72A2B2070B4006DD407 /* Tabs */ = {
+			isa = PBXGroup;
+			children = (
+				7002F72B2B2070F6006DD407 /* TrackerTab.swift */,
+				7002F72D2B20740A006DD407 /* TrackerSearchToolBarItem.swift */,
+			);
+			path = Tabs;
 			sourceTree = "<group>";
 		};
 		7035F66B2AF75A9800F42910 /* Fonts */ = {
@@ -355,6 +368,7 @@
 		7079602E2AEBA0A700AB748D /* Cinephile */ = {
 			isa = PBXGroup;
 			children = (
+				7002F72A2B2070B4006DD407 /* Tabs */,
 				7002F7122B1F5A0C006DD407 /* Router */,
 				703AEDE72B0CFDB400E9ED76 /* Notifications */,
 				703AEDE62B0CFD8700E9ED76 /* Settings */,
@@ -512,10 +526,12 @@
 				397998172B17A9E400AB6594 /* EpisodeView.swift in Sources */,
 				70F4AD182B11CFE500A83C8F /* ImageLoader.swift in Sources */,
 				397998152B17A9DD00AB6594 /* SeasonView.swift in Sources */,
+				7002F72E2B20740A006DD407 /* TrackerSearchToolBarItem.swift in Sources */,
 				70F4AD2A2B1851D400A83C8F /* MediaRow.swift in Sources */,
 				7084D7A12AEFA719008EF753 /* DiscoverMediaView.swift in Sources */,
 				70DFE2752AEBEBFE009AE124 /* MovieRow.swift in Sources */,
 				707ABEFC2AF3B616001B88FE /* CategorialMovieView.swift in Sources */,
+				7002F72C2B2070F6006DD407 /* TrackerTab.swift in Sources */,
 				39FAA7472B11D3A60049AA72 /* CastMemberView.swift in Sources */,
 				7084D70A2AEE8D64008EF753 /* MovieDetailView.swift in Sources */,
 				707ABEF62AF3A7D6001B88FE /* MovieDetailViewModel.swift in Sources */,
@@ -592,7 +608,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Cinephile/info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -651,7 +667,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Cinephile/info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -680,7 +696,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -712,7 +728,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
