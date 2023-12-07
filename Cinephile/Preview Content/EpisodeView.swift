@@ -22,8 +22,9 @@ struct EpisodeView: View {
                                 .overlay {
                                     ProgressView()
                                 }
-                                .frame(width: 30, height: 30)
+                                .frame(width: 120,height: 70)
                         }
+
                         .frame(height: 70)
                         VStack(alignment: .leading) {
                             Text(episode.name)

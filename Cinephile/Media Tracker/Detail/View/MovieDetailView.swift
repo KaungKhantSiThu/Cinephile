@@ -2,6 +2,7 @@ import SwiftUI
 import TMDb
 
 struct MovieDetailView: View {
+    @EnvironmentObject var notificationManager: LocalNotificationManager
     private let loader = MovieLoader()
     @State private var isMovieAdded = false
     @StateObject private var viewModel: MovieDetailViewModel<MovieLoader>
@@ -25,7 +26,17 @@ struct MovieDetailView: View {
                 HStack(spacing: 30) {
                     Rating(voteCount: movie.voteCount ?? 0, voteAverage: movie.voteAverage ?? 0.0)
                     Button {
-                            // Delete
+                        Task {
+//                            let dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: Date())
+                            let localNotification = LocalNotification(identifier: UUID().uuidString,
+                                                                      title: "Cinephile Release Alert",
+                                                                      body: "\(movie.title) is out tomorrow ",
+                                                                      timeInterval: 5,
+                                                                      repeats: false)
+//                            localNotification.userInfo = ["nextView" : NextView.renew.rawValue]
+                            await notificationManager.schedule(localNotification: localNotification)
+                            print("Scheduled!!!")
+                        }
                         } label: {
                             Label("Add Moive", systemImage: "plus.circle.fill")
                         }
@@ -43,24 +54,7 @@ struct MovieDetailView: View {
 }
 
 #Preview {
-    MovieDetailView(id: Movie.preview.id)
-}
-
-
-struct Rating: View {
-    let voteCount: Int
-    let voteAverage: Double
-    var body: some View {
-        VStack {
-            Text(voteCount, format: .number)
-                .font(.caption)
-                .foregroundStyle(.secondary)
-            Text(voteAverage, format: .number.precision(.fractionLength(1)))
-                .font(.title)
-                .fontWeight(.bold)
-            StarsView(rating: voteAverage / 2 , maxRating: 5)
-                .frame(width: 80)
-                .padding(.top, -10)
-        }
+    NavigationStack {
+        MovieDetailView(id: Movie.preview.id)
     }
 }

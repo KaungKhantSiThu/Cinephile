@@ -9,7 +9,7 @@ import Foundation
 import Combine
 import TMDb
 
-class ViewModel<Loader: DataLoader>: ObservableObject, LoadableObject {
+class DiscoverMediaViewModel<Loader: DataLoader>: ObservableObject, LoadableObject {
     @Published private(set) var state: LoadingState<[Loader.Output]> = .idle
     @Published var series: [TVSeries] = []
     @Published var upcomingMovies: [Loader.Output] = []
@@ -43,9 +43,7 @@ class ViewModel<Loader: DataLoader>: ObservableObject, LoadableObject {
 
 class MovieViewModel: ObservableObject {
 
-    
     @Published var casts: [CastMember] = []
-    
     private let loader: MovieLoader
     
     init(loader: MovieLoader) {

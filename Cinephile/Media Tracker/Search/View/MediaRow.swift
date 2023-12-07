@@ -17,8 +17,8 @@ struct MediaRow: View {
     let type: MediaType
     
     @State private var posterImage = URL(string: "https://picsum.photos/200/300")!
-    
-    var handler: (Int) -> Void
+     
+//    var handler: (Int) -> Void
     
     var body: some View {
         HStack {
@@ -60,30 +60,30 @@ struct MediaRow: View {
 }
 
 extension MediaRow {
-    init(movie: Movie, handler: @escaping (Int) -> Void) {
+    init(movie: Movie) {
         self.id = movie.id
         self.name = movie.title
         self.posterPath = movie.posterPath
         self.releaseDate = movie.releaseDate
-        self.handler = handler
+//        self.handler = handler
         self.type = .movie
     }
     
-    init(tvSeries: TVSeries, handler: @escaping (Int) -> Void) {
+    init(tvSeries: TVSeries) {
         self.id = tvSeries.id
         self.name = tvSeries.name
         self.posterPath = tvSeries.posterPath
         self.releaseDate = tvSeries.firstAirDate
-        self.handler = handler
+//        self.handler = handler
         self.type = .tvSeries
     }
     
-    init(person: Person, handler: @escaping (Int) -> Void) {
+    init(person: Person) {
         self.id = person.id
         self.name = person.name
         self.posterPath = person.profilePath
         self.releaseDate = person.birthday
-        self.handler = handler
+//        self.handler = handler
         self.type = .person
     }
 }
@@ -98,9 +98,7 @@ extension MediaRow {
 
 
 #Preview {
-    MediaRow(movie: .preview) {
-        print($0)
-    }
+    MediaRow(movie: .preview)
 }
 
 struct PosterImage: View {
@@ -116,7 +114,9 @@ struct PosterImage: View {
     
     var body: some View {
         WebImage(url: url)
-            .placeholder(Image(systemName: "photo"))
+            .placeholder(content: {
+                ProgressView()
+            })
             .resizable()
             .scaledToFit()
             .aspectRatio(contentMode: .fit)

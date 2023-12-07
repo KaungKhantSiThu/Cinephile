@@ -5,12 +5,11 @@ import TMDb
 
 struct SeasonView: View {
     var seasons: [TVSeason]
-    @State private var posterImage = URL(string: "https://picsum.photos/200/300")!
     var body: some View {
         VStack(alignment: .leading) {
             Text("All Episodes")
                 .foregroundStyle(.black)
-                .font(.title2)
+                .font(.title)
                 .fontWeight(.semibold)
                 .padding([.leading, .bottom], 10)
             ForEach(seasons) { season in
@@ -36,9 +35,15 @@ struct SeasonRow: View {
             
             PosterImage(url: posterImage, height: 100)
             VStack(alignment: .leading) {
-                Text(name)
-                    .font(.title2)
+                HStack {
+                    Text(name)
+                        .font(.title2)
                     .bold()
+                    
+                    Image(systemName: "chevron.right")
+                        .foregroundStyle(.secondary)
+                }
+                
             }
             
         }

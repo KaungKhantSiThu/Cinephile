@@ -13,25 +13,21 @@ struct CarousalView: View {
     let movies: [Movie]
     var body: some View {
         VStack(alignment: .leading) {
-            NavigationLink {
-                CategorialMovieView(movies: movies)
-            } label: {
-                HStack {
-                    Text(title)
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                    
-                    Image(systemName: "chevron.right")
+            HStack {
+                Text(title)
+                    .font(.title2)
+                    .fontWeight(.semibold)
+                Spacer()
+                NavigationLink("") {
+                    CategorialMovieView(movies: movies)
                 }
             }
-            .buttonStyle(.plain)
-
             
             ScrollView(.horizontal) {
                 HStack {
                     ForEach(movies.prefix(5)) { movie in
-                        NavigationLink(value: movie) {
-                            MediaCoverView(movie: movie)
+                        NavigationLink(value: RouterDestination.movieDetail(id: movie.id)) {
+                            MediaCover(movie: movie)
                                 .frame(width: 100)
                         }
                         .buttonStyle(.plain)
@@ -53,15 +49,17 @@ struct CarousalSeriesView: View {
                 Text(title)
                     .font(.title2)
                     .fontWeight(.semibold)
-                
-                Image(systemName: "chevron.right")
+                Spacer()
+                NavigationLink("See all") {
+                    Text("Haven't implemented")
+                }
             }
             
             ScrollView(.horizontal) {
                 HStack {
                     ForEach(series.prefix(5)) { series in
-                        NavigationLink(value: series) {
-                            MediaCoverView(tvSeries: series)
+                        NavigationLink(value: RouterDestination.seriesDetail(id: series.id)) {
+                            MediaCover(tvSeries: series)
                                 .frame(width: 100)
                         }
                         .buttonStyle(.plain)
@@ -74,12 +72,7 @@ struct CarousalSeriesView: View {
     }
 }
 #Preview {
-//    NavigationStack {
+    NavigationStack {
         CarousalView(title: "Trending Movies", movies: .preview)
-//            .navigationDestination(for: Movie.self) {
-//                MovieDetailView(id: $0.id, addButtonAction: { (id: Movie.ID) -> Void in
-//                    print(id)
-//                  })
-//        }
-//    }
+    }
 }
