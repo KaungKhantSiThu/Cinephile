@@ -12,7 +12,7 @@ struct TrackerTab: View {
     @State private var routerPath = RouterPath()
     var body: some View {
         NavigationStack(path: $routerPath.path) { 
-            DiscoverMediaView()
+            MediaTrackerView()
                 .withAppRouter()
                 .toolbar {
                     ToolbarItem(placement: .topBarTrailing) {

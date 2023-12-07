@@ -18,10 +18,8 @@ import SwiftUI
     }
     
     var isSearching = false
-    var isLoaded = false
     var isSearchPresented = false
-    var trendingMovies: [Movie] = []
-    var trendingSeries: [TVSeries] = []
+    private(set) var state: LoadingState<TrendingData> = .idle
     
     private let movieService = MovieService()
     private let seriesService = TVSeriesService()
@@ -31,19 +29,19 @@ import SwiftUI
     
     func fetchTrending() async {
         do {
+            state = .loading
             let data = try await fetchTrendingData()
-            trendingMovies = data.trendingMovies
-            trendingSeries = data.trendingSeries
             
             withAnimation {
-                isLoaded = true
+                state = .loaded(data)
             }
         } catch {
-            isLoaded = true
+            print(error.localizedDescription)
+            state = .failed(error)
         }
     }
     
-    private struct TrendingData {
+    struct TrendingData {
         let trendingMovies: [Movie]
         let trendingSeries: [TVSeries]
     }
@@ -53,31 +51,6 @@ import SwiftUI
         async let trendingSeries: [TVSeries] = seriesService.popular().results
         
         return try await .init(trendingMovies: trendingMovies, trendingSeries: trendingSeries)
-    }
-    
-    
-    func searchMovies(using searchText: String) async {
-        do {
-            self.medias = try await searchService.searchAll(query: searchText).results
-            print(medias.count)
-        } catch {
-            print("Search failed: \(error.localizedDescription)")
-        }
-    }
-    
-    func performSearch(using searchText: String) {
-        Task {
-            if !searchText.isEmpty {
-                await self.searchMovies(using: searchText)
-            } else {
-                self.remove()
-            }
-        }
-    }
-
-    
-    func remove() {
-        self.medias.removeAll()
     }
     
     func search() async {

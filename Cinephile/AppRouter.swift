@@ -19,6 +19,7 @@ extension View {
                 SeriesDetailView(id: id)
             case .trackerSearchView:
                 SearchView()
+                
             }
         }
     }

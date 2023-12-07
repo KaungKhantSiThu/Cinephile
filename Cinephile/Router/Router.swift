@@ -13,6 +13,7 @@ public enum RouterDestination: Hashable {
     case movieDetail(id: Movie.ID)
     case seriesDetail(id: TVSeries.ID)
     case trackerSearchView
+    
 }
 
 @MainActor

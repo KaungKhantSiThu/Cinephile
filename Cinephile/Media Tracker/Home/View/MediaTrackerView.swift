@@ -8,7 +8,7 @@
 import SwiftUI
 import TMDb
 
-struct DiscoverMediaView: View {
+struct MediaTrackerView: View {
     
     var body: some View {
         Text("Views for showing Movie, Series Collection")
@@ -17,8 +17,8 @@ struct DiscoverMediaView: View {
     }
 }
 
-#Preview {
-    DiscoverMediaView()
+#Preview(traits: .sizeThatFitsLayout) {
+    MediaTrackerView()
 }
 
 
