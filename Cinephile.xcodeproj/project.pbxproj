@@ -156,6 +156,8 @@
 				3910A41E2B1EF52300EBE18A /* LoginView.swift */,
 			);
 			path = Authentication;
+			sourceTree = "<group>";
+		};
 		7002F70A2B1F4859006DD407 /* Notifications */ = {
 			isa = PBXGroup;
 			children = (
