@@ -10,7 +10,6 @@ import TMDb
 import SDWebImageSwiftUI
 
 struct MediaRow: View {
-    let id: Int
     let name: String
     let releaseDate: Date?
     let posterPath: URL?
@@ -61,7 +60,6 @@ struct MediaRow: View {
 
 extension MediaRow {
     init(movie: Movie) {
-        self.id = movie.id
         self.name = movie.title
         self.posterPath = movie.posterPath
         self.releaseDate = movie.releaseDate
@@ -70,7 +68,6 @@ extension MediaRow {
     }
     
     init(tvSeries: TVSeries) {
-        self.id = tvSeries.id
         self.name = tvSeries.name
         self.posterPath = tvSeries.posterPath
         self.releaseDate = tvSeries.firstAirDate
@@ -79,7 +76,6 @@ extension MediaRow {
     }
     
     init(person: Person) {
-        self.id = person.id
         self.name = person.name
         self.posterPath = person.profilePath
         self.releaseDate = person.birthday

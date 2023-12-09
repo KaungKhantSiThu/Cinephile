@@ -27,17 +27,16 @@ import SwiftUI
     
     init() { }
     
-    func fetchTrending() async {
-        do {
-            state = .loading
-            let data = try await fetchTrendingData()
-            
-            withAnimation {
-                state = .loaded(data)
+    func fetchTrending() {
+        Task {
+            do {
+                self.state = .loading
+                let data = try await fetchTrendingData()
+                self.state = .loaded(data)
+            } catch {
+                print(error.localizedDescription)
+                self.state = .failed(error)
             }
-        } catch {
-            print(error.localizedDescription)
-            state = .failed(error)
         }
     }
     

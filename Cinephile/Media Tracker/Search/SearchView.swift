@@ -17,8 +17,8 @@ struct SearchView: View {
                 if !model.isSearchPresented {
                     switch model.state {
                     case .idle:
-                        Color.clear.task {
-                            await model.fetchTrending()
+                        Color.clear.onAppear {
+                            model.fetchTrending()
                         }
                     case .loading:
                         ProgressView()
@@ -71,12 +71,6 @@ struct SearchView: View {
                 }
             }
             .listStyle(.plain)
-            .task {
-                await model.fetchTrending()
-            }
-            .refreshable {
-                await model.fetchTrending()
-            }
             .searchable(text: $model.searchText,
                         isPresented: $model.isSearchPresented,
                         placement: .navigationBarDrawer(displayMode: .always),
