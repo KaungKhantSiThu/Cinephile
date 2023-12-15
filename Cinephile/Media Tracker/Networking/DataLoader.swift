@@ -14,6 +14,8 @@ protocol DataLoader {
     func loadTrendingItems() async throws -> [Output]
     func loadCastMembers(withID id: Output.ID) async throws -> [CastMember]
     func loadRecommendedItems(withID id: Output.ID) async throws -> [Output]
+    func loadUpcomingItems() async throws -> [Output]
+    func loadVideos(withID id: Output.ID) async throws -> [VideoMetadata]
 }
 
 struct MovieLoader: DataLoader {
@@ -44,9 +46,15 @@ struct MovieLoader: DataLoader {
         return try await movieService.recommendations(forMovie: id).results
     }
     
-    func upcomingItems() async throws -> [Movie] {
+    func loadUpcomingItems() async throws -> [Movie] {
         return try await movieService.upcoming().results
     }
+    
+    func loadVideos(withID id: Movie.ID) async throws -> [VideoMetadata] {
+        return try await movieService.videos(forMovie: id).results
+    }
+    
+    
 }
 
 struct TVSeriesLoader: DataLoader {
@@ -55,10 +63,12 @@ struct TVSeriesLoader: DataLoader {
     
     var tvSeriesService: TVSeriesService!
     var trendingService: TrendingService!
+    var episodeService: TVEpisodeService!
     
     init() {
         tvSeriesService = TVSeriesService()
         trendingService = TrendingService()
+        episodeService = TVEpisodeService()
     }
     
     func loadItem(withID id: TVSeries.ID) async throws -> TVSeries {
@@ -75,5 +85,14 @@ struct TVSeriesLoader: DataLoader {
     
     func loadRecommendedItems(withID id: TVSeries.ID) async throws -> [TVSeries] {
         return try await tvSeriesService.recommendations(forTVSeries: id).results
+    }
+    
+    //Need to be fixed
+    func loadUpcomingItems() async throws -> [TVSeries] {
+        return try await tvSeriesService.popular().results
+    }
+    
+    func loadVideos(withID id: TVSeries.ID) async throws -> [VideoMetadata] {
+        return try await tvSeriesService.videos(forTVSeries: id).results
     }
 }

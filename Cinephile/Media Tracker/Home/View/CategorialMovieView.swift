@@ -16,16 +16,21 @@ struct CategorialMovieView: View {
             LazyVGrid(columns: columns) {
                 ForEach(movies) { movie in
                     NavigationLink(value: movie) {
-                        MovieCoverView(movie: movie)
+                        MediaCover(movie: movie)
                     }
                     .buttonStyle(.plain)
                 }
             }
             .padding()
         }
+        .navigationDestination(for: Movie.self) { movie in
+            MovieDetailView(id: movie.id)
+        }
     }
 }
 
 #Preview {
-    CategorialMovieView(movies: .preview)
+    NavigationStack {
+        CategorialMovieView(movies: .preview)
+    }
 }

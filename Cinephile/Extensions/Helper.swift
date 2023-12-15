@@ -9,23 +9,6 @@ import Foundation
 import TMDb
 import SwiftUI
 
-extension Movie {
-//    var completePosterPath: URL {
-//        get async throws {
-//            let tmdb = TMDbAPI.init(apiKey: "a03aa105bd50498abba5719ade062653")
-//            let configurationService = tmdb.configurations
-//
-//            let apiConfiguration = try await configurationService.apiConfiguration()
-//            let imagesConfiguration = apiConfiguration.images
-//            if let url = imagesConfiguration.posterURL(for: posterPath) {
-//                return url
-//            } else {
-//                throw TMDbError.notFound
-//            }
-//        }
-//    }
-}
-
 enum LoadingState<Value> {
     case idle
     case loading
@@ -33,14 +16,15 @@ enum LoadingState<Value> {
     case loaded(Value)
 }
 
-protocol LoadableObject: ObservableObject {
+protocol LoadableObject {
     associatedtype Output
     var state: LoadingState<Output> { get }
     func load()
 }
 
+
 struct AsyncContentView<Source: LoadableObject, LoadingView: View, Content: View>: View {
-    @ObservedObject var source: Source
+    var source: Source
     var loadingView: LoadingView
     var content: (Source.Output) -> Content
 
