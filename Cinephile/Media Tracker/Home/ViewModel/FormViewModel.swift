@@ -1,6 +1,7 @@
 import Foundation
 import Combine
 
+@MainActor
 class FormViewModel: ObservableObject {
     
     @Published var email = ""
@@ -31,7 +32,7 @@ class FormViewModel: ObservableObject {
             .removeDuplicates()
             .map {
                 if !self.validateEmail(candidate: $0) {
-                    return EmailStatus.emailInvalid
+                    return EmailStatus.invalid
                 }
                 
                 return EmailStatus.valid
@@ -128,7 +129,7 @@ class FormViewModel: ObservableObject {
             .receive(on: RunLoop.main)
             .map { EmailStatus in
                 switch EmailStatus {
-                case .emailInvalid:
+                case .invalid:
                     return "Email is Invalid"
                 case .valid:
                     return ""
@@ -158,6 +159,6 @@ enum PasswordStatus {
 }
 
 enum EmailStatus {
-    case emailInvalid
+    case invalid
     case valid
 }

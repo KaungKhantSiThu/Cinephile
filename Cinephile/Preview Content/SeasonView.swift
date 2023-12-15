@@ -2,9 +2,12 @@ import Foundation
 import SDWebImageSwiftUI
 import SwiftUI
 import TMDb
+import Environment
 
+@MainActor
 struct SeasonView: View {
-    var seasons: [TVSeason]
+    let id: TVSeries.ID
+    let seasons: [TVSeason]
     var body: some View {
         VStack(alignment: .leading) {
             Text("All Episodes")
@@ -13,7 +16,10 @@ struct SeasonView: View {
                 .fontWeight(.semibold)
                 .padding([.leading, .bottom], 10)
             ForEach(seasons) { season in
-                SeasonRow(season: season)
+                NavigationLink(value: RouterDestination.episodeListView(id: id, inSeason: season.seasonNumber)) {
+                    SeasonRow(season: season)
+                }
+                .buttonStyle(.plain)
                 Divider()
             }
         }
@@ -21,7 +27,9 @@ struct SeasonView: View {
 }
 
 #Preview {
-    SeasonView(seasons: (TVSeries.preview?.seasons)!)
+    NavigationStack {
+        SeasonView(id: 12345, seasons: (TVSeries.preview?.seasons)!)
+    }
 }
 
 
@@ -33,18 +41,11 @@ struct SeasonRow: View {
     var body: some View {
         HStack(spacing: 20) {
             
-            PosterImage(url: posterImage, height: 100)
-            VStack(alignment: .leading) {
-                HStack {
-                    Text(name)
-                        .font(.title2)
-                    .bold()
-                    
-                    Image(systemName: "chevron.right")
-                        .foregroundStyle(.secondary)
-                }
-                
-            }
+            PosterImage(url: posterImage, height: 100, roundedCorner: false)
+            
+            Text(name)
+                .font(.title2)
+                .bold()
             
         }
         .padding(.leading, 20)

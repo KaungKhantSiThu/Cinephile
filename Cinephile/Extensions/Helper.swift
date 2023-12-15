@@ -16,14 +16,15 @@ enum LoadingState<Value> {
     case loaded(Value)
 }
 
-protocol LoadableObject: ObservableObject {
+protocol LoadableObject {
     associatedtype Output
     var state: LoadingState<Output> { get }
     func load()
 }
 
+
 struct AsyncContentView<Source: LoadableObject, LoadingView: View, Content: View>: View {
-    @ObservedObject var source: Source
+    var source: Source
     var loadingView: LoadingView
     var content: (Source.Output) -> Content
 

@@ -5,32 +5,33 @@ enum SeriesPage: String, Equatable, CaseIterable {
     case detail = "Details"
     case season = "Seasons"
     
-    var localizedName: LocalizedStringKey { LocalizedStringKey(rawValue) }
+    var localizedName: LocalizedStringKey { LocalizedStringKey(rawValue)
+    }
 }
 
 struct SeriesDetailView: View {
     private let loader = TVSeriesLoader()
-    @StateObject private var model: TVSeriesDetailViewModel<TVSeriesLoader>
+    @State private var model: TVSeriesDetailViewModel
     @State private var selectedPage: SeriesPage = .detail
     
     init(id: TVSeries.ID) {
-        _model = StateObject(wrappedValue: TVSeriesDetailViewModel(id: id))
+        _model = .init(wrappedValue: TVSeriesDetailViewModel(id: id))
     }
     var body: some View {
-        AsyncContentView(source: model) { series in
+        AsyncContentView(source: model) { data in
             ScrollView {
                 PosterImage(url: model.posterImageURL, height: 240)
                 
-                Text(series.name)
+                Text(data.tvSeries.name)
                     .font(.title)
                     .fontWeight(.bold)
                 
-                Text(series.firstAirDate ?? Date.now, format: .dateTime.year())
+                Text(data.tvSeries.firstAirDate ?? Date.now, format: .dateTime.year())
                 
-                Text(series.genres?.map(\.name).joined(separator: ", ") ?? "No genre")
+                Text(data.tvSeries.genres?.map(\.name).joined(separator: ", ") ?? "No genre")
                 
                 HStack(spacing: 30) {
-                    Rating(voteCount: series.voteCount ?? 0, voteAverage: series.voteAverage ?? 0.0)
+                    Rating(voteCount: data.tvSeries.voteCount ?? 0, voteAverage: data.tvSeries.voteAverage ?? 0.0)
                     
                     Button {
                         // something
@@ -50,13 +51,13 @@ struct SeriesDetailView: View {
                 
                 switch selectedPage {
                 case .detail:
-                    Text(series.overview ?? "No overview")
+                    Text(data.tvSeries.overview ?? "No overview")
                         .padding()
-                    VideosRowView(videos: model.videos)
+                    VideosRowView(videos: data.videos)
                     
-                    CastMemberView(castMembers: model.castMembers)
+                    CastMemberView(castMembers: data.castMembers)
                 case .season:
-                    SeasonView(seasons: series.seasons ?? [])
+                    SeasonView(id: data.tvSeries.id, seasons: data.tvSeries.seasons ?? [])
                 }
                 
             }

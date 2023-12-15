@@ -7,6 +7,7 @@
 //
 import SwiftUI
 import TMDb
+import Environment
 
 @MainActor
 struct SearchView: View {

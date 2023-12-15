@@ -8,37 +8,48 @@
 import SwiftUI
 import TMDb
 
-class MovieDetailViewModel<Loader: DataLoader>: ObservableObject, LoadableObject {
-    @Published private(set) var state: LoadingState<Movie> = .idle
+
+@Observable class MovieDetailViewModel: LoadableObject {
     
-    @Published var castMembers: [CastMember] = []
-    @Published var videos: [VideoMetadata] = []
-    @Published var posterImageURL: URL = URL(string: "https://picsum.photos/200/300")!
+    private(set) var state: LoadingState<MovieDetail> = .idle
+    private(set) var posterImageURL: URL = URL(string: "https://picsum.photos/200/300")!
     
     
     let id: Movie.ID
 
-    private let loader: MovieLoader
+    private let loader = MovieLoader()
     
-    init(id: Movie.ID, loader: MovieLoader = MovieLoader()) {
+    init(id: Movie.ID) {
         self.id = id
-        self.loader = loader
     }
     
     @MainActor
     func load() {
-        state = .loading
+        self.state = .loading
         Task {
             do {
-                let movie = try await loader.loadItem(withID: id)
-                self.castMembers = try await loader.loadCastMembers(withID: id)
-                self.videos = try await loader.loadVideos(withID: id)
-                self.state = .loaded(movie)
-                self.posterImageURL = try await ImageLoader.generate(from: movie.posterPath, width: 200)
+                let data = try await fetchMovieDetailData()
+                self.posterImageURL = try await ImageLoader.generate(from: data.movie.posterPath, width: 200)
+                self.state = .loaded(data)
             } catch {
                 self.state = .failed(error)
             }
         }
     }
     
+    private func fetchMovieDetailData() async throws -> MovieDetail {
+        async let movie = loader.loadItem(withID: id)
+        async let castMembers = loader.loadCastMembers(withID: id)
+        async let videos = loader.loadVideos(withID: id)
+        
+        return try await .init(movie: movie, castMembers: castMembers, videos: videos)
+    }
+}
+
+extension MovieDetailViewModel {
+    struct MovieDetail {
+        let movie: Movie
+        var castMembers: [CastMember]
+        var videos: [VideoMetadata]
+    }
 }

@@ -2,6 +2,7 @@ import Foundation
 import SwiftUI
 import TMDb
 
+@MainActor
 struct CastMemberView: View {
     var castMembers: [CastMember]
     var body: some View {

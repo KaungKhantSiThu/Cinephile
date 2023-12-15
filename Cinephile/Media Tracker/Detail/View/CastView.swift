@@ -9,6 +9,7 @@ import SwiftUI
 import TMDb
 import SDWebImageSwiftUI
 
+@MainActor
 struct CastView: View {
     let cast: CastMember
     @State private var posterImage = URL(string: "https://picsum.photos/200/300")!

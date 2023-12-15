@@ -1,5 +1,5 @@
 //
-//  MediaTracker+Notifications.swift
+//  MediaNotificationManager.swift
 //  Cinephile
 //
 //  Created by Kaung Khant Si Thu on 05/12/2023.
@@ -9,7 +9,7 @@ import Foundation
 import NotificationCenter
 
 @MainActor
-class LocalNotificationManager: NSObject, ObservableObject {
+class MediaNotificationManager: NSObject, ObservableObject {
     let notificationCenter = UNUserNotificationCenter.current()
     @Published var isGranted = false
     @Published var pendingRequests: [UNNotificationRequest] = []
@@ -41,18 +41,17 @@ class LocalNotificationManager: NSObject, ObservableObject {
         }
     }
     
-    func schedule(localNotification: LocalNotification) async {
+    func schedule(localNotification: MediaNotification) async {
         let content = UNMutableNotificationContent()
         content.title = localNotification.title
         content.body = localNotification.body
         if let subtitle = localNotification.subtitle {
             content.subtitle = subtitle
         }
-        if let bundleImageName = localNotification.bundleImageName {
-            if let url = Bundle.main.url(forResource: bundleImageName, withExtension: "") {
-                if let attachment = try? UNNotificationAttachment(identifier: bundleImageName, url: url) {
-                    content.attachments = [attachment]
-                }
+        if let imageURL = localNotification.imageURL {
+            let identifier = ProcessInfo.processInfo.globallyUniqueString
+            if let attachment = try? UNNotificationAttachment(identifier: identifier, url: imageURL) {
+                content.attachments = [attachment]
             }
         }
         if let userInfo = localNotification.userInfo {
@@ -67,12 +66,12 @@ class LocalNotificationManager: NSObject, ObservableObject {
         guard let timeInterval = localNotification.timeInterval else { return }
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval,
                                                         repeats: localNotification.repeats)
-            let request = UNNotificationRequest(identifier: localNotification.identifier, content: content, trigger: trigger)
+            let request = UNNotificationRequest(identifier: localNotification.id.uuidString, content: content, trigger: trigger)
             try? await notificationCenter.add(request)
         } else {
             guard let dateComponents = localNotification.dateComponents else { return }
             let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: localNotification.repeats)
-            let request = UNNotificationRequest(identifier: localNotification.identifier, content: content, trigger: trigger)
+            let request = UNNotificationRequest(identifier: localNotification.id.uuidString, content: content, trigger: trigger)
             try? await notificationCenter.add(request)
         }
         await getPendingRequests()
@@ -98,7 +97,7 @@ class LocalNotificationManager: NSObject, ObservableObject {
     }
 }
 
-extension LocalNotificationManager: UNUserNotificationCenterDelegate {
+extension MediaNotificationManager: UNUserNotificationCenterDelegate {
     
 //    func registerActions() {
 //        let snooze10Action = UNNotificationAction(identifier: "snooze10", title: "Snooze 10 seconds")

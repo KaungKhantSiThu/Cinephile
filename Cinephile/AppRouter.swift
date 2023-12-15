@@ -7,6 +7,10 @@
 
 import Foundation
 import SwiftUI
+import Models
+import Environment
+import AppAccount
+import Networking
 
 @MainActor
 extension View {
@@ -19,8 +23,33 @@ extension View {
                 SeriesDetailView(id: id)
             case .trackerSearchView:
                 SearchView()
-                
+            case .episodeListView(id: let id, inSeason: let seasonNumber):
+                EpisodeListView(id: id, inSeason: seasonNumber)
             }
         }
     }
+    
+    func withSheetDestinations(sheetDestinations: Binding<SheetDestination?>) -> some View {
+        sheet(item: sheetDestinations) { destination in
+            Group {
+                switch destination {
+                case .addAccount:
+                    LoginView()
+                }
+            }
+            .withEnvironments()
+        }
+    }
+    
+    func withEnvironments() -> some View {
+        environment(CurrentAccount.shared)
+        .environment(UserPreferences.shared)
+        .environment(CurrentInstance.shared)
+//        .environment(Theme.shared)
+        .environment(AppAccountsManager.shared)
+//        .environment(PushNotificationsService.shared)
+        .environment(AppAccountsManager.shared.currentClient)
+//        .environment(QuickLook.shared)
+    }
+
 }

@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@MainActor
 struct Rating: View {
     let voteCount: Int
     let voteAverage: Double

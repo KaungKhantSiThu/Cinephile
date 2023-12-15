@@ -1,39 +1,39 @@
 import SwiftUI
 import TMDb
 
+@MainActor
 struct MovieDetailView: View {
-    @EnvironmentObject var notificationManager: LocalNotificationManager
-    private let loader = MovieLoader()
+    @EnvironmentObject var notificationManager: MediaNotificationManager
     @State private var isMovieAdded = false
-    @StateObject private var viewModel: MovieDetailViewModel<MovieLoader>
+    @State private var viewModel: MovieDetailViewModel
     
     init(id: Movie.ID) {
-        _viewModel = StateObject(wrappedValue: MovieDetailViewModel<MovieLoader>(id: id))
+        _viewModel = .init(wrappedValue: MovieDetailViewModel(id: id))
     }
     
     var body: some View {
-        AsyncContentView(source: viewModel) { movie in
+        AsyncContentView(source: viewModel) { data in
             ScrollView {
                 PosterImage(url: viewModel.posterImageURL, height: 240)
                 
-                Text(movie.title)
+                Text(data.movie.title)
                     .font(.title)
                     .fontWeight(.bold)
                 
-                Text(movie.releaseDate ?? Date.now, format: .dateTime.year())
-                Text(movie.genres?.map(\.name).joined(separator: ", ") ?? "No genre")
+                Text(data.movie.releaseDate ?? Date.now, format: .dateTime.year())
+                Text(data.movie.genres?.map(\.name).joined(separator: ", ") ?? "No genre")
                 
                 HStack(spacing: 30) {
-                    Rating(voteCount: movie.voteCount ?? 0, voteAverage: movie.voteAverage ?? 0.0)
+                    Rating(voteCount: data.movie.voteCount ?? 0, voteAverage: data.movie.voteAverage ?? 0.0)
                     Button {
                         Task {
 //                            let dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: Date())
-                            let localNotification = LocalNotification(identifier: UUID().uuidString,
+                            let localNotification = MediaNotification(
                                                                       title: "Cinephile Release Alert",
-                                                                      body: "\(movie.title) is out tomorrow ",
+                                                                      body: "\(data.movie.title) is out tomorrow ",
                                                                       timeInterval: 5,
                                                                       repeats: false)
-//                            localNotification.userInfo = ["nextView" : NextView.renew.rawValue]
+//                            localNotification.imageURL = data.movie.posterPath
                             await notificationManager.schedule(localNotification: localNotification)
                             print("Scheduled!!!")
                         }
@@ -42,19 +42,19 @@ struct MovieDetailView: View {
                         }
                         .buttonStyle(CustomButtonStyle())
                 }
-                Text(movie.overview ?? "No overview")
+                Text(data.movie.overview ?? "No overview")
                     .padding()
                 
-                VideosRowView(videos: viewModel.videos)
+                VideosRowView(videos: data.videos)
                 
-                CastMemberView(castMembers: viewModel.castMembers)
+                CastMemberView(castMembers: data.castMembers)
             }
         }
     }
 }
 
-#Preview {
-    NavigationStack {
-        MovieDetailView(id: Movie.preview.id)
-    }
-}
+//#Preview {
+//    NavigationStack {
+//        MovieDetailView(id: Movie.preview.id)
+//    }
+//}

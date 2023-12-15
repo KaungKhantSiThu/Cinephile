@@ -10,6 +10,7 @@ import WebKit
 import AVKit
 import TMDb
 
+@MainActor
 struct VideoView: View {
     let metaData: VideoMetadata
 

@@ -1,5 +1,5 @@
 //
-//  LocalNotification.swift
+//  MediaNotification.swift
 //  Cinephile
 //
 //  Created by Kaung Khant Si Thu on 05/12/2023.
@@ -7,13 +7,13 @@
 
 import Foundation
 
-struct LocalNotification {
-    internal init(identifier: String,
+struct MediaNotification {
+    
+    internal init(
                   title: String,
                   body: String,
                   timeInterval: Double,
                   repeats: Bool) {
-        self.identifier = identifier
         self.scheduleType = .time
         self.title = title
         self.body = body
@@ -22,12 +22,11 @@ struct LocalNotification {
         self.repeats = repeats
     }
     
-    internal init(identifier: String,
+    internal init(
                   title: String,
                   body: String,
                   dateComponents: DateComponents,
                   repeats: Bool) {
-        self.identifier = identifier
         self.scheduleType = .calendar
         self.title = title
         self.body = body
@@ -40,12 +39,12 @@ struct LocalNotification {
         case time, calendar
     }
     
-    var identifier: String
+    let id = UUID()
     var scheduleType: ScheduleType
     var title: String
     var body: String
     var subtitle: String?
-    var bundleImageName: String?
+    var imageURL: URL?
     var userInfo: [AnyHashable : Any]?
     var timeInterval: Double?
     var dateComponents: DateComponents?

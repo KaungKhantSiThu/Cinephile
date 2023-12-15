@@ -8,21 +8,19 @@
 import SwiftUI
 import TMDb
 
-class TVSeriesDetailViewModel<Loader: DataLoader>: ObservableObject, LoadableObject {
-    @Published private(set) var state: LoadingState<TVSeries> = .idle
-    
-    @Published var castMembers: [CastMember] = []
-    @Published var videos: [VideoMetadata] = []
-    @Published var posterImageURL: URL = URL(string: "https://picsum.photos/200/300")!
+@Observable
+class TVSeriesDetailViewModel: ObservableObject, LoadableObject {
+    private(set) var state: LoadingState<TVSeriesDetail> = .idle
+
+    private(set) var posterImageURL: URL = URL(string: "https://picsum.photos/200/300")!
     
     
     let id: TVSeries.ID
 
-    private let loader: TVSeriesLoader
+    private let loader = TVSeriesLoader()
     
-    init(id: TVSeries.ID, loader: TVSeriesLoader = TVSeriesLoader()) {
+    init(id: TVSeries.ID) {
         self.id = id
-        self.loader = loader
     }
     
     @MainActor
@@ -30,15 +28,29 @@ class TVSeriesDetailViewModel<Loader: DataLoader>: ObservableObject, LoadableObj
         state = .loading
         Task {
             do {
-                let tvSeries = try await loader.loadItem(withID: id)
-                self.castMembers = try await loader.loadCastMembers(withID: id)
-                self.videos = try await loader.loadVideos(withID: id)
-                self.state = .loaded(tvSeries)
-                self.posterImageURL = try await ImageLoader.generate(from: tvSeries.posterPath, width: 200)
+                let data = try await fetchTVSeriesDetailData()
+                self.posterImageURL = try await ImageLoader.generate(from: data.tvSeries.posterPath, width: 200)
+                self.state = .loaded(data)
             } catch {
                 self.state = .failed(error)
             }
         }
     }
     
+    private func fetchTVSeriesDetailData() async throws -> TVSeriesDetail {
+        async let tvSeries = loader.loadItem(withID: id)
+        async let castMembers = loader.loadCastMembers(withID: id)
+        async let videos = loader.loadVideos(withID: id)
+        
+        return try await .init(tvSeries: tvSeries, castMembers: castMembers, videos: videos)
+    }
+    
+}
+
+extension TVSeriesDetailViewModel {
+    struct TVSeriesDetail {
+        let tvSeries: TVSeries
+        var castMembers: [CastMember]
+        var videos: [VideoMetadata]
+    }
 }

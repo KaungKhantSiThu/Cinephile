@@ -10,7 +10,7 @@ import SwiftUI
 
 @MainActor
 @Observable class SearchViewModel {
-    var medias: [Media] = []
+    private(set) var medias: [Media] = []
     var searchText = "" {
         didSet {
             isSearching = true
@@ -28,9 +28,9 @@ import SwiftUI
     init() { }
     
     func fetchTrending() {
+        self.state = .loading
         Task {
             do {
-                self.state = .loading
                 let data = try await fetchTrendingData()
                 self.state = .loaded(data)
             } catch {
