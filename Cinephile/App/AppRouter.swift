@@ -11,6 +11,7 @@ import Models
 import Environment
 import AppAccount
 import Networking
+import Account
 
 @MainActor
 extension View {
@@ -25,6 +26,12 @@ extension View {
                 SearchView()
             case .episodeListView(id: let id, inSeason: let seasonNumber):
                 EpisodeListView(id: id, inSeason: seasonNumber)
+            case .accountDetail(id: let id):
+                AccountDetailView(id: id, scrollToTopSignal: .constant(0))
+            case .accountDetailWithAccount(account: let account):
+                AccountDetailView(account: account, scrollToTopSignal: .constant(0))
+            case .accountSettingsWithAccount(account: let account, appAccount: let appAccount):
+                AccountSettingsView(account: account, appAccount: appAccount)
             }
         }
     }
@@ -35,6 +42,8 @@ extension View {
                 switch destination {
                 case .addAccount:
                     LoginView()
+                case .settings:
+                    SettingsTab(popToRootTab: .constant(.settings), isModal: true)
                 }
             }
             .withEnvironments()

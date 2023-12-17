@@ -21,12 +21,12 @@ struct CinephileApp: App {
     @State var currentAccount = CurrentAccount.shared
     @State var currentInstance = CurrentInstance.shared
     @State var userPreferences = UserPreferences.shared
-    @State var sideBarRouterPath = RouterPath()
+//    @State var sideBarRouterPath = RouterPath()
     
     @State var selectedTab: Tab = .tracker
     @State var popToRootTab: Tab = .other
     
-    @State var sideBarLoadedTab: Set<Tab> = Set()
+//    @State var sideBarLoadedTab: Set<Tab> = Set()
     
     var availableTabs: [Tab] {
         appAccountsManager.currentClient.isAuth ? Tab.loggedInTabs : Tab.loggedOutTabs

@@ -20,7 +20,6 @@ struct NotificationsTab: View {
 
     
     @State private var routerPath = RouterPath()
-    
     @Binding var popToRootTab: Tab
     
     init(popToRootTab: Binding<Tab>) {
@@ -28,8 +27,9 @@ struct NotificationsTab: View {
     }
     var body: some View {
         NavigationStack(path: $routerPath.path) {
-                NotificationsView()
+            NotificationsView()
         }
+        .environment(routerPath)
     }
 }
 

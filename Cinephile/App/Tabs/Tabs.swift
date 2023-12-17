@@ -21,11 +21,7 @@ enum Tab: Int, Identifiable, Hashable {
     }
     
     static var loggedInTabs: [Tab] {
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            return [.tracker, .timeline, .notifications, .profile]
-        } else {
-            return [.tracker, .timeline, .notifications, .profile]
-        }
+        return [.tracker, .timeline, .notifications, .profile]
     }
     
     @ViewBuilder
@@ -40,7 +36,7 @@ enum Tab: Int, Identifiable, Hashable {
         case .notifications:
             NotificationsTab(popToRootTab: popToRootTab)
         case .settings:
-            SettingsTab(popToRootTab: popToRootTab)
+            SettingsTab(popToRootTab: popToRootTab, isModal: false)
         case .other:
             EmptyView()
         }
@@ -57,9 +53,26 @@ enum Tab: Int, Identifiable, Hashable {
       case .profile:
         "person.crop.circle"
       case .other:
-        ""
+        "questionmark"
       case .tracker:
           "movieclapper"
       }
+    }
+    
+    var tabName: String {
+        switch self {
+        case .tracker:
+            "Tracker"
+        case .timeline:
+            "Timeline"
+        case .profile:
+            "Profile"
+        case .notifications:
+            "Notifications"
+        case .settings:
+            "Settings"
+        case .other:
+            ""
+        }
     }
 }

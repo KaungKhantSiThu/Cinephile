@@ -1,0 +1,150 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "" : {
+
+    },
+    "@mgkaung" : {
+
+    },
+    "0" : {
+
+    },
+    "3" : {
+
+    },
+    "5" : {
+
+    },
+    "10" : {
+
+    },
+    "12" : {
+
+    },
+    "account.action.edit-filters" : {
+
+    },
+    "account.action.edit-info" : {
+
+    },
+    "account.action.logout" : {
+
+    },
+    "account.action.more" : {
+
+    },
+    "Accounts" : {
+
+    },
+    "action.done" : {
+
+    },
+    "Add Moive" : {
+
+    },
+    "Add Series" : {
+
+    },
+    "All Episodes" : {
+
+    },
+    "Cast" : {
+
+    },
+    "Cinephile" : {
+
+    },
+    "Confirm Password" : {
+
+    },
+    "Days" : {
+
+    },
+    "Done" : {
+
+    },
+    "Email" : {
+
+    },
+    "EMAIL" : {
+
+    },
+    "Error: %@" : {
+
+    },
+    "Explore" : {
+
+    },
+    "Kelvin Gao" : {
+
+    },
+    "Login" : {
+
+    },
+    "Mg Kaung" : {
+
+    },
+    "No search Results" : {
+
+    },
+    "Notifications" : {
+
+    },
+    "Password" : {
+
+    },
+    "PASSWORD" : {
+
+    },
+    "Popular Movie" : {
+
+    },
+    "Popular TV Series" : {
+
+    },
+    "Rating" : {
+
+    },
+    "RATINGS" : {
+
+    },
+    "Remove" : {
+
+    },
+    "Retry" : {
+
+    },
+    "Search Movies, Series, Cast" : {
+
+    },
+    "Season %lld" : {
+
+    },
+    "Sing Up" : {
+
+    },
+    "There was an error regarding %@" : {
+
+    },
+    "Top Gun: Maverick is a thrilling sequel that surpasses the original. Tom Cruise delivers a stellar performance as the fearless and rebellious pilot who faces his demons and mentors a new generation of aviators. The action scenes are breathtaking and realistic, showcasing the best of modern fighter jets." : {
+
+    },
+    "Tracker" : {
+
+    },
+    "Username" : {
+
+    },
+    "USERNAME" : {
+
+    },
+    "Videos" : {
+
+    },
+    "View for Watchlist" : {
+
+    }
+  },
+  "version" : "1.0"
+}

@@ -34,20 +34,31 @@ struct TrackerTab: View {
                 .toolbar {
                     toolbarView
                 }
-                .environment(routerPath)
+                
                 .id(client.id)
             
         }
+        .onChange(of: $popToRootTab.wrappedValue) { _, newValue in
+          if newValue == .tracker {
+            if routerPath.path.isEmpty {
+//              scrollToTopSignal += 1
+            } else {
+              routerPath.path = []
+            }
+          }
+        }
         .onAppear {
             routerPath.client = client
-            if !client.isAuth {
-                routerPath.presentedSheet = .addAccount
-            }
+//            if !client.isAuth {
+//                routerPath.presentedSheet = .addAccount
+//            }
         }
+        .environment(routerPath)
     }
     
     @ToolbarContentBuilder
     private var toolbarView: some ToolbarContent {
+        
         ToolbarItem(placement: .topBarTrailing) {
             Button {
                 routerPath.navigate(to: .trackerSearchView)
@@ -57,9 +68,11 @@ struct TrackerTab: View {
         }
         
         if client.isAuth {
-            ToolbarItem(placement: .topBarLeading) {
-                Image(systemName: "checkmark.circle.fill")
-                    .foregroundStyle(.green)
+            if UIDevice.current.userInterfaceIdiom != .pad {
+              ToolbarItem(placement: .topBarLeading) {
+                AppAccountsSelectorView(routerPath: routerPath)
+                  .id(currentAccount.account?.id)
+              }
             }
         } else {
             ToolbarItem(placement: .topBarLeading) {

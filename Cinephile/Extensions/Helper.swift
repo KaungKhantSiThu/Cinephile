@@ -9,6 +9,7 @@ import Foundation
 import TMDb
 import SwiftUI
 
+@MainActor
 enum LoadingState<Value> {
     case idle
     case loading

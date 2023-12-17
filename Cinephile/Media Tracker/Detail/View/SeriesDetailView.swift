@@ -9,6 +9,7 @@ enum SeriesPage: String, Equatable, CaseIterable {
     }
 }
 
+@MainActor
 struct SeriesDetailView: View {
     private let loader = TVSeriesLoader()
     @State private var model: TVSeriesDetailViewModel

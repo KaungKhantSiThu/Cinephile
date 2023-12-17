@@ -12,8 +12,10 @@ extension CinephileApp {
         TabView(selection: .init(
             get: { selectedTab },
             set: { newTab in
+                
                 if newTab == selectedTab {
                     popToRootTab = .other
+                    
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
                       popToRootTab = selectedTab
                     }
@@ -29,12 +31,13 @@ extension CinephileApp {
 //                      } else {
 //                        Image(systemName: tab.iconName)
 //                      }
-                        Image(systemName: tab.iconName)
+                        Label(tab.tabName, systemImage: tab.iconName)
                     }
                     .tag(tab)
 //                    .badge(badgeFor(tab: tab))
 //                    .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .tabBar)
                 }
             }
+            .id(appAccountsManager.currentClient.id)
     }
 }

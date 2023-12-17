@@ -19,6 +19,7 @@ struct ProfileTab: View {
     @Environment(CurrentAccount.self) private var currentAccount
     
     @State private var routerPath = RouterPath()
+    @State private var scrollToTopSignal: Int = 0
     @Binding var popToRootTab: Tab
     
     init(popToRootTab: Binding<Tab>) {
@@ -27,55 +28,33 @@ struct ProfileTab: View {
     var body: some View {
         NavigationStack(path: $routerPath.path) {
             if let account = currentAccount.account {
-                AccountDetailView(account: account)
+                AccountDetailView(account: account, scrollToTopSignal: $scrollToTopSignal)
                     .withAppRouter()
                     .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
-                    .toolbar {
-                        ToolbarItem(placement: .topBarTrailing) {
-                            Button {
-                                Task {
-                                    await logoutAccount(account: appAccountsManager.currentAccount)
-                                    routerPath.navigate(to: .trackerSearchView)
-                                }
-                            } label: {
-                                Label("Log out", systemImage: "door.right.hand.open")
-                            }
-                        }
-                    }
-                    .environment(routerPath)
                     .id(account.id)
             } else {
-                Text("No account signed in")
+                AccountDetailView(account: .placeholder(), scrollToTopSignal: $scrollToTopSignal)
+                    .redacted(reason: .placeholder)
             }
         }
-//        .onChange(of: $popToRootTab.wrappedValue) { _, newValue in
-//          if newValue == .profile {
-//            if routerPath.path.isEmpty {
-////              scrollToTopSignal += 1
-//            } else {
-//              routerPath.path = []
-//            }
-//          }
-//        }
-//        .onChange(of: client.id) {
-//          routerPath.path = []
-//        }
+        .onChange(of: $popToRootTab.wrappedValue) { _, newValue in
+          if newValue == .profile {
+            if routerPath.path.isEmpty {
+              scrollToTopSignal += 1
+            } else {
+              routerPath.path = []
+            }
+          }
+        }
+        .onChange(of: client.id) {
+          routerPath.path = []
+        }
         .onAppear {
           routerPath.client = client
         }
+        .environment(routerPath)
 //        .withSafariRouter()
         
-    }
-    
-    private func logoutAccount(account: AppAccount) async {
-      if let token = account.oauthToken
-//            ,let sub = pushNotifications.subscriptions.first(where: { $0.account.token == token })
-      {
-//        let client = Client(server: account.server, oauthToken: token)
-//        await timelineCache.clearCache(for: client.id)
-//        await sub.deleteSubscription()
-        appAccountsManager.delete(account: account)
-      }
     }
 }
 

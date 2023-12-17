@@ -8,8 +8,7 @@
 import SwiftUI
 import TMDb
 
-@Observable
-class TVSeriesDetailViewModel: ObservableObject, LoadableObject {
+@Observable class TVSeriesDetailViewModel: ObservableObject, LoadableObject {
     private(set) var state: LoadingState<TVSeriesDetail> = .idle
 
     private(set) var posterImageURL: URL = URL(string: "https://picsum.photos/200/300")!

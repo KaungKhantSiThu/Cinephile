@@ -113,5 +113,6 @@ struct SearchView: View {
 #Preview {
     NavigationStack {
         SearchView()
+            .withAppRouter()
     }
 }
