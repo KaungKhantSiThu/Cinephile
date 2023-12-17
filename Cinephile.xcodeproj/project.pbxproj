@@ -116,6 +116,7 @@
 		701F56E92B2D97CA0043B71B /* CinephileUI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CinephileUI; path = ../CinephileUI; sourceTree = "<group>"; };
 		701F56ED2B2EBBE10043B71B /* AccountSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingView.swift; sourceTree = "<group>"; };
 		701F56EF2B2EC8FB0043B71B /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		701F56F12B2EEA500043B71B /* CinephileData */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CinephileData; path = Cinephile/Packages/CinephileData; sourceTree = "<group>"; };
 		7035F6662AF7587E00F42910 /* TimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineView.swift; sourceTree = "<group>"; };
 		7035F6682AF75A3700F42910 /* GentyDemo-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GentyDemo-Regular.otf"; sourceTree = "<group>"; };
 		7035F66A2AF75A6F00F42910 /* Cinephile-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Cinephile-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -406,6 +407,7 @@
 		707960232AEBA0A700AB748D = {
 			isa = PBXGroup;
 			children = (
+				701F56F12B2EEA500043B71B /* CinephileData */,
 				701F56E92B2D97CA0043B71B /* CinephileUI */,
 				70BCF75F2B2C9BC600D7AB7E /* Account */,
 				70BCF7432B2B50BC00D7AB7E /* AppAccount */,
