@@ -1,7 +1,7 @@
 import XCTest
-@testable import CinephileData
+@testable import CinephileUI
 
-final class CinephileDataTests: XCTestCase {
+final class CinephileUITests: XCTestCase {
     func testExample() throws {
         // XCTest Documentation
         // https://developer.apple.com/documentation/xctest
