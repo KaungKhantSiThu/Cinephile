@@ -1,8 +1,8 @@
 import Foundation
-import SDWebImageSwiftUI
 import SwiftUI
 import TMDb
 import Environment
+import TrackerUI
 
 @MainActor
 struct SeasonView: View {
@@ -27,9 +27,10 @@ struct SeasonView: View {
 }
 
 #Preview {
-    NavigationStack {
-        SeasonView(id: 12345, seasons: (TVSeries.preview?.seasons)!)
-    }
+//    NavigationStack {
+//        SeasonView(id: 12345, seasons: (TVSeries.preview?.seasons)!)
+//    }
+    SeasonRow(name: "Season 1", posterPath: nil )
 }
 
 

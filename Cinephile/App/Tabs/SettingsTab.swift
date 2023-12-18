@@ -98,19 +98,20 @@ struct SettingsTab: View {
             if !appAccountsManager.availableAccounts.isEmpty {
                 editAccountButton
             }
+            addAccountButton
         }
     }
     
-//    private var addAccountButton: some View {
-//      Button {
-//        addAccountSheetPresented.toggle()
-//      } label: {
-//        Text("settings.account.add")
-//      }
-//      .sheet(isPresented: $addAccountSheetPresented) {
-//        AddAccountView()
-//      }
-//    }
+    private var addAccountButton: some View {
+      Button {
+        addAccountSheetPresented.toggle()
+      } label: {
+        Text("settings.account.add")
+      }
+      .sheet(isPresented: $addAccountSheetPresented) {
+        LoginView()
+      }
+    }
 
     private var editAccountButton: some View {
       Button(role: isEditingAccount ? .none : .destructive) {

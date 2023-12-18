@@ -7,17 +7,16 @@
 
 import SwiftUI
 import TMDb
-import SDWebImageSwiftUI
 
-struct MovieTile: View {
+public struct MovieTile: View {
     let movie: Movie
-    var body: some View {
+    public var body: some View {
         HStack {
             PosterImage(url: movie.posterPath!, height: 90, roundedCorner: false)
         }
     }
 }
 
-#Preview {
-    MovieTile(movie: .preview)
-}
+//#Preview {
+//    MovieTile(movie: .preview)
+//}

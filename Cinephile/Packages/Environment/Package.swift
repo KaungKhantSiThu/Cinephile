@@ -26,8 +26,8 @@ let package = Package(
         .target(
             name: "Environment",
             dependencies: [
-                .product(name: "Models", package: "Models"),
-                .product(name: "Networking", package: "Networking"),
+                "Models",
+                "Networking",
                 .product(name: "TMDb", package: "TMDb")
             ]),
         .testTarget(

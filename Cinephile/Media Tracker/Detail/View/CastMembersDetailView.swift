@@ -7,12 +7,13 @@
 
 import SwiftUI
 import TMDb
+import TrackerUI
 
 struct CastMembersDetailView: View {
     var castMembers: [CastMember]
     var body: some View {
         List(castMembers) { cast in
-            CastView(cast: cast)
+            CastView(castMember: cast)
         }
     }
 }

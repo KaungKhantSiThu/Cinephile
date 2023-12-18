@@ -12,6 +12,7 @@ import Environment
 import AppAccount
 import Networking
 import Account
+import TrackerUI
 
 @MainActor
 extension View {

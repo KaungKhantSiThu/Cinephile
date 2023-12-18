@@ -7,9 +7,9 @@
 
 import SwiftUI
 import TMDb
-import SDWebImageSwiftUI
+import NukeUI
 
-struct MediaRow: View {
+public struct MediaRow: View {
     let name: String
     let releaseDate: Date?
     let posterPath: URL?
@@ -19,7 +19,7 @@ struct MediaRow: View {
      
 //    var handler: (Int) -> Void
     
-    var body: some View {
+    public var body: some View {
         HStack {
             PosterImage(url: posterImage)
             
@@ -58,7 +58,7 @@ struct MediaRow: View {
     }
 }
 
-extension MediaRow {
+public extension MediaRow {
     init(movie: Movie) {
         self.name = movie.title
         self.posterPath = movie.posterPath
@@ -84,7 +84,7 @@ extension MediaRow {
     }
 }
 
-extension MediaRow {
+public extension MediaRow {
     enum MediaType: String {
         case movie = "Movie"
         case tvSeries = "Series"
@@ -93,32 +93,7 @@ extension MediaRow {
 }
 
 
-#Preview {
-    MediaRow(movie: .preview)
+#Preview(traits: .sizeThatFitsLayout) {
+    MediaRow(name: "Some Movie", releaseDate: .now, posterPath: nil, type: .movie)
 }
 
-struct PosterImage: View {
-    let url: URL
-    let height: CGFloat
-    let roundedCorner:  Bool
-    
-    init(url: URL, height: CGFloat = 150, roundedCorner: Bool = true) {
-        self.url = url
-        self.height = height
-        self.roundedCorner = roundedCorner
-    }
-    
-    var body: some View {
-        WebImage(url: url)
-            .placeholder(content: {
-                ProgressView()
-            })
-            .resizable()
-            .scaledToFit()
-            .aspectRatio(contentMode: .fit)
-            .frame(height: height)
-            .clipShape(
-                RoundedRectangle(cornerRadius: roundedCorner ? 10 : 0)
-            )
-    }
-}

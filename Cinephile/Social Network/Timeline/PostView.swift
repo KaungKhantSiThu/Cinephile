@@ -6,20 +6,20 @@
 //
 
 import SwiftUI
-import SDWebImageSwiftUI
+import NukeUI
 
 struct PostView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
             HStack(alignment: .top) {
-                WebImage(url: URL(string: "https://picsum.photos/seed/picsum/200"))
-                    .resizable() // Resizable like SwiftUI.Image
-                    .aspectRatio(contentMode: .fit)
-                    .frame(height: 50)
-                    .clipShape(
-                        Circle()
-                    )
+//                WebImage(url: URL(string: "https://picsum.photos/seed/picsum/200"))
+//                    .resizable() // Resizable like SwiftUI.Image
+//                    .aspectRatio(contentMode: .fit)
+//                    .frame(height: 50)
+//                    .clipShape(
+//                        Circle()
+//                    )
                 
                 VStack(alignment: .leading) {
                     Text("Mg Kaung")
@@ -38,11 +38,11 @@ struct PostView: View {
             Text("Top Gun: Maverick is a thrilling sequel that surpasses the original. Tom Cruise delivers a stellar performance as the fearless and rebellious pilot who faces his demons and mentors a new generation of aviators. The action scenes are breathtaking and realistic, showcasing the best of modern fighter jets.")
                 .font(.body)
             
-            MovieRow(movie: PreviewData.mockMovie)
-                .background(.thickMaterial)
-                .clipShape(
-                    RoundedRectangle(cornerRadius: 15)
-                )
+//            MovieRow(movie: PreviewData.mockMovie)
+//                .background(.thickMaterial)
+//                .clipShape(
+//                    RoundedRectangle(cornerRadius: 15)
+//                )
             
             HStack(spacing: 60) {
                 

@@ -8,13 +8,13 @@
 import Foundation
 import TMDb
 
-struct ImageLoader {
+public struct ImageLoader {
     
     enum ImageLoaderError: Error {
         case urlNil
     }
 
-    static func generate(from url: URL?, width: Int) async throws -> URL {
+    public static func generate(from url: URL?, width: Int) async throws -> URL {
         if let url = url {
             let configurationService = ConfigurationService()
             let apiConfiguration = try await configurationService.apiConfiguration()

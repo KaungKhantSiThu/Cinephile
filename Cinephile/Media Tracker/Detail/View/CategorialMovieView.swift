@@ -7,6 +7,7 @@
 
 import SwiftUI
 import TMDb
+import TrackerUI
 
 struct CategorialMovieView: View {
     let columns:[GridItem] = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
@@ -29,8 +30,8 @@ struct CategorialMovieView: View {
     }
 }
 
-#Preview {
-    NavigationStack {
-        CategorialMovieView(movies: .preview)
-    }
-}
+//#Preview {
+//    NavigationStack {
+//        CategorialMovieView(movies: .preview)
+//    }
+//}

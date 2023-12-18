@@ -8,10 +8,16 @@
 import SwiftUI
 
 @MainActor
-struct Rating: View {
+public struct Rating: View {
     let voteCount: Int
     let voteAverage: Double
-    var body: some View {
+    
+    public init(voteCount: Int, voteAverage: Double) {
+        self.voteCount = voteCount
+        self.voteAverage = voteAverage
+    }
+    
+    public var body: some View {
         VStack {
             HStack {
                 Text(voteCount, format: .number)
@@ -22,7 +28,7 @@ struct Rating: View {
             .foregroundStyle(.secondary)
             
             HStack {
-                Image("tmdb_logo")
+                Image("tmdb_logo", bundle: .module)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 50)
@@ -38,6 +44,6 @@ struct Rating: View {
     }
 }
 
-#Preview {
+#Preview(traits: .sizeThatFitsLayout) {
     Rating(voteCount: 1234, voteAverage: 7.9)
 }

@@ -17,6 +17,7 @@ let package = Package(
     ],
     dependencies: [
       .package(url: "https://github.com/scinfu/SwiftSoup.git", from: "2.6.1"),
+      .package(url: "https://github.com/evgenyneu/keychain-swift.git", from: "20.0.0"),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -25,6 +26,7 @@ let package = Package(
             name: "Models",
             dependencies: [
               "SwiftSoup",
+              .product(name: "KeychainSwift", package: "keychain-swift")
             ]
         ),
         .testTarget(

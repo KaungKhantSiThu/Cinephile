@@ -49,9 +49,7 @@ public struct AppAccountView: View {
 
     private var fullView: some View {
       Button {
-        if appAccountsManager.currentAccount.id == viewModel.appAccount.id,
-           let account = viewModel.account
-        {
+        if appAccountsManager.currentAccount.id == viewModel.appAccount.id, let account = viewModel.account {
           routerPath.navigate(to: .accountSettingsWithAccount(account: account, appAccount: viewModel.appAccount))
         } else {
           var transation = Transaction()

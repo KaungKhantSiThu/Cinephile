@@ -3,12 +3,16 @@ import SwiftUI
 import TMDb
 
 @MainActor
-struct EpisodeListView: View {
+public struct EpisodeListView: View {
     @State private var episodes: [TVEpisode] = []
     let id: TVSeries.ID
     let inSeason: Int
     
-    var body: some View {
+    public init(id: TVSeries.ID, inSeason: Int) {
+        self.id = id
+        self.inSeason = inSeason
+    }
+    public var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
                 ForEach(episodes) { episode in
@@ -36,13 +40,13 @@ struct EpisodeListView: View {
 
 
 @MainActor
-struct EpisodeView: View {
+public struct EpisodeView: View {
     let number: Int
     let name: String
     let airDate: Date?
     let stillPath: URL?
     @State private var stillImage = URL(string: "https://picsum.photos/200/300")!
-    var body: some View {
+    public var body: some View {
         HStack(spacing: 20) {
             Text(number, format: .number)
                 .font(.title)
@@ -85,7 +89,7 @@ struct EpisodeView: View {
         }
     }
     
-    init(episode: TVEpisode) {
+    public init(episode: TVEpisode) {
         self.number = episode.episodeNumber
         self.name = episode.name
         self.airDate = episode.airDate

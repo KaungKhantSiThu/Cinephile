@@ -9,9 +9,13 @@ import SwiftUI
 import TMDb
 
 @MainActor
-struct VideosRowView: View {
+public struct VideosRowView: View {
     let videos: [VideoMetadata]
-    var body: some View {
+    
+    public init(videos: [VideoMetadata]) {
+        self.videos = videos
+    }
+    public var body: some View {
         VStack(alignment: .leading) {
             Text("Videos")
                 .font(.title)
@@ -31,6 +35,6 @@ struct VideosRowView: View {
     }
 }
 
-#Preview {
-    VideosRowView(videos: .preview)
-}
+//#Preview {
+//    VideosRowView(videos: .preview)
+//}

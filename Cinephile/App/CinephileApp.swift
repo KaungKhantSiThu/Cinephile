@@ -63,7 +63,7 @@ struct CinephileApp: App {
     func setNewClientsInEnv(client: Client) {
       currentAccount.setClient(client: client)
       currentInstance.setClient(client: client)
-//      userPreferences.setClient(client: client)
+      userPreferences.setClient(client: client)
       Task {
         await currentInstance.fetchCurrentInstance()
 //        watcher.setClient(client: client, instanceStreamingURL: currentInstance.instance?.urls?.streamingApi)

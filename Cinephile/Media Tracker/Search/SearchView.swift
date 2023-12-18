@@ -8,6 +8,7 @@
 import SwiftUI
 import TMDb
 import Environment
+import TrackerUI
 
 @MainActor
 struct SearchView: View {
@@ -110,9 +111,9 @@ struct SearchView: View {
 }
     
 
-#Preview {
-    NavigationStack {
-        SearchView()
-            .withAppRouter()
-    }
-}
+//#Preview {
+//    NavigationStack {
+//        SearchView()
+//            .withAppRouter()
+//    }
+//}

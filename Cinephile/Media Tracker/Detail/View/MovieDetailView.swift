@@ -1,5 +1,6 @@
 import SwiftUI
 import TMDb
+import TrackerUI
 
 @MainActor
 struct MovieDetailView: View {
@@ -53,8 +54,8 @@ struct MovieDetailView: View {
     }
 }
 
-//#Preview {
-//    NavigationStack {
-//        MovieDetailView(id: Movie.preview.id)
-//    }
-//}
+#Preview {
+    NavigationStack {
+        MovieDetailView(id: Movie.preview.id)
+    }
+}

@@ -7,32 +7,54 @@
     "@mgkaung" : {
 
     },
-    "0" : {
-
-    },
     "3" : {
 
     },
     "5" : {
 
     },
-    "10" : {
-
-    },
     "12" : {
 
     },
     "account.action.edit-filters" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit Filters"
+          }
+        }
+      }
     },
     "account.action.edit-info" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Info"
+          }
+        }
+      }
     },
     "account.action.logout" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Log out"
+          }
+        }
+      }
     },
     "account.action.more" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "More"
+          }
+        }
+      }
     },
     "Accounts" : {
 
@@ -56,9 +78,6 @@
 
     },
     "Confirm Password" : {
-
-    },
-    "Days" : {
 
     },
     "Done" : {
@@ -103,12 +122,6 @@
     "Popular TV Series" : {
 
     },
-    "Rating" : {
-
-    },
-    "RATINGS" : {
-
-    },
     "Remove" : {
 
     },
@@ -118,7 +131,7 @@
     "Search Movies, Series, Cast" : {
 
     },
-    "Season %lld" : {
+    "settings.account.add" : {
 
     },
     "Sing Up" : {
@@ -137,9 +150,6 @@
 
     },
     "USERNAME" : {
-
-    },
-    "Videos" : {
 
     },
     "View for Watchlist" : {

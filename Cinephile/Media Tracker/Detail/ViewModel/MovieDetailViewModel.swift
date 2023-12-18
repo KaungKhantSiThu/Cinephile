@@ -7,6 +7,7 @@
 
 import SwiftUI
 import TMDb
+import TrackerUI
 
 
 @Observable class MovieDetailViewModel: LoadableObject {

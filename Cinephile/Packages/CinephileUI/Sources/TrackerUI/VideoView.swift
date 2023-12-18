@@ -11,10 +11,10 @@ import AVKit
 import TMDb
 
 @MainActor
-struct VideoView: View {
+public struct VideoView: View {
     let metaData: VideoMetadata
 
-    var body: some View {
+    public var body: some View {
         
         VStack(alignment: .leading) {
             YouTubeView(videoId: metaData.key)
@@ -28,13 +28,14 @@ struct VideoView: View {
     }
 }
 
-struct YouTubeView: UIViewRepresentable {
+public struct YouTubeView: UIViewRepresentable {
     let videoId: String
     
-    func makeUIView(context: Context) ->  WKWebView {
+    public func makeUIView(context: Context) ->  WKWebView {
         return WKWebView()
     }
-    func updateUIView(_ uiView: WKWebView, context: Context) {
+    
+    public func updateUIView(_ uiView: WKWebView, context: Context) {
         guard let demoURL = URL(string: "https://www.youtube.com/embed/\(videoId)") else { return }
         uiView.scrollView.isScrollEnabled = false
         uiView.load(URLRequest(url: demoURL))
@@ -42,6 +43,6 @@ struct YouTubeView: UIViewRepresentable {
 }
 
 
-#Preview {
-    VideoView(metaData: .preview)
-}
+//#Preview {
+//    VideoView(metaData: .preview)
+//}

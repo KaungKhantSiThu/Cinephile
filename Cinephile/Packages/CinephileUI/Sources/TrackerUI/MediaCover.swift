@@ -7,14 +7,13 @@
 
 import SwiftUI
 import TMDb
-import SDWebImageSwiftUI
 
-struct MediaCover: View {
+public struct MediaCover: View {
     let title: String
     let releaseDate: Date?
     let posterPath: URL?
     @State private var posterImage = URL(string: "https://picsum.photos/200/300")!
-    var body: some View {
+    public var body: some View {
         VStack(alignment: .leading) {
             PosterImage(url: posterImage)
 
@@ -55,7 +54,7 @@ struct MediaCover: View {
     }
 }
 
-extension MediaCover {
+public extension MediaCover {
     init(movie: Movie) {
         self.title = movie.title
         self.posterPath = movie.posterPath
@@ -69,9 +68,13 @@ extension MediaCover {
     }
 }
 
-struct MovieCoverView_Previews: PreviewProvider {
-    static var previews: some View {
-        MediaCover(movie: .preview)
-            .previewLayout(.sizeThatFits)
-    }
+//struct MovieCoverView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MediaCover(movie: .preview)
+//            .previewLayout(.sizeThatFits)
+//    }
+//}
+
+#Preview(traits: .sizeThatFitsLayout) {
+    MediaCover(title: "Some Name", releaseDate: .now, posterPath: nil)
 }

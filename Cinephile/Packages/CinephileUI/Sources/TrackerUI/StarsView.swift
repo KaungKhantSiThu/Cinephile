@@ -7,11 +7,12 @@
 
 import SwiftUI
 
-struct StarsView: View {
+@MainActor
+public struct StarsView: View {
     var rating: CGFloat
     var maxRating: Int
 
-    var body: some View {
+    public var body: some View {
         let stars = HStack(spacing: 0) {
             ForEach(0..<maxRating, id: \.self) { _ in
                 Image(systemName: "star.fill")
@@ -35,6 +36,6 @@ struct StarsView: View {
     }
 }
 
-#Preview {
+#Preview(traits: .sizeThatFitsLayout) {
     StarsView(rating: 3.6, maxRating: 5)
 }

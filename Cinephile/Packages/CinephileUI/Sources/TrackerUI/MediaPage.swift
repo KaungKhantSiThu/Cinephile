@@ -7,13 +7,12 @@
 
 import SwiftUI
 import TMDb
-import SDWebImageSwiftUI
 
-struct MediaPage: View {
+public struct MediaPage: View {
     let title: String
     let image: URL?
     @State private var posterImage = URL(string: "https://picsum.photos/200/300")!
-    var body: some View {
+    public var body: some View {
         PosterImage(url: posterImage, height: 390)
             .overlay(alignment: .bottom) {
                 HStack {
@@ -36,7 +35,7 @@ struct MediaPage: View {
     }
 }
 
-extension MediaPage {
+public extension MediaPage {
     init(movie: Movie) {
         self.title = movie.title
         self.image = movie.posterPath
@@ -46,5 +45,5 @@ extension MediaPage {
 
 
 #Preview(traits: .sizeThatFitsLayout) {
-    MediaPage(movie: .preview)
+    MediaPage(title: "Some Title", image: nil)
 }

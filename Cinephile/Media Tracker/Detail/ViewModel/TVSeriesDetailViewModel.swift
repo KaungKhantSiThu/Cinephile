@@ -7,6 +7,7 @@
 
 import SwiftUI
 import TMDb
+import TrackerUI
 
 @Observable class TVSeriesDetailViewModel: ObservableObject, LoadableObject {
     private(set) var state: LoadingState<TVSeriesDetail> = .idle

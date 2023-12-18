@@ -7,7 +7,6 @@
 
 import SwiftUI
 import NukeUI
-import Models
 
 public struct AvatarView: View {
     
@@ -53,15 +52,20 @@ struct AvatarImage: View {
             ) { state in
               if let image = state.image {
                 image
-                  .resizable()
-                  .scaledToFit()
-                  .clipShape(Circle())
-                  .overlay(
-                    Circle()
-                      .stroke(.primary.opacity(0.25), lineWidth: 1)
-                  )
+                      .resizable()
+                      .scaledToFit()
+              } else if state.error != nil {
+                  Image("avatar_placeholder", bundle: .module)
+                      .resizable()
+                      .scaledToFit()
               }
             }
+            
+            .clipShape(Circle())
+            .overlay(
+              Circle()
+                .stroke(.primary.opacity(0.25), lineWidth: 1)
+            )
         }
     }
 }
@@ -101,45 +105,6 @@ extension AvatarView {
     }
 }
 
-//struct PreviewWrapper: View {
-//  @State private var isCircleAvatar = false
-//
-//  var body: some View {
-//    VStack(alignment: .leading) {
-//        AvatarView(Account.placeholder().avatar)
-////        .environment(Theme.shared)
-//      Toggle("Avatar Shape", isOn: $isCircleAvatar)
-//    }
-////    .onChange(of: isCircleAvatar) {
-////      Theme.shared.avatarShape = self.isCircleAvatar ? .circle : .rounded
-////    }
-////    .onAppear {
-////      Theme.shared.avatarShape = self.isCircleAvatar ? .circle : .rounded
-////    }
-//  }
-//
-//  private static let account = Account(
-//    id: UUID().uuidString,
-//    username: "@clattner_llvm",
-//    displayName: "Chris Lattner",
-//    avatar: URL(string: "https://pbs.twimg.com/profile_images/1484209565788897285/1n6Viahb_400x400.jpg")!,
-//    header: URL(string: "https://pbs.twimg.com/profile_banners/2543588034/1656822255/1500x500")!,
-//    acct: "clattner_llvm@example.com",
-//    note: .init(stringValue: "Building beautiful things @Modular_AI 🔥, lifting the world of production AI/ML software into a new phase of innovation.  We’re hiring! 🚀🧠"),
-//    createdAt: ServerDate(),
-//    followersCount: 77100,
-//    followingCount: 167,
-//    statusesCount: 123,
-//    lastStatusAt: nil,
-//    fields: [],
-//    locked: false,
-//    emojis: [],
-//    url: URL(string: "https://nondot.org/sabre/")!,
-//    source: nil,
-//    bot: false,
-//    discoverable: true)
-//}
-
 #Preview(traits: .sizeThatFitsLayout) {
-    AvatarView(Account.placeholder().avatar)
+    AvatarView(URL(string: "https://picsum.photos/200/300"), config: .account)
 }

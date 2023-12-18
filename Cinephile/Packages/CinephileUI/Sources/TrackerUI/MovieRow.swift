@@ -7,19 +7,19 @@
 
 import SwiftUI
 import TMDb
-import SDWebImageSwiftUI
 
 
-struct MovieRow: View {
+public struct MovieRow: View {
     let movie: Movie
-    var body: some View {
+    public var body: some View {
         HStack {
-            WebImage(url: URL(string: formatPosterPath(path: movie.posterPath!.absoluteString)))
-                .placeholder(Image(systemName: "photo"))
-                .resizable() // Resizable like SwiftUI.Image
-                 // Placeholder Image
-                .aspectRatio(contentMode: .fit)
-                .frame(height: 90)
+            
+//            WebImage(url: URL(string: formatPosterPath(path: movie.posterPath!.absoluteString)))
+//                .placeholder(Image(systemName: "photo"))
+//                .resizable() // Resizable like SwiftUI.Image
+//                 // Placeholder Image
+//                .aspectRatio(contentMode: .fit)
+//                .frame(height: 90)
                 
             VStack(alignment: .leading) {
                 Text(movie.title)
@@ -70,17 +70,17 @@ struct MovieRow: View {
     }
 }
 
-struct MovieRow_Previews: PreviewProvider {
-    static var previews: some View {
-        MovieRow(movie: PreviewData.mockMovie)
-            .previewLayout(.sizeThatFits)
+//struct MovieRow_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MovieRow(movie: PreviewData.mockMovie)
+//            .previewLayout(.sizeThatFits)
+//
+//    }
+//}
 
-    }
-}
-
-struct CountDownView: View {
+public struct CountDownView: View {
     let releasedDate: Date
-    var body: some View {
+    public var body: some View {
         VStack {
             Text(remainingDays(from: releasedDate))
                 .font(.title)

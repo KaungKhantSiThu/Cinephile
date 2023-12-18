@@ -26,23 +26,7 @@ struct AccountDetailHeaderView: View {
     
     var body: some View {
         VStack {
-//            LazyImage(url: account.avatar) { state in
-//                if let image = state.image {
-//                    image
-//                        .resizable()
-//                        .aspectRatio(contentMode: .fit)
-//                        .frame(height: 100)
-//                        .clipShape(
-//                            Circle()
-//                        )
-//                } else if state.isLoading {
-//                    ProgressView()
-//                        .frame(height: 100)
-//                }
-//
-//            }
             accountAvatarView
-            
             VStack(alignment: .leading) {
                 Text(account.safeDisplayName)
                     .font(.title)
@@ -51,34 +35,10 @@ struct AccountDetailHeaderView: View {
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
             }
-            
-            HStack(spacing: 20) {
-                VStack {
-                    Text("\(account.statusesCount ?? 999)")
-                        .font(.title2)
-                        .fontWeight(.bold)
-                    Text("Posts")
-                        .font(.caption)
-                }
-                
-                VStack {
-                    Text("\(account.followingCount ?? 999)")
-                        .font(.title2)
-                        .fontWeight(.bold)
-                    Text("Following")
-                        .font(.caption)
-                }
-                
-                VStack {
-                    Text("\(account.followersCount ?? 999)")
-                        .font(.title2)
-                        .fontWeight(.bold)
-                    Text("Followers")
-                        .font(.caption)
-                }
-            }
-            .padding(.top, 20)
+                .padding(.top, 20)
+            accountInfoView
         }
+        .border(.red)
         
     }
     
@@ -86,11 +46,11 @@ struct AccountDetailHeaderView: View {
         ZStack(alignment: .topTrailing) {
             AvatarView(account.avatar, config: .account)
             //          if viewModel.isCurrentUser, isSupporter {
-            if viewModel.isCurrentUser {
-                Image(systemName: "checkmark.seal.fill")
-                    .resizable()
-                    .frame(width: 25, height: 25)
-            }
+//            if viewModel.isCurrentUser {
+//                Image(systemName: "checkmark.seal.fill")
+//                    .resizable()
+//                    .frame(width: 25, height: 25)
+//            }
         }
         .onTapGesture {
             guard account.haveAvatar else {
@@ -105,11 +65,45 @@ struct AccountDetailHeaderView: View {
             //  #endif
         }
     }
+    
+    private var accountInfoView: some View {
+        HStack(spacing: 20) {
+            VStack {
+                Text("\(account.statusesCount ?? 999)")
+                    .font(.title2)
+                    .fontWeight(.bold)
+                Text("Posts")
+                    .font(.caption)
+            }
+
+            VStack {
+                Text("\(account.followingCount ?? 999)")
+                    .font(.title2)
+                    .fontWeight(.bold)
+                Text("Following")
+                    .font(.caption)
+            }
+
+            VStack {
+                Text("\(account.followersCount ?? 999)")
+                    .font(.title2)
+                    .fontWeight(.bold)
+                Text("Followers")
+                    .font(.caption)
+            }
+        }
+    }
 }
 
 #Preview {
-    AccountDetailHeaderView(
-        viewModel: .init(account: .placeholder()),
-        account: .placeholder(),
-        scrollViewProxy: nil)
+    List {
+        AccountDetailHeaderView(
+            viewModel: .init(account: .placeholder()),
+            account: .placeholder(),
+            scrollViewProxy: nil)
+        .environment(RouterPath())
+        .environment(CurrentAccount.shared)
+    }
+    .listStyle(.plain)
+    
 }

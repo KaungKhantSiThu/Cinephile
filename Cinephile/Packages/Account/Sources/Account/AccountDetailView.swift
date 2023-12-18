@@ -24,6 +24,8 @@ public struct AccountDetailView: View {
     @State private var viewModel: AccountDetailViewModel
     @State private var isCurrentUser: Bool = false
     
+    @State private var isEditingAccount: Bool = false
+    
     @Binding var scrollToTopSignal: Int
     
     
@@ -43,10 +45,11 @@ public struct AccountDetailView: View {
     
     public var body: some View {
         ScrollViewReader { proxy in
-            List {
+            ScrollView {
                 headerView(proxy: proxy)
+                    
             }
-            .listStyle(.plain)
+//            .listStyle(.plain)
             //            .onChange(of: scrollToTopSignal) {
             //              withAnimation {
             //                proxy.scrollTo(ScrollToView.Constants.scrollToTop, anchor: .top)
@@ -55,10 +58,9 @@ public struct AccountDetailView: View {
         }
         .onAppear {
             guard reasons != .placeholder else { return }
-            isCurrentUser = currentAccount.account?.id == viewModel.id
-            viewModel.isCurrentUser = isCurrentUser
-            viewModel.client = client
-            
+            self.isCurrentUser = currentAccount.account?.id == viewModel.id
+            self.viewModel.isCurrentUser = isCurrentUser
+            self.viewModel.client = client
             // Avoid capturing non-Sendable `self` just to access the view model.
             let viewModel = viewModel
             Task {
@@ -75,6 +77,21 @@ public struct AccountDetailView: View {
                 }
             }
         }
+        .refreshable {
+            await viewModel.fetchAccount()
+//            await viewModel.fetchNewestStatuses()
+        }
+        .onChange(of: isEditingAccount) { _, newValue in
+          if !newValue {
+            Task {
+              await viewModel.fetchAccount()
+              await preferences.refreshServerPreferences()
+            }
+          }
+        }
+        .sheet(isPresented: $isEditingAccount, content: {
+          EditAccountView()
+        })
         .toolbar {
             toolbarContent
         }
@@ -111,11 +128,17 @@ public struct AccountDetailView: View {
             }
             
         }
+        
+        ToolbarItemGroup(placement: .topBarTrailing) {
+            if isCurrentUser {
+                Button {
+                  isEditingAccount = true
+                } label: {
+                  Label("Edit Account Info", systemImage: "pencil")
+                }
+            }
+        }
+        
     }
     
 }
-
-
-//#Preview {
-//    AccountDetailView()
-//}

@@ -12,11 +12,15 @@ let package = Package(
         .library(
             name: "CinephileUI",
             targets: ["CinephileUI"]),
+        .library(
+            name: "TrackerUI",
+            targets: ["TrackerUI"])
     ],
     dependencies: [
         .package(name: "Models", path: "../Models"),
         .package(name: "Environment", path: "../Environment"),
         .package(url: "https://github.com/kean/Nuke", from: "12.0.0"),
+        .package(url: "https://github.com/adamayoung/TMDb.git", from: "10.0.0")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -24,10 +28,16 @@ let package = Package(
         .target(
             name: "CinephileUI",
             dependencies: [
-              .product(name: "Models", package: "Models"),
-              .product(name: "Environment", package: "Environment"),
-              .product(name: "NukeUI", package: "Nuke"),
-              .product(name: "Nuke", package: "Nuke"),
+              "Models",
+              "Environment",
+              .product(name: "NukeUI", package: "Nuke")
+            ]
+        ),
+        .target(
+            name: "TrackerUI",
+            dependencies: [
+                "TMDb",
+                .product(name: "NukeUI", package: "Nuke")
             ]
         ),
         .testTarget(

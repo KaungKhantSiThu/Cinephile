@@ -1,0 +1,142 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "@%@" : {
+
+    },
+    "%lld" : {
+
+    },
+    "account.edit.about" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "About"
+          }
+        }
+      }
+    },
+    "account.edit.account-settings.discoverable" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Discoverable"
+          }
+        }
+      }
+    },
+    "account.edit.account-settings.private" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Private"
+          }
+        }
+      }
+    },
+    "account.edit.account-settings.section-title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Account Settings"
+          }
+        }
+      }
+    },
+    "account.edit.add-metadata-button" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add a new metadata"
+          }
+        }
+      }
+    },
+    "account.edit.display-name" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Display Name"
+          }
+        }
+      }
+    },
+    "account.edit.error.save.message" : {
+
+    },
+    "account.edit.error.save.title" : {
+
+    },
+    "account.edit.metadata-name-placeholder" : {
+
+    },
+    "account.edit.metadata-section-title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profile Metadata"
+          }
+        }
+      }
+    },
+    "account.edit.metadata-value-placeholder" : {
+
+    },
+    "account.edit.navigation-title" : {
+
+    },
+    "action.cancel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        }
+      }
+    },
+    "action.save" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save"
+          }
+        }
+      }
+    },
+    "alert.button.ok" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        }
+      }
+    },
+    "Edit Account Info" : {
+
+    },
+    "Followers" : {
+
+    },
+    "Following" : {
+
+    },
+    "Posts" : {
+
+    },
+    "Settings" : {
+
+    }
+  },
+  "version" : "1.0"
+}

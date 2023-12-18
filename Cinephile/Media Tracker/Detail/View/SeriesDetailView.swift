@@ -1,5 +1,6 @@
 import SwiftUI
 import TMDb
+import TrackerUI
 
 enum SeriesPage: String, Equatable, CaseIterable {
     case detail = "Details"

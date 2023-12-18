@@ -14,7 +14,7 @@ import AppAccount
 
 @MainActor
 struct ProfileTab: View {
-    @Environment(AppAccountsManager.self) private var appAccountsManager
+//    @Environment(AppAccountsManager.self) private var appAccountsManager
     @Environment(Client.self) private var client
     @Environment(CurrentAccount.self) private var currentAccount
     

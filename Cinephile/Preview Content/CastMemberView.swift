@@ -1,6 +1,7 @@
 import Foundation
 import SwiftUI
 import TMDb
+import TrackerUI
 
 @MainActor
 struct CastMemberView: View {
@@ -14,7 +15,7 @@ struct CastMemberView: View {
             ScrollView(.horizontal) {
                 HStack {
                     ForEach(castMembers) { cast in
-                        CastView(cast: cast)
+                        CastView(castMember: cast)
                     }
                 }
             }
