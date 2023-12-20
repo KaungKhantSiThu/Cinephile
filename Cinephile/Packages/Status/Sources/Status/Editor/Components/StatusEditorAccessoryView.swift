@@ -1,4 +1,4 @@
-
+import CinephileUI
 import Environment
 //import GiphyUISDK
 import Models
@@ -190,9 +190,6 @@ struct StatusEditorAccessoryView: View {
               }
             }
 
-            if preferences.isOpenAIEnabled {
-              AIMenu.disabled(!viewModel.canPost)
-            }
           }
           .padding(.horizontal, .layoutPadding)
         }
@@ -239,37 +236,6 @@ struct StatusEditorAccessoryView: View {
       Text("\(nativeName) (\(name))")
     } else {
       Text(isoCode.uppercased())
-    }
-  }
-
-  private var AIMenu: some View {
-    Menu {
-      ForEach(StatusEditorAIPrompt.allCases, id: \.self) { prompt in
-        Button {
-          Task {
-            isLoadingAIRequest = true
-            await focusedSEVM.runOpenAI(prompt: prompt.toRequestPrompt(text: focusedSEVM.statusText.string))
-            isLoadingAIRequest = false
-          }
-        } label: {
-          prompt.label
-        }
-      }
-      if let backup = focusedSEVM.backupStatusText {
-        Button {
-          focusedSEVM.replaceTextWith(text: backup.string)
-          focusedSEVM.backupStatusText = nil
-        } label: {
-          Label("status.editor.restore-previous", systemImage: "arrow.uturn.right")
-        }
-      }
-    } label: {
-      if isLoadingAIRequest {
-        ProgressView()
-      } else {
-        Image(systemName: "faxmachine")
-          .accessibilityLabel("accessibility.editor.button.ai-prompt")
-      }
     }
   }
 
@@ -347,7 +313,7 @@ struct StatusEditorAccessoryView: View {
                       .fill(Color.gray)
                       .frame(width: 40, height: 40)
                       .accessibility(hidden: true)
-                      .shimmering()
+//                      .shimmering()
                   }
                 }
                 .onTapGesture {

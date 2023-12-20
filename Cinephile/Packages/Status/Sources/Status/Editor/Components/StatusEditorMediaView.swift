@@ -4,6 +4,7 @@ import Environment
 import Models
 import NukeUI
 import SwiftUI
+import CinephileUI
 
 @MainActor
 struct StatusEditorMediaView: View {

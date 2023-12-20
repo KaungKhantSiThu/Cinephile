@@ -1,7 +1,8 @@
-
+import CinephileUI
 import Environment
 import Models
 import SwiftUI
+import Networking
 
 struct StatusRowContentView: View {
   @Environment(\.redactionReasons) private var reasons
@@ -20,7 +21,7 @@ struct StatusRowContentView: View {
 
     if !viewModel.displaySpoiler {
       StatusRowTextView(viewModel: viewModel)
-      StatusRowTranslateView(viewModel: viewModel)
+//      StatusRowTranslateView(viewModel: viewModel)
       if let poll = viewModel.finalStatus.poll {
         StatusPollView(poll: poll, status: viewModel.finalStatus)
       }
@@ -29,12 +30,12 @@ struct StatusRowContentView: View {
          !isCompact,
          viewModel.isEmbedLoading || viewModel.embeddedStatus != nil
       {
-        StatusEmbeddedView(status: viewModel.embeddedStatus ?? Status.placeholder(),
+        StatusEmbeddedView(status: viewModel.embeddedStatus ?? Status.preview,
                            client: viewModel.client,
                            routerPath: viewModel.routerPath)
           .fixedSize(horizontal: false, vertical: true)
           .redacted(reason: viewModel.isEmbedLoading ? .placeholder : [])
-          .shimmering(active: viewModel.isEmbedLoading)
+//          .shimmering(active: viewModel.isEmbedLoading)
           .transition(.opacity)
       }
 
@@ -61,4 +62,15 @@ struct StatusRowContentView: View {
       }
     }
   }
+}
+
+#Preview {
+    StatusRowContentView(
+        viewModel: .init(
+            status: .preview,
+            client: Client(server: ""),
+            routerPath: RouterPath())
+    )
+    .environment(Theme.shared)
+    .environment(\.isStatusFocused, true)
 }

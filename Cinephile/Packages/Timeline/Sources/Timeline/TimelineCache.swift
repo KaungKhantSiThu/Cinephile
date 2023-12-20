@@ -1,6 +1,6 @@
 import Bodega
 import Models
-import Network
+import Networking
 import SwiftUI
 
 public actor TimelineCache {

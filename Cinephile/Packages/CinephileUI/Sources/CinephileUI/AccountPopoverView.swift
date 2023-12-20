@@ -1,14 +1,13 @@
-import Env
+import Environment
 import Models
 import Nuke
 import NukeUI
-import Shimmer
 import SwiftUI
 
 struct AccountPopoverView: View {
   let account: Account
   let theme: Theme // using `@Environment(Theme.self) will crash the SwiftUI preview
-  private let config: AvatarView.FrameConfig = .account
+  private let config: AvatarView.FrameConfiguration = .account
 
   @Binding var showPopup: Bool
   @Binding var autoDismiss: Bool
@@ -28,7 +27,7 @@ struct AccountPopoverView: View {
 
       VStack(alignment: .leading) {
         HStack(alignment: .bottomAvatar) {
-          AvatarImage(account.avatar, config: adaptiveConfig)
+            AvatarImage(avatar: account.avatar, config: adaptiveConfig)
           Spacer()
           makeCustomInfoLabel(title: "account.following", count: account.followingCount ?? 0)
           makeCustomInfoLabel(title: "account.posts", count: account.statusesCount ?? 0)
@@ -121,13 +120,13 @@ struct AccountPopoverView: View {
     .accessibilityValue("\(count)")
   }
 
-  private var adaptiveConfig: AvatarView.FrameConfig {
-    var cornerRadius: CGFloat = if config == .badge || theme.avatarShape == .circle {
+  private var adaptiveConfig: AvatarView.FrameConfiguration {
+      let cornerRadius: CGFloat = if config == .badge || theme.avatarShape == .circle {
       config.width / 2
     } else {
       config.cornerRadius
     }
-    return AvatarView.FrameConfig(width: config.width, height: config.height, cornerRadius: cornerRadius)
+    return AvatarView.FrameConfiguration(width: config.width, height: config.height, cornerRadius: cornerRadius)
   }
 }
 

@@ -17,5 +17,6 @@ struct MediaUIImageTransferable: Codable, Transferable {
     ProxyRepresentation { media in
       await media.fetchAsImage()
     }
+
   }
 }

@@ -2,7 +2,7 @@
 import Models
 import Nuke
 import NukeUI
-//
+import CinephileUI
 import SwiftUI
 
 @MainActor

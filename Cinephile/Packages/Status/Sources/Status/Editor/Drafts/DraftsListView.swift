@@ -1,4 +1,4 @@
-
+import CinephileUI
 import Models
 import SwiftData
 import SwiftUI

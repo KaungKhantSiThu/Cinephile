@@ -1,4 +1,4 @@
-
+import CinephileUI
 import Environment
 import Models
 import Nuke
@@ -30,7 +30,7 @@ public struct StatusRowMediaPreviewView: View {
   }
 
   var appLayoutWidth: CGFloat {
-    let avatarColumnWidth = theme.avatarPosition == .leading ? AvatarView.FrameConfig.status.width + .statusColumnsSpacing : 0
+    let avatarColumnWidth = theme.avatarPosition == .leading ? AvatarView.FrameConfiguration.status.width + .statusColumnsSpacing : 0
     var sidebarWidth: CGFloat = 0
     var secondaryColumnWidth: CGFloat = 0
     let layoutPading: CGFloat = .layoutPadding * 2
@@ -67,9 +67,9 @@ public struct StatusRowMediaPreviewView: View {
           availableWidth: availableWidth,
           availableHeight: sceneDelegate.windowHeight
         )
-        .accessibilityElement(children: .ignore)
-        .accessibilityLabel(Self.accessibilityLabel(for: attachments[0]))
-        .accessibilityAddTraits([.isButton, .isImage])
+//        .accessibilityElement(children: .ignore)
+//        .accessibilityLabel(Self.accessibilityLabel(for: attachments[0]))
+//        .accessibilityAddTraits([.isButton, .isImage])
         .onTapGesture { tabAction(for: 0) }
       } else {
         ScrollView(.horizontal, showsIndicators: false) {

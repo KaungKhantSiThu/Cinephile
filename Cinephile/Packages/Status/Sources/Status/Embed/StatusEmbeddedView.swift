@@ -1,4 +1,4 @@
-
+import CinephileUI
 import EmojiText
 import Environment
 import Models
@@ -48,11 +48,11 @@ public struct StatusEmbeddedView: View {
     HStack(alignment: .center) {
       AvatarView(account.avatar, config: .embed)
       VStack(alignment: .leading, spacing: 0) {
-        EmojiTextApp(.init(stringValue: account.safeDisplayName), emojis: account.emojis)
-          .font(.scaledFootnote)
-          .emojiSize(Font.scaledFootnoteFont.emojiSize)
-          .emojiBaselineOffset(Font.scaledFootnoteFont.emojiBaselineOffset)
-          .fontWeight(.semibold)
+//        EmojiTextApp(.init(stringValue: account.safeDisplayName), emojis: account.emojis)
+//          .font(.scaledFootnote)
+//          .emojiSize(Font.scaledFootnoteFont.emojiSize)
+//          .emojiBaselineOffset(Font.scaledFootnoteFont.emojiBaselineOffset)
+//          .fontWeight(.semibold)
         Group {
           Text("@\(account.acct)") +
             Text(" ⸱ ") +

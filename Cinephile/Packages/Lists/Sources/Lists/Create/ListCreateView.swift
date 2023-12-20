@@ -1,8 +1,8 @@
-import DesignSystem
+import CinephileUI
 import EmojiText
-import Env
+import Environment
 import Models
-import Network
+import Networking
 import SwiftUI
 
 @MainActor

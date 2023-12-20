@@ -1,4 +1,4 @@
-
+import CinephileUI
 import Environment
 import Models
 import SwiftUI
@@ -19,7 +19,7 @@ struct StatusRowTextView: View {
                      lineLimit: viewModel.lineLimit)
           .font(isFocused ? .scaledBodyFocused : .scaledBody)
           .lineSpacing(CGFloat(theme.lineSpacing))
-          .foregroundColor(viewModel.textDisabled ? .gray : theme.labelColor)
+//          .foregroundColor(viewModel.textDisabled ? .gray : theme.labelColor)
           .emojiSize(isFocused ? Font.scaledBodyFocusedFont.emojiSize : Font.scaledBodyFont.emojiSize)
           .emojiBaselineOffset(isFocused ? Font.scaledBodyFocusedFont.emojiBaselineOffset : Font.scaledBodyFont.emojiBaselineOffset)
           .environment(\.openURL, OpenURLAction { url in
@@ -58,4 +58,9 @@ struct StatusRowTextView: View {
       }
     }
   }
+}
+
+#Preview(traits: .sizeThatFitsLayout) {
+    StatusRowTextView(viewModel: .init(status: .preview, client: .init(server: "mastodon.social"), routerPath: .init()))
+        .environment(Theme.shared)
 }

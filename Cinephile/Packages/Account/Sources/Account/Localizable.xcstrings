@@ -1,10 +1,28 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "" : {
+
+    },
     "@%@" : {
 
     },
     "%lld" : {
+
+    },
+    "accessibility.general.toggle.off" : {
+
+    },
+    "accessibility.general.toggle.on" : {
+
+    },
+    "accessibility.tabs.profile.user-notifications.label" : {
+
+    },
+    "accessibility.tabs.profile.user-reblogs.label" : {
+
+    },
+    "account.boosted-by" : {
 
     },
     "account.edit.about" : {
@@ -91,6 +109,40 @@
     },
     "account.edit.navigation-title" : {
 
+    },
+    "account.favorited-by" : {
+
+    },
+    "account.follow-requests.instructions" : {
+
+    },
+    "account.follow-requests.pending-requests" : {
+
+    },
+    "account.follow.follow" : {
+
+    },
+    "account.follow.following" : {
+
+    },
+    "account.follow.requested" : {
+
+    },
+    "account.followers" : {
+
+    },
+    "account.following" : {
+
+    },
+    "account.label.followers %lld %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "account.label.followers %1$lld %2$@"
+          }
+        }
+      }
     },
     "action.cancel" : {
       "localizations" : {

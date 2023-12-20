@@ -1,4 +1,4 @@
-import Env
+import Environment
 import Models
 import SwiftUI
 
@@ -25,7 +25,7 @@ public struct TagRowView: View {
     }
     .contentShape(Rectangle())
     .onTapGesture {
-      routerPath.navigate(to: .hashTag(tag: tag.name, account: nil))
+        routerPath.navigate(to: .hashTag(tag: tag.name, accountId: nil))
     }
   }
 }

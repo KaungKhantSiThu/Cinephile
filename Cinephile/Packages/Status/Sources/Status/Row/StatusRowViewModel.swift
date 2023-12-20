@@ -1,5 +1,5 @@
 import Combine
-
+import CinephileUI
 import Environment
 import Models
 import NaturalLanguage
@@ -28,7 +28,7 @@ import SwiftUI
   var isEmbedLoading: Bool = false
   var isFiltered: Bool = false
 
-  var translation: Translation?
+//  var translation: Translation?
   var isLoadingTranslation: Bool = false
   var showDeleteAlert: Bool = false
 
@@ -329,51 +329,24 @@ import SwiftUI
     withAnimation {
       isLoadingTranslation = true
     }
-    if !alwaysTranslateWithDeepl {
-      do {
-        // We first use instance translation API if available.
-        let translation: Translation = try await client.post(endpoint: Statuses.translate(id: finalStatus.id,
-                                                                                          lang: userLang))
-        withAnimation {
-          self.translation = translation
-          isLoadingTranslation = false
-        }
-
-        return
-      } catch {}
-    }
+//    if !alwaysTranslateWithDeepl {
+//      do {
+//        // We first use instance translation API if available.
+//        let translation: Translation = try await client.post(endpoint: Statuses.translate(id: finalStatus.id,
+//                                                                                          lang: userLang))
+//        withAnimation {
+//          self.translation = translation
+//          isLoadingTranslation = false
+//        }
+//
+//        return
+//      } catch {}
+//    }
 
     // If not or fail we use Ice Cubes own DeepL client.
-    await translateWithDeepL(userLang: userLang)
   }
 
-  func translateWithDeepL(userLang: String) async {
-    withAnimation {
-      isLoadingTranslation = true
-    }
 
-    let deepLClient = getDeepLClient()
-    let translation = try? await deepLClient.request(target: userLang,
-                                                     text: finalStatus.content.asRawText)
-    withAnimation {
-      self.translation = translation
-      isLoadingTranslation = false
-    }
-  }
-
-  private func getDeepLClient() -> DeepLClient {
-    let userAPIfree = UserPreferences.shared.userDeeplAPIFree
-
-    return DeepLClient(userAPIKey: userAPIKey, userAPIFree: userAPIfree)
-  }
-
-  private var userAPIKey: String? {
-    DeepLUserAPIHandler.readIfAllowed()
-  }
-
-  var alwaysTranslateWithDeepl: Bool {
-    DeepLUserAPIHandler.shouldAlwaysUseDeepl
-  }
 
   func fetchRemoteStatus() async -> Bool {
     guard isRemote, let remoteStatusURL = URL(string: finalStatus.url ?? "") else { return false }

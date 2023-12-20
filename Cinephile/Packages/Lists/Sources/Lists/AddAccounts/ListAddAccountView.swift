@@ -1,7 +1,7 @@
-import DesignSystem
-import Env
+import CinephileUI
+import Environment
 import Models
-import Network
+import Networking
 import SwiftUI
 
 @MainActor

@@ -2,7 +2,7 @@
 import Environment
 import Models
 import Networking
-
+import CinephileUI
 import SwiftUI
 
 @MainActor

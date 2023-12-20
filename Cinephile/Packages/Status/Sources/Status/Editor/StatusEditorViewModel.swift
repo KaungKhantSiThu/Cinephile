@@ -1,5 +1,5 @@
 import Combine
-
+import CinephileUI
 import Environment
 import Models
 import NaturalLanguage
@@ -204,7 +204,7 @@ import SwiftUI
       case let .edit(status):
         postStatus = try await client.put(endpoint: Statuses.editStatus(id: status.id, json: data))
       }
-      HapticManager.shared.fireHaptic(.notification(.success))
+//      HapticManager.shared.fireHaptic(.notification(.success))
       if hasExplicitlySelectedLanguage, let selectedLanguage {
         preferences?.markLanguageAsSelected(isoCode: selectedLanguage)
       }
@@ -216,7 +216,7 @@ import SwiftUI
         showPostingErrorAlert = true
       }
       isPosting = false
-      HapticManager.shared.fireHaptic(.notification(.error))
+//      HapticManager.shared.fireHaptic(.notification(.error))
       return nil
     }
   }
@@ -566,14 +566,14 @@ import SwiftUI
 
   // MARK: - OpenAI Prompt
 
-  func runOpenAI(prompt: OpenAIClient.Prompt) async {
-    do {
-      let client = OpenAIClient()
-      let response = try await client.request(prompt)
-      backupStatusText = statusText
-      replaceTextWith(text: response.trimmedText)
-    } catch {}
-  }
+//  func runOpenAI(prompt: OpenAIClient.Prompt) async {
+//    do {
+//      let client = OpenAIClient()
+//      let response = try await client.request(prompt)
+//      backupStatusText = statusText
+//      replaceTextWith(text: response.trimmedText)
+//    } catch {}
+//  }
 
   // MARK: - Media related function
 
@@ -602,7 +602,7 @@ import SwiftUI
   func makeMediaContainer(from pickerItem: PhotosPickerItem) async -> StatusEditorMediaContainer? {
     await withTaskGroup(of: StatusEditorMediaContainer?.self, returning: StatusEditorMediaContainer?.self) { taskGroup in
       taskGroup.addTask(priority: .high) { await Self.makeImageContainer(from: pickerItem) }
-      taskGroup.addTask(priority: .high) { await Self.makeGifContainer(from: pickerItem) }
+//      taskGroup.addTask(priority: .high) { await Self.makeGifContainer(from: pickerItem) }
       taskGroup.addTask(priority: .high) { await Self.makeMovieContainer(from: pickerItem) }
 
       for await container in taskGroup {
@@ -616,18 +616,18 @@ import SwiftUI
     }
   }
 
-  private static func makeGifContainer(from pickerItem: PhotosPickerItem) async -> StatusEditorMediaContainer? {
-    guard let gifFile = try? await pickerItem.loadTransferable(type: GifFileTranseferable.self) else { return nil }
-
-    return StatusEditorMediaContainer(
-      id: pickerItem.itemIdentifier ?? UUID().uuidString,
-      image: nil,
-      movieTransferable: nil,
-      gifTransferable: gifFile,
-      mediaAttachment: nil,
-      error: nil
-    )
-  }
+//  private static func makeGifContainer(from pickerItem: PhotosPickerItem) async -> StatusEditorMediaContainer? {
+//    guard let gifFile = try? await pickerItem.loadTransferable(type: GifFileTranseferable.self) else { return nil }
+//
+//    return StatusEditorMediaContainer(
+//      id: pickerItem.itemIdentifier ?? UUID().uuidString,
+//      image: nil,
+//      movieTransferable: nil,
+//      gifTransferable: gifFile,
+//      mediaAttachment: nil,
+//      error: nil
+//    )
+//  }
 
   private static func makeMovieContainer(from pickerItem: PhotosPickerItem) async -> StatusEditorMediaContainer? {
     guard let movieFile = try? await pickerItem.loadTransferable(type: MovieFileTranseferable.self) else { return nil }

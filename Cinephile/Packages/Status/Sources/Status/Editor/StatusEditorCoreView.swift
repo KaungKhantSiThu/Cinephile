@@ -1,6 +1,6 @@
 import Accounts
 import AppAccount
-
+import CinephileUI
 import Environment
 import Models
 import Networking
@@ -78,7 +78,7 @@ struct StatusEditorCoreView: View {
                                   accountCreationEnabled: false,
                                   avatarConfig: .status)
         } else {
-          AvatarView(account.avatar, config: AvatarView.FrameConfig.status)
+          AvatarView(account.avatar, config: AvatarView.FrameConfiguration.status)
             .environment(theme)
             .accessibilityHidden(true)
         }

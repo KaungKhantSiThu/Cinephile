@@ -1,7 +1,8 @@
-
+import CinephileUI
 import Environment
 import Models
 import SwiftUI
+import Networking
 
 @MainActor
 struct StatusRowHeaderView: View {
@@ -24,7 +25,7 @@ struct StatusRowHeaderView: View {
       Spacer()
       if !isInCaptureMode {
         threadIcon
-        contextMenuButton
+//        contextMenuButton
       }
     }
     .sheet(isPresented: $showTextForSelection) {
@@ -36,11 +37,11 @@ struct StatusRowHeaderView: View {
     .accessibilityAction {
       viewModel.navigateToAccountDetail(account: viewModel.finalStatus.account)
     }
-    .accessibilityActions {
-      if isFocused {
-        StatusRowContextMenu(viewModel: viewModel, showTextForSelection: $showTextForSelection)
-      }
-    }
+//    .accessibilityActions {
+//      if isFocused {
+//        StatusRowContextMenu(viewModel: viewModel, showTextForSelection: $showTextForSelection)
+//      }
+//    }
   }
 
   @ViewBuilder
@@ -48,7 +49,7 @@ struct StatusRowHeaderView: View {
     HStack(alignment: .center) {
       if theme.avatarPosition == .top {
         AvatarView(viewModel.finalStatus.account.avatar)
-          .accountPopover(viewModel.finalStatus.account)
+//          .accountPopover(viewModel.finalStatus.account)
       }
       VStack(alignment: .leading, spacing: 2) {
         HStack(alignment: .firstTextBaseline, spacing: 2) {
@@ -61,7 +62,7 @@ struct StatusRowHeaderView: View {
               .emojiBaselineOffset(Font.scaledSubheadlineFont.emojiBaselineOffset)
               .fontWeight(.semibold)
               .lineLimit(1)
-              .accountPopover(viewModel.finalStatus.account)
+//              .accountPopover(viewModel.finalStatus.account)
 
             accountBadgeView
               .font(.footnote)
@@ -77,7 +78,7 @@ struct StatusRowHeaderView: View {
               .font(.scaledFootnote)
               .foregroundStyle(.secondary)
               .lineLimit(1)
-              .accountPopover(viewModel.finalStatus.account)
+//              .accountPopover(viewModel.finalStatus.account)
           }
         }
         if theme.avatarPosition == .top {
@@ -91,7 +92,7 @@ struct StatusRowHeaderView: View {
             .foregroundStyle(.secondary)
             .lineLimit(1)
             .offset(y: 1)
-            .accountPopover(viewModel.finalStatus.account)
+//            .accountPopover(viewModel.finalStatus.account)
         }
       }
     }
@@ -123,21 +124,29 @@ struct StatusRowHeaderView: View {
     }
   }
 
-  private var contextMenuButton: some View {
-    Menu {
-      StatusRowContextMenu(viewModel: viewModel, showTextForSelection: $showTextForSelection)
-        .onAppear {
-          Task {
-            await viewModel.loadAuthorRelationship()
-          }
-        }
-    } label: {
-      Image(systemName: "ellipsis")
-        .frame(width: 40, height: 40)
-    }
-    .menuStyle(.borderlessButton)
-    .foregroundStyle(.secondary)
-    .contentShape(Rectangle())
-    .accessibilityHidden(true)
-  }
+//  private var contextMenuButton: some View {
+//    Menu {
+//      StatusRowContextMenu(viewModel: viewModel, showTextForSelection: $showTextForSelection)
+//        .onAppear {
+//          Task {
+//            await viewModel.loadAuthorRelationship()
+//          }
+//        }
+//    } label: {
+//      Image(systemName: "ellipsis")
+//        .frame(width: 40, height: 40)
+//    }
+//    .menuStyle(.borderlessButton)
+//    .foregroundStyle(.secondary)
+//    .contentShape(Rectangle())
+//    .accessibilityHidden(true)
+//  }
+}
+
+#Preview(traits: .sizeThatFitsLayout) {
+    StatusRowHeaderView(viewModel: .init(
+        status: .preview,
+        client: Client(server: ""),
+        routerPath: RouterPath()))
+    .environment(Theme.shared)
 }

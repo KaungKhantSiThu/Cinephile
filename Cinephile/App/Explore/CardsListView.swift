@@ -1,6 +1,7 @@
 import Models
 import Status
 import SwiftUI
+import CinephileUI
 
 public struct CardsListView: View {
   @Environment(Theme.self) private var theme

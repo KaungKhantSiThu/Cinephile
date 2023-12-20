@@ -17,3 +17,8 @@ struct StatusRowTagView: View {
     }
   }
 }
+
+//#Preview {
+//    StatusRowTagView(viewModel: .init(status: .preview, client: .init(server: "mastodon.social"), routerPath: .init()))
+//        .environment(CurrentAccount.shared)
+//}

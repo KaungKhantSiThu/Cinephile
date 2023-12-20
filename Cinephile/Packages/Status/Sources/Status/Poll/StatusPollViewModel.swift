@@ -26,7 +26,9 @@ import SwiftUI
     do {
       poll = try await client.get(endpoint: Polls.poll(id: poll.id))
       votes = poll.ownVotes ?? []
-    } catch {}
+    } catch {
+        print(error.localizedDescription)
+    }
   }
 
   public func postVotes() async {

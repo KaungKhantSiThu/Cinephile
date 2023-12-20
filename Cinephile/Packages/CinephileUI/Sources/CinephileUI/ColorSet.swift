@@ -6,3 +6,9 @@
 //
 
 import Foundation
+import SwiftUI
+
+public enum ColorScheme: String {
+  case dark, light
+}
+

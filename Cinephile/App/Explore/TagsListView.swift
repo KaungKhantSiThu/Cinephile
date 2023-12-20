@@ -1,5 +1,6 @@
 import Models
 import SwiftUI
+import CinephileUI
 
 public struct TagsListView: View {
   @Environment(Theme.self) private var theme

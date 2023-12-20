@@ -1,8 +1,8 @@
-import DesignSystem
-import Env
+import CinephileUI
+import Environment
 import Models
-import Network
-import Shimmer
+import Networking
+//import Shimmer
 import SwiftUI
 
 @MainActor
@@ -25,7 +25,7 @@ public struct AccountsListView: View {
           AccountsListRow(viewModel: .init(account: .placeholder(), relationShip: .placeholder()))
             .redacted(reason: .placeholder)
             .allowsHitTesting(false)
-            .shimmering()
+//            .shimmering()
             .listRowBackground(theme.primaryBackgroundColor)
         }
       case let .display(accounts, relationships, nextPageState):

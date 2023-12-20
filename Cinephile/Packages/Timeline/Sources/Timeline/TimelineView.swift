@@ -1,9 +1,9 @@
 import Charts
-import DesignSystem
-import Env
+import CinephileUI
+import Environment
 import Models
-import Network
-import Shimmer
+import Networking
+
 import Status
 import SwiftData
 import SwiftUI
@@ -111,11 +111,11 @@ public struct TimelineView: View {
       viewModel.isTimelineVisible = false
     }
     .refreshable {
-      SoundEffectManager.shared.playSound(.pull)
-      HapticManager.shared.fireHaptic(.dataRefresh(intensity: 0.3))
+//      SoundEffectManager.shared.playSound(.pull)
+//      HapticManager.shared.fireHaptic(.dataRefresh(intensity: 0.3))
       await viewModel.pullToRefresh()
-      HapticManager.shared.fireHaptic(.dataRefresh(intensity: 0.7))
-      SoundEffectManager.shared.playSound(.refresh)
+//      HapticManager.shared.fireHaptic(.dataRefresh(intensity: 0.7))
+//      SoundEffectManager.shared.playSound(.refresh)
     }
     .onChange(of: watcher.latestEvent?.id) {
       if let latestEvent = watcher.latestEvent {
@@ -192,7 +192,7 @@ public struct TimelineView: View {
             HStack(spacing: 4) {
               ForEach(group.tags, id: \.self) { tag in
                 Button {
-                  routerPath.navigate(to: .hashTag(tag: tag, account: nil))
+                    routerPath.navigate(to: .hashTag(tag: tag, accountId: nil))
                 } label: {
                   Text("#\(tag)")
                     .font(.scaledHeadline)
@@ -202,12 +202,12 @@ public struct TimelineView: View {
             }
           }
           .scrollIndicators(.hidden)
-          Button("status.action.edit") {
-            routerPath.presentedSheet = .editTagGroup(tagGroup: group, onSaved: { group in
-              viewModel.timeline = .tagGroup(title: group.title, tags: group.tags)
-            })
-          }
-          .buttonStyle(.bordered)
+//          Button("status.action.edit") {
+//            routerPath.presentedSheet = .editTagGroup(tagGroup: group, onSaved: { group in
+//              viewModel.timeline = .tagGroup(title: group.title, tags: group.tags)
+//            })
+//          }
+//          .buttonStyle(.bordered)
         }
       }
     }

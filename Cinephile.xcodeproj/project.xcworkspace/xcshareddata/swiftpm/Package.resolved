@@ -1,12 +1,39 @@
 {
   "pins" : [
     {
+      "identity" : "bodega",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/mergesort/Bodega",
+      "state" : {
+        "revision" : "f0554077c178088ba11557bbdbb71775cc6a1b84",
+        "version" : "2.1.0"
+      }
+    },
+    {
+      "identity" : "emojitext",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/divadretlaw/EmojiText.git",
+      "state" : {
+        "revision" : "d0664390e3236ff6241ea0586d80f4e92702973b",
+        "version" : "3.2.1"
+      }
+    },
+    {
       "identity" : "keychain-swift",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/evgenyneu/keychain-swift.git",
       "state" : {
         "revision" : "d108a1fa6189e661f91560548ef48651ed8d93b9",
         "version" : "20.0.0"
+      }
+    },
+    {
+      "identity" : "lrucache",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/nicklockwood/LRUCache.git",
+      "state" : {
+        "revision" : "6d2b5246c9c98dcd498552bb22f08d55b12a8371",
+        "version" : "1.0.4"
       }
     },
     {
@@ -19,12 +46,30 @@
       }
     },
     {
+      "identity" : "sqlite.swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/stephencelis/SQLite.swift.git",
+      "state" : {
+        "revision" : "7a2e3cd27de56f6d396e84f63beefd0267b55ccb",
+        "version" : "0.14.1"
+      }
+    },
+    {
       "identity" : "swiftsoup",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/scinfu/SwiftSoup.git",
       "state" : {
         "revision" : "8b6cf29eead8841a1fa7822481cb3af4ddaadba6",
         "version" : "2.6.1"
+      }
+    },
+    {
+      "identity" : "swiftui-introspect",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/siteline/SwiftUI-Introspect.git",
+      "state" : {
+        "revision" : "9e1cc02a65b22e09a8251261cccbccce02731fc5",
+        "version" : "1.1.1"
       }
     },
     {

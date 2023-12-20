@@ -1,8 +1,8 @@
 import Account
-import DesignSystem
+import CinephileUI
 import EmojiText
 import Models
-import Network
+import Networking
 import SwiftUI
 
 @MainActor

@@ -1,4 +1,4 @@
-
+import CinephileUI
 import Environment
 import Models
 import Networking
@@ -197,3 +197,7 @@ public struct StatusPollView: View {
     .buttonStyle(.borderless)
   }
 }
+
+//#Preview {
+//    StatusPollView(poll: <#T##Poll#>, status: Status.preview)
+//}

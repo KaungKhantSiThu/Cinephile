@@ -109,7 +109,7 @@ struct SettingsTab: View {
         Text("settings.account.add")
       }
       .sheet(isPresented: $addAccountSheetPresented) {
-        LoginView()
+        AddAccountView()
       }
     }
 

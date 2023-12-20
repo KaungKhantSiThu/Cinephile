@@ -1,4 +1,4 @@
-import Env
+import Environment
 import Foundation
 import Models
 import Observation
@@ -20,7 +20,7 @@ import SwiftUI
   func removeStatus(status: Status) {
     if !disableUpdate, let index = pendingStatuses.firstIndex(of: status.id) {
       pendingStatuses.removeSubrange(index ... (pendingStatuses.count - 1))
-      HapticManager.shared.fireHaptic(.timeline)
+//      HapticManager.shared.fireHaptic(.timeline)
     }
   }
 

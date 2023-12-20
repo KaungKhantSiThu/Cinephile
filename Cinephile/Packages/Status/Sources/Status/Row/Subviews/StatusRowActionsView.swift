@@ -1,4 +1,4 @@
-
+import CinephileUI
 import Environment
 import Models
 import Networking
@@ -201,23 +201,24 @@ struct StatusRowActionsView: View {
           return
         }
       }
-      HapticManager.shared.fireHaptic(.notification(.success))
+//      HapticManager.shared.fireHaptic(.notification(.success))
       switch action {
       case .respond:
-        SoundEffectManager.shared.playSound(.share)
+//        SoundEffectManager.shared.playSound(.share)
         #if targetEnvironment(macCatalyst)
           openWindow(value: WindowDestinationEditor.replyToStatusEditor(status: viewModel.localStatus ?? viewModel.status))
         #else
-          viewModel.routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.localStatus ?? viewModel.status)
+//          viewModel.routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.localStatus ?? viewModel.status)
+          print("respond")
         #endif
       case .favorite:
-        SoundEffectManager.shared.playSound(.favorite)
+//        SoundEffectManager.shared.playSound(.favorite)
         await statusDataController.toggleFavorite(remoteStatus: viewModel.localStatusId)
       case .bookmark:
-        SoundEffectManager.shared.playSound(.bookmark)
+//        SoundEffectManager.shared.playSound(.bookmark)
         await statusDataController.toggleBookmark(remoteStatus: viewModel.localStatusId)
       case .boost:
-        SoundEffectManager.shared.playSound(.boost)
+//        SoundEffectManager.shared.playSound(.boost)
         await statusDataController.toggleReblog(remoteStatus: viewModel.localStatusId)
       default:
         break

@@ -1,12 +1,5 @@
 import Foundation
 
-public enum Visibility: String, Codable, CaseIterable, Hashable, Equatable, Sendable {
-  case pub = "public"
-  case unlisted
-  case priv = "private"
-  case direct
-}
-
 public protocol AnyStatus {
   var viewId: StatusViewId { get }
   var id: String { get }
@@ -115,21 +108,21 @@ public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable
     self.language = language
   }
 
-  public static func placeholder(forSettings: Bool = false, language: String? = nil) -> Status {
+    public static let preview : Status =
     .init(id: UUID().uuidString,
           content: .init(stringValue: "Here's to the [#crazy](#) ones. The misfits.\nThe [@rebels](#). The troublemakers.",
-                         parseMarkdown: forSettings),
+                         parseMarkdown: true),
 
           account: .placeholder(),
           createdAt: ServerDate(),
           editedAt: nil,
           reblog: nil,
           mediaAttachments: [],
-          mentions: [],
+          mentions: [.init(id: "12345", username: "Mg Kaung", url: URL(string: "www.apple.com")!, acct: "@mgkaung")],
           repliesCount: 0,
           reblogsCount: 0,
           favouritesCount: 0,
-          card: nil,
+          card: .preview,
           favourited: false,
           reblogged: false,
           pinned: false,
@@ -138,17 +131,17 @@ public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable
           url: "https://example.com",
           application: nil,
           inReplyToId: nil,
-          inReplyToAccountId: nil,
+          inReplyToAccountId: "12345",
           visibility: .pub,
           poll: nil,
-          spoilerText: .init(stringValue: ""),
+          spoilerText: .init(stringValue: "Some spoiler"),
           filtered: [],
           sensitive: false,
-          language: language)
-  }
+          language: "en")
+  
 
   public static func placeholders() -> [Status] {
-    [.placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder()]
+    [.preview, .preview,.preview,.preview]
   }
 
   public var reblogAsAsStatus: Status? {

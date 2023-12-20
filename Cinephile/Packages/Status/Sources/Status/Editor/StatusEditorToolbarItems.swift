@@ -3,6 +3,8 @@ import Models
 import StoreKit
 import SwiftUI
 
+
+
 @MainActor
 struct StatusEditorToolbarItems: ToolbarContent {
   @State private var isLanguageConfirmPresented = false
@@ -83,7 +85,7 @@ struct StatusEditorToolbarItems: ToolbarContent {
 
     if status != nil, isMainPost {
       close()
-      SoundEffectManager.shared.playSound(.tootSent)
+//      SoundEffectManager.shared.playSound(.tootSent)
       NotificationCenter.default.post(name: .shareSheetClose, object: nil)
       #if !targetEnvironment(macCatalyst)
         if !mainSEVM.mode.isInShareExtension, !preferences.requestedReview {

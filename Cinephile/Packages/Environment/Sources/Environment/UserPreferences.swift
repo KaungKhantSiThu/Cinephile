@@ -1,6 +1,6 @@
 //
-//  File.swift
-//  
+//  UserPreferences.swift
+//
 //
 //  Created by Kaung Khant Si Thu on 14/12/2023.
 //
@@ -13,13 +13,13 @@ import SwiftUI
 @MainActor
 @Observable public class UserPreferences {
   class Storage {
-//    @AppStorage("preferred_browser") public var preferredBrowser: PreferredBrowser = .inAppSafari
+    @AppStorage("preferred_browser") public var preferredBrowser: PreferredBrowser = .inAppSafari
     @AppStorage("show_translate_button_inline") public var showTranslateButton: Bool = true
     @AppStorage("show_pending_at_bottom") public var pendingShownAtBottom: Bool = false
     @AppStorage("show_pending_left") public var pendingShownLeft: Bool = false
     @AppStorage("is_open_ai_enabled") public var isOpenAIEnabled: Bool = true
 
-//    @AppStorage("recently_used_languages") public var recentlyUsedLanguages: [String] = []
+    @AppStorage("recently_used_languages") public var recentlyUsedLanguages: [String] = []
     @AppStorage("social_keyboard_composer") public var isSocialKeyboardEnabled: Bool = true
 
     @AppStorage("use_instance_content_settings") public var useInstanceContentSettings: Bool = true
@@ -47,10 +47,10 @@ import SwiftUI
 
     @AppStorage("show_second_column_ipad") public var showiPadSecondaryColumn = true
 
-//    @AppStorage("swipeactions-status-trailing-right") public var swipeActionsStatusTrailingRight = StatusAction.favorite
-//    @AppStorage("swipeactions-status-trailing-left") public var swipeActionsStatusTrailingLeft = StatusAction.boost
-//    @AppStorage("swipeactions-status-leading-left") public var swipeActionsStatusLeadingLeft = StatusAction.reply
-//    @AppStorage("swipeactions-status-leading-right") public var swipeActionsStatusLeadingRight = StatusAction.none
+    @AppStorage("swipeactions-status-trailing-right") public var swipeActionsStatusTrailingRight = StatusAction.favorite
+    @AppStorage("swipeactions-status-trailing-left") public var swipeActionsStatusTrailingLeft = StatusAction.boost
+    @AppStorage("swipeactions-status-leading-left") public var swipeActionsStatusLeadingLeft = StatusAction.reply
+    @AppStorage("swipeactions-status-leading-right") public var swipeActionsStatusLeadingRight = StatusAction.none
     @AppStorage("swipeactions-use-theme-color") public var swipeActionsUseThemeColor = false
     @AppStorage("swipeactions-icon-style") public var swipeActionsIconStyle: SwipeActionsIconStyle = .iconWithText
 
@@ -58,12 +58,14 @@ import SwiftUI
 
     @AppStorage("collapse-long-posts") public var collapseLongPosts = true
 
-//    @AppStorage("share-button-behavior") public var shareButtonBehavior: PreferredShareButtonBehavior = .linkAndText
+    @AppStorage("share-button-behavior") public var shareButtonBehavior: PreferredShareButtonBehavior = .linkAndText
     
     @AppStorage("fast_refresh") public var fastRefreshEnabled: Bool = false
 
     @AppStorage("max_reply_indentation") public var maxReplyIndentation: UInt = 7
     @AppStorage("show_reply_indentation") public var showReplyIndentation: Bool = true
+
+      @AppStorage("show_account_popover") public var showAccountPopover: Bool = true
 
     init() {}
   }
@@ -74,11 +76,11 @@ import SwiftUI
 
   private var client: Client?
 
-//  public var preferredBrowser: PreferredBrowser {
-//    didSet {
-//      storage.preferredBrowser = preferredBrowser
-//    }
-//  }
+  public var preferredBrowser: PreferredBrowser {
+    didSet {
+      storage.preferredBrowser = preferredBrowser
+    }
+  }
 
   public var showTranslateButton: Bool {
     didSet {
@@ -121,11 +123,11 @@ import SwiftUI
     }
   }
 
-//  public var recentlyUsedLanguages: [String] {
-//    didSet {
-//      storage.recentlyUsedLanguages = recentlyUsedLanguages
-//    }
-//  }
+  public var recentlyUsedLanguages: [String] {
+    didSet {
+      storage.recentlyUsedLanguages = recentlyUsedLanguages
+    }
+  }
 
   public var isSocialKeyboardEnabled: Bool {
     didSet {
@@ -247,29 +249,29 @@ import SwiftUI
     }
   }
 
-//  public var swipeActionsStatusTrailingRight: StatusAction {
-//    didSet {
-//      storage.swipeActionsStatusTrailingRight = swipeActionsStatusTrailingRight
-//    }
-//  }
-//
-//  public var swipeActionsStatusTrailingLeft: StatusAction {
-//    didSet {
-//      storage.swipeActionsStatusTrailingLeft = swipeActionsStatusTrailingLeft
-//    }
-//  }
-//
-//  public var swipeActionsStatusLeadingLeft: StatusAction {
-//    didSet {
-//      storage.swipeActionsStatusLeadingLeft = swipeActionsStatusLeadingLeft
-//    }
-//  }
-//
-//  public var swipeActionsStatusLeadingRight: StatusAction {
-//    didSet {
-//      storage.swipeActionsStatusLeadingRight = swipeActionsStatusLeadingRight
-//    }
-//  }
+  public var swipeActionsStatusTrailingRight: StatusAction {
+    didSet {
+      storage.swipeActionsStatusTrailingRight = swipeActionsStatusTrailingRight
+    }
+  }
+
+  public var swipeActionsStatusTrailingLeft: StatusAction {
+    didSet {
+      storage.swipeActionsStatusTrailingLeft = swipeActionsStatusTrailingLeft
+    }
+  }
+
+  public var swipeActionsStatusLeadingLeft: StatusAction {
+    didSet {
+      storage.swipeActionsStatusLeadingLeft = swipeActionsStatusLeadingLeft
+    }
+  }
+
+  public var swipeActionsStatusLeadingRight: StatusAction {
+    didSet {
+      storage.swipeActionsStatusLeadingRight = swipeActionsStatusLeadingRight
+    }
+  }
 
   public var swipeActionsUseThemeColor: Bool {
     didSet {
@@ -295,11 +297,11 @@ import SwiftUI
     }
   }
 
-//  public var shareButtonBehavior: PreferredShareButtonBehavior {
-//    didSet {
-//      storage.shareButtonBehavior = shareButtonBehavior
-//    }
-//  }
+  public var shareButtonBehavior: PreferredShareButtonBehavior {
+    didSet {
+      storage.shareButtonBehavior = shareButtonBehavior
+    }
+  }
   
   public var fastRefreshEnabled: Bool {
     didSet {
@@ -322,6 +324,12 @@ import SwiftUI
   public func getRealMaxIndent() -> UInt {
     showReplyIndentation ? maxReplyIndentation : 0
   }
+    
+    public var showAccountPopover: Bool {
+      didSet {
+        storage.showAccountPopover = showAccountPopover
+      }
+    }
 
   public enum SwipeActionsIconStyle: String, CaseIterable {
     case iconWithText, iconOnly
@@ -362,9 +370,9 @@ import SwiftUI
     getMinVisibility(postVisibility, appDefaultReplyVisibility)
   }
 
-//  public func getReplyVisibility(of status: Status) -> Models.Visibility {
-//    getMinVisibility(getReplyVisibility(), status.visibility)
-//  }
+  public func getReplyVisibility(of status: Status) -> Models.Visibility {
+    getMinVisibility(getReplyVisibility(), status.visibility)
+  }
 
   private func getMinVisibility(_ vis1: Models.Visibility, _ vis2: Models.Visibility) -> Models.Visibility {
     let no1 = Self.getIntOfVisibility(vis1)
@@ -430,14 +438,14 @@ import SwiftUI
     serverPreferences = try? await client.get(endpoint: Accounts.preferences)
   }
 
-//  public func markLanguageAsSelected(isoCode: String) {
-//    var copy = recentlyUsedLanguages
-//    if let index = copy.firstIndex(of: isoCode) {
-//      copy.remove(at: index)
-//    }
-//    copy.insert(isoCode, at: 0)
-//    recentlyUsedLanguages = Array(copy.prefix(3))
-//  }
+  public func markLanguageAsSelected(isoCode: String) {
+    var copy = recentlyUsedLanguages
+    if let index = copy.firstIndex(of: isoCode) {
+      copy.remove(at: index)
+    }
+    copy.insert(isoCode, at: 0)
+    recentlyUsedLanguages = Array(copy.prefix(3))
+  }
 
   public static func getIntOfVisibility(_ vis: Models.Visibility) -> Int {
     switch vis {
@@ -453,10 +461,10 @@ import SwiftUI
   }
 
   private init() {
-//    preferredBrowser = storage.preferredBrowser
+    preferredBrowser = storage.preferredBrowser
     showTranslateButton = storage.showTranslateButton
     isOpenAIEnabled = storage.isOpenAIEnabled
-//    recentlyUsedLanguages = storage.recentlyUsedLanguages
+    recentlyUsedLanguages = storage.recentlyUsedLanguages
     isSocialKeyboardEnabled = storage.isSocialKeyboardEnabled
     useInstanceContentSettings = storage.useInstanceContentSettings
     appAutoExpandSpoilers = storage.appAutoExpandSpoilers
@@ -477,20 +485,22 @@ import SwiftUI
     showiPhoneTabLabel = storage.showiPhoneTabLabel
     showAltTextForMedia = storage.showAltTextForMedia
     showiPadSecondaryColumn = storage.showiPadSecondaryColumn
-//    swipeActionsStatusTrailingRight = storage.swipeActionsStatusTrailingRight
-//    swipeActionsStatusTrailingLeft = storage.swipeActionsStatusTrailingLeft
-//    swipeActionsStatusLeadingLeft = storage.swipeActionsStatusLeadingLeft
-//    swipeActionsStatusLeadingRight = storage.swipeActionsStatusLeadingRight
+    swipeActionsStatusTrailingRight = storage.swipeActionsStatusTrailingRight
+    swipeActionsStatusTrailingLeft = storage.swipeActionsStatusTrailingLeft
+    swipeActionsStatusLeadingLeft = storage.swipeActionsStatusLeadingLeft
+    swipeActionsStatusLeadingRight = storage.swipeActionsStatusLeadingRight
     swipeActionsUseThemeColor = storage.swipeActionsUseThemeColor
     swipeActionsIconStyle = storage.swipeActionsIconStyle
     requestedReview = storage.requestedReview
     collapseLongPosts = storage.collapseLongPosts
-//    shareButtonBehavior = storage.shareButtonBehavior
+    shareButtonBehavior = storage.shareButtonBehavior
     pendingShownAtBottom = storage.pendingShownAtBottom
     pendingShownLeft = storage.pendingShownLeft
     fastRefreshEnabled = storage.fastRefreshEnabled
     maxReplyIndentation = storage.maxReplyIndentation
     showReplyIndentation = storage.showReplyIndentation
+      showAccountPopover = storage.showAccountPopover
+
   }
 }
 

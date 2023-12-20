@@ -1,9 +1,9 @@
 import Combine
-import DesignSystem
+import CinephileUI
 import EmojiText
-import Env
+import Environment
 import Models
-import Network
+import Networking
 import Observation
 import SwiftUI
 
@@ -108,23 +108,23 @@ public struct AccountsListRow: View {
     .onTapGesture {
       routerPath.navigate(to: .accountDetailWithAccount(account: viewModel.account))
     }
-    .contextMenu {
-      AccountDetailContextMenu(showBlockConfirmation: $showBlockConfirmation, viewModel: .init(account: viewModel.account))
-    } preview: {
-      List {
-        AccountDetailHeaderView(viewModel: .init(account: viewModel.account),
-                                account: viewModel.account,
-                                scrollViewProxy: nil)
-          .applyAccountDetailsRowStyle(theme: theme)
-      }
-      .listStyle(.plain)
-      .scrollContentBackground(.hidden)
-      .background(theme.primaryBackgroundColor)
-      .environment(theme)
-      .environment(currentAccount)
-      .environment(client)
-      .environment(quickLook)
-      .environment(routerPath)
-    }
+//    .contextMenu {
+//      AccountDetailContextMenu(showBlockConfirmation: $showBlockConfirmation, viewModel: .init(account: viewModel.account))
+//    } preview: {
+//      List {
+//        AccountDetailHeaderView(viewModel: .init(account: viewModel.account),
+//                                account: viewModel.account,
+//                                scrollViewProxy: nil)
+//          .applyAccountDetailsRowStyle(theme: theme)
+//      }
+//      .listStyle(.plain)
+//      .scrollContentBackground(.hidden)
+//      .background(theme.primaryBackgroundColor)
+//      .environment(theme)
+//      .environment(currentAccount)
+//      .environment(client)
+//      .environment(quickLook)
+//      .environment(routerPath)
+//    }
   }
 }

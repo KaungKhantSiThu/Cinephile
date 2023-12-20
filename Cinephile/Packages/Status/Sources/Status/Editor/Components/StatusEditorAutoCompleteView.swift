@@ -1,6 +1,7 @@
 import EmojiText
 import Foundation
 import SwiftUI
+import CinephileUI
 
 @MainActor
 struct StatusEditorAutoCompleteView: View {
@@ -30,7 +31,7 @@ struct StatusEditorAutoCompleteView: View {
         viewModel.selectMentionSuggestion(account: account)
       } label: {
         HStack {
-          AvatarView(account.avatar, config: AvatarView.FrameConfig.badge)
+          AvatarView(account.avatar, config: AvatarView.FrameConfiguration.badge)
           VStack(alignment: .leading) {
             EmojiTextApp(.init(stringValue: account.safeDisplayName),
                          emojis: account.emojis)

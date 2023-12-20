@@ -1,4 +1,4 @@
-
+import CinephileUI
 import Environment
 import Models
 import SwiftUI
@@ -13,7 +13,7 @@ struct StatusRowDetailView: View {
 
   var body: some View {
     Group {
-      Divider()
+//      Divider()
       HStack {
         Group {
           Text(viewModel.status.createdAt.asDate, style: .date) +
@@ -41,58 +41,58 @@ struct StatusRowDetailView: View {
       .font(.scaledCaption)
       .foregroundStyle(.secondary)
 
-      if let editedAt = viewModel.status.editedAt {
-        Divider()
-        HStack {
-          Text("status.summary.edited-time") +
-            Text(editedAt.asDate, style: .date) +
-            Text("status.summary.at-time") +
-            Text(editedAt.asDate, style: .time)
-          Spacer()
-        }
-        .onTapGesture {
-          viewModel.routerPath.presentedSheet = .statusEditHistory(status: viewModel.status.id)
-        }
-        .underline()
-        .font(.scaledCaption)
-        .foregroundStyle(.secondary)
-      }
+//      if let editedAt = viewModel.status.editedAt {
+//        Divider()
+//        HStack {
+//          Text("status.summary.edited-time") +
+//            Text(editedAt.asDate, style: .date) +
+//            Text("status.summary.at-time") +
+//            Text(editedAt.asDate, style: .time)
+//          Spacer()
+//        }
+//        .onTapGesture {
+//          viewModel.routerPath.presentedSheet = .statusEditHistory(status: viewModel.status.id)
+//        }
+//        .underline()
+//        .font(.scaledCaption)
+//        .foregroundStyle(.secondary)
+//      }
 
-      if viewModel.actionsAccountsFetched, statusDataController.favoritesCount > 0 {
-        Divider()
-        Button {
-          viewModel.routerPath.navigate(to: .favoritedBy(id: viewModel.status.id))
-        } label: {
-          HStack {
-            Text("status.summary.n-favorites \(statusDataController.favoritesCount)")
-              .font(.scaledCallout)
-            Spacer()
-            makeAccountsScrollView(accounts: viewModel.favoriters)
-            Image(systemName: "chevron.right")
-          }
-          .frame(height: 20)
-        }
-        .buttonStyle(.borderless)
-        .transition(.move(edge: .leading))
-      }
+//      if viewModel.actionsAccountsFetched, statusDataController.favoritesCount > 0 {
+//        Divider()
+//        Button {
+//          viewModel.routerPath.navigate(to: .favoritedBy(id: viewModel.status.id))
+//        } label: {
+//          HStack {
+//            Text("status.summary.n-favorites \(statusDataController.favoritesCount)")
+//              .font(.scaledCallout)
+//            Spacer()
+//            makeAccountsScrollView(accounts: viewModel.favoriters)
+//            Image(systemName: "chevron.right")
+//          }
+//          .frame(height: 20)
+//        }
+//        .buttonStyle(.borderless)
+//        .transition(.move(edge: .leading))
+//      }
 
-      if viewModel.actionsAccountsFetched, statusDataController.reblogsCount > 0 {
-        Divider()
-        Button {
-          viewModel.routerPath.navigate(to: .rebloggedBy(id: viewModel.status.id))
-        } label: {
-          HStack {
-            Text("status.summary.n-boosts \(statusDataController.reblogsCount)")
-              .font(.scaledCallout)
-            Spacer()
-            makeAccountsScrollView(accounts: viewModel.rebloggers)
-            Image(systemName: "chevron.right")
-          }
-          .frame(height: 20)
-        }
-        .buttonStyle(.borderless)
-        .transition(.move(edge: .leading))
-      }
+//      if viewModel.actionsAccountsFetched, statusDataController.reblogsCount > 0 {
+//        Divider()
+//        Button {
+//          viewModel.routerPath.navigate(to: .rebloggedBy(id: viewModel.status.id))
+//        } label: {
+//          HStack {
+//            Text("status.summary.n-boosts \(statusDataController.reblogsCount)")
+//              .font(.scaledCallout)
+//            Spacer()
+//            makeAccountsScrollView(accounts: viewModel.rebloggers)
+//            Image(systemName: "chevron.right")
+//          }
+//          .frame(height: 20)
+//        }
+//        .buttonStyle(.borderless)
+//        .transition(.move(edge: .leading))
+//      }
     }
     .task {
       await viewModel.fetchActionsAccounts()
