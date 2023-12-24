@@ -49,9 +49,6 @@ import os
   private let urlSession: URLSession
   private let decoder = JSONDecoder()
 
-  // Putting all mutable state inside an `OSAllocatedUnfairLock` makes `Client`
-  // provably `Sendable`. The lock is a struct, but it uses a `ManagedBuffer`
-  // reference type to hold its associated state.
   private let critical: OSAllocatedUnfairLock<Critical>
   private struct Critical: Sendable {
     /// Only used as a transitionary app while in the oauth flow.
@@ -94,6 +91,11 @@ import os
       }
     }
   }
+
+    public func signUpAccount(accountData : AccountData,completion: @escaping (Result<Data, Error>) -> Void) {
+        guard let url = URL(string: "https://polar-brushlands-19893-4c4dfbb9419d.herokuapp.com/api/v1/accounts") else { return }
+        _ = makeURLRequest(url: url, endpoint: Accounts.createAccount(json: accountData), httpMethod: "POST")
+    }
 
   private func makeURL(scheme: String = "https",
                        endpoint: Endpoint,

@@ -9,6 +9,7 @@ import Foundation
 import Models
 
 public enum Accounts: Endpoint {
+  case createAccount(json: AccountData)
   case accounts(id: String)
   case lookup(name: String)
   case favorites(sinceId: String?)
@@ -40,6 +41,8 @@ public enum Accounts: Endpoint {
 
   public func path() -> String {
     switch self {
+    case .createAccount:
+        "accounts"
     case let .accounts(id):
       "accounts/\(id)"
     case .lookup:
@@ -151,6 +154,24 @@ public enum Accounts: Endpoint {
       nil
     }
   }
+}
+
+public struct AccountData : Codable, Sendable {
+    var username : String
+    var email : String
+    var password : String
+    var aggreement : Bool
+    var reason : String
+    var locale : String
+    
+    init(username: String, email: String, password: String, aggreement: Bool = true, reason: String = "test", locale: String = "en") {
+        self.username = username
+        self.email = email
+        self.password = password
+        self.aggreement = aggreement
+        self.reason = reason
+        self.locale = locale
+    }
 }
 
 public struct MuteData: Encodable, Sendable {
