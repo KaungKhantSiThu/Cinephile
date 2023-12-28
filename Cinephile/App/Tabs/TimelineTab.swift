@@ -138,7 +138,11 @@ struct TimelineTab: View {
         Button {
           self.timeline = timeline
         } label: {
-          Label(timeline.localizedTitle(), systemImage: timeline.iconName() ?? "")
+            Label {
+                Text(timeline.localizedTitle())
+            } icon: {
+                Image(systemName: timeline.iconName() ?? "")
+            }
         }
       }
       if !currentAccount.lists.isEmpty {
@@ -258,7 +262,7 @@ struct TimelineTab: View {
       }
         
       switch timeline {
-      case let .list(list):
+      case let .list(_):
         ToolbarItem {
           Button {
 //            routerPath.presentedSheet = .listEdit(list: list)
