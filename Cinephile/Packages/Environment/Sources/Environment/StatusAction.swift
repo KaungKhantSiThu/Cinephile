@@ -41,7 +41,7 @@ public enum StatusAction: String, CaseIterable, Identifiable {
         return isReblogged ? "Rocket.Fill" : "lock.rotation"
       }
 
-      return isReblogged ? "Rocket.Fill" : "Rocket"
+      return isReblogged ? "arrowshape.turn.up.backward.circle.fill" : "arrowshape.turn.up.backward.circle"
     case .favorite:
       return isFavorited ? "star.fill" : "star"
     case .bookmark:

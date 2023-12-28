@@ -20,7 +20,7 @@ public enum RemoteTimelineFilter: String, CaseIterable, Hashable, Equatable {
   public func iconName() -> String {
     switch self {
     case .federated:
-      "globe.americas"
+      "globe.asia.australia"
     case .local:
       "person.2"
     case .trending:
@@ -110,7 +110,7 @@ public enum TimelineFilter: Hashable, Equatable {
     case .latest:
       "arrow.counterclockwise"
     case .federated:
-      "globe.americas"
+      "globe.asia.australia"
     case .local:
       "person.2"
     case .trending:

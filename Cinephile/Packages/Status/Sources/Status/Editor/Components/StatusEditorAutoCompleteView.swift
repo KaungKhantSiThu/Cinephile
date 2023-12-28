@@ -39,7 +39,7 @@ struct StatusEditorAutoCompleteView: View {
               .emojiBaselineOffset(Font.scaledFootnoteFont.emojiBaselineOffset)
               .font(.scaledFootnote)
               .foregroundColor(theme.labelColor)
-            Text("@\(account.acct)")
+              Text("@\(account.acct)", comment: "Account name")
               .font(.scaledCaption)
               .foregroundColor(theme.tintColor)
           }
@@ -54,10 +54,10 @@ struct StatusEditorAutoCompleteView: View {
         viewModel.selectHashtagSuggestion(tag: tag)
       } label: {
         VStack(alignment: .leading) {
-          Text("#\(tag.name)")
+            Text("#\(tag.name)", comment: "Tag name")
             .font(.scaledFootnote)
             .foregroundColor(theme.tintColor)
-          Text("tag.suggested.mentions-\(tag.totalUses)")
+          Text("tag.suggested.mentions-\(tag.totalUses)", bundle: .module)
             .font(.scaledCaption)
             .foregroundStyle(.secondary)
         }

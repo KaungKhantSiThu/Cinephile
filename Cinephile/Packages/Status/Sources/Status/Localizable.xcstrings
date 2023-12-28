@@ -1,0 +1,933 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "" : {
+
+    },
+    " " : {
+
+    },
+    "  ·" : {
+
+    },
+    " ⸱ " : {
+
+    },
+    ", " : {
+
+    },
+    ", %lld%%" : {
+
+    },
+    "@%@" : {
+      "comment" : "Account name"
+    },
+    "@%@@%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "@%1$@@%2$@"
+          }
+        }
+      }
+    },
+    "#%@" : {
+      "comment" : "Tag name"
+    },
+    "%@" : {
+
+    },
+    "%@ (%@)" : {
+      "comment" : "Native name - Name for languages ",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ (%2$@)"
+          }
+        }
+      }
+    },
+    "%lld" : {
+
+    },
+    "%lld%%" : {
+
+    },
+    "⚠︎" : {
+
+    },
+    "100%" : {
+
+    },
+    "accessibility.editor.button.custom-emojis" : {
+
+    },
+    "accessibility.editor.button.drafts" : {
+
+    },
+    "accessibility.editor.button.language" : {
+
+    },
+    "accessibility.editor.button.poll" : {
+
+    },
+    "accessibility.editor.button.spoiler" : {
+
+    },
+    "accessibility.editor.privacy.hint" : {
+
+    },
+    "accessibility.editor.privacy.label" : {
+
+    },
+    "accessibility.image.alt-text-%@" : {
+
+    },
+    "accessibility.status.application.label" : {
+
+    },
+    "accessibility.status.poll.active.label" : {
+
+    },
+    "accessibility.status.poll.finished.label" : {
+
+    },
+    "accessibility.status.poll.option-prefix-%lld-of-%lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "accessibility.status.poll.option-prefix-%1$lld-of-%2$lld"
+          }
+        }
+      }
+    },
+    "accessibility.tabs.profile.picker.media" : {
+
+    },
+    "action.cancel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        }
+      }
+    },
+    "action.delete" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete"
+          }
+        }
+      }
+    },
+    "action.done" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Done"
+          }
+        }
+      }
+    },
+    "action.retry" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retry"
+          }
+        }
+      }
+    },
+    "action.view.error" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "View Error"
+          }
+        }
+      }
+    },
+    "alert.button.ok" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        }
+      }
+    },
+    "alert.error" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error"
+          }
+        }
+      }
+    },
+    "Capture Mode" : {
+
+    },
+    "Compact Mode" : {
+
+    },
+    "Edit" : {
+
+    },
+    "New" : {
+
+    },
+    "Preview for %lld item(s)" : {
+
+    },
+    "Quote-%@" : {
+
+    },
+    "Reply-%@" : {
+
+    },
+    "Show" : {
+
+    },
+    "status.action.block" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Block"
+          }
+        }
+      }
+    },
+    "status.action.bookmark" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bookmark"
+          }
+        }
+      }
+    },
+    "status.action.boost" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Boost"
+          }
+        }
+      }
+    },
+    "status.action.boost-to-follower" : {
+
+    },
+    "status.action.boost-to-followers" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Boost to followers"
+          }
+        }
+      }
+    },
+    "status.action.copy-link" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copy link"
+          }
+        }
+      }
+    },
+    "status.action.copy-text" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copy text"
+          }
+        }
+      }
+    },
+    "status.action.delete" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete"
+          }
+        }
+      }
+    },
+    "status.action.delete.confirm.message" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Are you sure to delete this status?"
+          }
+        }
+      }
+    },
+    "status.action.delete.confirm.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete Status"
+          }
+        }
+      }
+    },
+    "status.action.edit" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit"
+          }
+        }
+      }
+    },
+    "status.action.favorite" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Favorite"
+          }
+        }
+      }
+    },
+    "status.action.mention" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mention"
+          }
+        }
+      }
+    },
+    "status.action.message" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Message"
+          }
+        }
+      }
+    },
+    "status.action.mute" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mute"
+          }
+        }
+      }
+    },
+    "status.action.pin" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pin"
+          }
+        }
+      }
+    },
+    "status.action.post" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Post"
+          }
+        }
+      }
+    },
+    "status.action.quote" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quote"
+          }
+        }
+      }
+    },
+    "status.action.reply" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reply"
+          }
+        }
+      }
+    },
+    "status.action.report" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Report"
+          }
+        }
+      }
+    },
+    "status.action.select-text" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select text"
+          }
+        }
+      }
+    },
+    "status.action.share" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Share"
+          }
+        }
+      }
+    },
+    "status.action.share-image" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Share image"
+          }
+        }
+      }
+    },
+    "status.action.share-link" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Share link"
+          }
+        }
+      }
+    },
+    "status.action.share-title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Share "
+          }
+        }
+      }
+    },
+    "status.action.translated-label-from-%@-%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "status.action.translated-label-from-%1$@-%2$@"
+          }
+        }
+      }
+    },
+    "status.action.unblock" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unblock"
+          }
+        }
+      }
+    },
+    "status.action.unbookmark" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unbookmark"
+          }
+        }
+      }
+    },
+    "status.action.unboost" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unboost"
+          }
+        }
+      }
+    },
+    "status.action.unfavorite" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unfavorite"
+          }
+        }
+      }
+    },
+    "status.action.unmute" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unmute"
+          }
+        }
+      }
+    },
+    "status.action.unpin" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unpin"
+          }
+        }
+      }
+    },
+    "status.action.view-in-browser" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "View in browser"
+          }
+        }
+      }
+    },
+    "status.card.copy" : {
+
+    },
+    "status.card.share" : {
+
+    },
+    "status.draft.delete" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete draft"
+          }
+        }
+      }
+    },
+    "status.draft.save" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save draft"
+          }
+        }
+      }
+    },
+    "status.editor.browse-file" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Browse File"
+          }
+        }
+      }
+    },
+    "status.editor.camera-picker" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Camera Picker"
+          }
+        }
+      }
+    },
+    "status.editor.description.add" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add description"
+          }
+        }
+      }
+    },
+    "status.editor.description.edit" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit description"
+          }
+        }
+      }
+    },
+    "status.editor.drafts.navigation-title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drafts"
+          }
+        }
+      }
+    },
+    "status.editor.emojis.navigation-title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Custom Emojis"
+          }
+        }
+      }
+    },
+    "status.editor.error.upload" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error uploading"
+          }
+        }
+      }
+    },
+    "status.editor.language-select.confirmation.detected-%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Post in %@"
+          }
+        }
+      }
+    },
+    "status.editor.language-select.confirmation.selected-%@" : {
+
+    },
+    "status.editor.language-select.navigation-title" : {
+
+    },
+    "status.editor.language-select.recently-used" : {
+
+    },
+    "status.editor.media.edit-image" : {
+
+    },
+    "status.editor.media.image-description" : {
+
+    },
+    "status.editor.photo-library" : {
+
+    },
+    "status.editor.spoiler" : {
+
+    },
+    "status.editor.text.placeholder" : {
+
+    },
+    "status.error.loading.message" : {
+
+    },
+    "status.error.message" : {
+
+    },
+    "status.error.posting.title" : {
+
+    },
+    "status.error.title" : {
+
+    },
+    "status.filter.filtered-by-%@" : {
+
+    },
+    "status.filter.show-anyway" : {
+
+    },
+    "status.image.alt-text.abbreviation" : {
+
+    },
+    "status.media.content.show" : {
+
+    },
+    "status.media.sensitive.show" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show sensitive content"
+          }
+        }
+      }
+    },
+    "status.poll.closed" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Closed"
+          }
+        }
+      }
+    },
+    "status.poll.closes-in %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Closes in %@"
+          }
+        }
+      }
+    },
+    "status.poll.duration" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Poll Duration"
+          }
+        }
+      }
+    },
+    "status.poll.frequency" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pooling Frequency"
+          }
+        }
+      }
+    },
+    "status.poll.n-votes %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld votes"
+          }
+        }
+      }
+    },
+    "status.poll.n-votes-voters %lld %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld votes from %lld voters"
+          }
+        }
+      }
+    },
+    "status.poll.option-n %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Option %lld"
+          }
+        }
+      }
+    },
+    "status.poll.send" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Send vote"
+          }
+        }
+      }
+    },
+    "status.post-from-%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Post from %@"
+          }
+        }
+      }
+    },
+    "status.row.is-thread" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continues a thread"
+          }
+        }
+      }
+    },
+    "status.row.was-boosted" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "boosted"
+          }
+        }
+      }
+    },
+    "status.row.was-reply %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Replied to %@"
+          }
+        }
+      }
+    },
+    "status.show-full-post" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show more"
+          }
+        }
+      }
+    },
+    "status.summary.at-time" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "at"
+          }
+        }
+      }
+    },
+    "status.summary.edit-history" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit history"
+          }
+        }
+      }
+    },
+    "status.summary.edited-time" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit time"
+          }
+        }
+      }
+    },
+    "status.summary.n-boosts %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld boosts"
+          }
+        }
+      }
+    },
+    "status.summary.n-favorites %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld favorites"
+          }
+        }
+      }
+    },
+    "status.visibility.direct" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Direct"
+          }
+        }
+      }
+    },
+    "status.visibility.follower" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Follower"
+          }
+        }
+      }
+    },
+    "status.visibility.public" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Public"
+          }
+        }
+      }
+    },
+    "status.visibility.unlisted" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unlisted"
+          }
+        }
+      }
+    },
+    "tag.suggested.mentions-%lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mentions"
+          }
+        }
+      }
+    },
+    "Your post" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your post"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

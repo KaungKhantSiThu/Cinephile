@@ -12,22 +12,22 @@ import Networking
 import Models
 
 public enum SheetDestination: Identifiable {
-//    case newStatusEditor(visibility: Models.Visibility)
-//    case editStatusEditor(status: Models.Status)
-//    case replyToStatusEditor(status: Models.Status)
-//    case quoteStatusEditor(status: Models.Status)
-//    case mentionStatusEditor(account: Account, visibility: Models.Visibility)
+    case newStatusEditor(visibility: Models.Visibility)
+    case editStatusEditor(status: Models.Status)
+    case replyToStatusEditor(status: Models.Status)
+    case quoteStatusEditor(status: Models.Status)
+    case mentionStatusEditor(account: Models.Account, visibility: Models.Visibility)
 //    case listCreate
 //    case listEdit(list: Models.List)
 //    case listAddAccount(account: Account)
     case addAccount
 //    case addRemoteLocalTimeline
 //    case addTagGroup
-//    case statusEditHistory(status: String)
+    case statusEditHistory(status: String)
     case settings
 //    case accountPushNotficationsSettings
-//    case report(status: Models.Status)
-//    case shareImage(image: UIImage, status: Models.Status)
+    case report(status: Models.Status)
+    case shareImage(image: UIImage, status: Models.Status)
 //    case editTagGroup(tagGroup: TagGroup, onSaved: ((TagGroup) -> Void)?)
 
     
@@ -35,8 +35,8 @@ public enum SheetDestination: Identifiable {
         switch self {
         case .addAccount:
             "addAccount"
-//        case .newStatusEditor, .editStatusEditor, .replyToStatusEditor, .quoteStatusEditor, .mentionStatusEditor, .settings:
-//            "statusEditor"
+        case .newStatusEditor, .editStatusEditor, .replyToStatusEditor, .quoteStatusEditor, .mentionStatusEditor:
+            "statusEditor"
 //        case .editTagGroup:
 //            "editTagGroup"
 //        case .listCreate:
@@ -49,24 +49,32 @@ public enum SheetDestination: Identifiable {
 //            "addRemoteLocalTimeline"
 //        case .addTagGroup:
 //            "addTagGroup"
-//        case .statusEditHistory:
-//            "statusEditHistory"
+        case .statusEditHistory:
+            "statusEditHistory"
         case .settings:
-            "statusEditor"
-//        case .report:
-//            "report"
-//        case .shareImage:
-//            "shareImage"
+            "settings"
+        case .report:
+            "report"
+        case .shareImage:
+            "shareImage"
         }
     }
     
     
 }
 
+public enum WindowDestinationEditor: Hashable, Codable {
+    case newStatusEditor(visibility: Models.Visibility)
+    case editStatusEditor(status: Models.Status)
+    case replyToStatusEditor(status: Models.Status)
+    case quoteStatusEditor(status: Models.Status)
+}
+
 public enum RouterDestination: Hashable {
     case movieDetail(id: Movie.ID)
     case seriesDetail(id: TVSeries.ID)
     case trackerSearchView
+    case socialSearchView
     case episodeListView(id: TVSeries.ID, inSeason: Int)
     case accountDetail(id: Account.ID)
     case accountDetailWithAccount(account: Account)

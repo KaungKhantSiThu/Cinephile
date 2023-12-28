@@ -9,8 +9,7 @@ import SwiftUI
 struct StatusEditorToolbarItems: ToolbarContent {
   @State private var isLanguageConfirmPresented = false
   @State private var isDismissAlertPresented: Bool = false
-  let mainSEVM: StatusEditorViewModel
-  let followUpSEVMs: [StatusEditorViewModel]
+  let viewModel: StatusEditorViewModel
 
   @Environment(\.modelContext) private var context
   @Environment(UserPreferences.self) private var preferences
@@ -24,21 +23,21 @@ struct StatusEditorToolbarItems: ToolbarContent {
     ToolbarItem(placement: .navigationBarTrailing) {
       Button {
         Task {
-          mainSEVM.evaluateLanguages()
-          if preferences.autoDetectPostLanguage, let _ = mainSEVM.languageConfirmationDialogLanguages {
+          viewModel.evaluateLanguages()
+          if preferences.autoDetectPostLanguage, let _ = viewModel.languageConfirmationDialogLanguages {
             isLanguageConfirmPresented = true
           } else {
             await postAllStatus()
           }
         }
       } label: {
-        if mainSEVM.isPosting {
+        if viewModel.isPosting {
           ProgressView()
         } else {
-          Text("status.action.post").bold()
+          Text("status.action.post", bundle: .module).bold()
         }
       }
-      .disabled(!mainSEVM.canPost)
+      .disabled(!viewModel.canPost)
       .keyboardShortcut(.return, modifiers: .command)
       .confirmationDialog("", isPresented: $isLanguageConfirmPresented, actions: {
         languageConfirmationDialog
@@ -47,7 +46,7 @@ struct StatusEditorToolbarItems: ToolbarContent {
 
     ToolbarItem(placement: .navigationBarLeading) {
       Button {
-        if mainSEVM.shouldDisplayDismissWarning {
+        if viewModel.shouldDisplayDismissWarning {
           isDismissAlertPresented = true
         } else {
           close()
@@ -55,7 +54,7 @@ struct StatusEditorToolbarItems: ToolbarContent {
                                           object: nil)
         }
       } label: {
-        Text("action.cancel")
+        Text("action.cancel", bundle: .module)
       }
       .keyboardShortcut(.cancelAction)
       .confirmationDialog(
@@ -68,7 +67,7 @@ struct StatusEditorToolbarItems: ToolbarContent {
                                             object: nil)
           }
           Button("status.draft.save") {
-            context.insert(Draft(content: mainSEVM.statusText.string))
+            context.insert(Draft(content: viewModel.statusText.string))
             close()
             NotificationCenter.default.post(name: .shareSheetClose,
                                             object: nil)
@@ -88,7 +87,7 @@ struct StatusEditorToolbarItems: ToolbarContent {
 //      SoundEffectManager.shared.playSound(.tootSent)
       NotificationCenter.default.post(name: .shareSheetClose, object: nil)
       #if !targetEnvironment(macCatalyst)
-        if !mainSEVM.mode.isInShareExtension, !preferences.requestedReview {
+        if !viewModel.mode.isInShareExtension, !preferences.requestedReview {
           if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
             SKStoreReviewController.requestReview(in: scene)
           }
@@ -101,14 +100,7 @@ struct StatusEditorToolbarItems: ToolbarContent {
   }
 
   private func postAllStatus() async {
-    guard var latestPost = await postStatus(with: mainSEVM, isMainPost: true) else { return }
-    for p in followUpSEVMs {
-      p.mode = .replyTo(status: latestPost)
-      guard let post = await postStatus(with: p, isMainPost: false) else {
-        break
-      }
-      latestPost = post
-    }
+    guard let _ = await postStatus(with: viewModel, isMainPost: true) else { return }
   }
 
   #if targetEnvironment(macCatalyst)
@@ -119,20 +111,20 @@ struct StatusEditorToolbarItems: ToolbarContent {
 
   @ViewBuilder
   private var languageConfirmationDialog: some View {
-    if let (detected: detected, selected: selected) = mainSEVM.languageConfirmationDialogLanguages,
+    if let (detected: detected, selected: selected) = viewModel.languageConfirmationDialogLanguages,
        let detectedLong = Locale.current.localizedString(forLanguageCode: detected),
        let selectedLong = Locale.current.localizedString(forLanguageCode: selected)
     {
       Button("status.editor.language-select.confirmation.detected-\(detectedLong)") {
-        mainSEVM.selectedLanguage = detected
+        viewModel.selectedLanguage = detected
         Task { await postAllStatus() }
       }
       Button("status.editor.language-select.confirmation.selected-\(selectedLong)") {
-        mainSEVM.selectedLanguage = selected
+        viewModel.selectedLanguage = selected
         Task { await postAllStatus() }
       }
       Button("action.cancel", role: .cancel) {
-        mainSEVM.languageConfirmationDialogLanguages = nil
+        viewModel.languageConfirmationDialogLanguages = nil
       }
     } else {
       EmptyView()

@@ -29,8 +29,7 @@ public struct StatusEditorToolbarItem: ToolbarContent {
           #if targetEnvironment(macCatalyst)
             openWindow(value: WindowDestinationEditor.newStatusEditor(visibility: visibility))
           #else
-            print("newStatusEditor")
-//            routerPath.presentedSheet = .newStatusEditor(visibility: visibility)
+            routerPath.presentedSheet = .newStatusEditor(visibility: visibility)
 //            HapticManager.shared.fireHaptic(.buttonPress)
           #endif
         }
@@ -47,22 +46,22 @@ public struct StatusEditorToolbarItem: ToolbarContent {
   }
 }
 
-@MainActor
-public struct SecondaryColumnToolbarItem: ToolbarContent {
-  @Environment(\.isSecondaryColumn) private var isSecondaryColumn
-  @Environment(UserPreferences.self) private var preferences
-
-  public init() {}
-
-  public var body: some ToolbarContent {
-    ToolbarItem(placement: isSecondaryColumn ? .navigationBarLeading : .navigationBarTrailing) {
-      Button {
-        withAnimation {
-          preferences.showiPadSecondaryColumn.toggle()
-        }
-      } label: {
-        Image(systemName: "sidebar.right")
-      }
-    }
-  }
-}
+//@MainActor
+//public struct SecondaryColumnToolbarItem: ToolbarContent {
+//  @Environment(\.isSecondaryColumn) private var isSecondaryColumn
+//  @Environment(UserPreferences.self) private var preferences
+//
+//  public init() {}
+//
+//  public var body: some ToolbarContent {
+//    ToolbarItem(placement: isSecondaryColumn ? .navigationBarLeading : .navigationBarTrailing) {
+//      Button {
+//        withAnimation {
+//          preferences.showiPadSecondaryColumn.toggle()
+//        }
+//      } label: {
+//        Image(systemName: "sidebar.right")
+//      }
+//    }
+//  }
+//}

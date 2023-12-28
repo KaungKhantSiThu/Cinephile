@@ -18,7 +18,8 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
   public init(fetcher: Fetcher,
               client: Client,
               routerPath: RouterPath,
-              isRemote: Bool = false)
+              isRemote: Bool = false
+  )
   {
     _fetcher = .init(initialValue: fetcher)
     self.isRemote = isRemote
@@ -32,7 +33,7 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
       ForEach(Status.placeholders()) { status in
         StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
           .redacted(reason: .placeholder)
-          .allowsHitTesting(false)
+//          .allowsHitTesting(false)
       }
     case .error:
       ErrorView(title: "status.error.title",

@@ -11,6 +11,7 @@ import AppAccount
 import Environment
 import Models
 import Networking
+import Timeline
 
 @MainActor
 struct SettingsTab: View {
@@ -24,13 +25,12 @@ struct SettingsTab: View {
     @State private var addAccountSheetPresented = false
     @State private var isEditingAccount = false
     
+    @State private var cachedRemoved = false
+    @State private var timelineCache = TimelineCache()
+    
     @Binding var popToRootTab: Tab
     
     let isModal: Bool
-    
-//    init(popToRootTab: Binding<Tab>) {
-//        _popToRootTab = popToRootTab
-//    }
     
     var body: some View {
         NavigationStack(path: $routerPath.path) {
@@ -59,7 +59,7 @@ struct SettingsTab: View {
                 await currentInstance.fetchCurrentInstance()
               }
             }
-//            .withSafariRouter()
+            .withSafariRouter()
             .environment(routerPath)
             .onChange(of: $popToRootTab.wrappedValue) { _, newValue in
               if newValue == .notifications {
@@ -106,7 +106,7 @@ struct SettingsTab: View {
       Button {
         addAccountSheetPresented.toggle()
       } label: {
-        Text("settings.account.add")
+        Text("Add")
       }
       .sheet(isPresented: $addAccountSheetPresented) {
         AddAccountView()
@@ -120,23 +120,22 @@ struct SettingsTab: View {
         }
       } label: {
         if isEditingAccount {
-          Text("action.done")
+          Text("Done")
         } else {
-          Text("account.action.logout")
+          Text("Log out")
         }
       }
     }
     
     private func logoutAccount(account: AppAccount) async {
-//      if let token = account.oauthToken
+      if let token = account.oauthToken
 //            ,let sub = pushNotifications.subscriptions.first(where: { $0.account.token == token })
-//      {
-//        let client = Client(server: account.server, oauthToken: token)
-//        await timelineCache.clearCache(for: client.id)
+      {
+        let client = Client(server: account.server, oauthToken: token)
+        await timelineCache.clearCache(for: client.id)
 //        await sub.deleteSubscription()
-//        appAccountsManager.delete(account: account)
-//      }
         appAccountsManager.delete(account: account)
+      }
     }
 }
 

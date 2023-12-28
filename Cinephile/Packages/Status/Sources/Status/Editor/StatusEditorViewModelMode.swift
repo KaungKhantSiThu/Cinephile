@@ -3,11 +3,12 @@ import SwiftUI
 import UIKit
 
 public extension StatusEditorViewModel {
+    
   enum Mode {
-    case replyTo(status: Status)
+    case replyTo(status: Models.Status)
     case new(visibility: Models.Visibility)
-    case edit(status: Status)
-    case quote(status: Status)
+    case edit(status: Models.Status)
+    case quote(status: Models.Status)
     case mention(account: Account, visibility: Models.Visibility)
     case shareExtension(items: [NSItemProvider])
 
@@ -41,13 +42,13 @@ public extension StatusEditorViewModel {
     var title: LocalizedStringKey {
       switch self {
       case .new, .mention, .shareExtension:
-        "status.editor.mode.new"
+        "New"
       case .edit:
-        "status.editor.mode.edit"
+        "Edit"
       case let .replyTo(status):
-        "status.editor.mode.reply-\(status.reblog?.account.displayNameWithoutEmojis ?? status.account.displayNameWithoutEmojis)"
+        "Reply-\(status.reblog?.account.displayNameWithoutEmojis ?? status.account.displayNameWithoutEmojis)"
       case let .quote(status):
-        "status.editor.mode.quote-\(status.reblog?.account.displayNameWithoutEmojis ?? status.account.displayNameWithoutEmojis)"
+        "Quote-\(status.reblog?.account.displayNameWithoutEmojis ?? status.account.displayNameWithoutEmojis)"
       }
     }
   }

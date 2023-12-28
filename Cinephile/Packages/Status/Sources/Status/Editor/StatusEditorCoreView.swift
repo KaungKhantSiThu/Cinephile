@@ -9,13 +9,9 @@ import SwiftUI
 @MainActor
 struct StatusEditorCoreView: View {
   @Bindable var viewModel: StatusEditorViewModel
-  @Binding var followUpSEVMs: [StatusEditorViewModel]
   @Binding var editingMediaContainer: StatusEditorMediaContainer?
 
   @FocusState<UUID?>.Binding var isSpoilerTextFocused: UUID?
-  @FocusState<StatusEditorFocusState?>.Binding var editorFocusState: StatusEditorFocusState?
-  let assignedFocusState: StatusEditorFocusState
-  let isMain: Bool
 
   @Environment(Theme.self) private var theme
   @Environment(UserPreferences.self) private var preferences
@@ -30,13 +26,6 @@ struct StatusEditorCoreView: View {
 
   var body: some View {
     HStack(spacing: 0) {
-      if !isMain {
-        Rectangle()
-          .fill(theme.tintColor)
-          .frame(width: 2)
-          .accessibilityHidden(true)
-          .padding(.leading, .layoutPadding)
-      }
 
       VStack(spacing: 0) {
         spoilerTextView
@@ -51,10 +40,8 @@ struct StatusEditorCoreView: View {
 
         Divider()
       }
-      .opacity(editorFocusState == assignedFocusState ? 1 : 0.6)
     }
     .background(theme.primaryBackgroundColor)
-    .focused($editorFocusState, equals: assignedFocusState)
     .onAppear { setupViewModel() }
   }
 
@@ -84,24 +71,11 @@ struct StatusEditorCoreView: View {
         }
 
         VStack(alignment: .leading, spacing: 4) {
-          StatusEditorPrivacyMenu(visibility: $viewModel.visibility, tint: isMain ? theme.tintColor : .secondary)
-            .disabled(!isMain)
+          StatusEditorPrivacyMenu(visibility: $viewModel.visibility, tint: theme.tintColor)
 
           Text("@\(account.acct)@\(appAccounts.currentClient.server)")
             .font(.scaledFootnote)
             .foregroundStyle(.secondary)
-        }
-
-        Spacer()
-
-        if case let .followUp(id) = assignedFocusState {
-          Button {
-            followUpSEVMs.removeAll { $0.id == id }
-          } label: {
-            HStack {
-              Image(systemName: "minus.circle.fill").foregroundStyle(.red)
-            }
-          }
         }
       }
       .padding(.horizontal, .layoutPadding)
@@ -113,7 +87,7 @@ struct StatusEditorCoreView: View {
       $viewModel.statusText,
       getTextView: { textView in viewModel.textView = textView }
     )
-    .placeholder(String(localized: isMain ? "status.editor.text.placeholder" : "status.editor.follow-up.text.placeholder"))
+    .placeholder(String(localized: "status.editor.text.placeholder", bundle: .module))
     .setKeyboardType(preferences.isSocialKeyboardEnabled ? .twitter : .default)
     .padding(.horizontal, .layoutPadding)
     .padding(.vertical)

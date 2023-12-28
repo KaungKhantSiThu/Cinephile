@@ -16,6 +16,7 @@ let package = Package(
             targets: ["Timeline"]),
     ],
     dependencies: [
+        .package(name: "Account", path: "../Account"),
       .package(name: "Networking", path: "../Networking"),
       .package(name: "Models", path: "../Models"),
       .package(name: "Environment", path: "../Environment"),
@@ -30,6 +31,7 @@ let package = Package(
         .target(
             name: "Timeline",
             dependencies: [
+                .product(name: "Account", package: "Account"),
               .product(name: "Networking", package: "Networking"),
               .product(name: "Models", package: "Models"),
               .product(name: "Environment", package: "Environment"),

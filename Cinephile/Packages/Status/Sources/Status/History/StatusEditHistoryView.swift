@@ -2,6 +2,7 @@ import CinephileUI
 import Models
 import Networking
 import SwiftUI
+import EmojiText
 
 public struct StatusEditHistoryView: View {
   @Environment(\.dismiss) private var dismiss
@@ -24,13 +25,13 @@ public struct StatusEditHistoryView: View {
           if let history {
             ForEach(history) { edit in
               VStack(alignment: .leading, spacing: 8) {
-//                EmojiTextApp(edit.content, emojis: edit.emojis)
-//                  .font(.scaledBody)
-//                  .emojiSize(Font.scaledBodyFont.emojiSize)
-//                  .emojiBaselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
+                EmojiTextApp(edit.content, emojis: edit.emojis)
+                  .font(.scaledBody)
+                  .emojiSize(Font.scaledBodyFont.emojiSize)
+                  .emojiBaselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
                 Group {
                   Text(edit.createdAt.asDate, style: .date) +
-                    Text("status.summary.at-time") +
+                    Text("status.summary.at-time", bundle: .module) +
                     Text(edit.createdAt.asDate, style: .time)
                 }
                 .font(.footnote)

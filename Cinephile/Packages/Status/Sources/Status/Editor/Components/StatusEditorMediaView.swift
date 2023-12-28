@@ -125,7 +125,7 @@ struct StatusEditorMediaView: View {
         .scaledToFill()
         .cornerRadius(8)
       if container.error != nil {
-        Text("status.editor.error.upload")
+        Text("status.editor.error.upload", bundle: .module)
       } else if container.mediaAttachment == nil {
         ProgressView()
       }
@@ -190,10 +190,10 @@ struct StatusEditorMediaView: View {
   private func makeErrorView(error: ServerError) -> some View {
     ZStack {
       placeholderView
-      Text("status.editor.error.upload")
+      Text("status.editor.error.upload", bundle: .module)
     }
     .alert("alert.error", isPresented: $isErrorDisplayed) {
-      Button("Ok", action: {})
+      Button("alert.button.ok", action: {})
     } message: {
       Text(error.error ?? "")
     }
@@ -203,7 +203,7 @@ struct StatusEditorMediaView: View {
     Button {
       editingMediaContainer = container
     } label: {
-      Text("status.image.alt-text.abbreviation")
+      Text("status.image.alt-text.abbreviation", bundle: .module)
         .font(.caption2)
     }
     .padding(8)

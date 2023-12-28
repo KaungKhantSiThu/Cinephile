@@ -224,6 +224,7 @@ struct TimelineTab: View {
           timelineFilterButton
         }
       }
+        
       if client.isAuth {
         if UIDevice.current.userInterfaceIdiom != .pad {
           ToolbarItem(placement: .navigationBarLeading) {
@@ -231,16 +232,31 @@ struct TimelineTab: View {
               .id(currentAccount.account?.id)
           }
         }
+          
         statusEditorToolbarItem(routerPath: routerPath,
                                 visibility: preferences.postVisibility)
-        if UIDevice.current.userInterfaceIdiom == .pad, !preferences.showiPadSecondaryColumn {
-          SecondaryColumnToolbarItem()
-        }
+//        if UIDevice.current.userInterfaceIdiom == .pad, !preferences.showiPadSecondaryColumn {
+//          SecondaryColumnToolbarItem()
+//        }
+          ToolbarItem(placement: .topBarTrailing) {
+              Button {
+                #if targetEnvironment(macCatalyst)
+//                  openWindow(value: WindowDestinationEditor.)
+                #else
+                  routerPath.navigate(to: .socialSearchView)
+                //            HapticManager.shared.fireHaptic(.buttonPress)
+                #endif
+              } label: {
+                  Image(systemName: "magnifyingglass")
+              }
+          }
+
       } else {
         ToolbarItem(placement: .navigationBarTrailing) {
           addAccountButton
         }
       }
+        
       switch timeline {
       case let .list(list):
         ToolbarItem {

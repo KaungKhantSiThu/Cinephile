@@ -41,12 +41,13 @@ struct StatusRowActionsView: View {
       case .boost:
         if privateBoost {
           if dataController.isReblogged {
-            return Image("Rocket.Fill")
+              return Image(systemName: "arrow.left.arrow.right")
           } else {
             return Image(systemName: "lock.rotation")
           }
         }
-        return Image(dataController.isReblogged ? "Rocket.Fill" : "Rocket")
+          return Image(systemName: dataController.isReblogged ? "arrowshape.turn.up.backward.circle.fill" : "arrowshape.turn.up.backward.circle")
+              .symbolRenderingMode(.palette)
       case .favorite:
         return Image(systemName: dataController.isFavorited ? "star.fill" : "star")
       case .bookmark:

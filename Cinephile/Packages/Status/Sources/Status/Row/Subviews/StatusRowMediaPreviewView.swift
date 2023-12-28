@@ -301,7 +301,7 @@ struct BlurOverLay: View {
               ViewThatFits(in: .horizontal) {
                 HStack {
                   Image(systemName: "eye")
-                  Text(sensitive ? "status.media.sensitive.show" : "status.media.content.show")
+                  Text(sensitive ? "status.media.sensitive.show" : "status.media.content.show", bundle: .module)
                 }
                 HStack {
                   Image(systemName: "eye")
@@ -370,7 +370,7 @@ struct AltTextButton: View {
         ZStack {
           // use to sync button with show/hide content button
           Image(systemName: "eye.slash").opacity(0)
-          Text("status.image.alt-text.abbreviation")
+          Text("status.image.alt-text.abbreviation", bundle: .module)
         }
       }
       .buttonStyle(.borderless)

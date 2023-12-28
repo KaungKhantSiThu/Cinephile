@@ -86,7 +86,7 @@ public struct StatusPollView: View {
               Text("100%")
                 .hidden()
 
-              Text("\(percentForOption(option: option))%")
+              Text("\(percentForOption(option: option))%", bundle: .module)
                 .font(.scaledSubheadline)
             }
           }
@@ -99,14 +99,16 @@ public struct StatusPollView: View {
         .accessibilityRemoveTraits(isInteractive ? [] : .isButton)
       }
       if !viewModel.poll.expired, !(viewModel.poll.voted ?? false), !viewModel.votes.isEmpty {
-        Button("status.poll.send") {
-          Task {
-            do {
-              await viewModel.postVotes()
-            }
+          Button {
+              Task {
+                do {
+                  await viewModel.postVotes()
+                }
+              }
+          } label: {
+              Text("status.poll.send", bundle: .module)
           }
-        }
-        .buttonStyle(.bordered)
+          .buttonStyle(.bordered)
       }
       footerView
 
@@ -123,7 +125,7 @@ public struct StatusPollView: View {
 
   func combinedAccessibilityLabel(for option: Poll.Option, index: Int) -> Text {
     let showPercentage = viewModel.poll.expired || viewModel.poll.voted ?? false
-    return Text("accessibility.status.poll.option-prefix-\(index + 1)-of-\(viewModel.poll.options.count)") +
+    return Text("accessibility.status.poll.option-prefix-\(index + 1)-of-\(viewModel.poll.options.count)", bundle: .module) +
       Text(", ") +
       Text(option.title) +
       Text(showPercentage ? ", \(percentForOption(option: option))%" : "")
@@ -132,16 +134,16 @@ public struct StatusPollView: View {
   private var footerView: some View {
     HStack(spacing: 0) {
       if viewModel.poll.multiple {
-        Text("status.poll.n-votes-voters \(viewModel.poll.votesCount) \(viewModel.poll.safeVotersCount)")
+        Text("status.poll.n-votes-voters \(viewModel.poll.votesCount) \(viewModel.poll.safeVotersCount)", bundle: .module)
       } else {
-        Text("status.poll.n-votes \(viewModel.poll.votesCount)")
+        Text("status.poll.n-votes \(viewModel.poll.votesCount)", bundle: .module)
       }
       Text(" ⸱ ")
         .accessibilityHidden(true)
       if viewModel.poll.expired {
-        Text("status.poll.closed")
+        Text("status.poll.closed", bundle: .module)
       } else if let date = viewModel.poll.expiresAt.value?.asDate {
-        Text("status.poll.closes-in \(date, style: .timer)")
+        Text("status.poll.closes-in \(date, style: .timer)", bundle: .module)
       }
     }
     .font(.scaledFootnote)

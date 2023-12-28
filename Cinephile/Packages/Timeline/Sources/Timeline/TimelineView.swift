@@ -159,9 +159,9 @@ public struct TimelineView: View {
             .padding(.top, 12)
 
           VStack(alignment: .leading, spacing: 4) {
-            Text("#\(tag.name)")
+              Text("#\(tag.name)", bundle: .module, comment: "Tag name")
               .font(.scaledHeadline)
-            Text("timeline.n-recent-from-n-participants \(tag.totalUses) \(tag.totalAccounts)")
+              Text("timeline.n-recent-from-n-participants \(tag.totalUses) \(tag.totalAccounts)", bundle: .module)
               .font(.scaledFootnote)
               .foregroundStyle(.secondary)
           }
@@ -176,7 +176,7 @@ public struct TimelineView: View {
               }
             }
           } label: {
-            Text(tag.following ? "account.follow.following" : "account.follow.follow")
+            Text(tag.following ? "account.follow.following" : "account.follow.follow", bundle: .module)
           }.buttonStyle(.bordered)
         }
       }
@@ -236,13 +236,13 @@ public struct TimelineView: View {
       VStack(alignment: .center) {
         switch timeline {
         case let .remoteLocal(_, filter):
-          Text(filter.localizedTitle())
+            Text(filter.localizedTitle(), bundle: .module)
             .font(.headline)
-          Text(timeline.localizedTitle())
+          Text(timeline.localizedTitle(), bundle: .module)
             .font(.caption)
             .foregroundStyle(.secondary)
         default:
-          Text(timeline.localizedTitle())
+          Text(timeline.localizedTitle(), bundle: .module)
             .font(.headline)
         }
       }
@@ -252,13 +252,13 @@ public struct TimelineView: View {
           if canFilterTimeline {
             Menu(filter.localizedTitle()) {}
           } else {
-            Text(filter.localizedTitle())
+            Text(filter.localizedTitle(), bundle: .module)
           }
         default:
           if canFilterTimeline {
             Menu(timeline.localizedTitle()) {}
           } else {
-            Text(timeline.localizedTitle())
+            Text(timeline.localizedTitle(), bundle: .module)
           }
         }
       }

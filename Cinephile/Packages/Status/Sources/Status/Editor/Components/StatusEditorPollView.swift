@@ -8,7 +8,6 @@ struct StatusEditorPollView: View {
   enum FocusField: Hashable {
     case option(Int)
   }
-
   @FocusState var focused: FocusField?
 
   @State private var currentFocusIndex: Int = 0
@@ -76,7 +75,7 @@ struct StatusEditorPollView: View {
 
         Picker("status.poll.duration", selection: $viewModel.pollDuration) {
           ForEach(Duration.pollDurations(), id: \.rawValue) {
-            Text($0.description)
+              Text($0.description, comment: "Poll Duration description")
               .tag($0)
           }
         }

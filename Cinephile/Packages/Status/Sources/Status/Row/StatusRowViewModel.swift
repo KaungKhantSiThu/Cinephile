@@ -29,7 +29,7 @@ import SwiftUI
   var isFiltered: Bool = false
 
 //  var translation: Translation?
-  var isLoadingTranslation: Bool = false
+//  var isLoadingTranslation: Bool = false
   var showDeleteAlert: Bool = false
 
   private(set) var actionsAccountsFetched: Bool = false
@@ -57,7 +57,7 @@ import SwiftUI
   // used by the button to expand a collapsed post
   var isCollapsed: Bool = true {
     didSet {
-      recalcCollapse()
+      recalculateCollapse()
     }
   }
 
@@ -73,7 +73,7 @@ import SwiftUI
   @ObservationIgnored
   var collapseLongPosts: Bool = false
 
-  private func recalcCollapse() {
+  private func recalculateCollapse() {
     let hasContentWarning = !status.spoilerText.asRawText.isEmpty
     let showCollapseButton = collapseLongPosts && isCollapsed && !hasContentWarning
       && finalStatus.content.asRawText.unicodeScalars.count > collapseThresholdLength
@@ -148,7 +148,7 @@ import SwiftUI
     }
 
     collapseLongPosts = UserPreferences.shared.collapseLongPosts
-    recalcCollapse()
+    recalculateCollapse()
   }
 
   func markSeen() {
@@ -325,26 +325,26 @@ import SwiftUI
     finalStatus.language
   }
 
-  func translate(userLang: String) async {
-    withAnimation {
-      isLoadingTranslation = true
-    }
-//    if !alwaysTranslateWithDeepl {
-//      do {
-//        // We first use instance translation API if available.
-//        let translation: Translation = try await client.post(endpoint: Statuses.translate(id: finalStatus.id,
-//                                                                                          lang: userLang))
-//        withAnimation {
-//          self.translation = translation
-//          isLoadingTranslation = false
-//        }
-//
-//        return
-//      } catch {}
+//  func translate(userLang: String) async {
+//    withAnimation {
+//      isLoadingTranslation = true
 //    }
-
-    // If not or fail we use Ice Cubes own DeepL client.
-  }
+////    if !alwaysTranslateWithDeepl {
+////      do {
+////        // We first use instance translation API if available.
+////        let translation: Translation = try await client.post(endpoint: Statuses.translate(id: finalStatus.id,
+////                                                                                          lang: userLang))
+////        withAnimation {
+////          self.translation = translation
+////          isLoadingTranslation = false
+////        }
+////
+////        return
+////      } catch {}
+////    }
+//
+//    // If not or fail we use Ice Cubes own DeepL client.
+//  }
 
 
 

@@ -28,7 +28,6 @@
 		7002F72C2B2070F6006DD407 /* TrackerTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7002F72B2B2070F6006DD407 /* TrackerTab.swift */; };
 		700C9E282B32CDB30009038D /* CinephileApp+AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700C9E272B32CDB30009038D /* CinephileApp+AppDelegate.swift */; };
 		701F56EE2B2EBBE10043B71B /* AccountSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701F56ED2B2EBBE10043B71B /* AccountSettingView.swift */; };
-		701F56F02B2EC8FB0043B71B /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 701F56EF2B2EC8FB0043B71B /* Localizable.xcstrings */; };
 		701F56FB2B2EF0570043B71B /* Account in Frameworks */ = {isa = PBXBuildFile; productRef = 701F56FA2B2EF0570043B71B /* Account */; };
 		701F56FD2B2EF05A0043B71B /* AppAccount in Frameworks */ = {isa = PBXBuildFile; productRef = 701F56FC2B2EF05A0043B71B /* AppAccount */; };
 		701F56FF2B2EF05E0043B71B /* CinephileUI in Frameworks */ = {isa = PBXBuildFile; productRef = 701F56FE2B2EF05E0043B71B /* CinephileUI */; };
@@ -43,6 +42,7 @@
 		7062A2B62AF0F98600B99324 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7062A2B52AF0F98600B99324 /* SearchView.swift */; };
 		7062A2BB2AF107BD00B99324 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7062A2BA2AF107BD00B99324 /* SearchViewModel.swift */; };
 		7062A2CA2AF290B000B99324 /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7062A2C92AF290B000B99324 /* PostView.swift */; };
+		707405EC2B3C169C00539526 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 707405EB2B3C169C00539526 /* Localizable.xcstrings */; };
 		707960302AEBA0A700AB748D /* CinephileApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7079602F2AEBA0A700AB748D /* CinephileApp.swift */; };
 		707960342AEBA0A900AB748D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 707960332AEBA0A900AB748D /* Assets.xcassets */; };
 		707960372AEBA0A900AB748D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 707960362AEBA0A900AB748D /* Preview Assets.xcassets */; };
@@ -110,7 +110,6 @@
 		7002F72B2B2070F6006DD407 /* TrackerTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerTab.swift; sourceTree = "<group>"; };
 		700C9E272B32CDB30009038D /* CinephileApp+AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CinephileApp+AppDelegate.swift"; sourceTree = "<group>"; };
 		701F56ED2B2EBBE10043B71B /* AccountSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingView.swift; sourceTree = "<group>"; };
-		701F56EF2B2EC8FB0043B71B /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		701F56F32B2EEDB70043B71B /* Environment */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Environment; path = Cinephile/Packages/Environment; sourceTree = "<group>"; };
 		701F56F42B2EEE110043B71B /* Models */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Models; path = Cinephile/Packages/Models; sourceTree = "<group>"; };
 		701F56F52B2EEEC80043B71B /* Networking */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Networking; path = Cinephile/Packages/Networking; sourceTree = "<group>"; };
@@ -126,6 +125,7 @@
 		7062A2B52AF0F98600B99324 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		7062A2BA2AF107BD00B99324 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		7062A2C92AF290B000B99324 /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
+		707405EB2B3C169C00539526 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		7079602C2AEBA0A700AB748D /* Cinephile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cinephile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7079602F2AEBA0A700AB748D /* CinephileApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CinephileApp.swift; sourceTree = "<group>"; };
 		707960332AEBA0A900AB748D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -431,7 +431,7 @@
 				7062A2C82AF2909200B99324 /* Helpers */,
 				707960332AEBA0A900AB748D /* Assets.xcassets */,
 				707960352AEBA0A900AB748D /* Preview Content */,
-				701F56EF2B2EC8FB0043B71B /* Localizable.xcstrings */,
+				707405EB2B3C169C00539526 /* Localizable.xcstrings */,
 			);
 			path = Cinephile;
 			sourceTree = "<group>";
@@ -610,7 +610,7 @@
 				397998132B17A4EC00AB6594 /* episode-detail.json in Resources */,
 				39AB4F3A2B10FAD4005F4B51 /* cast.json in Resources */,
 				707960372AEBA0A900AB748D /* Preview Assets.xcassets in Resources */,
-				701F56F02B2EC8FB0043B71B /* Localizable.xcstrings in Resources */,
+				707405EC2B3C169C00539526 /* Localizable.xcstrings in Resources */,
 				707960342AEBA0A900AB748D /* Assets.xcassets in Resources */,
 				39AB4F3B2B10FAD4005F4B51 /* movie.json in Resources */,
 				397D96DF2B11F30300D87895 /* series.json in Resources */,

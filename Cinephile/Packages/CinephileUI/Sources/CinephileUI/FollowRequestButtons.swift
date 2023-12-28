@@ -21,7 +21,7 @@ public struct FollowRequestButtons: View {
           requestUpdated?()
         }
       } label: {
-        Text("account.follow-request.accept")
+          Text("account.follow-request.accept", bundle: .module)
           .frame(maxWidth: .infinity)
       }
       Button {
@@ -30,7 +30,7 @@ public struct FollowRequestButtons: View {
           requestUpdated?()
         }
       } label: {
-        Text("account.follow-request.reject")
+        Text("account.follow-request.reject", bundle: .module)
           .frame(maxWidth: .infinity)
       }
     }

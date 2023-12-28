@@ -35,7 +35,7 @@ struct StatusRowTextView: View {
   func makeCollapseButton() -> some View {
     if let _ = viewModel.lineLimit {
       HStack(alignment: .top) {
-        Text("status.show-full-post")
+        Text("status.show-full-post", bundle: .module)
           .font(.system(.subheadline, weight: .bold))
           .foregroundColor(.secondary)
         Spacer()
@@ -47,7 +47,7 @@ struct StatusRowTextView: View {
           Image(systemName: "chevron.down")
         }
         .buttonStyle(.bordered)
-        .accessibility(label: Text("status.show-full-post"))
+        .accessibility(label: Text("status.show-full-post", bundle: .module))
         .accessibilityHidden(true)
       }
       .contentShape(Rectangle())

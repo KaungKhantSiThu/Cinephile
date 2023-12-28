@@ -10,8 +10,8 @@ struct StatusRowReplyView: View {
         Group {
           if let mention = viewModel.status.mentions.first(where: { $0.id == accountId }) {
             HStack(spacing: 2) {
-              Image(systemName: "arrowshape.turn.up.left.circle.fill")
-              Text("status.row.was-reply \(mention.username)")
+              Image(systemName: "arrow.left.arrow.right")
+              Text("status.row.was-reply \(mention.username)", bundle: .module)
             }
 //            .accessibilityElement(children: .combine)
 //            .accessibilityLabel(

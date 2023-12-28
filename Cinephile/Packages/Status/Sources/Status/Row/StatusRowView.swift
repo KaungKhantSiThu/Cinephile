@@ -9,7 +9,7 @@ import SwiftUI
 
 @MainActor
 public struct StatusRowView: View {
-//  @Environment(\.openWindow) private var openWindow
+  @Environment(\.openWindow) private var openWindow
   @Environment(\.isInCaptureMode) private var isInCaptureMode: Bool
   @Environment(\.redactionReasons) private var reasons
   @Environment(\.isCompact) private var isCompact: Bool
@@ -28,9 +28,9 @@ public struct StatusRowView: View {
     _viewModel = .init(initialValue: viewModel)
   }
 
-//  var contextMenu: some View {
-//    StatusRowContextMenu(viewModel: viewModel, showTextForSelection: $showSelectableText)
-//  }
+  var contextMenu: some View {
+    StatusRowContextMenu(viewModel: viewModel, showTextForSelection: $showSelectableText)
+  }
 
   public var body: some View {
     HStack(spacing: 0) {
@@ -129,26 +129,26 @@ public struct StatusRowView: View {
         }
       }
     }
-//    .contextMenu {
-//      contextMenu
-//        .onAppear {
-//          Task {
-//            await viewModel.loadAuthorRelationship()
-//          }
-//        }
-//    }
-//    .swipeActions(edge: .trailing) {
-//      // The actions associated with the swipes are exposed as custom accessibility actions and there is no way to remove them.
-//      if !isCompact, accessibilityVoiceOverEnabled == false {
-//        StatusRowSwipeView(viewModel: viewModel, mode: .trailing)
-//      }
-//    }
-//    .swipeActions(edge: .leading) {
-//      // The actions associated with the swipes are exposed as custom accessibility actions and there is no way to remove them.
-//      if !isCompact, accessibilityVoiceOverEnabled == false {
-//        StatusRowSwipeView(viewModel: viewModel, mode: .leading)
-//      }
-//    }
+    .contextMenu {
+      contextMenu
+        .onAppear {
+          Task {
+            await viewModel.loadAuthorRelationship()
+          }
+        }
+    }
+    .swipeActions(edge: .trailing) {
+      // The actions associated with the swipes are exposed as custom accessibility actions and there is no way to remove them.
+      if !isCompact, accessibilityVoiceOverEnabled == false {
+        StatusRowSwipeView(viewModel: viewModel, mode: .trailing)
+      }
+    }
+    .swipeActions(edge: .leading) {
+      // The actions associated with the swipes are exposed as custom accessibility actions and there is no way to remove them.
+      if !isCompact, accessibilityVoiceOverEnabled == false {
+        StatusRowSwipeView(viewModel: viewModel, mode: .leading)
+      }
+    }
     .listRowBackground(viewModel.highlightRowColor)
     .listRowInsets(.init(top: 12,
                          leading: .layoutPadding,
@@ -181,18 +181,18 @@ public struct StatusRowView: View {
       }
     }
     .alert(isPresented: $viewModel.showDeleteAlert, content: {
-      Alert(
-        title: Text("status.action.delete.confirm.title"),
-        message: Text("status.action.delete.confirm.message"),
-        primaryButton: .destructive(
-          Text("status.action.delete"))
-        {
-          Task {
-            await viewModel.delete()
-          }
-        },
-        secondaryButton: .cancel()
-      )
+        Alert(
+            title: Text("status.action.delete.confirm.title", bundle: .module),
+          message: Text("status.action.delete.confirm.message", bundle: .module),
+          primaryButton: .destructive(
+            Text("status.action.delete", bundle: .module))
+          {
+            Task {
+              await viewModel.delete()
+            }
+          },
+          secondaryButton: .cancel()
+        )
     })
     .alignmentGuide(.listRowSeparatorLeading) { _ in
       -100
@@ -281,13 +281,13 @@ public struct StatusRowView: View {
 
   private func makeFilterView(filter: Filter) -> some View {
     HStack {
-      Text("status.filter.filtered-by-\(filter.title)")
+      Text("status.filter.filtered-by-\(filter.title)", bundle: .module)
       Button {
         withAnimation {
           viewModel.isFiltered = false
         }
       } label: {
-        Text("status.filter.show-anyway")
+        Text("status.filter.show-anyway", bundle: .module)
       }
     }
     .accessibilityAction {
@@ -431,22 +431,3 @@ public struct StatusRowView: View {
 //    return Text("")
 //  }
 //}
-
-//#Preview {
-//    StatusRowView(viewModel: .init(status: .preview, client: Client(server: "mastodon.social"), routerPath: RouterPath()))
-//        .environment(Theme.shared)
-//        .environment(QuickLook.shared)
-//        .environment(\.isInCaptureMode, false)
-//        .environment(\.isCompact, false)
-//        .environment(\.isStatusFocused, false)
-//        .environment(\.indentationLevel, 0)
-//        .environment(\.isHomeTimeline, true)
-//}
-
-//@Environment(\.isInCaptureMode) private var isInCaptureMode: Bool
-//@Environment(\.redactionReasons) private var reasons
-//@Environment(\.isCompact) private var isCompact: Bool
-//@Environment(\.accessibilityVoiceOverEnabled) private var accessibilityVoiceOverEnabled
-//@Environment(\.isStatusFocused) private var isFocused
-//@Environment(\.indentationLevel) private var indentationLevel
-//@Environment(\.isHomeTimeline) private var isHomeTimeline

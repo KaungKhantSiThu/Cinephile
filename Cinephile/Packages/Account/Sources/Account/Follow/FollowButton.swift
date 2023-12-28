@@ -117,7 +117,7 @@ public struct FollowButton: View {
               await viewModel.toggleReboosts()
             }
           } label: {
-            Image(viewModel.relationship.showingReblogs ? "Rocket.Fill" : "Rocket")
+            Image(viewModel.relationship.showingReblogs ? "arrowshape.turn.up.backward.circle.fill" : "arrowshape.turn.up.backward.circle")
           }
           .accessibilityLabel("accessibility.tabs.profile.user-reblogs.label")
           .accessibilityValue(viewModel.relationship.showingReblogs ? "accessibility.general.toggle.on" : "accessibility.general.toggle.off")

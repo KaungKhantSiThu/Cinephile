@@ -40,12 +40,16 @@ struct DraftsListView: View {
       }
       .toolbar {
         ToolbarItem(placement: .navigationBarLeading) {
-          Button("action.cancel", action: { dismiss() })
+            Button {
+                dismiss()
+            } label: {
+                Text("action.cancel", bundle: .module)
+            }
         }
       }
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
-      .navigationTitle("status.editor.drafts.navigation-title")
+      .navigationTitle(Text("status.editor.drafts.navigation-title", bundle: .module))
       .navigationBarTitleDisplayMode(.inline)
     }
   }

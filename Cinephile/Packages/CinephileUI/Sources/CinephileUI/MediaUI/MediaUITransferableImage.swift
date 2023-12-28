@@ -12,11 +12,10 @@ struct MediaUIImageTransferable: Codable, Transferable {
     }
     return Image(uiImage: uiimage)
   }
-
+    
   static var transferRepresentation: some TransferRepresentation {
     ProxyRepresentation { media in
       await media.fetchAsImage()
     }
-
   }
 }
