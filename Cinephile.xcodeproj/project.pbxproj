@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3910A41D2B1EF51D00EBE18A /* SingupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3910A41C2B1EF51D00EBE18A /* SingupView.swift */; };
 		3910A41F2B1EF52300EBE18A /* AddAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3910A41E2B1EF52300EBE18A /* AddAccountView.swift */; };
 		39389BEA2B203ECD0087F64D /* FormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39389BE92B203ECD0087F64D /* FormViewModel.swift */; };
 		397998112B17A4CB00AB6594 /* season-detail.json in Resources */ = {isa = PBXBuildFile; fileRef = 397998102B17A4CB00AB6594 /* season-detail.json */; };
@@ -43,6 +42,7 @@
 		7062A2BB2AF107BD00B99324 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7062A2BA2AF107BD00B99324 /* SearchViewModel.swift */; };
 		7062A2CA2AF290B000B99324 /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7062A2C92AF290B000B99324 /* PostView.swift */; };
 		707405EC2B3C169C00539526 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 707405EB2B3C169C00539526 /* Localizable.xcstrings */; };
+		707405EE2B3D5C9400539526 /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707405ED2B3D5C9400539526 /* SignupView.swift */; };
 		707960302AEBA0A700AB748D /* CinephileApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7079602F2AEBA0A700AB748D /* CinephileApp.swift */; };
 		707960342AEBA0A900AB748D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 707960332AEBA0A900AB748D /* Assets.xcassets */; };
 		707960372AEBA0A900AB748D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 707960362AEBA0A900AB748D /* Preview Assets.xcassets */; };
@@ -89,7 +89,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3910A41C2B1EF51D00EBE18A /* SingupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingupView.swift; sourceTree = "<group>"; };
 		3910A41E2B1EF52300EBE18A /* AddAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAccountView.swift; sourceTree = "<group>"; };
 		39389BE92B203ECD0087F64D /* FormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewModel.swift; sourceTree = "<group>"; };
 		397998102B17A4CB00AB6594 /* season-detail.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "season-detail.json"; sourceTree = "<group>"; };
@@ -126,6 +125,7 @@
 		7062A2BA2AF107BD00B99324 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		7062A2C92AF290B000B99324 /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
 		707405EB2B3C169C00539526 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		707405ED2B3D5C9400539526 /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 		7079602C2AEBA0A700AB748D /* Cinephile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cinephile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7079602F2AEBA0A700AB748D /* CinephileApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CinephileApp.swift; sourceTree = "<group>"; };
 		707960332AEBA0A900AB748D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -198,8 +198,8 @@
 		3910A41B2B1EF49D00EBE18A /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
-				3910A41C2B1EF51D00EBE18A /* SingupView.swift */,
 				3910A41E2B1EF52300EBE18A /* AddAccountView.swift */,
+				707405ED2B3D5C9400539526 /* SignupView.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -636,6 +636,7 @@
 				70BCF74C2B2C36F000D7AB7E /* TimelineTab.swift in Sources */,
 				7062A2B62AF0F98600B99324 /* SearchView.swift in Sources */,
 				70525BAE2AF7635F006E7CD6 /* NotificationsView.swift in Sources */,
+				707405EE2B3D5C9400539526 /* SignupView.swift in Sources */,
 				7035F6672AF7587E00F42910 /* TimelineView.swift in Sources */,
 				70F610C92B302C53006D9A4C /* CategorialMovieView.swift in Sources */,
 				701F56EE2B2EBBE10043B71B /* AccountSettingView.swift in Sources */,
@@ -671,7 +672,6 @@
 				708B802C2B31E8AF00D72A35 /* SafariRouter.swift in Sources */,
 				7084D70E2AEE9876008EF753 /* Helper.swift in Sources */,
 				70BCF74E2B2C376600D7AB7E /* NotificationsTab.swift in Sources */,
-				3910A41D2B1EF51D00EBE18A /* SingupView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
