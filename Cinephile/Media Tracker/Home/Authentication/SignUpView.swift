@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SingUpView: View {
+struct SignUpView: View {
     
     @StateObject private var formViewModel = FormViewModel()
     
@@ -49,5 +49,5 @@ struct SingUpView: View {
 }
 
 #Preview {
-    SingupView()
+    SignUpView()
 }
