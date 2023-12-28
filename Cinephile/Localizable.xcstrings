@@ -7,6 +7,9 @@
     "@mgkaung" : {
 
     },
+    "#%@" : {
+
+    },
     "3" : {
 
     },
@@ -16,12 +19,15 @@
     "12" : {
 
     },
+    "accessibility.tabs.timeline.add-account" : {
+
+    },
     "account.action.edit-filters" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Edit Filters"
+            "value" : "Edit filters"
           }
         }
       }
@@ -31,7 +37,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Info"
+            "value" : "Edit info"
           }
         }
       }
@@ -59,7 +65,17 @@
     "Accounts" : {
 
     },
-    "action.done" : {
+    "action.cancel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        }
+      }
+    },
+    "Add" : {
 
     },
     "Add Moive" : {
@@ -72,9 +88,6 @@
 
     },
     "Cast" : {
-
-    },
-    "Cinephile" : {
 
     },
     "Confirm Password" : {
@@ -93,6 +106,12 @@
 
     },
     "Explore" : {
+
+    },
+    "Kelvin Gao" : {
+
+    },
+    "Log out" : {
 
     },
     "Login" : {
@@ -122,13 +141,33 @@
     "Remove" : {
 
     },
+    "report.action.send" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Send"
+          }
+        }
+      }
+    },
+    "report.comment.placeholder" : {
+
+    },
+    "report.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Report"
+          }
+        }
+      }
+    },
     "Retry" : {
 
     },
     "Search Movies, Series, Cast" : {
-
-    },
-    "settings.account.add" : {
 
     },
     "SignIn" : {
@@ -139,6 +178,46 @@
     },
     "There was an error regarding %@" : {
 
+    },
+    "timeline.filter.lists" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lists"
+          }
+        }
+      }
+    },
+    "timeline.filter.local" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Local"
+          }
+        }
+      }
+    },
+    "timeline.filter.tag-groups" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tag groups"
+          }
+        }
+      }
+    },
+    "timeline.filter.tags" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tags"
+          }
+        }
+      }
     },
     "Top Gun: Maverick is a thrilling sequel that surpasses the original. Tom Cruise delivers a stellar performance as the fearless and rebellious pilot who faces his demons and mentors a new generation of aviators. The action scenes are breathtaking and realistic, showcasing the best of modern fighter jets." : {
 

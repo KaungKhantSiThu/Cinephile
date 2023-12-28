@@ -3,10 +3,10 @@ import Models
 
 public enum Statuses: Endpoint {
 
-//  case postStatus(json: StatusData)
-//  case editStatus(id: String, json: StatusData)
-//  case status(id: String)
-//  case context(id: String)
+  case postStatus(json: StatusData)
+  case editStatus(id: String, json: StatusData)
+  case status(id: String)
+  case context(id: String)
     
   case favorite(id: String)
   case unfavorite(id: String)
@@ -17,26 +17,26 @@ public enum Statuses: Endpoint {
     
   case favoritedBy(id: String, maxId: String?)
     
-//  case pin(id: String)
-//  case unpin(id: String)
+  case pin(id: String)
+  case unpin(id: String)
     
   case bookmark(id: String)
   case unbookmark(id: String)
     
-//  case history(id: String)
+  case history(id: String)
   case translate(id: String, lang: String?)
   case report(accountId: String, statusId: String, comment: String)
 
   public func path() -> String {
     switch self {
-//    case .postStatus:
-//      "statuses"
-//    case let .status(id):
-//      "statuses/\(id)"
-//    case let .editStatus(id, _):
-//      "statuses/\(id)"
-//    case let .context(id):
-//      "statuses/\(id)/context"
+    case .postStatus:
+      "statuses"
+    case let .status(id):
+      "statuses/\(id)"
+    case let .editStatus(id, _):
+      "statuses/\(id)"
+    case let .context(id):
+      "statuses/\(id)/context"
     case let .favorite(id):
       "statuses/\(id)/favourite"
     case let .unfavorite(id):
@@ -49,16 +49,16 @@ public enum Statuses: Endpoint {
       "statuses/\(id)/reblogged_by"
     case let .favoritedBy(id, _):
       "statuses/\(id)/favourited_by"
-//    case let .pin(id):
-//      "statuses/\(id)/pin"
-//    case let .unpin(id):
-//      "statuses/\(id)/unpin"
+    case let .pin(id):
+      "statuses/\(id)/pin"
+    case let .unpin(id):
+      "statuses/\(id)/unpin"
     case let .bookmark(id):
       "statuses/\(id)/bookmark"
     case let .unbookmark(id):
       "statuses/\(id)/unbookmark"
-//    case let .history(id):
-//      "statuses/\(id)/history"
+    case let .history(id):
+      "statuses/\(id)/history"
     case let .translate(id, _):
       "statuses/\(id)/translate"
     case .report:
@@ -86,16 +86,16 @@ public enum Statuses: Endpoint {
     }
   }
 
-//  public var jsonValue: Encodable? {
-//    switch self {
-//    case let .postStatus(json):
-//      json
-//    case let .editStatus(_, json):
-//      json
-//    default:
-//      nil
-//    }
-//  }
+  public var jsonValue: Encodable? {
+    switch self {
+    case let .postStatus(json):
+      json
+    case let .editStatus(_, json):
+      json
+    default:
+      nil
+    }
+  }
 }
 
 public struct StatusData: Encodable, Sendable {

@@ -1,9 +1,11 @@
+//
+//  SignupView.swift
+//  Cinephile
+//
+//  Created by Kaung Khant Si Thu on 28/12/2023.
+//
+
 import SwiftUI
-import Networking
-import Models
-import SafariServices
-import AuthenticationServices
-import AppAccount
 
 struct SignUpView: View {
     
@@ -29,12 +31,7 @@ struct SignUpView: View {
                         
                     }
                 }
-                Button(action: {
-                    let model = SignUpModel(username: formViewModel.username, email: formViewModel.email, password: formViewModel.password)
-                    SignUpViewModel.shared.signUp(user: model) { result in
-                        print(result)
-                    }
-                }) {
+                Button(action: {}) {
                     RoundedRectangle(cornerRadius: 10)
                         .frame(height: 60)
                         .overlay(

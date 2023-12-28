@@ -9,6 +9,7 @@ import SwiftUI
 import Environment
 import Networking
 import Models
+import CinephileUI
 
 @MainActor
 public struct AccountDetailView: View {
@@ -18,6 +19,8 @@ public struct AccountDetailView: View {
     @Environment(CurrentAccount.self) private var currentAccount
     @Environment(CurrentInstance.self) private var currentInstance
     @Environment(UserPreferences.self) private var preferences
+    @Environment(Theme.self) private var theme
+
     @Environment(Client.self) private var client
     @Environment(RouterPath.self) private var routerPath
     
@@ -112,6 +115,33 @@ public struct AccountDetailView: View {
             Text(error.localizedDescription)
         }
     }
+    
+//    @ViewBuilder
+//    private var pinnedPostsView: some View {
+//      if !viewModel.pinned.isEmpty {
+//        Label("account.post.pinned", systemImage: "pin.fill")
+//          .accessibilityAddTraits(.isHeader)
+//          .font(.scaledFootnote)
+//          .foregroundStyle(.secondary)
+//          .fontWeight(.semibold)
+//          .listRowInsets(.init(top: 0,
+//                               leading: 12,
+//                               bottom: 0,
+//                               trailing: .layoutPadding))
+//          .listRowSeparator(.hidden)
+//          .listRowBackground(theme.primaryBackgroundColor)
+//        ForEach(viewModel.pinned) { status in
+////          StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
+//        }
+//        Rectangle()
+//          .fill(theme.secondaryBackgroundColor)
+//          .frame(height: 12)
+//          .listRowInsets(.init())
+//          .listRowSeparator(.hidden)
+//          .accessibilityHidden(true)
+//      }
+//    }
+    
     
     @ToolbarContentBuilder
     private var toolbarContent: some ToolbarContent {

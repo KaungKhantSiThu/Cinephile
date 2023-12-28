@@ -1,0 +1,115 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "@%@" : {
+
+    },
+    "#%@" : {
+
+    },
+    "%lld" : {
+
+    },
+    "accessibility.tabs.timeline.new-post.inputLabel1" : {
+
+    },
+    "accessibility.tabs.timeline.new-post.inputLabel2" : {
+
+    },
+    "accessibility.tabs.timeline.new-post.label" : {
+
+    },
+    "account.follow-request.accept" : {
+
+    },
+    "account.follow-request.reject" : {
+
+    },
+    "account.followers" : {
+
+    },
+    "account.following" : {
+
+    },
+    "account.joined" : {
+
+    },
+    "account.posts" : {
+
+    },
+    "alert.button.ok" : {
+
+    },
+    "day" : {
+
+    },
+    "design.tag.n-posts-from-n-participants %lld %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "design.tag.n-posts-from-n-participants %1$lld %2$lld"
+          }
+        }
+      }
+    },
+    "enum.avatar-position.leading" : {
+
+    },
+    "enum.avatar-position.top" : {
+
+    },
+    "enum.avatar-shape.circle" : {
+
+    },
+    "enum.avatar-shape.rounded" : {
+
+    },
+    "enum.status-actions-display.all" : {
+
+    },
+    "enum.status-actions-display.no-buttons" : {
+
+    },
+    "enum.status-actions-display.only-buttons" : {
+
+    },
+    "enum.status-display-style.compact" : {
+
+    },
+    "enum.status-display-style.large" : {
+
+    },
+    "enum.status-display-style.medium" : {
+
+    },
+    "Hyper Legible" : {
+
+    },
+    "Open Dyslexic" : {
+
+    },
+    "settings.display.font.custom" : {
+
+    },
+    "settings.display.font.system" : {
+
+    },
+    "SF Rounded" : {
+
+    },
+    "status.editor.media.image-description" : {
+
+    },
+    "status.image.alt-text.abbreviation" : {
+
+    },
+    "status.media.contextmenu.share" : {
+
+    },
+    "uses" : {
+
+    }
+  },
+  "version" : "1.0"
+}

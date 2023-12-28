@@ -73,3 +73,23 @@ extension Tag: Sendable {}
 extension Tag.History: Sendable {}
 extension FeaturedTag: Sendable {}
 
+public extension Array where Element == Models.Tag {
+    static let preview = [
+        Tag(name: "TagOne", 
+            url: "http://cinephile.social/tags/TagOne",
+            following: false,
+            history: [Tag.History(day: "1668297600", accounts: "1", uses: "1")]
+           ),
+        Tag(name: "TagTwo",
+            url: "http://cinephile.social/tags/TagTwo",
+            following: false,
+            history: [Tag.History(day: "1668297600", accounts: "1", uses: "1")]
+           ),
+        Tag(name: "TagThree",
+            url: "http://cinephile.social/tags/TagThree",
+            following: false,
+            history: [Tag.History(day: "1668297600", accounts: "1", uses: "1")]
+           ),
+    ]
+}
+

@@ -6,7 +6,7 @@ import AuthenticationServices
 import AppAccount
 
 @MainActor
-struct LoginView: View {
+struct AddAccountView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.webAuthenticationSession) private var webAuthenticationSession

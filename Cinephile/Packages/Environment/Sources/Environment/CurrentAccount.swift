@@ -16,8 +16,8 @@ import Observation
   private static var accountsCache: [String: Account] = [:]
 
   public private(set) var account: Account?
-//  public private(set) var lists: [List] = []
-//  public private(set) var tags: [Tag] = []
+  public private(set) var lists: [List] = []
+  public private(set) var tags: [Tag] = []
   public private(set) var followRequests: [Account] = []
   public private(set) var isUpdating: Bool = false
   public private(set) var updatingFollowRequestAccountIds = Set<String>()
@@ -27,13 +27,13 @@ import Observation
 
   public static let shared = CurrentAccount()
 
-//  public var sortedLists: [List] {
-//    lists.sorted { $0.title.lowercased() < $1.title.lowercased() }
-//  }
-//
-//  public var sortedTags: [Tag] {
-//    tags.sorted { $0.name.lowercased() < $1.name.lowercased() }
-//  }
+  public var sortedLists: [List] {
+    lists.sorted { $0.title.lowercased() < $1.title.lowercased() }
+  }
+
+  public var sortedTags: [Tag] {
+    tags.sorted { $0.name.lowercased() < $1.name.lowercased() }
+  }
 
   private init() {}
 
@@ -49,9 +49,9 @@ import Observation
     await withTaskGroup(of: Void.self) { group in
       group.addTask { await self.fetchCurrentAccount() }
       group.addTask { await self.fetchConnections() }
-//      group.addTask { await self.fetchLists() }
-//      group.addTask { await self.fetchFollowedTags() }
-//      group.addTask { await self.fetchFollowerRequests() }
+      group.addTask { await self.fetchLists() }
+      group.addTask { await self.fetchFollowedTags() }
+      group.addTask { await self.fetchFollowerRequests() }
     }
   }
 
@@ -77,7 +77,6 @@ import Observation
     Self.accountsCache[client.id] = account
   }
 
-    /*
   public func fetchLists() async {
     guard let client, client.isAuth else { return }
     do {
@@ -159,6 +158,5 @@ import Observation
       await fetchFollowerRequests()
     } catch {}
   }
-     */
 }
 

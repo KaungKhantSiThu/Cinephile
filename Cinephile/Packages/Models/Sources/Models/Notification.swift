@@ -9,19 +9,19 @@ public struct Notification: Decodable, Identifiable, Equatable {
   public let type: String
   public let createdAt: ServerDate
   public let account: Account
-//  public let status: Status?
+  public let status: Status?
 
   public var supportedType: NotificationType? {
     .init(rawValue: type)
   }
 
-//  public static func placeholder() -> Notification {
-//    .init(id: UUID().uuidString,
-//          type: NotificationType.favourite.rawValue,
-//          createdAt: ServerDate(),
-//          account: .placeholder(),
-//          status: .placeholder())
-//  }
+  public static func placeholder() -> Notification {
+    .init(id: UUID().uuidString,
+          type: NotificationType.favourite.rawValue,
+          createdAt: ServerDate(),
+          account: .placeholder(),
+          status: .preview)
+  }
 }
 
 extension Notification: Sendable {}

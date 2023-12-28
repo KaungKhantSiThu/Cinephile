@@ -88,7 +88,6 @@ struct SearchView: View {
             .navigationTitle("Explore")
             
         }
-        
     }
     
     private var searchResultsView: some View {
