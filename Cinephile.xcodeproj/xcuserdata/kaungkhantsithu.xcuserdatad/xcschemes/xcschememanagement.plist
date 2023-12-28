@@ -51,6 +51,21 @@
 			<key>orderHint</key>
 			<integer>16</integer>
 		</dict>
+		<key>SQLite (Playground) 1.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>17</integer>
+		</dict>
+		<key>SQLite (Playground) 2.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>18</integer>
+		</dict>
+		<key>SQLite (Playground).xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>16</integer>
+		</dict>
 	</dict>
 </dict>
 </plist>

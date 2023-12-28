@@ -1,6 +1,11 @@
 import SwiftUI
+import Networking
+import Models
+import SafariServices
+import AuthenticationServices
+import AppAccount
 
-struct SingupView: View {
+struct SignUpView: View {
     
     @StateObject private var formViewModel = FormViewModel()
     
@@ -24,7 +29,12 @@ struct SingupView: View {
                         
                     }
                 }
-                Button(action: {}) {
+                Button(action: {
+                    let model = SignUpModel(username: formViewModel.username, email: formViewModel.email, password: formViewModel.password)
+                    SignUpViewModel.shared.signUp(user: model) { result in
+                        print(result)
+                    }
+                }) {
                     RoundedRectangle(cornerRadius: 10)
                         .frame(height: 60)
                         .overlay(
@@ -42,5 +52,5 @@ struct SingupView: View {
 }
 
 #Preview {
-    SingupView()
+    SignUpView()
 }

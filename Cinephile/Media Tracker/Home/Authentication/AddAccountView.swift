@@ -25,6 +25,15 @@ struct AddAccountView: View {
     var body: some View {
         NavigationStack {
             VStack {
+                NavigationLink(destination: SignUpView()) {
+                         Text("SignIn")
+                             .padding()
+                             .background(Color.blue)
+                             .foregroundColor(.white)
+                             .cornerRadius(10)
+                     }
+                     .buttonStyle(PlainButtonStyle())
+                
                 Button(action: {
                     withAnimation {
                         isSigninIn = true
