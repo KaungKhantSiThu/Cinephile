@@ -28,15 +28,7 @@ struct MovieDetailView: View {
                     Rating(voteCount: data.movie.voteCount ?? 0, voteAverage: data.movie.voteAverage ?? 0.0)
                     Button {
                         Task {
-//                            let dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: Date())
-                            let localNotification = MediaNotification(
-                                                                      title: "Cinephile Release Alert",
-                                                                      body: "\(data.movie.title) is out tomorrow ",
-                                                                      timeInterval: 5,
-                                                                      repeats: false)
-//                            localNotification.imageURL = data.movie.posterPath
-                            await notificationManager.schedule(localNotification: localNotification)
-                            print("Scheduled!!!")
+                            notificationManager.notificationAttachment(name: data.movie.title, url: viewModel.posterImageURL)
                         }
                         } label: {
                             Label("Add Moive", systemImage: "plus.circle.fill")
@@ -50,6 +42,24 @@ struct MovieDetailView: View {
                 
                 CastMemberView(castMembers: data.castMembers)
             }
+        }
+    }
+}
+
+extension UNNotificationAttachment {
+    static func create(image imageData: Data, identifier: String) -> UNNotificationAttachment? {
+        let fileManager = FileManager.default
+        let tempDirectory = NSTemporaryDirectory()
+        let imageFileIdentifier = identifier + ".jpg"
+        let imageFileURL = URL(fileURLWithPath: tempDirectory).appendingPathComponent(imageFileIdentifier)
+
+        do {
+            try imageData.write(to: imageFileURL)
+            let imageAttachment = try UNNotificationAttachment(identifier: identifier, url: imageFileURL, options: nil)
+            return imageAttachment
+        } catch {
+            print("Error creating image attachment: \(error)")
+            return nil
         }
     }
 }
