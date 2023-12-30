@@ -2,6 +2,9 @@ import Bodega
 import Models
 import Networking
 import SwiftUI
+import OSLog
+
+private let logger = Logger(subsystem: "Timeline", category: "Cache")
 
 public actor TimelineCache {
   private func storageFor(_ client: String) -> SQLiteStorageEngine {
@@ -18,10 +21,13 @@ public actor TimelineCache {
   }
 
   public func clearCache(for client: String) async {
+      logger.log("Clearing cache")
     let engine = storageFor(client)
     do {
       try await engine.removeAllData()
-    } catch {}
+    } catch {
+        logger.error("Cache Clearing Error: \(error.localizedDescription)")
+    }
   }
 
   func set(statuses: [Status], client: String) async {

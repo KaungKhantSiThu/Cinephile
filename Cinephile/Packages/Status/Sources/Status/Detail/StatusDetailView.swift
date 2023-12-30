@@ -104,7 +104,7 @@ public struct StatusDetailView: View {
         viewModel.handleEvent(event: lastEvent, currentAccount: currentAccount.account)
       }
     }
-    .navigationTitle(viewModel.title)
+    .navigationTitle(Text(viewModel.title, bundle: .module))
     .navigationBarTitleDisplayMode(.inline)
   }
 

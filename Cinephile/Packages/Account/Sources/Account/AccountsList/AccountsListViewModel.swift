@@ -2,6 +2,9 @@ import Models
 import Networking
 import Observation
 import SwiftUI
+import OSLog
+
+private let logger = Logger(subsystem: "Account", category: "ListViewModel")
 
 public enum AccountsListMode {
   case following(accountId: String), followers(accountId: String)
@@ -50,6 +53,7 @@ public enum AccountsListMode {
   private var nextPageId: String?
 
   init(mode: AccountsListMode) {
+      logger.info("Initializing AccountsListViewModel")
     self.mode = mode
   }
 
@@ -58,6 +62,7 @@ public enum AccountsListMode {
     do {
       state = .loading
       let link: LinkHandler?
+        
       switch mode {
       case let .followers(accountId):
         (accounts, link) = try await client.getWithLink(endpoint: Accounts.followers(id: accountId,
@@ -75,13 +80,16 @@ public enum AccountsListMode {
         self.accounts = accounts
         link = nil
       }
+        
       nextPageId = link?.maxId
       relationships = try await client.get(endpoint:
         Accounts.relationships(ids: accounts.map(\.id)))
       state = .display(accounts: accounts,
                        relationships: relationships,
                        nextPageState: link?.maxId != nil ? .hasNextPage : .none)
-    } catch {}
+    } catch {
+        logger.error("Failed to fetch accounts: \(error.localizedDescription)")
+    }
   }
 
   func fetchNextPage() async {
@@ -117,7 +125,8 @@ public enum AccountsListMode {
                        relationships: relationships,
                        nextPageState: link?.maxId != nil ? .hasNextPage : .none)
     } catch {
-      print(error)
+        logger.error("Failed to fetch accounts in next page: \(error.localizedDescription)")
+
     }
   }
 }

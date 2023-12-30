@@ -12,6 +12,9 @@ import Environment
 import Models
 import Networking
 import Timeline
+import Nuke
+import SwiftData
+import CinephileUI
 
 @MainActor
 struct SettingsTab: View {
@@ -100,6 +103,22 @@ struct SettingsTab: View {
             }
             addAccountButton
         }
+    }
+    
+    private var cacheSection: some View {
+      Section("settings.section.cache") {
+        if cachedRemoved {
+          Text("action.done")
+            .transition(.move(edge: .leading))
+        } else {
+          Button("settings.cache-media.clear", role: .destructive) {
+            ImagePipeline.shared.cache.removeAll()
+            withAnimation {
+              cachedRemoved = true
+            }
+          }
+        }
+      }
     }
     
     private var addAccountButton: some View {

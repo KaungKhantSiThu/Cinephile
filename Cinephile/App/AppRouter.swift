@@ -100,7 +100,6 @@ extension View {
               StatusEditHistoryView(statusId: status)
             case .settings:
               SettingsTab(popToRootTab: .constant(.settings), isModal: true)
-                .preferredColorScheme(Theme.shared.selectedScheme == .dark ? .dark : .light)
             case let .report(status):
               ReportView(status: status)
             case let .shareImage(image, status):

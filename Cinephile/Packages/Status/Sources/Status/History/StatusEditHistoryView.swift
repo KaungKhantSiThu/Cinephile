@@ -3,6 +3,9 @@ import Models
 import Networking
 import SwiftUI
 import EmojiText
+import OSLog
+
+private let logger = Logger(subsystem: "Status", category: "EditHistoryView")
 
 public struct StatusEditHistoryView: View {
   @Environment(\.dismiss) private var dismiss
@@ -29,13 +32,14 @@ public struct StatusEditHistoryView: View {
                   .font(.scaledBody)
                   .emojiSize(Font.scaledBodyFont.emojiSize)
                   .emojiBaselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
-                Group {
-                  Text(edit.createdAt.asDate, style: .date) +
-                    Text("status.summary.at-time", bundle: .module) +
-                    Text(edit.createdAt.asDate, style: .time)
-                }
-                .font(.footnote)
-                .foregroundStyle(.secondary)
+//                Group {
+//                  Text(edit.createdAt.asDate, style: .date) +
+//                    Text("status.summary.at-time", bundle: .module) +
+//                    Text(edit.createdAt.asDate, style: .time)
+//                }
+//                .font(.footnote)
+//                .foregroundStyle(.secondary)
+                  StatusRowHistory(editedAt: edit.createdAt.asDate)
               }
             }
           } else {
@@ -45,20 +49,25 @@ public struct StatusEditHistoryView: View {
               Spacer()
             }
           }
-        }.listRowBackground(theme.primaryBackgroundColor)
+        }
+        .listRowBackground(theme.primaryBackgroundColor)
       }
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
-          Button("action.done", action: { dismiss() })
+            Button {
+                dismiss()
+            } label: {
+                Text("action.done", bundle: .module)
+            }
         }
       }
-      .navigationTitle("status.summary.edit-history")
+      .navigationTitle(Text("status.summary.edit-history", bundle: .module))
       .navigationBarTitleDisplayMode(.inline)
       .task {
         do {
           history = try await client.get(endpoint: Statuses.history(id: statusId))
         } catch {
-          print(error)
+            logger.error("Error fetching Status's history: \(error.localizedDescription)")
         }
       }
       .listStyle(.plain)

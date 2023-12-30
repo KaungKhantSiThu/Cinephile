@@ -262,7 +262,7 @@ struct TimelineTab: View {
       }
         
       switch timeline {
-      case let .list(_):
+      case .list:
         ToolbarItem {
           Button {
 //            routerPath.presentedSheet = .listEdit(list: list)

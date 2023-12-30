@@ -8,6 +8,9 @@
 import SwiftUI
 import Models
 import Networking
+import OSLog
+
+private let logger = Logger(subsystem: "Account", category: "EditAccountViewModel")
 
 @MainActor
 @Observable class EditAccountViewModel {
@@ -42,7 +45,9 @@ import Networking
   func fetchAccount() async {
     guard let client else { return }
     do {
+        logger.info("Fetching Account for Editing")
       let account: Account = try await client.get(endpoint: Accounts.verifyCredentials)
+        logger.info("Fetched Account for Editing")
       displayName = account.displayName ?? ""
       note = account.source?.note ?? ""
       postPrivacy = account.source?.privacy ?? .pub
@@ -54,7 +59,9 @@ import Networking
       withAnimation {
         isLoading = false
       }
-    } catch {}
+    } catch {
+        logger.error("Failed to Fetch Account for Editing: \(error.localizedDescription)")
+    }
   }
 
   func save() async {
@@ -67,13 +74,18 @@ import Networking
                                        locked: isLocked,
                                        discoverable: isDiscoverable,
                                        fieldsAttributes: fields.map { .init(name: $0.name, value: $0.value) })
+        logger.info("Updating account information")
       let response = try await client?.patch(endpoint: Accounts.updateCredentials(json: data))
       if response?.statusCode != 200 {
+          logger.error("Failed Updating account information: Response's Status code: \(response?.statusCode ?? 0, privacy: .public)")
         saveError = true
+      } else {
+          logger.info("Successfully updated account information")
       }
       isSaving = false
     } catch {
       isSaving = false
+        logger.error("Failed Updating account information: \(error.localizedDescription)")
       saveError = true
     }
   }

@@ -10,12 +10,15 @@ import Networking
 import Environment
 import Models
 import CinephileUI
+import Status
+import OSLog
 
+private let logger = Logger(subsystem: "Account", category: "EditAccountView")
 @MainActor
 public struct EditAccountView: View {
   @Environment(\.dismiss) private var dismiss
   @Environment(Client.self) private var client
-//  @Environment(Theme.self) private var theme
+  @Environment(Theme.self) private var theme
   @Environment(UserPreferences.self) private var userPreferences
 
   @State private var viewModel = EditAccountViewModel()
@@ -36,18 +39,20 @@ public struct EditAccountView: View {
       }
       .environment(\.editMode, .constant(.active))
       .scrollContentBackground(.hidden)
-//      .background(theme.secondaryBackgroundColor)
       .scrollDismissesKeyboard(.immediately)
-      .navigationTitle("account.edit.navigation-title")
+      .navigationTitle(Text("account.edit.navigation-title", bundle: .module))
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
         toolbarContent
       }
-      .alert("account.edit.error.save.title",
+      .alert(Text("account.edit.error.save.title", bundle: .module),
              isPresented: $viewModel.saveError,
              actions: {
-               Button("alert.button.ok", action: {})
-             }, message: { Text("account.edit.error.save.message") })
+          Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+              Text("alert.button.ok", bundle: .module)
+          })
+      },
+             message: { Text("account.edit.error.save.message", bundle: .module) })
       .task {
         viewModel.client = client
         await viewModel.fetchAccount()
@@ -63,69 +68,95 @@ public struct EditAccountView: View {
         Spacer()
       }
     }
-//    .listRowBackground(theme.primaryBackgroundColor)
+    .listRowBackground(theme.primaryBackgroundColor)
   }
 
   @ViewBuilder
   private var aboutSections: some View {
-    Section("account.edit.display-name") {
+    Section {
       TextField("account.edit.display-name", text: $viewModel.displayName)
+    } header: {
+        Text("account.edit.display-name", bundle: .module)
     }
-//    .listRowBackground(theme.primaryBackgroundColor)
-    Section("account.edit.about") {
+    .listRowBackground(theme.primaryBackgroundColor)
+    Section {
       TextField("account.edit.about", text: $viewModel.note, axis: .vertical)
         .frame(maxHeight: 150)
+    } header: {
+        Text("account.edit.about", bundle: .module)
     }
-//    .listRowBackground(theme.primaryBackgroundColor)
+    .listRowBackground(theme.primaryBackgroundColor)
   }
 
-//  private var postSettingsSection: some View {
-//    Section("account.edit.post-settings.section-title") {
-//      if !userPreferences.useInstanceContentSettings {
-//        Text("account.edit.post-settings.content-settings-reference")
-//      }
-//        
-//      Picker(selection: $viewModel.postPrivacy) {
-//        ForEach(Models.Visibility.supportDefault, id: \.rawValue) { privacy in
-//          Text(privacy.title).tag(privacy)
-//        }
-//      } label: {
-//        Label("account.edit.post-settings.privacy", systemImage: "lock")
-//      }
-//      .pickerStyle(.menu)
-//        
-//      Toggle(isOn: $viewModel.isSensitive) {
-//        Label("account.edit.post-settings.sensitive", systemImage: "eye")
-//      }
-//    }
-////    .listRowBackground(theme.primaryBackgroundColor)
-//  }
+  private var postSettingsSection: some View {
+    Section {
+      if !userPreferences.useInstanceContentSettings {
+          Text("account.edit.post-settings.content-settings-reference", bundle: .module)
+      }
+        
+      Picker(selection: $viewModel.postPrivacy) {
+        ForEach(Models.Visibility.supportDefault, id: \.rawValue) { privacy in
+            Text(privacy.title, bundle: .module).tag(privacy)
+        }
+      } label: {
+          Label(
+            title: { Text("account.edit.post-settings.privacy", bundle: .module) },
+            icon: { Image(systemName: "lock") }
+          )
+      }
+      .pickerStyle(.menu)
+        
+      Toggle(isOn: $viewModel.isSensitive) {
+          Label(
+            title: { Text("account.edit.post-settings.sensitive", bundle: .module) },
+            icon: { Image(systemName: "eye") }
+          )
+      }
+    } header: {
+        Text("account.edit.post-settings.section-title", bundle: .module)
+    }
+  }
 
   private var accountSection: some View {
-    Section("account.edit.account-settings.section-title") {
+    Section {
       Toggle(isOn: $viewModel.isLocked) {
-        Label("account.edit.account-settings.private", systemImage: "lock")
+          Label(
+            title: { Text("account.edit.account-settings.private", bundle: .module) },
+            icon: { Image(systemName: "lock") }
+          )
       }
-//      Toggle(isOn: $viewModel.isBot) {
-//        Label("account.edit.account-settings.bot", systemImage: "laptopcomputer.trianglebadge.exclamationmark")
-//      }
+      Toggle(isOn: $viewModel.isBot) {
+          Label(
+            title: { Text("account.edit.account-settings.bot", bundle: .module) },
+            icon: { Image(systemName: "laptopcomputer.trianglebadge.exclamationmark") }
+          )
+      }
       Toggle(isOn: $viewModel.isDiscoverable) {
-        Label("account.edit.account-settings.discoverable", systemImage: "magnifyingglass")
+          Label(
+            title: { Text("account.edit.account-settings.discoverable", bundle: .module) },
+            icon: { Image(systemName: "magnifyingglass") }
+          )
       }
+    } header: {
+        Text("account.edit.account-settings.section-title", bundle: .module)
     }
-//    .listRowBackground(theme.primaryBackgroundColor)
+    .listRowBackground(theme.primaryBackgroundColor)
   }
 
   private var fieldsSection: some View {
-    Section("account.edit.metadata-section-title") {
+    Section {
       ForEach($viewModel.fields) { $field in
         VStack(alignment: .leading) {
-          TextField("account.edit.metadata-name-placeholder", text: $field.name)
-//            .font(.scaledHeadline)
-          TextField("account.edit.metadata-value-placeholder", text: $field.value)
-//            .emojiSize(Font.scaledBodyFont.emojiSize)
-//            .emojiBaselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
-//            .foregroundColor(theme.tintColor)
+            TextField(text: $field.name) {
+                Text("account.edit.metadata-name-placeholder", bundle: .module)
+            }
+            .font(.scaledHeadline)
+            TextField(text: $field.value) {
+                Text("account.edit.metadata-value-placeholder", bundle: .module)
+            }
+            .emojiSize(Font.scaledBodyFont.emojiSize)
+            .emojiBaselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
+            .foregroundColor(theme.tintColor)
         }
       }
       .onMove(perform: { indexSet, newOffset in
@@ -142,40 +173,41 @@ public struct EditAccountView: View {
             viewModel.fields.append(.init(name: "", value: ""))
           }
         } label: {
-          Text("account.edit.add-metadata-button")
-//            .foregroundColor(theme.tintColor)
+            Text("account.edit.add-metadata-button", bundle: .module)
+            .foregroundColor(theme.tintColor)
         }
       }
+    } header: {
+        Text("account.edit.metadata-section-title", bundle: .module)
     }
-//    .listRowBackground(theme.primaryBackgroundColor)
+    .listRowBackground(theme.primaryBackgroundColor)
   }
 
   @ToolbarContentBuilder
   private var toolbarContent: some ToolbarContent {
     ToolbarItem(placement: .navigationBarLeading) {
-      Button("action.cancel") {
+      Button {
         dismiss()
+      } label: {
+          Text("action.cancel", bundle: .module)
       }
     }
 
     ToolbarItem(placement: .navigationBarTrailing) {
       Button {
         Task {
+            
           await viewModel.save()
           dismiss()
         }
       } label: {
         if viewModel.isSaving {
-          ProgressView()
+            ProgressView()
         } else {
-          Text("action.save").bold()
+            Text("action.save", bundle: .module)
+                .bold()
         }
       }
     }
   }
-}
-
-
-#Preview {
-    EditAccountView()
 }

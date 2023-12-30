@@ -4,19 +4,7 @@
     "" : {
 
     },
-    "@mgkaung" : {
-
-    },
     "#%@" : {
-
-    },
-    "3" : {
-
-    },
-    "5" : {
-
-    },
-    "12" : {
 
     },
     "accessibility.tabs.timeline.add-account" : {
@@ -75,6 +63,9 @@
         }
       }
     },
+    "action.done" : {
+
+    },
     "Add" : {
 
     },
@@ -115,9 +106,6 @@
 
     },
     "Login" : {
-
-    },
-    "Mg Kaung" : {
 
     },
     "No search Results" : {
@@ -168,6 +156,32 @@
 
     },
     "Search Movies, Series, Cast" : {
+
+    },
+    "settings.account.action.delete-cache" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear Cache"
+          }
+        }
+      }
+    },
+    "settings.account.cached-posts-%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cached Posts: %@"
+          }
+        }
+      }
+    },
+    "settings.cache-media.clear" : {
+
+    },
+    "settings.section.cache" : {
 
     },
     "SignIn" : {
@@ -273,9 +287,6 @@
           }
         }
       }
-    },
-    "Top Gun: Maverick is a thrilling sequel that surpasses the original. Tom Cruise delivers a stellar performance as the fearless and rebellious pilot who faces his demons and mentors a new generation of aviators. The action scenes are breathtaking and realistic, showcasing the best of modern fighter jets." : {
-
     },
     "Tracker" : {
 

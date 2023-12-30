@@ -110,7 +110,7 @@ private struct AltTextToolbarItem: ToolbarContent {
         Button {
           isAlertDisplayed = true
         } label: {
-          Text("status.image.alt-text.abbreviation")
+            Text("status.image.alt-text.abbreviation", bundle: .module)
         }
         .alert("status.editor.media.image-description",
                isPresented: $isAlertDisplayed)

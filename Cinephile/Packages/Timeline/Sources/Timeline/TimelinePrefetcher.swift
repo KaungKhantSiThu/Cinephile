@@ -3,6 +3,9 @@ import Nuke
 import Observation
 import SwiftUI
 import UIKit
+import OSLog
+
+private let logger = Logger(subsystem: "Timeline", category: "Prefetcher")
 
 @Observable final class TimelinePrefetcher: NSObject, UICollectionViewDataSourcePrefetching {
   private let prefetcher = ImagePrefetcher()
@@ -11,11 +14,13 @@ import UIKit
 
   func collectionView(_: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
     let imageURLs = getImageURLs(for: indexPaths)
+      logger.log("starting Timeline Prefetching")
     prefetcher.startPrefetching(with: imageURLs)
   }
 
   func collectionView(_: UICollectionView, cancelPrefetchingForItemsAt indexPaths: [IndexPath]) {
     let imageURLs = getImageURLs(for: indexPaths)
+      logger.log("stopping Timeline Prefetching")
     prefetcher.stopPrefetching(with: imageURLs)
   }
 

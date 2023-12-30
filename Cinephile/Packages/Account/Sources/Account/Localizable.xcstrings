@@ -10,20 +10,37 @@
     "%lld" : {
 
     },
-    "accessibility.general.toggle.off" : {
-
-    },
-    "accessibility.general.toggle.on" : {
-
-    },
-    "accessibility.tabs.profile.user-notifications.label" : {
-
-    },
-    "accessibility.tabs.profile.user-reblogs.label" : {
-
+    "%lld followers" : {
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld follower"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "new",
+                  "value" : "%lld followers"
+                }
+              }
+            }
+          }
+        }
+      }
     },
     "account.boosted-by" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Boosted by"
+          }
+        }
+      }
     },
     "account.edit.about" : {
       "localizations" : {
@@ -31,6 +48,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "About"
+          }
+        }
+      }
+    },
+    "account.edit.account-settings.bot" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bot account"
           }
         }
       }
@@ -86,13 +113,34 @@
       }
     },
     "account.edit.error.save.message" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error while saving your profile, please try again."
+          }
+        }
+      }
     },
     "account.edit.error.save.title" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error while saving your profile"
+          }
+        }
+      }
     },
     "account.edit.metadata-name-placeholder" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Content"
+          }
+        }
+      }
     },
     "account.edit.metadata-section-title" : {
       "localizations" : {
@@ -105,41 +153,141 @@
       }
     },
     "account.edit.metadata-value-placeholder" : {
-
-    },
-    "account.edit.navigation-title" : {
-
-    },
-    "account.favorited-by" : {
-
-    },
-    "account.follow-requests.instructions" : {
-
-    },
-    "account.follow-requests.pending-requests" : {
-
-    },
-    "account.follow.follow" : {
-
-    },
-    "account.follow.following" : {
-
-    },
-    "account.follow.requested" : {
-
-    },
-    "account.followers" : {
-
-    },
-    "account.following" : {
-
-    },
-    "account.label.followers %lld %@" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "account.label.followers %1$lld %2$@"
+            "state" : "translated",
+            "value" : "Label"
+          }
+        }
+      }
+    },
+    "account.edit.navigation-title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit Profile"
+          }
+        }
+      }
+    },
+    "account.edit.post-settings.content-settings-reference" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Warning: These settings are overwritten by the global content settings"
+          }
+        }
+      }
+    },
+    "account.edit.post-settings.privacy" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Default Privacy"
+          }
+        }
+      }
+    },
+    "account.edit.post-settings.section-title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Post settings"
+          }
+        }
+      }
+    },
+    "account.edit.post-settings.sensitive" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sensitive content"
+          }
+        }
+      }
+    },
+    "account.favorited-by" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Favorited by"
+          }
+        }
+      }
+    },
+    "account.follow-requests.instructions" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Those users won't see your posts until you accept them"
+          }
+        }
+      }
+    },
+    "account.follow-requests.pending-requests" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pending requests"
+          }
+        }
+      }
+    },
+    "account.follow.follow" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Follow"
+          }
+        }
+      }
+    },
+    "account.follow.following" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Following"
+          }
+        }
+      }
+    },
+    "account.follow.requested" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Requested"
+          }
+        }
+      }
+    },
+    "account.followers" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Followers"
+          }
+        }
+      }
+    },
+    "account.following" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Following"
           }
         }
       }

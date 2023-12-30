@@ -102,7 +102,14 @@
 
     },
     "status.image.alt-text.abbreviation" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ALT"
+          }
+        }
+      }
     },
     "status.media.contextmenu.share" : {
 

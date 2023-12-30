@@ -49,25 +49,25 @@ extension URLSessionHTTPClientAdapter {
     #if canImport(FoundationNetworking)
     private func perform(_ urlRequest: URLRequest) async throws -> (Data, URLResponse) {
         return try await withCheckedThrowingContinuation { continuation in
-            urlSession.dataTask(with: urlRequest) { data, response, error in
-                if let error {
-                    continuation.resume(throwing: error)
+            urlSession.dataTask(with: urlRequest) { loaded, response, failed in
+                if let failed {
+                    continuation.resume(throwing: failed)
                     return
                 }
 
-                guard let data, let response else {
+                guard let loaded, let response else {
                     continuation.resume(throwing: NSError(domain: "uk.co.adam-young.TMDb", code: -1))
                     return
                 }
 
-                continuation.resume(returning: (data, response))
+                continuation.resume(returning: (loaded, response))
             }
             .resume()
         }
     }
     #else
     private func perform(_ urlRequest: URLRequest) async throws -> (Data, URLResponse) {
-        try await urlSession.data(for: urlRequest)
+        try await urlSession.loaded(for: urlRequest)
     }
     #endif
 

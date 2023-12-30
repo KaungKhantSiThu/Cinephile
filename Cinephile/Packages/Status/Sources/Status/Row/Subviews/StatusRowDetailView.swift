@@ -14,48 +14,21 @@ struct StatusRowDetailView: View {
   var body: some View {
     Group {
       Divider()
-      HStack {
-        Group {
-          Text(viewModel.status.createdAt.asDate, style: .date) +
-            Text("status.summary.at-time", bundle: .module) +
-            Text(viewModel.status.createdAt.asDate, style: .time) +
-            Text("  ·")
-          Image(systemName: viewModel.status.visibility.iconName)
-            .accessibilityHidden(true)
-        }.accessibilityElement(children: .combine)
-        Spacer()
-        if let name = viewModel.status.application?.name, let url = viewModel.status.application?.website {
-          Button {
-            openURL(url)
-          } label: {
-            Text(name)
-              .underline()
-          }
-          .buttonStyle(.plain)
-          .accessibilityLabel("accessibility.status.application.label")
-          .accessibilityValue(name)
-          .accessibilityAddTraits(.isLink)
-          .accessibilityRemoveTraits(.isButton)
-        }
-      }
-      .font(.scaledCaption)
-      .foregroundStyle(.secondary)
+        StatusRowHistory(status: viewModel.status)
 
       if let editedAt = viewModel.status.editedAt {
         Divider()
         HStack {
-          Text("status.summary.edited-time", bundle: .module) +
-            Text(editedAt.asDate, style: .date) +
-            Text("status.summary.at-time", bundle: .module) +
-            Text(editedAt.asDate, style: .time)
+          Text("status.summary.edited-time", bundle: .module)
+            StatusRowHistory(editedAt: editedAt.asDate)
           Spacer()
         }
         .onTapGesture {
           viewModel.routerPath.presentedSheet = .statusEditHistory(status: viewModel.status.id)
         }
-        .underline()
-        .font(.scaledCaption)
-        .foregroundStyle(.secondary)
+//        .underline()
+//        .font(.scaledCaption)
+//        .foregroundStyle(.secondary)
       }
 
       if viewModel.actionsAccountsFetched, statusDataController.favoritesCount > 0 {

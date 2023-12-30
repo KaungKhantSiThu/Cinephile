@@ -4,6 +4,9 @@ import Networking
 import Observation
 import Status
 import SwiftUI
+import OSLog
+
+private let logger = Logger(subsystem: "Timeline", category: "ViewModel")
 
 @MainActor
 @Observable class TimelineViewModel {
@@ -93,7 +96,10 @@ import SwiftUI
   }
 
   func reset() async {
+      logger.info("Resetting Timeline Datasource")
     await datasource.reset()
+      logger.info("Timeline Datasource resetted")
+
   }
 
   func handleEvent(event: any StreamEvent, currentAccount _: CurrentAccount) {
@@ -135,19 +141,25 @@ import SwiftUI
 extension TimelineViewModel {
   private func cacheHome() async {
     if let client, timeline == .home {
+    logger.info("Caching Home Timeline Statuses")
       await cache.set(statuses: datasource.get(), client: client.id)
+        logger.info("Home Timeline Statuses cached")
+
     }
   }
 
   private func getCachedStatuses() async -> [Status]? {
     if let client {
+      logger.info("Fetching Home Timeline Statuses from the cache")
       return await cache.getStatuses(for: client.id)
+
     }
     return nil
   }
 
   private func clearHomeCache() async {
     if let client {
+        logger.info("Clearing Home Timeline Statuses from the cache and setting latest seen statuses array as empty")
       await cache.clearCache(for: client.id)
       await cache.setLatestSeenStatuses(ids: [], for: client)
     }
@@ -186,7 +198,7 @@ extension TimelineViewModel: StatusesFetcher {
     } catch {
       statusesState = .error(error: error)
       canStreamEvents = true
-      print("timeline parse error: \(error)")
+        logger.error("timeline parse error: \(error)")
     }
   }
 
