@@ -7,6 +7,9 @@
 
 import Foundation
 import NotificationCenter
+import OSLog
+
+private let logger = Logger(subsystem: "Tracker", category: "NotificationManager")
 
 @MainActor
 class MediaNotificationManager: NSObject, ObservableObject {
@@ -96,17 +99,25 @@ class MediaNotificationManager: NSObject, ObservableObject {
         print("Pending: \(pendingRequests.count)")
     }
     
-    func notificationAttachment(name: String, url: URL) {
+    func notificationAttachment(name: String, url: URL) async {
         let center = UNUserNotificationCenter.current()
         let content = UNMutableNotificationContent()
         content.title = "Cinephile Release Alert"
         content.body = "\(name) is out tomorrow "
         content.categoryIdentifier = NotificationCateogry.general.rawValue
-
-        if let imageData = try? Data(contentsOf: url),
-        let attachment = UNNotificationAttachment.create(image: imageData, identifier: "imageAttachment") {
-            content.attachments = [attachment]
+        do {
+            let (imageData, _) = try await URLSession.shared.data(from: url)
+            if let attachment = UNNotificationAttachment.create(image: imageData, identifier: "imageAttachment") {
+                content.attachments = [attachment]
+            }
+        } catch {
+            logger.error("Error Fetching Image Data: \(error.localizedDescription)")
         }
+        
+//        if let imageData = try? Data(contentsOf: url),
+//        let attachment = UNNotificationAttachment.create(image: imageData, identifier: "imageAttachment") {
+//            content.attachments = [attachment]
+//        }
 
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
         
@@ -114,29 +125,51 @@ class MediaNotificationManager: NSObject, ObservableObject {
         
         let dismiss = UNNotificationAction(identifier: NotificationAction.dismiss.rawValue, title: "Dismiss")
         
-        let remider = UNNotificationAction(identifier: NotificationAction.remider.rawValue, title: "Remider")
+        let reminder = UNNotificationAction(identifier: NotificationAction.reminder.rawValue, title: "Reminder")
         
-        let generalCategory = UNNotificationCategory(identifier: NotificationCateogry.general.rawValue, actions: [dismiss, remider], intentIdentifiers: [], options: [])
+        let generalCategory = UNNotificationCategory(identifier: NotificationCateogry.general.rawValue, actions: [dismiss, reminder], intentIdentifiers: [], options: [])
         
         center.setNotificationCategories([generalCategory])
         
-        center.add(request) { error in
-            if let error = error {
-                print(error)
-            }
+//        center.add(request) { error in
+//            if let error = error {
+//                print(error)
+//            }
+//        }
+        do {
+            try await center.add(request)
+        } catch {
+            logger.error("Error adding notification request: \(error.localizedDescription)")
         }
     }
 }
 
 enum NotificationAction: String {
     case dismiss
-    case remider
+    case reminder
 }
 
 enum NotificationCateogry: String {
     case general
 }
 
+extension UNNotificationAttachment {
+    static func create(image imageData: Data, identifier: String) -> UNNotificationAttachment? {
+        let fileManager = FileManager.default
+        let tempDirectory = NSTemporaryDirectory()
+        let imageFileIdentifier = identifier + ".jpg"
+        let imageFileURL = URL(fileURLWithPath: tempDirectory).appendingPathComponent(imageFileIdentifier)
+
+        do {
+            try imageData.write(to: imageFileURL)
+            let imageAttachment = try UNNotificationAttachment(identifier: identifier, url: imageFileURL, options: nil)
+            return imageAttachment
+        } catch {
+            print("Error creating image attachment: \(error)")
+            return nil
+        }
+    }
+}
 
 
 extension MediaNotificationManager: UNUserNotificationCenterDelegate {
