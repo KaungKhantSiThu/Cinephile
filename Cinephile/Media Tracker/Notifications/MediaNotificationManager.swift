@@ -95,7 +95,49 @@ class MediaNotificationManager: NSObject, ObservableObject {
         pendingRequests.removeAll()
         print("Pending: \(pendingRequests.count)")
     }
+    
+    func notificationAttachment(name: String, url: URL) {
+        let center = UNUserNotificationCenter.current()
+        let content = UNMutableNotificationContent()
+        content.title = "Cinephile Release Alert"
+        content.body = "\(name) is out tomorrow "
+        content.categoryIdentifier = NotificationCateogry.general.rawValue
+
+        if let imageData = try? Data(contentsOf: url),
+        let attachment = UNNotificationAttachment.create(image: imageData, identifier: "imageAttachment") {
+            content.attachments = [attachment]
+        }
+
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        
+        let request = UNNotificationRequest(identifier: "identifier", content: content, trigger: trigger)
+        
+        let dismiss = UNNotificationAction(identifier: NotificationAction.dismiss.rawValue, title: "Dismiss")
+        
+        let remider = UNNotificationAction(identifier: NotificationAction.remider.rawValue, title: "Remider")
+        
+        let generalCategory = UNNotificationCategory(identifier: NotificationCateogry.general.rawValue, actions: [dismiss, remider], intentIdentifiers: [], options: [])
+        
+        center.setNotificationCategories([generalCategory])
+        
+        center.add(request) { error in
+            if let error = error {
+                print(error)
+            }
+        }
+    }
 }
+
+enum NotificationAction: String {
+    case dismiss
+    case remider
+}
+
+enum NotificationCateogry: String {
+    case general
+}
+
+
 
 extension MediaNotificationManager: UNUserNotificationCenterDelegate {
     
