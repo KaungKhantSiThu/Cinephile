@@ -52,11 +52,11 @@ extension View {
                              selectedTagGroup: .constant(nil),
                              scrollToTopSignal: .constant(0),
                              canFilterTimeline: false)
-            case .list(list: let list):
-                TimelineView(timeline: .constant(.list(list: list)),
-                             selectedTagGroup: .constant(nil),
-                             scrollToTopSignal: .constant(0),
-                             canFilterTimeline: false)
+//            case .list(list: let list):
+//                TimelineView(timeline: .constant(.list(list: list)),
+//                             selectedTagGroup: .constant(nil),
+//                             scrollToTopSignal: .constant(0),
+//                             canFilterTimeline: false)
             case .followers(id: let id):
                 AccountsListView(mode: .followers(accountId: id))
             case .following(id: let id):

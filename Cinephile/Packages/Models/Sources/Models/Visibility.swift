@@ -12,4 +12,8 @@ public enum Visibility: String, Codable, CaseIterable, Hashable, Equatable, Send
   case unlisted
   case priv = "private"
   case direct
+    
+  public static func == (lhs: Visibility, rhs: Visibility) -> Bool {
+      lhs.rawValue == rhs.rawValue
+    }
 }

@@ -38,6 +38,16 @@
     "%@" : {
 
     },
+    "%@ · %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ · %2$@"
+          }
+        }
+      }
+    },
     "%@ (%@)" : {
       "comment" : "Native name - Name for languages ",
       "localizations" : {
@@ -183,6 +193,213 @@
     "Edit" : {
 
     },
+    "enum.durations.custom" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Custom"
+          }
+        },
+        "my" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "စိတ်ကြိုက်"
+          }
+        }
+      }
+    },
+    "enum.durations.fiveMinutes" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "5 minutes"
+          }
+        },
+        "my" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "၅ မိနစ်"
+          }
+        }
+      }
+    },
+    "enum.durations.infinite" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Infinite"
+          }
+        },
+        "my" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "အကန့်အသက်မဲ့"
+          }
+        }
+      }
+    },
+    "enum.durations.oneDay" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 day"
+          }
+        },
+        "my" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "၁ ရက်"
+          }
+        }
+      }
+    },
+    "enum.durations.oneHour" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 hour"
+          }
+        },
+        "my" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "၁ နာရီ"
+          }
+        }
+      }
+    },
+    "enum.durations.sevenDays" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "7 days"
+          }
+        },
+        "my" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "၇ ရက်"
+          }
+        }
+      }
+    },
+    "enum.durations.sixHours" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "6 hours"
+          }
+        },
+        "my" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "၆ နာရီ"
+          }
+        }
+      }
+    },
+    "enum.durations.thirtyMinutes" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "30 minutes"
+          }
+        },
+        "my" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "၃၀ မိနစ်"
+          }
+        }
+      }
+    },
+    "enum.durations.threeDays" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3 days"
+          }
+        },
+        "my" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "၃ ရက်"
+          }
+        }
+      }
+    },
+    "enum.durations.twelveHours" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "12 hours"
+          }
+        },
+        "my" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "၁၂ နာရီ"
+          }
+        }
+      }
+    },
+    "env.poll-vote-frequency.multiple" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Multiple Votes"
+          }
+        },
+        "my" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "မဲအများအပြား"
+          }
+        }
+      }
+    },
+    "env.poll-vote-frequency.one" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "One Vote"
+          }
+        },
+        "my" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "တစ်မဲ"
+          }
+        }
+      }
+    },
+    "Hello, World!" : {
+
+    },
     "New" : {
 
     },
@@ -193,7 +410,14 @@
 
     },
     "Reply-%@" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reply %@"
+          }
+        }
+      }
     },
     "Show" : {
 
@@ -229,7 +453,14 @@
       }
     },
     "status.action.boost-to-follower" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Boost to follower"
+          }
+        }
+      }
     },
     "status.action.boost-to-followers" : {
       "localizations" : {
@@ -522,10 +753,24 @@
       }
     },
     "status.card.copy" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copy"
+          }
+        }
+      }
     },
     "status.card.share" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Share"
+          }
+        }
+      }
     },
     "status.draft.delete" : {
       "localizations" : {
@@ -631,19 +876,54 @@
 
     },
     "status.editor.language-select.navigation-title" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Post Language"
+          }
+        }
+      }
     },
     "status.editor.language-select.recently-used" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recently used"
+          }
+        }
+      }
     },
     "status.editor.media.edit-image" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit Image"
+          }
+        }
+      }
     },
     "status.editor.media.image-description" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ALT"
+          }
+        }
+      }
     },
     "status.editor.photo-library" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Photo Library"
+          }
+        }
+      }
     },
     "status.editor.spoiler" : {
       "localizations" : {
@@ -656,7 +936,14 @@
       }
     },
     "status.editor.text.placeholder" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What's on your mind?"
+          }
+        }
+      }
     },
     "status.error.loading.message" : {
 
@@ -687,7 +974,14 @@
       }
     },
     "status.media.content.show" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show content"
+          }
+        }
+      }
     },
     "status.media.sensitive.show" : {
       "localizations" : {
@@ -766,6 +1060,12 @@
             "state" : "translated",
             "value" : "Option %lld"
           }
+        },
+        "my" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ရွေးချယ်မှု %lld"
+          }
         }
       }
     },
@@ -829,17 +1129,6 @@
         }
       }
     },
-    "status.summary.at-time" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "at"
-          }
-        }
-      }
-    },
     "status.summary.edit-history" : {
       "localizations" : {
         "en" : {
@@ -885,7 +1174,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Direct"
+            "value" : "Private"
           }
         }
       }
@@ -905,7 +1194,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Public"
+            "value" : "Everyone"
           }
         }
       }

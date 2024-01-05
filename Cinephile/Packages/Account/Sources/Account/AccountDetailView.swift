@@ -49,56 +49,61 @@ public struct AccountDetailView: View {
     
     public var body: some View {
         ScrollViewReader { proxy in
-            ScrollView {
-                List {
-                    Group {
-                        headerView(proxy: proxy)
-                            .padding(.bottom, -20)
-                            .id(ScrollToView.Constants.scrollToTop)
-                        
-                        familiarFollowers
-                        
-                        featuredTagsView
-                        
-                        Picker("", selection: $viewModel.selectedTab) {
-                          ForEach(isCurrentUser ? AccountDetailViewModel.Tab.currentAccountTabs : AccountDetailViewModel.Tab.accountTabs,
-                                  id: \.self)
-                          { tab in
-                            Image(systemName: tab.iconName)
-                              .tag(tab)
-                              .accessibilityLabel(tab.accessibilityLabel)
-                          }
-                        }
-                        .pickerStyle(.segmented)
-                        .padding(.layoutPadding)
-                        .id("status")
-                    }
-                    .applyAccountDetailsRowStyle(theme: theme)
-
-                    switch viewModel.tabState {
-                    case .statuses:
-                      if viewModel.selectedTab == .statuses {
-                        pinnedPostsView
-                      }
-                      StatusesListView(fetcher: viewModel,
-                                       client: client,
-                                       routerPath: routerPath)
-                    case .followedTags:
-                      EmptyView()
-                    case .lists:
-                        EmptyView()
-                    }
-                    
+            List {
+                HStack {
+                    Spacer()
+                    headerView(proxy: proxy)
+                            .applyAccountDetailsRowStyle(theme: theme)
+//                            .padding(.bottom, -20)
+                        .id(ScrollToView.Constants.scrollToTop)
+                    Spacer()
                 }
-                .environment(\.defaultMinListRowHeight, 1)
-                .listStyle(.plain)
-                .scrollContentBackground(.hidden)
-                .background(theme.primaryBackgroundColor)
-                .onChange(of: scrollToTopSignal) {
-                  withAnimation {
-                    proxy.scrollTo(ScrollToView.Constants.scrollToTop, anchor: .top)
+                
+                    
+                familiarFollowers
+                        .applyAccountDetailsRowStyle(theme: theme)
+                
+                featuredTagsView
+                        .applyAccountDetailsRowStyle(theme: theme)
+                    
+                Picker("", selection: $viewModel.selectedTab) {
+                  ForEach(isCurrentUser ? AccountDetailViewModel.Tab.currentAccountTabs : AccountDetailViewModel.Tab.accountTabs,
+                          id: \.self)
+                  { tab in
+                    Image(systemName: tab.iconName)
+                      .tag(tab)
+                      .accessibilityLabel(tab.accessibilityLabel)
                   }
                 }
+                .pickerStyle(.segmented)
+                .padding(.layoutPadding)
+                .id("status")
+                    
+                
+
+            switch viewModel.tabState {
+            case .statuses:
+              if viewModel.selectedTab == .statuses {
+                pinnedPostsView
+              }
+              StatusesListView(fetcher: viewModel,
+                               client: client,
+                               routerPath: routerPath)
+            case .followedTags:
+              EmptyView()
+            case .lists:
+                EmptyView()
+            }
+                
+            }
+            .environment(\.defaultMinListRowHeight, 1)
+            .listStyle(.plain)
+            .scrollContentBackground(.hidden)
+                .background(theme.primaryBackgroundColor)
+            .onChange(of: scrollToTopSignal) {
+              withAnimation {
+                proxy.scrollTo(ScrollToView.Constants.scrollToTop, anchor: .top)
+              }
             }
         }
         .onAppear {
@@ -136,7 +141,7 @@ public struct AccountDetailView: View {
         .sheet(isPresented: $isEditingAccount, content: {
           EditAccountView()
         })
-        .edgesIgnoringSafeArea(.top)
+//        .edgesIgnoringSafeArea(.top)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             toolbarContent

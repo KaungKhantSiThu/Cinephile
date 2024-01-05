@@ -38,8 +38,8 @@ private let logger = Logger(subsystem: "Account", category: "DetailViewModel")
 
     var iconName: String {
       switch self {
-      case .statuses: "bubble.right"
-      case .favorites: "star"
+      case .statuses: "doc.richtext"
+      case .favorites: "heart"
       case .bookmarks: "bookmark"
       case .followedTags: "tag"
       case .postsAndReplies: "bubble.left.and.bubble.right"

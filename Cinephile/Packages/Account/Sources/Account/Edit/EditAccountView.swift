@@ -22,6 +22,8 @@ public struct EditAccountView: View {
   @Environment(UserPreferences.self) private var userPreferences
 
   @State private var viewModel = EditAccountViewModel()
+    
+    @State private var fieldsChange = false
 
   public init() {}
 
@@ -33,7 +35,7 @@ public struct EditAccountView: View {
         } else {
           aboutSections
           fieldsSection
-//          postSettingsSection
+          postSettingsSection
           accountSection
         }
       }
@@ -73,14 +75,29 @@ public struct EditAccountView: View {
 
   @ViewBuilder
   private var aboutSections: some View {
+      Section {
+          EditableCircularProfileImage(viewModel: $viewModel)
+      } header: {
+          Text("account.edit.avatar", bundle: .module)
+      }
+      
     Section {
-      TextField("account.edit.display-name", text: $viewModel.displayName)
+        TextField(text: $viewModel.displayName) {
+            Text("account.edit.display-name", bundle: .module)
+        }.onSubmit {
+            fieldsChange = true
+        }
     } header: {
         Text("account.edit.display-name", bundle: .module)
     }
     .listRowBackground(theme.primaryBackgroundColor)
+      
     Section {
-      TextField("account.edit.about", text: $viewModel.note, axis: .vertical)
+      TextField(text: $viewModel.note, axis: .vertical) {
+          Text("account.edit.about", bundle: .module)
+      }.onSubmit {
+          fieldsChange = true
+      }
         .frame(maxHeight: 150)
     } header: {
         Text("account.edit.about", bundle: .module)
@@ -105,6 +122,10 @@ public struct EditAccountView: View {
           )
       }
       .pickerStyle(.menu)
+      .onChange(of: viewModel.postPrivacy) {
+          fieldsChange = true
+      }
+        
         
       Toggle(isOn: $viewModel.isSensitive) {
           Label(
@@ -114,6 +135,9 @@ public struct EditAccountView: View {
       }
     } header: {
         Text("account.edit.post-settings.section-title", bundle: .module)
+    }
+    .onChange(of: viewModel.isSensitive) {
+        fieldsChange = true
     }
   }
 
@@ -125,17 +149,26 @@ public struct EditAccountView: View {
             icon: { Image(systemName: "lock") }
           )
       }
+      .onChange(of: viewModel.isLocked) {
+          fieldsChange = true
+      }
       Toggle(isOn: $viewModel.isBot) {
           Label(
             title: { Text("account.edit.account-settings.bot", bundle: .module) },
             icon: { Image(systemName: "laptopcomputer.trianglebadge.exclamationmark") }
           )
       }
+      .onChange(of: viewModel.isBot) {
+          fieldsChange = true
+      }
       Toggle(isOn: $viewModel.isDiscoverable) {
           Label(
             title: { Text("account.edit.account-settings.discoverable", bundle: .module) },
             icon: { Image(systemName: "magnifyingglass") }
           )
+      }
+      .onChange(of: viewModel.isDiscoverable) {
+          fieldsChange = true
       }
     } header: {
         Text("account.edit.account-settings.section-title", bundle: .module)
@@ -181,6 +214,9 @@ public struct EditAccountView: View {
         Text("account.edit.metadata-section-title", bundle: .module)
     }
     .listRowBackground(theme.primaryBackgroundColor)
+    .onChange(of: viewModel.fields) {
+        fieldsChange = true
+    }
   }
 
   @ToolbarContentBuilder
@@ -196,7 +232,6 @@ public struct EditAccountView: View {
     ToolbarItem(placement: .navigationBarTrailing) {
       Button {
         Task {
-            
           await viewModel.save()
           dismiss()
         }
@@ -208,6 +243,7 @@ public struct EditAccountView: View {
                 .bold()
         }
       }
+      .disabled(fieldsChange == false)
     }
   }
 }

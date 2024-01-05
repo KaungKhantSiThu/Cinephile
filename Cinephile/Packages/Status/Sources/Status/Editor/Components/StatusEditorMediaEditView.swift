@@ -61,7 +61,7 @@ struct StatusEditorMediaEditView: View {
         .listRowBackground(theme.primaryBackgroundColor)
       }
       .scrollContentBackground(.hidden)
-      .background(theme.secondaryBackgroundColor)
+//      .background(theme.secondaryBackgroundColor)
       .onAppear {
         if !didAppear {
           imageDescription = container.mediaAttachment?.description ?? ""

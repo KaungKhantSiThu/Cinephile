@@ -28,8 +28,7 @@ struct StatusRowContentView: View {
 
       if !reasons.contains(.placeholder),
          !isCompact,
-         viewModel.isEmbedLoading || viewModel.embeddedStatus != nil
-      {
+         viewModel.isEmbedLoading || viewModel.embeddedStatus != nil {
         StatusEmbeddedView(status: viewModel.embeddedStatus ?? Status.preview,
                            client: viewModel.client,
                            routerPath: viewModel.routerPath)
@@ -55,7 +54,6 @@ struct StatusRowContentView: View {
          !viewModel.isEmbedLoading,
          !isCompact,
          theme.statusDisplayStyle != .compact,
-         viewModel.finalStatus.content.statusesURLs.isEmpty,
          viewModel.finalStatus.mediaAttachments.isEmpty
       {
         StatusRowCardView(card: card)

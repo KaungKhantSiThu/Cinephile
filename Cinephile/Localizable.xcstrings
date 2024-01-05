@@ -64,7 +64,14 @@
       }
     },
     "action.done" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Done"
+          }
+        }
+      }
     },
     "Add" : {
 
@@ -97,6 +104,9 @@
 
     },
     "Explore" : {
+
+    },
+    "Hello, World!" : {
 
     },
     "Kelvin Gao" : {
@@ -179,9 +189,73 @@
       }
     },
     "settings.cache-media.clear" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear Media Cache"
+          }
+        }
+      }
+    },
+    "settings.general.browser" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Browser"
+          }
+        }
+      }
+    },
+    "settings.general.browser.in-app" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In-App Browser"
+          }
+        },
+        "my" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "In-App Browser"
+          }
+        }
+      }
+    },
+    "settings.general.browser.in-app.readerview" : {
+
+    },
+    "settings.general.browser.system" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "System Browser"
+          }
+        },
+        "my" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "System Browser"
+          }
+        }
+      }
+    },
+    "settings.other.fast-refresh" : {
+
+    },
+    "settings.other.social-keyboard" : {
 
     },
     "settings.section.cache" : {
+
+    },
+    "settings.section.other" : {
+
+    },
+    "settings.section.other.footer" : {
 
     },
     "SignIn" : {
@@ -205,6 +279,7 @@
       }
     },
     "timeline.filter.lists" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -225,6 +300,7 @@
       }
     },
     "timeline.filter.tag-groups" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

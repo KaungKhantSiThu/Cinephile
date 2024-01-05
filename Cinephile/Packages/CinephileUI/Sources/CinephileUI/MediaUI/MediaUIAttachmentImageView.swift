@@ -13,7 +13,7 @@ struct MediaUIAttachmentImageView: View {
         if let image = state.image {
           image
             .resizable()
-            .clipShape(RoundedRectangle(cornerRadius: 8))
+//            .clipShape(RoundedRectangle(cornerRadius: 8))
             .scaledToFit()
             .padding(.horizontal, 8)
             .scaleEffect(zoom)

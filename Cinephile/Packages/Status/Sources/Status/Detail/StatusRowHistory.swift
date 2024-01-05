@@ -10,22 +10,28 @@ import Models
 
 struct StatusRowHistory: View {
     @Environment(\.openURL) private var openURL
+    @Environment(\.locale) private var locale
 
     let date: Date
     let iconName: String?
     let applicationName: String?
     let applicationURL: URL?
-    var formattedDate: String {
-        return date.formatted(date: .abbreviated, time: .shortened)
+    
+    private var formattedDate: String {
+        let str = date.formatted(.dateTime.year().month().day().locale(locale))
+        return str
     }
     
-    var formattedTime: String {
-        return date.formatted(date: .omitted, time: .shortened)
+    private var formattedTime: String {
+        let str = date.formatted(.dateTime.hour().minute().locale(locale))
+        return str
     }
+
     var body: some View {
         HStack {
-            Text(date, style: .date)
-            Text(date, style: .time)
+            Text("\(formattedDate) · \(formattedTime)")
+//            Text(date, style: .date)
+//            Text(date, style: .time)
             if let iconName {
                 Text("·")
                 Image(systemName: iconName)

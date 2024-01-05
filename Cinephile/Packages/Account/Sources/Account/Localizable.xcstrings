@@ -7,6 +7,9 @@
     "@%@" : {
 
     },
+    "#%@" : {
+
+    },
     "%lld" : {
 
     },
@@ -32,6 +35,27 @@
         }
       }
     },
+    "accessibility.tabs.profile.picker.bookmarks" : {
+
+    },
+    "accessibility.tabs.profile.picker.favorites" : {
+
+    },
+    "accessibility.tabs.profile.picker.followed-tags" : {
+
+    },
+    "accessibility.tabs.profile.picker.lists" : {
+
+    },
+    "accessibility.tabs.profile.picker.media" : {
+
+    },
+    "accessibility.tabs.profile.picker.posts-and-replies" : {
+
+    },
+    "accessibility.tabs.profile.picker.statuses" : {
+
+    },
     "account.boosted-by" : {
       "localizations" : {
         "en" : {
@@ -41,6 +65,12 @@
           }
         }
       }
+    },
+    "account.detail.familiar-followers" : {
+
+    },
+    "account.detail.featured-tags-n-posts %lld" : {
+
     },
     "account.edit.about" : {
       "localizations" : {
@@ -102,6 +132,9 @@
         }
       }
     },
+    "account.edit.avatar" : {
+
+    },
     "account.edit.display-name" : {
       "localizations" : {
         "en" : {
@@ -131,6 +164,9 @@
           }
         }
       }
+    },
+    "account.edit.info" : {
+
     },
     "account.edit.metadata-name-placeholder" : {
       "localizations" : {
@@ -292,6 +328,19 @@
         }
       }
     },
+    "account.post.pinned" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pinned posts"
+          }
+        }
+      }
+    },
+    "account.settings" : {
+
+    },
     "action.cancel" : {
       "localizations" : {
         "en" : {
@@ -322,9 +371,6 @@
         }
       }
     },
-    "Edit Account Info" : {
-
-    },
     "Followers" : {
 
     },
@@ -332,9 +378,6 @@
 
     },
     "Posts" : {
-
-    },
-    "Settings" : {
 
     }
   },

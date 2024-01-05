@@ -94,7 +94,13 @@ private struct DismissToolbarItem: ToolbarContent {
       Button {
         dismiss()
       } label: {
-        Image(systemName: "xmark.circle")
+        
+          Label {
+              Text("quicklook.action.dismiss", bundle: .module)
+          } icon: {
+              Image(systemName: "xmark.circle")
+          }
+
       }
     }
   }
@@ -115,7 +121,9 @@ private struct AltTextToolbarItem: ToolbarContent {
         .alert("status.editor.media.image-description",
                isPresented: $isAlertDisplayed)
         {
-          Button("alert.button.ok", action: {})
+            Button(action: {}, label: {
+                Text("alert.button.ok", bundle: .module)
+            })
         } message: {
           Text(alt)
         }
@@ -196,7 +204,7 @@ private struct QuickLookToolbarItem: ToolbarContent, @unchecked Sendable {
   @State private var isLoading = false
 
   var body: some ToolbarContent {
-    ToolbarItem(placement: .topBarTrailing) {
+      ToolbarItem(placement: .topBarTrailing) {
       Button {
         Task {
           isLoading = true
