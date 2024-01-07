@@ -46,8 +46,9 @@ public struct TimelineView: View {
     public var body: some View {
         ScrollViewReader { proxy in
             ZStack(alignment: .top) {
+                scrollToTopView
                 List {
-                    scrollToTopView
+                    
                     //          tagGroupHeaderView
                     tagHeaderView
                     switch viewModel.timeline {
