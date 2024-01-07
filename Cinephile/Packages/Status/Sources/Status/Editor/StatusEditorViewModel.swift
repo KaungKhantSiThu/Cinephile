@@ -76,6 +76,8 @@ import SwiftUI
   private var itemsProvider: [NSItemProvider]?
 
   var backupStatusText: NSAttributedString?
+    
+    var showTracker: Bool = false
 
   var showPoll: Bool = false
   var pollVotingFrequency = PollVotingFrequency.oneVote

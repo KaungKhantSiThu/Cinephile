@@ -4,101 +4,132 @@ import Networking
 import Observation
 import Status
 import SwiftUI
+import OSLog
+
+private let logger = Logger(subsystem: "Timeline", category: "ViewModel")
 
 @MainActor
 @Observable class TimelineViewModel {
-  var scrollToIndex: Int?
-  var statusesState: StatusesState = .loading
-  var timeline: TimelineFilter = .federated {
-    didSet {
-      timelineTask?.cancel()
-      timelineTask = Task {
-        if timeline == .latest {
-          if oldValue == .home {
-            await clearHomeCache()
-          }
-          timeline = oldValue
+    var scrollToIndex: Int?
+    var statusesState: StatusesState = .loading
+    var timeline: TimelineFilter = .federated {
+        willSet {
+            if timeline == .home && newValue != .resume {
+                saveMarker()
+            }
         }
-        if oldValue != timeline {
-          await reset()
-          pendingStatusesObserver.pendingStatuses = []
-          tag = nil
+        didSet {
+            logger.log("Cancelling timeline task")
+            timelineTask?.cancel()
+            timelineTask = Task {
+                await handleLatestOrResume(oldValue)
+                
+                if oldValue != timeline {
+                    await reset()
+                    pendingStatusesObserver.pendingStatuses = []
+                    tag = nil
+                }
+                
+                guard !Task.isCancelled else {
+                    return
+                }
+                
+                logger.info("Fetching newest statuses")
+                await fetchNewestStatuses()
+                switch timeline {
+                case let .hashtag(tag, _):
+                    await fetchTag(id: tag)
+                default:
+                    break
+                }
+            }
         }
-        guard !Task.isCancelled else {
-          return
-        }
-        await fetchNewestStatuses()
-        switch timeline {
-        case let .hashtag(tag, _):
-          await fetchTag(id: tag)
-        default:
-          break
-        }
-      }
     }
-  }
-
-  private var timelineTask: Task<Void, Never>?
-
-  var tag: Tag?
-
-  // Internal source of truth for a timeline.
-  private var datasource = TimelineDatasource()
-  private let cache = TimelineCache()
-  private var visibileStatusesIds = Set<String>()
-  private var canStreamEvents: Bool = true
-
-  private var accountId: String? {
-    CurrentAccount.shared.account?.id
-  }
-
-  var client: Client? {
-    didSet {
-      if oldValue != client {
-        Task {
-          await reset()
+    
+    private(set) var timelineTask: Task<Void, Never>?
+    
+    var tag: Tag?
+    
+    // Internal source of truth for a timeline.
+    private(set) var datasource = TimelineDatasource()
+    private let cache = TimelineCache()
+    private var isCacheEnabled: Bool {
+        canFilterTimeline && timeline.supportNewestPagination
+    }
+    
+    @ObservationIgnored
+    private var visibileStatuses: [Status] = []
+    
+    private var canStreamEvents: Bool = true
+    
+    @ObservationIgnored
+    var canFilterTimeline: Bool = true
+    
+    var client: Client? {
+        didSet {
+            if oldValue != client {
+                Task {
+                    await reset()
+                }
+            }
         }
-      }
     }
-  }
-
-  var scrollToTopVisible: Bool = false {
-    didSet {
-      if scrollToTopVisible {
-        pendingStatusesObserver.pendingStatuses = []
-      }
+    
+    var scrollToTopVisible: Bool = false {
+        didSet {
+            if scrollToTopVisible {
+                pendingStatusesObserver.pendingStatuses = []
+            }
+        }
     }
-  }
-
-  var serverName: String {
-    client?.server ?? "Error"
-  }
-
-  var isTimelineVisible: Bool = false
-  let pendingStatusesObserver: PendingStatusesObserver = .init()
-  var scrollToIndexAnimated: Bool = false
-
-  init() {
-    pendingStatusesObserver.scrollToIndex = { [weak self] index in
-      self?.scrollToIndexAnimated = true
-      self?.scrollToIndex = index
+    
+    var serverName: String {
+        client?.server ?? "Error"
     }
-  }
-
-  private func fetchTag(id: String) async {
-    guard let client else { return }
-    do {
-      tag = try await client.get(endpoint: Tags.tag(id: id))
-    } catch {}
-  }
-
-  func reset() async {
-    await datasource.reset()
-  }
-
-  func handleEvent(event: any StreamEvent, currentAccount _: CurrentAccount) {
-    Task {
+    
+    var isTimelineVisible: Bool = false
+    let pendingStatusesObserver: PendingStatusesObserver = .init()
+    var scrollToIndexAnimated: Bool = false
+    var marker: Marker.Content?
+    
+    
+    init() {
+        pendingStatusesObserver.scrollToIndex = { [weak self] index in
+            self?.scrollToIndexAnimated = true
+            self?.scrollToIndex = index
+        }
+    }
+    
+    private func fetchTag(id: String) async {
+        guard let client else { return }
+        do {
+            tag = try await client.get(endpoint: Tags.tag(id: id))
+            withAnimation {
+                self.tag = tag
+            }
+        } catch {}
+    }
+    
+    func reset() async {
+        logger.info("Resetting Timeline Datasource")
+        await datasource.reset()
+        logger.info("Timeline Datasource resetted")
+        
+    }
+    
+    private func handleLatestOrResume(_ oldValue: TimelineFilter) async {
+        if timeline == .latest || timeline == .resume {
+            await clearCache(filter: oldValue)
+            if timeline == .resume, let marker = await fetchMarker() {
+                self.marker = marker
+            }
+            timeline = oldValue
+        }
+    }
+    
+    func handleEvent(event: any StreamEvent) async {
       if let event = event as? StreamEventUpdate,
+         let client,
          timeline == .home,
          canStreamEvents,
          isTimelineVisible,
@@ -107,288 +138,346 @@ import SwiftUI
         pendingStatusesObserver.pendingStatuses.insert(event.status.id, at: 0)
         let newStatus = event.status
         await datasource.insert(newStatus, at: 0)
-        await cacheHome()
+        await cache()
+        StatusDataControllerProvider.shared.updateDataControllers(for: [event.status], client: client)
         let statuses = await datasource.get()
         withAnimation {
           statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
         }
       } else if let event = event as? StreamEventDelete {
         await datasource.remove(event.status)
-        await cacheHome()
+        await cache()
         let statuses = await datasource.get()
         withAnimation {
           statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
         }
-      } else if let event = event as? StreamEventStatusUpdate {
+      } else if let event = event as? StreamEventStatusUpdate, let client {
         if let originalIndex = await datasource.indexOf(statusId: event.status.id) {
+          StatusDataControllerProvider.shared.updateDataControllers(for: [event.status], client: client)
           await datasource.replace(event.status, at: originalIndex)
-          await cacheHome()
-          statusesState = await .display(statuses: datasource.get(), nextPageState: .hasNextPage)
+          let statuses = await datasource.get()
+          await cache()
+          statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
         }
       }
     }
-  }
 }
 
 // MARK: - Cache
 
 extension TimelineViewModel {
-  private func cacheHome() async {
-    if let client, timeline == .home {
-      await cache.set(statuses: datasource.get(), client: client.id)
+    private func cache() async {
+        if let client, isCacheEnabled {
+            logger.info("Caching Home Timeline Statuses")
+            await cache.set(statuses: datasource.get(), client: client.id, filter: timeline.id)
+            logger.info("Home Timeline Statuses cached")
+        }
     }
-  }
-
-  private func getCachedStatuses() async -> [Status]? {
-    if let client {
-      return await cache.getStatuses(for: client.id)
+    
+    private func getCachedStatuses() async -> [Status]? {
+        if let client, isCacheEnabled {
+            logger.info("Fetching Home Timeline Statuses from the cache")
+            return await cache.getStatuses(for: client.id, filter: timeline.id)
+            
+        }
+        return nil
     }
-    return nil
-  }
-
-  private func clearHomeCache() async {
-    if let client {
-      await cache.clearCache(for: client.id)
-      await cache.setLatestSeenStatuses(ids: [], for: client)
+    
+    private func clearCache(filter: TimelineFilter) async {
+        if let client, isCacheEnabled {
+            logger.info("Clearing Home Timeline Statuses from the cache and setting latest seen statuses array as empty")
+            await cache.clearCache(for: client.id, filter: filter.id)
+            await cache.setLatestSeenStatuses([], for: client, filter: filter.id)
+        }
     }
-  }
 }
 
 // MARK: - StatusesFetcher
 
 extension TimelineViewModel: StatusesFetcher {
-  func pullToRefresh() async {
-    timelineTask?.cancel()
-    if !timeline.supportNewestPagination || UserPreferences.shared.fastRefreshEnabled {
-      await reset()
-    }
-    await fetchNewestStatuses()
-  }
-
-  func refreshTimeline() {
-    timelineTask?.cancel()
-    timelineTask = Task {
-      if UserPreferences.shared.fastRefreshEnabled {
-        await reset()
-      }
-      await fetchNewestStatuses()
-    }
-  }
-
-  func fetchNewestStatuses() async {
-    guard let client else { return }
-    do {
-      if await datasource.isEmpty {
-        try await fetchFirstPage(client: client)
-      } else if let latest = await datasource.get().first, timeline.supportNewestPagination {
-        try await fetchNewPagesFrom(latestStatus: latest, client: client)
-      }
-    } catch {
-      statusesState = .error(error: error)
-      canStreamEvents = true
-      print("timeline parse error: \(error)")
-    }
-  }
-
-  // Hydrate statuses in the Timeline when statuses are empty.
-  private func fetchFirstPage(client: Client) async throws {
-    pendingStatusesObserver.pendingStatuses = []
-
-    if await datasource.isEmpty {
-      statusesState = .loading
-    }
-
-    // If we get statuses from the cache for the home timeline, we displays those.
-    // Else we fetch top most page from the API.
-    if let cachedStatuses = await getCachedStatuses(),
-       !cachedStatuses.isEmpty,
-       timeline == .home, !UserPreferences.shared.fastRefreshEnabled
-    {
-      await datasource.set(cachedStatuses)
-      if let latestSeenId = await cache.getLatestSeenStatus(for: client)?.last,
-         let index = await datasource.indexOf(statusId: latestSeenId),
-         index > 0
-      {
-        // Restore cache and scroll to latest seen status.
-        statusesState = await .display(statuses: datasource.get(), nextPageState: .hasNextPage)
-        scrollToIndexAnimated = false
-        scrollToIndex = index + 1
-      } else {
-        // Restore cache and scroll to top.
-        let statuses = await datasource.get()
-        withAnimation {
-          statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
+    func pullToRefresh() async {
+        timelineTask?.cancel()
+        if !timeline.supportNewestPagination || UserPreferences.shared.fastRefreshEnabled {
+            await reset()
         }
-      }
-      // And then we fetch statuses again toget newest statuses from there.
-      await fetchNewestStatuses()
-    } else {
-      var statuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
-                                                                                maxId: nil,
-                                                                                minId: nil,
-                                                                                offset: 0))
-
-      ReblogCache.shared.removeDuplicateReblogs(&statuses)
-      StatusDataControllerProvider.shared.updateDataControllers(for: statuses, client: client)
-
-      await datasource.set(statuses)
-      await cacheHome()
-
-      withAnimation {
-        statusesState = .display(statuses: statuses, nextPageState: statuses.count < 20 ? .none : .hasNextPage)
-      }
+        await fetchNewestStatuses()
     }
-  }
-
-  // Fetch pages from the top most status of the tomeline.
-  private func fetchNewPagesFrom(latestStatus: Status, client: Client) async throws {
-    canStreamEvents = false
-    let initialTimeline = timeline
-    var newStatuses: [Status] = await fetchNewPages(minId: latestStatus.id, maxPages: 10)
-
-    // Dedup statuses, a status with the same id could have been streamed in.
-    let ids = await datasource.get().map(\.id)
-    newStatuses = newStatuses.filter { status in
-      !ids.contains(where: { $0 == status.id })
+    
+    func refreshTimeline() {
+        timelineTask?.cancel()
+        timelineTask = Task {
+            if UserPreferences.shared.fastRefreshEnabled {
+                await reset()
+            }
+            await fetchNewestStatuses()
+        }
     }
-
-    ReblogCache.shared.removeDuplicateReblogs(&newStatuses)
-    StatusDataControllerProvider.shared.updateDataControllers(for: newStatuses, client: client)
-
-    // If no new statuses, resume streaming and exit.
-    guard !newStatuses.isEmpty else {
-      canStreamEvents = true
-      return
+    
+    func fetchStatuses(from: Marker.Content) async throws {
+        guard let client else { return }
+        statusesState = .loading
+        var statuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
+                                                                                  maxId: from.lastReadId,
+                                                                                  minId: nil,
+                                                                                  offset: 0))
+        
+        ReblogCache.shared.removeDuplicateReblogs(&statuses)
+        StatusDataControllerProvider.shared.updateDataControllers(for: statuses, client: client)
+        
+        await datasource.set(statuses)
+        await cache()
+        marker = nil
+        
+        withAnimation {
+            statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
+        }
+        
+        await fetchNewestStatuses()
     }
-
-    // If the timeline is not visible, we don't update it as it would mess up the user position.
-    guard isTimelineVisible else {
-      canStreamEvents = true
-      return
+    
+    func fetchNewestStatuses() async {
+        guard let client else { return }
+        do {
+            if let marker {
+                try await fetchStatuses(from: marker)
+            } else if await datasource.isEmpty {
+                try await fetchFirstPage(client: client)
+            } else if let latest = await datasource.get().first, timeline.supportNewestPagination {
+                try await fetchNewPagesFrom(latestStatus: latest.id, client: client)
+            }
+        } catch {
+            statusesState = .error(error: error)
+            canStreamEvents = true
+            logger.error("timeline parse error: \(error)")
+        }
     }
-
-    // Return if task has been cancelled.
-    guard !Task.isCancelled else {
-      canStreamEvents = true
-      return
+    
+    // Hydrate statuses in the Timeline when statuses are empty.
+    private func fetchFirstPage(client: Client) async throws {
+        pendingStatusesObserver.pendingStatuses = []
+        
+        if await datasource.isEmpty {
+            statusesState = .loading
+        }
+        
+        // If we get statuses from the cache for the home timeline, we displays those.
+        // Else we fetch top most page from the API.
+        if timeline.supportNewestPagination,
+           let cachedStatuses = await getCachedStatuses(),
+           !cachedStatuses.isEmpty,
+           !UserPreferences.shared.fastRefreshEnabled
+        {
+            await datasource.set(cachedStatuses)
+            let statuses = await datasource.get()
+            if let latestSeenId = await cache.getLatestSeenStatus(for: client, filter: timeline.id)?.last,
+               let index = await datasource.indexOf(statusId: latestSeenId),
+               index > 0
+            {
+                // Restore cache and scroll to latest seen status.
+                statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
+                scrollToIndexAnimated = false
+                scrollToIndex = index + 1
+            } else {
+                // Restore cache and scroll to top.
+                withAnimation {
+                    statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
+                }
+            }
+            // And then we fetch statuses again toget newest statuses from there.
+            await fetchNewestStatuses()
+        } else {
+            var statuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
+                                                                                      maxId: nil,
+                                                                                      minId: nil,
+                                                                                      offset: 0))
+            
+            ReblogCache.shared.removeDuplicateReblogs(&statuses)
+            StatusDataControllerProvider.shared.updateDataControllers(for: statuses, client: client)
+            
+            await datasource.set(statuses)
+            statuses = await datasource.get()
+            await cache()
+            
+            withAnimation {
+                statusesState = .display(statuses: statuses, nextPageState: statuses.count < 20 ? .none : .hasNextPage)
+            }
+        }
     }
-
-    // As this is a long runnign task we need to ensure that the user didn't changed the timeline filter.
-    guard initialTimeline == timeline else {
-      canStreamEvents = true
-      return
-    }
-
-    // Keep track of the top most status, so we can scroll back to it after view update.
-    let topStatusId = await datasource.get().first?.id
-
-    // Insert new statuses in internal datasource.
-    await datasource.insert(contentOf: newStatuses, at: 0)
-
-    // Cache statuses for home timeline.
-    await cacheHome()
-
-    // Append new statuses in the timeline indicator.
-    pendingStatusesObserver.pendingStatuses.insert(contentsOf: newStatuses.map(\.id), at: 0)
-
-    // High chance the user is scrolled to the top.
-    // We need to update the statuses state, and then scroll to the previous top most status.
-    if let topStatusId, visibileStatusesIds.contains(topStatusId), scrollToTopVisible {
-      pendingStatusesObserver.disableUpdate = true
-      let statuses = await datasource.get()
-      statusesState = .display(statuses: statuses,
-                               nextPageState: statuses.count < 20 ? .none : .hasNextPage)
-      scrollToIndexAnimated = false
-      scrollToIndex = newStatuses.count + 1
-      DispatchQueue.main.async {
-        self.pendingStatusesObserver.disableUpdate = false
-        self.canStreamEvents = true
-      }
-    } else {
-      // This will keep the scroll position (if the list is scrolled) and prepend statuses on the top.
-      let statuses = await datasource.get()
-      withAnimation {
-        statusesState = .display(statuses: statuses,
-                                 nextPageState: statuses.count < 20 ? .none : .hasNextPage)
-        canStreamEvents = true
-      }
-    }
-
-    // We trigger a new fetch so we can get the next new statuses if any.
-    // If none, it'll stop there.
-    // Only do that in the context of the home timeline as other don't worth catching up that much.
-    if timeline == .home,
-       !Task.isCancelled,
-       let latest = await datasource.get().first
-    {
-      try await fetchNewPagesFrom(latestStatus: latest, client: client)
-    }
-  }
-
-  private func fetchNewPages(minId: String, maxPages: Int) async -> [Status] {
-    guard let client else { return [] }
-    var pagesLoaded = 0
-    var allStatuses: [Status] = []
-    var latestMinId = minId
-    do {
-      while
-        !Task.isCancelled,
-        var newStatuses: [Status] =
-        try await client.get(endpoint: timeline.endpoint(sinceId: nil,
-                                                         maxId: nil,
-                                                         minId: latestMinId,
-                                                         offset: datasource.get().count)),
-        !newStatuses.isEmpty,
-        pagesLoaded < maxPages
-      {
-        pagesLoaded += 1
-
+    
+    // Fetch pages from the top most status of the tomeline.
+    private func fetchNewPagesFrom(latestStatus: String, client: Client) async throws {
+        canStreamEvents = false
+        let initialTimeline = timeline
+        var newStatuses: [Status] = await fetchNewPages(minId: latestStatus, maxPages: 5)
+        
+        // Dedup statuses, a status with the same id could have been streamed in.
+        let ids = await datasource.get().map(\.id)
+        newStatuses = newStatuses.filter { status in
+            !ids.contains(where: { $0 == status.id })
+        }
+        
         ReblogCache.shared.removeDuplicateReblogs(&newStatuses)
         StatusDataControllerProvider.shared.updateDataControllers(for: newStatuses, client: client)
-
-        allStatuses.insert(contentsOf: newStatuses, at: 0)
-        latestMinId = newStatuses.first?.id ?? ""
-      }
-    } catch {
-      return allStatuses
+        
+        // If no new statuses, resume streaming and exit.
+        guard !newStatuses.isEmpty else {
+            canStreamEvents = true
+            return
+        }
+        
+        // If the timeline is not visible, we don't update it as it would mess up the user position.
+        guard isTimelineVisible else {
+            canStreamEvents = true
+            return
+        }
+        
+        // Return if task has been cancelled.
+        guard !Task.isCancelled else {
+            canStreamEvents = true
+            return
+        }
+        
+        // As this is a long runnign task we need to ensure that the user didn't changed the timeline filter.
+        guard initialTimeline == timeline else {
+            canStreamEvents = true
+            return
+        }
+        
+        // Keep track of the top most status, so we can scroll back to it after view update.
+        let topStatus = await datasource.get().first
+        
+        // Insert new statuses in internal datasource.
+        await datasource.insert(contentOf: newStatuses, at: 0)
+        
+        // Cache statuses for home timeline.
+        await cache()
+        
+        // Append new statuses in the timeline indicator.
+        pendingStatusesObserver.pendingStatuses.insert(contentsOf: newStatuses.map(\.id), at: 0)
+        
+        // High chance the user is scrolled to the top.
+        // We need to update the statuses state, and then scroll to the previous top most status.
+        if let topStatus, visibileStatuses.contains(where: { $0.id == topStatus.id}), scrollToTopVisible {
+            pendingStatusesObserver.disableUpdate = true
+            let statuses = await datasource.get()
+            statusesState = .display(statuses: statuses,
+                                     nextPageState: statuses.count < 20 ? .none : .hasNextPage)
+            scrollToIndexAnimated = false
+            scrollToIndex = newStatuses.count + 1
+            DispatchQueue.main.async {
+                self.pendingStatusesObserver.disableUpdate = false
+                self.canStreamEvents = true
+            }
+        } else {
+            // This will keep the scroll position (if the list is scrolled) and prepend statuses on the top.
+            let statuses = await datasource.get()
+            withAnimation {
+                statusesState = .display(statuses: statuses,
+                                         nextPageState: statuses.count < 20 ? .none : .hasNextPage)
+                canStreamEvents = true
+            }
+        }
+        
+        // We trigger a new fetch so we can get the next new statuses if any.
+        // If none, it'll stop there.
+        // Only do that in the context of the home timeline as other don't worth catching up that much.
+        if timeline == .home,
+           !Task.isCancelled,
+           let latest = await datasource.get().first
+        {
+            try await fetchNewPagesFrom(latestStatus: latest.id, client: client)
+        }
     }
-    return allStatuses
-  }
-
-  func fetchNextPage() async {
-    guard let client else { return }
-    do {
-      guard let lastId = await datasource.get().last?.id else { return }
-      statusesState = await .display(statuses: datasource.get(), nextPageState: .loadingNextPage)
-      var newStatuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
-                                                                                   maxId: lastId,
-                                                                                   minId: nil,
-                                                                                   offset: datasource.get().count))
-
-      ReblogCache.shared.removeDuplicateReblogs(&newStatuses)
-
-      await datasource.append(contentOf: newStatuses)
-      StatusDataControllerProvider.shared.updateDataControllers(for: newStatuses, client: client)
-
-      statusesState = await .display(statuses: datasource.get(),
-                                     nextPageState: newStatuses.count < 20 ? .none : .hasNextPage)
-    } catch {
-      statusesState = .error(error: error)
+    
+    private func fetchNewPages(minId: String, maxPages: Int) async -> [Status] {
+        guard let client else { return [] }
+        var pagesLoaded = 0
+        var allStatuses: [Status] = []
+        var latestMinId = minId
+        do {
+            while
+                !Task.isCancelled,
+                var newStatuses: [Status] =
+                    try await client.get(endpoint: timeline.endpoint(sinceId: nil,
+                                                                     maxId: nil,
+                                                                     minId: latestMinId,
+                                                                     offset: datasource.get().count)),
+                !newStatuses.isEmpty,
+                pagesLoaded < maxPages
+            {
+                pagesLoaded += 1
+                
+                ReblogCache.shared.removeDuplicateReblogs(&newStatuses)
+                StatusDataControllerProvider.shared.updateDataControllers(for: newStatuses, client: client)
+                
+                allStatuses.insert(contentsOf: newStatuses, at: 0)
+                latestMinId = newStatuses.first?.id ?? ""
+            }
+        } catch {
+            return allStatuses
+        }
+        return allStatuses
     }
-  }
-
-  func statusDidAppear(status: Status) {
-    pendingStatusesObserver.removeStatus(status: status)
-    visibileStatusesIds.insert(status.id)
-
-    if let client, timeline == .home {
-      Task {
-        await cache.setLatestSeenStatuses(ids: visibileStatusesIds.map { $0 }, for: client)
-      }
+    
+    func fetchNextPage() async {
+        guard let client else { return }
+        do {
+            guard let lastId = await datasource.get().last?.id else { return }
+            statusesState = await .display(statuses: datasource.get(), nextPageState: .loadingNextPage)
+            var newStatuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
+                                                                                         maxId: lastId,
+                                                                                         minId: nil,
+                                                                                         offset: datasource.get().count))
+            
+            ReblogCache.shared.removeDuplicateReblogs(&newStatuses)
+            
+            await datasource.append(contentOf: newStatuses)
+            StatusDataControllerProvider.shared.updateDataControllers(for: newStatuses, client: client)
+            
+            statusesState = await .display(statuses: datasource.get(),
+                                           nextPageState: newStatuses.count < 20 ? .none : .hasNextPage)
+        } catch {
+            statusesState = .error(error: error)
+        }
     }
-  }
+    
+    func statusDidAppear(status: Status) {
+        pendingStatusesObserver.removeStatus(status: status)
+        visibileStatuses.insert(status, at: 0)
+        
+        if let client, timeline.supportNewestPagination {
+            Task {
+                await cache.setLatestSeenStatuses(visibileStatuses, for: client, filter: timeline.id)
+            }
+        }
+    }
+    
+    func statusDidDisappear(status: Status) {
+        visibileStatuses.removeAll(where: { $0.id == status.id })
+    }
+}
 
-  func statusDidDisappear(status: Status) {
-    visibileStatusesIds.remove(status.id)
-  }
+// MARK: - MARKER
+extension TimelineViewModel {
+    func fetchMarker() async -> Marker.Content? {
+        guard let client else {
+            return nil
+        }
+        do {
+            let data: Marker = try await client.get(endpoint: Markers.markers)
+            return data.home
+        } catch {
+            return nil
+        }
+    }
+    
+    func saveMarker() {
+        guard timeline == .home, let client else { return }
+        Task {
+            guard let id = await cache.getLatestSeenStatus(for: client, filter: timeline.id)?.first else { return }
+            do {
+                let _: Marker = try await client.post(endpoint: Markers.markHome(lastReadId: id))
+            } catch { }
+        }
+    }
 }

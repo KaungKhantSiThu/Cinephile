@@ -18,7 +18,9 @@ struct AccountDetailHeaderView: View {
 
     @Environment(RouterPath.self) private var routerPath
     @Environment(CurrentAccount.self) private var currentAccount
-//    @Environment(\.isSupporter) private var isSupporter: Bool
+    @Environment(QuickLook.self) private var quickLook
+
+    @Environment(\.isSupporter) private var isSupporter: Bool
 
     let viewModel: AccountDetailViewModel
     let account: Account
@@ -38,31 +40,28 @@ struct AccountDetailHeaderView: View {
                 .padding(.top, 20)
             accountInfoView
         }
-        .border(.red)
-        
     }
     
     private var accountAvatarView: some View {
         ZStack(alignment: .topTrailing) {
             AvatarView(account.avatar, config: .account)
-            //          if viewModel.isCurrentUser, isSupporter {
-//            if viewModel.isCurrentUser {
-//                Image(systemName: "checkmark.seal.fill")
-//                    .resizable()
-//                    .frame(width: 25, height: 25)
-//            }
+            if viewModel.isCurrentUser, isSupporter {
+                Image(systemName: "checkmark.seal.fill")
+                    .resizable()
+                    .frame(width: 25, height: 25)
+            }
         }
         .onTapGesture {
             guard account.haveAvatar else {
                 return
             }
-            //          let attachement = MediaAttachment.imageWith(url: account.avatar)
-            //  #if targetEnvironment(macCatalyst)
-            //          openWindow(value: WindowDestinationMedia.mediaViewer(attachments: [attachement],
-            //                                                               selectedAttachment: attachement))
-            //  #else
-            //          quickLook.prepareFor(selectedMediaAttachment: attachement, mediaAttachments: [attachement])
-            //  #endif
+                      let attachement = MediaAttachment.imageWith(url: account.avatar)
+              #if targetEnvironment(macCatalyst)
+                      openWindow(value: WindowDestinationMedia.mediaViewer(attachments: [attachement],
+                                                                           selectedAttachment: attachement))
+              #else
+                      quickLook.prepareFor(selectedMediaAttachment: attachement, mediaAttachments: [attachement])
+              #endif
         }
     }
     
@@ -96,14 +95,11 @@ struct AccountDetailHeaderView: View {
 }
 
 #Preview {
-    List {
-        AccountDetailHeaderView(
-            viewModel: .init(account: .placeholder()),
-            account: .placeholder(),
-            scrollViewProxy: nil)
-        .environment(RouterPath())
-        .environment(CurrentAccount.shared)
-    }
-    .listStyle(.plain)
-    
+    AccountDetailHeaderView(
+        viewModel: .init(account: .placeholder()),
+        account: .placeholder(),
+        scrollViewProxy: nil)
+    .environment(RouterPath())
+    .environment(CurrentAccount.shared)
+    .environment(QuickLook.shared)
 }

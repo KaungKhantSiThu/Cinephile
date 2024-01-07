@@ -17,7 +17,6 @@ public struct StatusEditorView: View {
   @Environment(Theme.self) private var theme
 
   @State private var viewModel: StatusEditorViewModel
-//  @State private var followUpSEVMs: [StatusEditorViewModel] = []
   @FocusState private var isSpoilerTextFocused: UUID? // connect CoreEditor and StatusEditorAccessoryView
   @State private var editingMediaContainer: StatusEditorMediaContainer?
   @State private var scrollID: UUID?
@@ -56,7 +55,11 @@ public struct StatusEditorView: View {
         "status.error.posting.title",
         isPresented: $viewModel.showPostingErrorAlert,
         actions: {
-          Button("alert.button.ok") {}
+            Button {
+                
+            } label: {
+                Text("alert.button.ok")
+            }
         }, message: {
           Text(viewModel.postingError ?? "")
         }

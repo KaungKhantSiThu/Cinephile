@@ -10,6 +10,7 @@ import Environment
 import Networking
 import Models
 import CinephileUI
+import Status
 
 @MainActor
 public struct AccountDetailView: View {
@@ -48,16 +49,62 @@ public struct AccountDetailView: View {
     
     public var body: some View {
         ScrollViewReader { proxy in
-            ScrollView {
-                headerView(proxy: proxy)
+            List {
+                HStack {
+                    Spacer()
+                    headerView(proxy: proxy)
+                            .applyAccountDetailsRowStyle(theme: theme)
+//                            .padding(.bottom, -20)
+                        .id(ScrollToView.Constants.scrollToTop)
+                    Spacer()
+                }
+                
                     
+                familiarFollowers
+                        .applyAccountDetailsRowStyle(theme: theme)
+                
+                featuredTagsView
+                        .applyAccountDetailsRowStyle(theme: theme)
+                    
+                Picker("", selection: $viewModel.selectedTab) {
+                  ForEach(isCurrentUser ? AccountDetailViewModel.Tab.currentAccountTabs : AccountDetailViewModel.Tab.accountTabs,
+                          id: \.self)
+                  { tab in
+                    Image(systemName: tab.iconName)
+                      .tag(tab)
+                      .accessibilityLabel(tab.accessibilityLabel)
+                  }
+                }
+                .pickerStyle(.segmented)
+                .padding(.layoutPadding)
+                .id("status")
+                    
+                
+
+            switch viewModel.tabState {
+            case .statuses:
+              if viewModel.selectedTab == .statuses {
+                pinnedPostsView
+              }
+              StatusesListView(fetcher: viewModel,
+                               client: client,
+                               routerPath: routerPath)
+            case .followedTags:
+              EmptyView()
+            case .lists:
+                EmptyView()
             }
-//            .listStyle(.plain)
-            //            .onChange(of: scrollToTopSignal) {
-            //              withAnimation {
-            //                proxy.scrollTo(ScrollToView.Constants.scrollToTop, anchor: .top)
-            //              }
-            //            }
+                
+            }
+            .environment(\.defaultMinListRowHeight, 1)
+            .listStyle(.plain)
+            .scrollContentBackground(.hidden)
+                .background(theme.primaryBackgroundColor)
+            .onChange(of: scrollToTopSignal) {
+              withAnimation {
+                proxy.scrollTo(ScrollToView.Constants.scrollToTop, anchor: .top)
+              }
+            }
         }
         .onAppear {
             guard reasons != .placeholder else { return }
@@ -68,12 +115,11 @@ public struct AccountDetailView: View {
             let viewModel = viewModel
             Task {
                 await withTaskGroup(of: Void.self) { group in
-                    group.addTask { await viewModel.fetchAccount() }
-                    //                group.addTask {
-                    //                  if await viewModel.statuses.isEmpty {
-                    //                    await viewModel.fetchNewestStatuses()
-                    //                  }
-                    //                }
+                    group.addTask {
+                      if await viewModel.statuses.isEmpty {
+                        await viewModel.fetchNewestStatuses()
+                      }
+                    }
                     if !viewModel.isCurrentUser {
                         group.addTask { await viewModel.fetchFamilliarFollowers() }
                     }
@@ -82,7 +128,7 @@ public struct AccountDetailView: View {
         }
         .refreshable {
             await viewModel.fetchAccount()
-//            await viewModel.fetchNewestStatuses()
+            await viewModel.fetchNewestStatuses()
         }
         .onChange(of: isEditingAccount) { _, newValue in
           if !newValue {
@@ -95,6 +141,8 @@ public struct AccountDetailView: View {
         .sheet(isPresented: $isEditingAccount, content: {
           EditAccountView()
         })
+//        .edgesIgnoringSafeArea(.top)
+        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             toolbarContent
         }
@@ -116,31 +164,34 @@ public struct AccountDetailView: View {
         }
     }
     
-//    @ViewBuilder
-//    private var pinnedPostsView: some View {
-//      if !viewModel.pinned.isEmpty {
-//        Label("account.post.pinned", systemImage: "pin.fill")
-//          .accessibilityAddTraits(.isHeader)
-//          .font(.scaledFootnote)
-//          .foregroundStyle(.secondary)
-//          .fontWeight(.semibold)
-//          .listRowInsets(.init(top: 0,
-//                               leading: 12,
-//                               bottom: 0,
-//                               trailing: .layoutPadding))
-//          .listRowSeparator(.hidden)
-//          .listRowBackground(theme.primaryBackgroundColor)
-//        ForEach(viewModel.pinned) { status in
-////          StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
-//        }
-//        Rectangle()
-//          .fill(theme.secondaryBackgroundColor)
-//          .frame(height: 12)
-//          .listRowInsets(.init())
-//          .listRowSeparator(.hidden)
-//          .accessibilityHidden(true)
-//      }
-//    }
+    @ViewBuilder
+    private var pinnedPostsView: some View {
+      if !viewModel.pinned.isEmpty {
+          Label(
+            title: { Text("account.post.pinned", bundle: .module) },
+            icon: { Image(systemName: "pin.fill") }
+          )
+          .accessibilityAddTraits(.isHeader)
+          .font(.scaledFootnote)
+          .foregroundStyle(.secondary)
+          .fontWeight(.semibold)
+          .listRowInsets(.init(top: 0,
+                               leading: 12,
+                               bottom: 0,
+                               trailing: .layoutPadding))
+          .listRowSeparator(.hidden)
+          .listRowBackground(theme.primaryBackgroundColor)
+        ForEach(viewModel.pinned) { status in
+          StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
+        }
+        Rectangle()
+          .fill(theme.secondaryBackgroundColor)
+          .frame(height: 12)
+          .listRowInsets(.init())
+          .listRowSeparator(.hidden)
+          .accessibilityHidden(true)
+      }
+    }
     
     
     @ToolbarContentBuilder
@@ -154,9 +205,11 @@ public struct AccountDetailView: View {
             Button {
                 routerPath.presentedSheet = .settings
             } label: {
-                Label("Settings", systemImage: "gear")
+                Label(
+                    title: { Text("account.settings") },
+                    icon: { Image(systemName: "gear") }
+                )
             }
-            
         }
         
         ToolbarItemGroup(placement: .topBarTrailing) {
@@ -164,11 +217,78 @@ public struct AccountDetailView: View {
                 Button {
                   isEditingAccount = true
                 } label: {
-                  Label("Edit Account Info", systemImage: "pencil")
+                    Label(
+                        title: { Text("account.edit.info") },
+                        icon: { Image(systemName: "pencil") }
+                    )
                 }
             }
         }
         
     }
     
+    @ViewBuilder
+    private var featuredTagsView: some View {
+      if !viewModel.featuredTags.isEmpty {
+        ScrollView(.horizontal, showsIndicators: false) {
+          HStack(spacing: 4) {
+            if !viewModel.featuredTags.isEmpty {
+              ForEach(viewModel.featuredTags) { tag in
+                Button {
+                  routerPath.navigate(to: .hashTag(tag: tag.name, accountId: viewModel.id))
+                } label: {
+                  VStack(alignment: .leading, spacing: 0) {
+                    Text("#\(tag.name)")
+                      .font(.scaledCallout)
+                      Text("account.detail.featured-tags-n-posts \(tag.statusesCountInt)", bundle: .module)
+                      .font(.caption2)
+                  }
+                }
+                .buttonStyle(.bordered)
+              }
+            }
+          }
+          .padding(.leading, .layoutPadding)
+        }
+      }
+    }
+    
+    @ViewBuilder
+    private var familiarFollowers: some View {
+      if !viewModel.familiarFollowers.isEmpty {
+        VStack(alignment: .leading, spacing: 2) {
+            Text("account.detail.familiar-followers", bundle: .module)
+            .font(.scaledHeadline)
+            .padding(.leading, .layoutPadding)
+            .accessibilityAddTraits(.isHeader)
+          ScrollView(.horizontal, showsIndicators: false) {
+            LazyHStack(spacing: 0) {
+              ForEach(viewModel.familiarFollowers) { account in
+                Button {
+                  routerPath.navigate(to: .accountDetailWithAccount(account: account))
+                } label: {
+                  AvatarView(account.avatar, config: .badge)
+                    .padding(.leading, -4)
+                    .accessibilityLabel(account.safeDisplayName)
+                }
+                .accessibilityAddTraits(.isImage)
+                .buttonStyle(.plain)
+              }
+            }
+            .padding(.leading, .layoutPadding + 4)
+          }
+        }
+        .padding(.top, 2)
+        .padding(.bottom, 12)
+      }
+    }
+    
+}
+
+extension View {
+  func applyAccountDetailsRowStyle(theme: Theme) -> some View {
+    listRowInsets(.init())
+      .listRowSeparator(.hidden)
+      .listRowBackground(theme.primaryBackgroundColor)
+  }
 }

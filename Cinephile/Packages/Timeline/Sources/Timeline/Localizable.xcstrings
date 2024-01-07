@@ -177,9 +177,6 @@
         }
       }
     },
-    "tag-groups.edit.section.title" : {
-
-    },
     "timeline.federated" : {
       "localizations" : {
         "en" : {
@@ -229,6 +226,9 @@
           }
         }
       }
+    },
+    "timeline.resume" : {
+
     },
     "timeline.trending" : {
       "localizations" : {

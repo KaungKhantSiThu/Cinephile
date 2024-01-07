@@ -34,7 +34,7 @@ public struct StatusEmbeddedView: View {
       Spacer()
     }
     .padding(8)
-    .background(theme.secondaryBackgroundColor)
+//    .background(theme.secondaryBackgroundColor)
     .cornerRadius(4)
     .overlay(
       RoundedRectangle(cornerRadius: 4)

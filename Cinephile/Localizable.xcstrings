@@ -4,19 +4,7 @@
     "" : {
 
     },
-    "@mgkaung" : {
-
-    },
     "#%@" : {
-
-    },
-    "3" : {
-
-    },
-    "5" : {
-
-    },
-    "12" : {
 
     },
     "accessibility.tabs.timeline.add-account" : {
@@ -75,6 +63,16 @@
         }
       }
     },
+    "action.done" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Done"
+          }
+        }
+      }
+    },
     "Add" : {
 
     },
@@ -108,6 +106,9 @@
     "Explore" : {
 
     },
+    "Hello, World!" : {
+
+    },
     "Kelvin Gao" : {
 
     },
@@ -115,9 +116,6 @@
 
     },
     "Login" : {
-
-    },
-    "Mg Kaung" : {
 
     },
     "No search Results" : {
@@ -170,6 +168,96 @@
     "Search Movies, Series, Cast" : {
 
     },
+    "settings.account.action.delete-cache" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear Cache"
+          }
+        }
+      }
+    },
+    "settings.account.cached-posts-%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cached Posts: %@"
+          }
+        }
+      }
+    },
+    "settings.cache-media.clear" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear Media Cache"
+          }
+        }
+      }
+    },
+    "settings.general.browser" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Browser"
+          }
+        }
+      }
+    },
+    "settings.general.browser.in-app" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In-App Browser"
+          }
+        },
+        "my" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "In-App Browser"
+          }
+        }
+      }
+    },
+    "settings.general.browser.in-app.readerview" : {
+
+    },
+    "settings.general.browser.system" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "System Browser"
+          }
+        },
+        "my" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "System Browser"
+          }
+        }
+      }
+    },
+    "settings.other.fast-refresh" : {
+
+    },
+    "settings.other.social-keyboard" : {
+
+    },
+    "settings.section.cache" : {
+
+    },
+    "settings.section.other" : {
+
+    },
+    "settings.section.other.footer" : {
+
+    },
     "SignIn" : {
 
     },
@@ -191,6 +279,7 @@
       }
     },
     "timeline.filter.lists" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -211,6 +300,7 @@
       }
     },
     "timeline.filter.tag-groups" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -273,9 +363,6 @@
           }
         }
       }
-    },
-    "Top Gun: Maverick is a thrilling sequel that surpasses the original. Tom Cruise delivers a stellar performance as the fearless and rebellious pilot who faces his demons and mentors a new generation of aviators. The action scenes are breathtaking and realistic, showcasing the best of modern fighter jets." : {
-
     },
     "Tracker" : {
 

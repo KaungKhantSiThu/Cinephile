@@ -56,8 +56,8 @@ public struct AccountsListRow: View {
           .foregroundStyle(Color.secondary)
 
         // First parameter is the number for the plural
-        // Second parameter is the formatted string to show
-          Text("account.label.followers \(viewModel.account.followersCount ?? 0) \(viewModel.account.followersCount ?? 0, format: .number.notation(.compactName))", bundle: .module)
+        // Second parameter is the formatted string to show , format: .number.notation(.compactName)
+          Text("\(viewModel.account.followersCount ?? 0) followers", bundle: .module)
           .font(.scaledFootnote)
 
         if let field = viewModel.account.fields.filter({ $0.verifiedAt != nil }).first {

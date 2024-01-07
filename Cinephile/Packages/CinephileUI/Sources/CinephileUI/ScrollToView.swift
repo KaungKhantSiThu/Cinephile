@@ -19,3 +19,7 @@ public struct ScrollToView: View {
       .id(Constants.scrollToTop)
   }
 }
+
+#Preview(traits: .sizeThatFitsLayout) {
+    ScrollToView()
+}

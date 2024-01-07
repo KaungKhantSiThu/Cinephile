@@ -41,6 +41,7 @@ struct StatusEditorAccessoryView: View {
               } label: {
                 Label("status.editor.photo-library", systemImage: "photo")
               }
+                
               #if !targetEnvironment(macCatalyst)
                 Button {
                   isCameraPickerPresented = true
@@ -223,8 +224,10 @@ struct StatusEditorAccessoryView: View {
       List {
         if languageSearch.isEmpty {
           if !recentlyUsedLanguages.isEmpty {
-            Section("status.editor.language-select.recently-used") {
+            Section {
               languageSheetSection(languages: recentlyUsedLanguages)
+            } header: {
+                Text("status.editor.language-select.recently-used", bundle: .module)
             }
           }
           Section {
@@ -237,13 +240,17 @@ struct StatusEditorAccessoryView: View {
       .searchable(text: $languageSearch)
       .toolbar {
         ToolbarItem(placement: .navigationBarLeading) {
-          Button("action.cancel", action: { isLanguageSheetDisplayed = false })
+            Button {
+                isLanguageSheetDisplayed = false
+            } label: {
+                Text("action.cancel", bundle: .module)
+            }
         }
       }
-      .navigationTitle("status.editor.language-select.navigation-title")
+      .navigationTitle(Text("status.editor.language-select.navigation-title", bundle: .module))
       .navigationBarTitleDisplayMode(.inline)
       .scrollContentBackground(.hidden)
-      .background(theme.secondaryBackgroundColor)
+//      .background(theme.secondaryBackgroundColor)
     }
   }
 
@@ -269,6 +276,7 @@ struct StatusEditorAccessoryView: View {
       }
     }
   }
+    
 
   private var customEmojisSheet: some View {
     NavigationStack {
@@ -307,12 +315,16 @@ struct StatusEditorAccessoryView: View {
       }
       .toolbar {
         ToolbarItem(placement: .navigationBarLeading) {
-          Button("action.cancel", action: { isCustomEmojisSheetDisplay = false })
+            Button {
+                isCustomEmojisSheetDisplay = false
+            } label: {
+                Text("action.cancel", bundle: .module)
+            }
         }
       }
       .scrollContentBackground(.hidden)
       .background(theme.primaryBackgroundColor)
-      .navigationTitle("status.editor.emojis.navigation-title")
+      .navigationTitle(Text("status.editor.emojis.navigation-title", bundle: .module))
       .navigationBarTitleDisplayMode(.inline)
     }
     .presentationDetents([.medium])

@@ -3,6 +3,9 @@ import Foundation
 import Models
 import Networking
 import SwiftUI
+import OSLog
+
+private let logger = Logger(subsystem: "Status", category: "DetailViewModel")
 
 @MainActor
 @Observable class StatusDetailViewModel {
@@ -79,9 +82,13 @@ import SwiftUI
   private func fetchStatusDetail(animate: Bool) async {
     guard let client, let statusId else { return }
     do {
+        logger.info("Fetching status detail of id \(statusId)")
       let data = try await fetchContextData(client: client, statusId: statusId)
+        logger.info("Fetched status detail of id \(statusId)")
+
       title = "status.post-from-\(data.status.account.displayNameWithoutEmojis)"
       var statuses = data.context.ancestors
+        logger.info("Adding status detail of id \(statusId) to ancestors array")
       statuses.append(data.status)
       statuses.append(contentsOf: data.context.descendants)
       cacheReplyTopPrevious(statuses: statuses)
@@ -93,7 +100,7 @@ import SwiftUI
         }
       } else {
         state = .display(statuses: statuses)
-        scrollToId = statusId
+        scrollToId = data.status.id + (data.status.editedAt?.asDate.description ?? "")
       }
     } catch {
       if let error = error as? ServerError, error.httpCode == 404 {

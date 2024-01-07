@@ -45,7 +45,7 @@ enum Tab: Int, Identifiable, Hashable {
     var iconName: String {
       switch self {
       case .timeline:
-        "rectangle.stack"
+        "person.3"
       case .notifications:
         "bell"
       case .settings:

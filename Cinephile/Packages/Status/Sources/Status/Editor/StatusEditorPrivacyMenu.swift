@@ -7,14 +7,22 @@ struct StatusEditorPrivacyMenu: View {
 
   var body: some View {
     Menu {
-      ForEach(Models.Visibility.allCases, id: \.self) { vis in
-        Button { visibility = vis } label: {
-          Label(vis.title, systemImage: vis.iconName)
+      ForEach(Models.Visibility.allCases, id: \.self) { visibility in
+          Button { self.visibility = visibility } label: {
+            Label {
+                Text(visibility.title, bundle: .module)
+            } icon: {
+                Image(systemName: visibility.iconName)
+            }
         }
       }
     } label: {
       HStack {
-        Label(visibility.title, systemImage: visibility.iconName)
+          Label {
+              Text(visibility.title, bundle: .module)
+          } icon: {
+              Image(systemName: visibility.iconName)
+          }
           .accessibilityLabel("accessibility.editor.privacy.label")
           .accessibilityValue(visibility.title)
           .accessibilityHint("accessibility.editor.privacy.hint")
