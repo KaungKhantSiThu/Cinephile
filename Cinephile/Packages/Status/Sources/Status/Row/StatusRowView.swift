@@ -48,6 +48,7 @@ public struct StatusRowView: View {
           Spacer(minLength: 8)
         }
       }
+        
       VStack(alignment: .leading) {
         if viewModel.isFiltered, let filter = viewModel.filter {
           switch filter.filter.filterAction {
@@ -64,6 +65,7 @@ public struct StatusRowView: View {
             }
             .padding(.leading, AvatarView.FrameConfiguration.status.width + .statusColumnsSpacing)
           }
+            
           HStack(alignment: .top, spacing: .statusColumnsSpacing) {
             if !isCompact,
                theme.avatarPosition == .leading
@@ -86,6 +88,7 @@ public struct StatusRowView: View {
                 if !isCompact {
                   StatusRowHeaderView(viewModel: viewModel)
                 }
+                  
                 StatusRowContentView(viewModel: viewModel)
                   .contentShape(Rectangle())
                   .onTapGesture {
@@ -98,6 +101,7 @@ public struct StatusRowView: View {
 //                    }
 //                  }
               }
+                
               VStack(alignment: .leading, spacing: 12) {
                 if viewModel.showActions, isFocused || theme.statusActionsDisplay != .none, !isInCaptureMode {
                   StatusRowActionsView(viewModel: viewModel)

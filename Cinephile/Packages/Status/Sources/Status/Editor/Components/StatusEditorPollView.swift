@@ -26,7 +26,9 @@ struct StatusEditorPollView: View {
       ForEach(0 ..< count, id: \.self) { index in
         VStack {
           HStack(spacing: 16) {
-            TextField("status.poll.option-n \(index + 1)", text: $viewModel.pollOptions[index])
+              TextField(text: $viewModel.pollOptions[index]) {
+                  Text("status.poll.option-n \(index + 1)", bundle: .module)
+              }
               .textFieldStyle(.roundedBorder)
               .focused($focused, equals: .option(index))
               .onTapGesture {
@@ -65,7 +67,7 @@ struct StatusEditorPollView: View {
       HStack {
         Picker("status.poll.frequency", selection: $viewModel.pollVotingFrequency) {
           ForEach(PollVotingFrequency.allCases, id: \.rawValue) {
-            Text($0.displayString)
+            Text($0.displayString, bundle: .module)
               .tag($0)
           }
         }
@@ -75,7 +77,7 @@ struct StatusEditorPollView: View {
 
         Picker("status.poll.duration", selection: $viewModel.pollDuration) {
           ForEach(Duration.pollDurations(), id: \.rawValue) {
-              Text($0.description, comment: "Poll Duration description")
+              Text($0.description, bundle: .module, comment: "Poll Duration description")
               .tag($0)
           }
         }

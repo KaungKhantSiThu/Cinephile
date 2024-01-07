@@ -87,18 +87,18 @@ public struct AppAccountView: View {
           } else {
             ProgressView()
             Text(viewModel.appAccount.accountName ?? viewModel.acct)
-//              .font(.scaledSubheadline)
+              .font(.scaledSubheadline)
               .foregroundStyle(Color.secondary)
               .padding(.leading, 6)
           }
           VStack(alignment: .leading) {
             if let account = viewModel.account {
-//              EmojiTextApp(.init(stringValue: account.safeDisplayName), emojis: account.emojis)
+              EmojiTextApp(.init(stringValue: account.safeDisplayName), emojis: account.emojis)
 //                .foregroundColor(theme.labelColor)
               Text("\(account.username)@\(viewModel.appAccount.server)")
-//                .font(.scaledSubheadline)
-//                .emojiSize(Font.scaledSubheadlineFont.emojiSize)
-//                .emojiBaselineOffset(Font.scaledSubheadlineFont.emojiBaselineOffset)
+                .font(.scaledSubheadline)
+                .emojiSize(Font.scaledSubheadlineFont.emojiSize)
+                .emojiBaselineOffset(Font.scaledSubheadlineFont.emojiBaselineOffset)
                 .foregroundStyle(Color.secondary)
             }
           }

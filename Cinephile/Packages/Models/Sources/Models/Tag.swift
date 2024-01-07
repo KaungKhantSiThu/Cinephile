@@ -41,6 +41,14 @@ public struct Tag: Codable, Identifiable, Equatable, Hashable {
   public var totalAccounts: Int {
     history.compactMap { Int($0.accounts) }.reduce(0, +)
   }
+    
+ public static let preview = Tag(name: "TagOne",
+                            url: "http://cinephile.social/tags/TagOne",
+                            following: false,
+                            history: [
+                                Tag.History(day: "1668297600", accounts: "1", uses: "1")
+                            ]
+                           )
 }
 
 public struct FeaturedTag: Codable, Identifiable {

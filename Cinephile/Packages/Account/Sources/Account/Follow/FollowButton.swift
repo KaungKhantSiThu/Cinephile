@@ -1,6 +1,9 @@
 import Models
 import Networking
 import SwiftUI
+import OSLog
+
+private let logger = Logger(subsystem: "Account", category: "FollowButtonViewModel")
 
 @MainActor
 @Observable public class FollowButtonViewModel {
@@ -30,9 +33,9 @@ import SwiftUI
       relationship = try await client.post(endpoint: Accounts.follow(id: accountId, notify: false, reblogs: true))
       relationshipUpdated(relationship)
     } catch {
-      print("Error while following: \(error.localizedDescription)")
+        logger.error("Error while following: \(error.localizedDescription)")
     }
-    isUpdating = false
+      isUpdating = false
   }
 
   func unfollow() async {
@@ -42,7 +45,7 @@ import SwiftUI
       relationship = try await client.post(endpoint: Accounts.unfollow(id: accountId))
       relationshipUpdated(relationship)
     } catch {
-      print("Error while unfollowing: \(error.localizedDescription)")
+        logger.error("Error while unfollowing: \(error.localizedDescription)")
     }
     isUpdating = false
   }
@@ -55,7 +58,7 @@ import SwiftUI
                                                                      reblogs: relationship.showingReblogs))
       relationshipUpdated(relationship)
     } catch {
-      print("Error while following: \(error.localizedDescription)")
+        logger.error("Error while following: \(error.localizedDescription)")
     }
   }
 
@@ -67,7 +70,7 @@ import SwiftUI
                                                                      reblogs: !relationship.showingReblogs))
       relationshipUpdated(relationship)
     } catch {
-      print("Error while switching reboosts: \(error.localizedDescription)")
+        logger.error("Error while switching reboosts: \(error.localizedDescription)")
     }
   }
 }
@@ -92,11 +95,11 @@ public struct FollowButton: View {
         }
       } label: {
         if viewModel.relationship.requested == true {
-          Text("account.follow.requested")
+            Text("account.follow.requested", bundle: .module)
         } else {
-          Text(viewModel.relationship.following ? "account.follow.following" : "account.follow.follow")
-            .accessibilityLabel("account.follow.following")
-            .accessibilityValue(viewModel.relationship.following ? "accessibility.general.toggle.on" : "accessibility.general.toggle.off")
+            Text(viewModel.relationship.following ? "account.follow.following" : "account.follow.follow", bundle: .module)
+//            .accessibilityLabel("account.follow.following")
+//            .accessibilityValue(viewModel.relationship.following ? "accessibility.general.toggle.on" : "accessibility.general.toggle.off")
         }
       }
       if viewModel.relationship.following,
@@ -110,8 +113,8 @@ public struct FollowButton: View {
           } label: {
             Image(systemName: viewModel.relationship.notifying ? "bell.fill" : "bell")
           }
-          .accessibilityLabel("accessibility.tabs.profile.user-notifications.label")
-          .accessibilityValue(viewModel.relationship.notifying ? "accessibility.general.toggle.on" : "accessibility.general.toggle.off")
+//          .accessibilityLabel("accessibility.tabs.profile.user-notifications.label")
+//          .accessibilityValue(viewModel.relationship.notifying ? "accessibility.general.toggle.on" : "accessibility.general.toggle.off")
           Button {
             Task {
               await viewModel.toggleReboosts()
@@ -119,8 +122,8 @@ public struct FollowButton: View {
           } label: {
             Image(viewModel.relationship.showingReblogs ? "arrowshape.turn.up.backward.circle.fill" : "arrowshape.turn.up.backward.circle")
           }
-          .accessibilityLabel("accessibility.tabs.profile.user-reblogs.label")
-          .accessibilityValue(viewModel.relationship.showingReblogs ? "accessibility.general.toggle.on" : "accessibility.general.toggle.off")
+//          .accessibilityLabel("accessibility.tabs.profile.user-reblogs.label")
+//          .accessibilityValue(viewModel.relationship.showingReblogs ? "accessibility.general.toggle.on" : "accessibility.general.toggle.off")
         }
       }
     }

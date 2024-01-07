@@ -2,12 +2,13 @@ import AVFoundation
 import Foundation
 import UIKit
 
-actor StatusEditorCompressor {
-  enum CompressorError: Error {
+public actor StatusEditorCompressor {
+    enum CompressorError: Error {
     case noData
   }
+    public init() { }
 
-  func compressImageFrom(url: URL) async -> Data? {
+    public func compressImageFrom(url: URL) async -> Data? {
     await withCheckedContinuation { continuation in
       let sourceOptions = [kCGImageSourceShouldCache: false] as CFDictionary
       guard let source = CGImageSourceCreateWithURL(url as CFURL, sourceOptions) else {
@@ -54,7 +55,7 @@ actor StatusEditorCompressor {
     }
   }
 
-  func compressImageForUpload(_ image: UIImage) async throws -> Data {
+    public func compressImageForUpload(_ image: UIImage) async throws -> Data {
     var image = image
     if image.size.height > 5000 || image.size.width > 5000 {
       image = image.resized(to: .init(width: image.size.width / 4,
@@ -81,7 +82,7 @@ actor StatusEditorCompressor {
     return imageData
   }
 
-  func compressVideo(_ url: URL) async -> URL? {
+    public func compressVideo(_ url: URL) async -> URL? {
     await withCheckedContinuation { continuation in
       let urlAsset = AVURLAsset(url: url, options: nil)
       guard let exportSession = AVAssetExportSession(asset: urlAsset, presetName: AVAssetExportPreset1920x1080) else {

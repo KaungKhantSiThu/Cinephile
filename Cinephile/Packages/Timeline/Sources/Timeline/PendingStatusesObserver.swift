@@ -41,7 +41,7 @@ struct PendingStatusesObserverView: View {
       }
       .accessibilityLabel("accessibility.tabs.timeline.unread-posts.label-\(observer.pendingStatusesCount)")
       .accessibilityHint("accessibility.tabs.timeline.unread-posts.hint")
-      .buttonStyle(.bordered)
+      .buttonStyle(.borderedProminent)
       .background(.thinMaterial)
       .cornerRadius(8)
       .padding(12)

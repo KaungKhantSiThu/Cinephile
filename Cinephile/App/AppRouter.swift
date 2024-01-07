@@ -52,11 +52,11 @@ extension View {
                              selectedTagGroup: .constant(nil),
                              scrollToTopSignal: .constant(0),
                              canFilterTimeline: false)
-            case .list(list: let list):
-                TimelineView(timeline: .constant(.list(list: list)),
-                             selectedTagGroup: .constant(nil),
-                             scrollToTopSignal: .constant(0),
-                             canFilterTimeline: false)
+//            case .list(list: let list):
+//                TimelineView(timeline: .constant(.list(list: list)),
+//                             selectedTagGroup: .constant(nil),
+//                             scrollToTopSignal: .constant(0),
+//                             canFilterTimeline: false)
             case .followers(id: let id):
                 AccountsListView(mode: .followers(accountId: id))
             case .following(id: let id):
@@ -100,7 +100,6 @@ extension View {
               StatusEditHistoryView(statusId: status)
             case .settings:
               SettingsTab(popToRootTab: .constant(.settings), isModal: true)
-                .preferredColorScheme(Theme.shared.selectedScheme == .dark ? .dark : .light)
             case let .report(status):
               ReportView(status: status)
             case let .shareImage(image, status):

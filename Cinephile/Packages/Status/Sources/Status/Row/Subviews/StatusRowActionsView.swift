@@ -13,8 +13,15 @@ struct StatusRowActionsView: View {
 
   @Environment(\.openWindow) private var openWindow
   @Environment(\.isStatusFocused) private var isFocused
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+
 
   var viewModel: StatusRowViewModel
+    
+    var isNarrow: Bool {
+      horizontalSizeClass == .compact && (UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac)
+    }
+
 
   func privateBoost() -> Bool {
     viewModel.status.visibility == .priv && viewModel.status.account.id == currentAccount.account?.id
@@ -31,13 +38,13 @@ struct StatusRowActionsView: View {
     //     satisfy nonisolated protocol requirement
     //
     public nonisolated static var allCases: [StatusRowActionsView.Action] {
-      [.respond, .boost, .favorite, .bookmark, .share]
+        [.favorite, .respond, .boost, .bookmark, .share]
     }
 
     func image(dataController: StatusDataController, privateBoost: Bool = false) -> Image {
       switch self {
       case .respond:
-        return Image(systemName: "arrowshape.turn.up.left")
+        return Image(systemName: "message")
       case .boost:
         if privateBoost {
           if dataController.isReblogged {
@@ -46,10 +53,13 @@ struct StatusRowActionsView: View {
             return Image(systemName: "lock.rotation")
           }
         }
-          return Image(systemName: dataController.isReblogged ? "arrowshape.turn.up.backward.circle.fill" : "arrowshape.turn.up.backward.circle")
-              .symbolRenderingMode(.palette)
+          return dataController.isReblogged ? 
+          Image(systemName:  "arrow.left.arrow.right")
+              .symbolRenderingMode(.palette) :
+          Image(systemName: "arrow.left.arrow.right")
+              
       case .favorite:
-        return Image(systemName: dataController.isFavorited ? "star.fill" : "star")
+        return Image(systemName: dataController.isFavorited ? "heart.fill" : "heart")
       case .bookmark:
         return Image(systemName: dataController.isBookmarked ? "bookmark.fill" : "bookmark")
       case .share:
@@ -102,11 +112,12 @@ struct StatusRowActionsView: View {
       case .respond, .share:
         nil
       case .favorite:
-        .yellow
+        .red
       case .bookmark:
-        .pink
+          theme.tintColor
       case .boost:
-        theme.tintColor
+//        theme.tintColor
+          .green
       }
     }
 
@@ -157,43 +168,101 @@ struct StatusRowActionsView: View {
     }
   }
 
-  private func actionButton(action: Action) -> some View {
-    HStack(spacing: 2) {
-      Button {
-        handleAction(action: action)
-      } label: {
-        if action == .boost {
-          action
-            .image(dataController: statusDataController, privateBoost: privateBoost())
-            .imageScale(.medium)
-            .font(.body)
-            .fontWeight(.black)
-        } else {
-          action
-            .image(dataController: statusDataController, privateBoost: privateBoost())
-        }
-      }
-      .buttonStyle(
-        .statusAction(
-          isOn: action.isOn(dataController: statusDataController),
-          tintColor: action.tintColor(theme: theme)
-        )
-      )
-      .disabled(action == .boost &&
-        (viewModel.status.visibility == .direct || viewModel.status.visibility == .priv && viewModel.status.account.id != currentAccount.account?.id))
-      if let count = action.count(dataController: statusDataController,
-                                  isFocused: isFocused,
-                                  theme: theme), !viewModel.isRemote
-      {
-        Text("\(count)")
-          .foregroundColor(Color(UIColor.secondaryLabel))
-          .font(.scaledFootnote)
-          .monospacedDigit()
-      }
-    }
-    .accessibilityElement(children: .combine)
-    .accessibilityLabel(action.accessibilityLabel(dataController: statusDataController, privateBoost: privateBoost()))
-  }
+    private func actionButton(action: Action) -> some View {
+       Button {
+         handleAction(action: action)
+       } label: {
+         HStack(spacing: 2) {
+           if action == .boost {
+             action
+               .image(dataController: statusDataController, privateBoost: privateBoost())
+               .imageScale(.medium)
+               .font(.scaledBody)
+               .fontWeight(.black)
+           } else {
+             action
+               .image(dataController: statusDataController, privateBoost: privateBoost())
+               .font(.scaledBody)
+           }
+           if !isNarrow,
+              let count = action.count(dataController: statusDataController,
+                                       isFocused: isFocused,
+                                       theme: theme), !viewModel.isRemote
+           {
+             Text("\(count)")
+               .contentTransition(.numericText(value: Double(count)))
+               .foregroundColor(Color(UIColor.secondaryLabel))
+               .font(.scaledFootnote)
+               .monospacedDigit()
+           }
+         }
+         .contentShape(Rectangle())
+       }
+       .buttonStyle(
+         .statusAction(
+           isOn: action.isOn(dataController: statusDataController),
+           tintColor: action.tintColor(theme: theme)
+         )
+       )
+       .disabled(action == .boost &&
+                 (viewModel.status.visibility == .direct || viewModel.status.visibility == .priv && viewModel.status.account.id != currentAccount.account?.id))
+//       .accessibilityElement(children: .combine)
+//       .accessibilityLabel(action.accessibilityLabel(dataController: statusDataController, privateBoost: privateBoost()))
+     }
+//  private func actionButton(action: Action) -> some View {
+//      Button {
+//        handleAction(action: action)
+//      } label: {
+//          HStack(alignment: .center, spacing: 2) {
+//              
+//              if action == .boost {
+//                  action
+//                      .image(dataController: statusDataController, privateBoost: privateBoost())
+//                      .imageScale(.medium)
+//                      .font(.body)
+//                      .fontWeight(.black)
+//              } else {
+//                  action
+//                      .image(dataController: statusDataController, privateBoost: privateBoost())
+//              }
+//              
+//              if !isNarrow,
+//                         let count = action.count(dataController: statusDataController,
+//                                                  isFocused: isFocused,
+//                                                  theme: theme), !viewModel.isRemote
+//                      {
+//                        Text("\(count)")
+//                          .contentTransition(.numericText(value: Double(count)))
+//                          .foregroundColor(Color(UIColor.secondaryLabel))
+//                          .font(.scaledFootnote)
+//                          .monospacedDigit()
+//                      }
+//              
+//          }
+//      }
+//
+//    }
+//        .buttonStyle(
+//          .statusAction(
+//            isOn: action.isOn(dataController: statusDataController),
+//            tintColor: action.tintColor(theme: theme)
+//          )
+//        )
+//        .disabled(action == .boost &&
+//          (viewModel.status.visibility == .direct || viewModel.status.visibility == .priv && viewModel.status.account.id != currentAccount.account?.id))
+//          
+//        if let count = action.count(dataController: statusDataController,
+//                                    isFocused: isFocused,
+//                                    theme: theme), !viewModel.isRemote
+//        {
+//            Text("\(count)")
+//            .foregroundColor(Color(UIColor.secondaryLabel))
+//            .font(.scaledFootnote)
+//            .monospacedDigit()
+//        }
+//    .accessibilityElement(children: .combine)
+//    .accessibilityLabel(action.accessibilityLabel(dataController: statusDataController, privateBoost: privateBoost()))
+//  }
 
   private func handleAction(action: Action) {
     Task {
@@ -209,8 +278,7 @@ struct StatusRowActionsView: View {
         #if targetEnvironment(macCatalyst)
           openWindow(value: WindowDestinationEditor.replyToStatusEditor(status: viewModel.localStatus ?? viewModel.status))
         #else
-//          viewModel.routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.localStatus ?? viewModel.status)
-          print("respond")
+          viewModel.routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.localStatus ?? viewModel.status)
         #endif
       case .favorite:
 //        SoundEffectManager.shared.playSound(.favorite)

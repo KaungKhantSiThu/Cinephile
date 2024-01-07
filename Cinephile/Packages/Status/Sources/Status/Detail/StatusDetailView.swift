@@ -77,21 +77,23 @@ public struct StatusDetailView: View {
             proxy.scrollTo(newValue, anchor: .top)
           }
         }
-        .task {
+        .onAppear {
           guard !isLoaded else { return }
           viewModel.client = client
           viewModel.routerPath = routerPath
-          let result = await viewModel.fetch()
-          isLoaded = true
+            Task {
+                let result = await viewModel.fetch()
+                isLoaded = true
 
-          if !result {
-            if let url = viewModel.remoteStatusURL {
-              await UIApplication.shared.open(url)
+                if !result {
+                  if let url = viewModel.remoteStatusURL {
+                    await UIApplication.shared.open(url)
+                  }
+                  DispatchQueue.main.async {
+                    _ = routerPath.path.popLast()
+                  }
+                }
             }
-            DispatchQueue.main.async {
-              _ = routerPath.path.popLast()
-            }
-          }
         }
       }
       .refreshable {
@@ -104,7 +106,7 @@ public struct StatusDetailView: View {
         viewModel.handleEvent(event: lastEvent, currentAccount: currentAccount.account)
       }
     }
-    .navigationTitle(viewModel.title)
+    .navigationTitle(Text(viewModel.title, bundle: .module))
     .navigationBarTitleDisplayMode(.inline)
   }
 

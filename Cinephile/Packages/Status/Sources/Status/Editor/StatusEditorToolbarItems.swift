@@ -86,14 +86,14 @@ struct StatusEditorToolbarItems: ToolbarContent {
       close()
 //      SoundEffectManager.shared.playSound(.tootSent)
       NotificationCenter.default.post(name: .shareSheetClose, object: nil)
-      #if !targetEnvironment(macCatalyst)
-        if !viewModel.mode.isInShareExtension, !preferences.requestedReview {
-          if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
-            SKStoreReviewController.requestReview(in: scene)
-          }
-          preferences.requestedReview = true
-        }
-      #endif
+//      #if !targetEnvironment(macCatalyst)
+//        if !viewModel.mode.isInShareExtension, !preferences.requestedReview {
+//          if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
+//            SKStoreReviewController.requestReview(in: scene)
+//          }
+//          preferences.requestedReview = true
+//        }
+//      #endif
     }
 
     return status

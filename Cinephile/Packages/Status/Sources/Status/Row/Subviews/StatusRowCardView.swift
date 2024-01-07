@@ -56,7 +56,7 @@ public struct StatusRowCardView: View {
         }
         .frame(maxWidth: maxWidth)
         .fixedSize(horizontal: false, vertical: true)
-        .background(theme.secondaryBackgroundColor)
+        .background(theme.secondaryBackgroundColor.opacity(0.3))
 //        .cornerRadius(16)
         .overlay(
           RoundedRectangle(cornerRadius: 16)

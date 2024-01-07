@@ -240,36 +240,68 @@ import os
     return urlSession.webSocketTask(with: url, protocols: subprotocols)
   }
 
-  public func mediaUpload<Entity: Decodable>(endpoint: Endpoint,
-                                             version: Version,
-                                             method: String,
-                                             mimeType: String,
-                                             filename: String,
-                                             data: Data) async throws -> Entity
-  {
-    let url = try makeURL(endpoint: endpoint, forceVersion: version)
-    var request = makeURLRequest(url: url, endpoint: endpoint, httpMethod: method)
-    let boundary = UUID().uuidString
-    request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
-    let httpBody = NSMutableData()
-    httpBody.append("--\(boundary)\r\n".data(using: .utf8)!)
-    httpBody.append("Content-Disposition: form-data; name=\"\(filename)\"; filename=\"\(filename)\"\r\n".data(using: .utf8)!)
-    httpBody.append("Content-Type: \(mimeType)\r\n".data(using: .utf8)!)
-    httpBody.append("\r\n".data(using: .utf8)!)
-    httpBody.append(data)
-    httpBody.append("\r\n--\(boundary)--\r\n".data(using: .utf8)!)
-    request.httpBody = httpBody as Data
-    let (data, httpResponse) = try await urlSession.data(for: request)
-    logResponseOnError(httpResponse: httpResponse, data: data)
-    do {
-      return try decoder.decode(Entity.self, from: data)
-    } catch {
-      if let serverError = try? decoder.decode(ServerError.self, from: data) {
-        throw serverError
+    public func mediaUpload<Entity: Decodable>(endpoint: Endpoint,
+                                               version: Version,
+                                               method: String,
+                                               mimeType: String,
+                                               filename: String,
+                                               data: Data) async throws -> Entity
+    {
+      let request = try makeFormDataRequest(endpoint: endpoint,
+                                            version: version,
+                                            method: method,
+                                            mimeType: mimeType,
+                                            filename: filename,
+                                            data: data)
+      let (data, httpResponse) = try await urlSession.data(for: request)
+      logResponseOnError(httpResponse: httpResponse, data: data)
+      do {
+        return try decoder.decode(Entity.self, from: data)
+      } catch {
+        if let serverError = try? decoder.decode(ServerError.self, from: data) {
+          throw serverError
+        }
+        throw error
       }
-      throw error
     }
-  }
+    
+    public func mediaUpload(endpoint: Endpoint,
+                            version: Version,
+                            method: String,
+                            mimeType: String,
+                            filename: String,
+                            data: Data) async throws -> HTTPURLResponse?
+    {
+      let request = try makeFormDataRequest(endpoint: endpoint,
+                                            version: version,
+                                            method: method,
+                                            mimeType: mimeType,
+                                            filename: filename,
+                                            data: data)
+      let (_, httpResponse) = try await urlSession.data(for: request)
+      return httpResponse as? HTTPURLResponse
+    }
+    
+    private func makeFormDataRequest(endpoint: Endpoint,
+                                     version: Version,
+                                     method: String,
+                                     mimeType: String,
+                                     filename: String,
+                                     data: Data) throws -> URLRequest {
+      let url = try makeURL(endpoint: endpoint, forceVersion: version)
+      var request = makeURLRequest(url: url, endpoint: endpoint, httpMethod: method)
+      let boundary = UUID().uuidString
+      request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+      let httpBody = NSMutableData()
+      httpBody.append("--\(boundary)\r\n".data(using: .utf8)!)
+      httpBody.append("Content-Disposition: form-data; name=\"\(filename)\"; filename=\"\(filename)\"\r\n".data(using: .utf8)!)
+      httpBody.append("Content-Type: \(mimeType)\r\n".data(using: .utf8)!)
+      httpBody.append("\r\n".data(using: .utf8)!)
+      httpBody.append(data)
+      httpBody.append("\r\n--\(boundary)--\r\n".data(using: .utf8)!)
+      request.httpBody = httpBody as Data
+      return request
+    }
 
   private func logResponseOnError(httpResponse: URLResponse, data: Data) {
     if let httpResponse = httpResponse as? HTTPURLResponse, httpResponse.statusCode > 299 {

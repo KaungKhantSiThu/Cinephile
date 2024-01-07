@@ -12,7 +12,7 @@ import Environment
 import Models
 import Networking
 import SwiftUI
-//import Timeline
+import Timeline
 
 struct AccountSettingsView: View {
   @Environment(\.dismiss) private var dismiss
@@ -21,14 +21,14 @@ struct AccountSettingsView: View {
 //  @Environment(PushNotificationsService.self) private var pushNotifications
   @Environment(CurrentAccount.self) private var currentAccount
   @Environment(CurrentInstance.self) private var currentInstance
-//  @Environment(Theme.self) private var theme
+  @Environment(Theme.self) private var theme
   @Environment(AppAccountsManager.self) private var appAccountsManager
   @Environment(Client.self) private var client
 
   @State private var isEditingAccount: Bool = false
   @State private var isEditingFilters: Bool = false
   @State private var cachedPostsCount: Int = 0
-//  @State private var timelineCache = TimelineCache()
+  @State private var timelineCache = TimelineCache()
 
   let account: Account
   let appAccount: AppAccount
@@ -61,18 +61,18 @@ struct AccountSettingsView: View {
 //          }
 //        }
       }
-//      .listRowBackground(theme.primaryBackgroundColor)
+      //.listRowBackground(theme.primaryBackgroundColor)
 
-//      Section {
-//        Label("settings.account.cached-posts-\(String(cachedPostsCount))", systemImage: "internaldrive")
-//        Button("settings.account.action.delete-cache", role: .destructive) {
-//          Task {
-//            await timelineCache.clearCache(for: appAccountsManager.currentClient.id)
-//            cachedPostsCount = await timelineCache.cachedPostsCount(for: appAccountsManager.currentClient.id)
-//          }
-//        }
-//      }
-//      .listRowBackground(theme.primaryBackgroundColor)
+      Section {
+        Label("settings.account.cached-posts-\(String(cachedPostsCount))", systemImage: "internaldrive")
+        Button("settings.account.action.delete-cache", role: .destructive) {
+          Task {
+            await timelineCache.clearCache(for: appAccountsManager.currentClient.id)
+            cachedPostsCount = await timelineCache.cachedPostsCount(for: appAccountsManager.currentClient.id)
+          }
+        }
+      }
+      //.listRowBackground(theme.primaryBackgroundColor)
 
       Section {
         Button {
@@ -81,14 +81,14 @@ struct AccountSettingsView: View {
           Text("account.action.more")
         }
       }
-//      .listRowBackground(theme.primaryBackgroundColor)
+      //.listRowBackground(theme.primaryBackgroundColor)
 
       Section {
         Button(role: .destructive) {
           if let token = appAccount.oauthToken {
             Task {
-//              let client = Client(server: appAccount.server, oauthToken: token)
-//              await timelineCache.clearCache(for: client.id)
+              let client = Client(server: appAccount.server, oauthToken: token)
+              await timelineCache.clearCache(for: client.id)
 //              if let sub = pushNotifications.subscriptions.first(where: { $0.account.token == token }) {
 //                await sub.deleteSubscription()
 //              }
@@ -101,11 +101,11 @@ struct AccountSettingsView: View {
             .frame(maxWidth: .infinity)
         }
       }
-//      .listRowBackground(theme.primaryBackgroundColor)
+      //.listRowBackground(theme.primaryBackgroundColor)
     }
-//    .sheet(isPresented: $isEditingAccount, content: {
-//      EditAccountView()
-//    })
+    .sheet(isPresented: $isEditingAccount, content: {
+      EditAccountView()
+    })
 //    .sheet(isPresented: $isEditingFilters, content: {
 //      FiltersListView()
 //    })
@@ -118,9 +118,9 @@ struct AccountSettingsView: View {
         }
       }
     }
-//    .task {
-//      cachedPostsCount = await timelineCache.cachedPostsCount(for: appAccountsManager.currentClient.id)
-//    }
+    .task {
+      cachedPostsCount = await timelineCache.cachedPostsCount(for: appAccountsManager.currentClient.id)
+    }
     .navigationTitle(account.safeDisplayName)
     .scrollContentBackground(.hidden)
 //    .background(theme.secondaryBackgroundColor)
