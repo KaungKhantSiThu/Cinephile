@@ -99,7 +99,7 @@ public struct AccountDetailView: View {
             .environment(\.defaultMinListRowHeight, 1)
             .listStyle(.plain)
             .scrollContentBackground(.hidden)
-                .background(theme.primaryBackgroundColor)
+                //.background(theme.primaryBackgroundColor)
             .onChange(of: scrollToTopSignal) {
               withAnimation {
                 proxy.scrollTo(ScrollToView.Constants.scrollToTop, anchor: .top)
@@ -117,7 +117,7 @@ public struct AccountDetailView: View {
                 await withTaskGroup(of: Void.self) { group in
                     group.addTask {
                       if await viewModel.statuses.isEmpty {
-                        await viewModel.fetchNewestStatuses()
+                          await viewModel.fetchNewestStatuses(pullToRefresh: false)
                       }
                     }
                     if !viewModel.isCurrentUser {
@@ -128,7 +128,7 @@ public struct AccountDetailView: View {
         }
         .refreshable {
             await viewModel.fetchAccount()
-            await viewModel.fetchNewestStatuses()
+            await viewModel.fetchNewestStatuses(pullToRefresh: true)
         }
         .onChange(of: isEditingAccount) { _, newValue in
           if !newValue {

@@ -12,19 +12,31 @@ import TMDb
 
 @MainActor
 public struct VideoView: View {
-    let metaData: VideoMetadata
+    let name: String
+    let id: String
 
     public var body: some View {
-        
         VStack(alignment: .leading) {
-            YouTubeView(videoId: metaData.key)
+            YouTubeView(videoId: id)
                 .clipShape(RoundedRectangle(cornerRadius: 25))
                 .frame(width: 320, height: 180)
             
-            Text(metaData.name)
+            Text(name)
                 .font(.headline)
+                .lineLimit(2)
                 .frame(width: 300)
         }
+    }
+    
+
+    init(metaData: VideoMetadata) {
+        self.name = metaData.name
+        self.id = metaData.id
+    }
+    
+    init(name: String, id: String) {
+        self.name = name
+        self.id = id
     }
 }
 
@@ -42,7 +54,6 @@ public struct YouTubeView: UIViewRepresentable {
     }
 }
 
-
-//#Preview {
-//    VideoView(metaData: .preview)
-//}
+#Preview {
+    VideoView(name: "London Underground กว่าศตวรรษของโลโก้ ที่มีคนก็อบมากที่สุด! | Logo Tales EP.3", id: "R1RtdU3y7JY")
+}

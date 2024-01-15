@@ -39,6 +39,7 @@ let package = Package(
             name: "TrackerUI",
             dependencies: [
                 "TMDb",
+                "Environment",
                 .product(name: "NukeUI", package: "Nuke")
             ]
         ),

@@ -47,7 +47,7 @@ public struct CastView: View {
         .padding(.leading, 20)
         .task {
             do {
-                posterImage = try await ImageLoader.generate(from: self.profilePath, width: 200)
+                posterImage = try await ImageLoaderS.generate(from: self.profilePath)
             } catch {
                 print(error.localizedDescription)
             }

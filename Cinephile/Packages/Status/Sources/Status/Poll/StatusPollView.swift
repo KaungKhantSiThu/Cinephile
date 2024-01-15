@@ -68,7 +68,7 @@ public struct StatusPollView: View {
       }
     }
     return Image(systemName: imageName)
-      .foregroundColor(theme.labelColor)
+      //.foregroundColor(theme.labelColor)
   }
 
   public var body: some View {
@@ -187,7 +187,7 @@ public struct StatusPollView: View {
           HStack {
             buttonImage
             Text(option.title)
-              .foregroundColor(theme.labelColor)
+              //.foregroundColor(theme.labelColor)
               .font(.scaledBody)
               .minimumScaleFactor(0.7)
           }

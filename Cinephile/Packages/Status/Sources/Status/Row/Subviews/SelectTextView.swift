@@ -26,7 +26,7 @@ struct SelectTextView: View {
             }
           }
         }
-        .background(Theme.shared.primaryBackgroundColor)
+//        .background(Theme.shared.primaryBackgroundColor)
         .navigationTitle(Text("status.action.select-text", bundle: .module))
         .navigationBarTitleDisplayMode(.inline)
     }

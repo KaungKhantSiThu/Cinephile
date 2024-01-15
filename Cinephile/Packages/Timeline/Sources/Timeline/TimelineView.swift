@@ -46,9 +46,8 @@ public struct TimelineView: View {
     public var body: some View {
         ScrollViewReader { proxy in
             ZStack(alignment: .top) {
-                scrollToTopView
                 List {
-                    
+                    scrollToTopView
                     //          tagGroupHeaderView
                     tagHeaderView
                     switch viewModel.timeline {
@@ -63,7 +62,7 @@ public struct TimelineView: View {
                 .environment(\.defaultMinListRowHeight, 1)
                 .listStyle(.plain)
                 .scrollContentBackground(.hidden)
-                .background(theme.primaryBackgroundColor)
+                //.background(theme.primaryBackgroundColor)
                 .introspect(.list, on: .iOS(.v17)) { (collectionView: UICollectionView) in
                     DispatchQueue.main.async {
                         self.collectionView = collectionView
@@ -74,7 +73,7 @@ public struct TimelineView: View {
                 }
                 
                 if viewModel.timeline.supportNewestPagination {
-                    PendingStatusesObserverView(observer: viewModel.pendingStatusesObserver)
+                    TimelineUnreadStatusesView(observer: viewModel.pendingStatusesObserver)
                 }
                 
             }
@@ -232,7 +231,7 @@ public struct TimelineView: View {
             content()
             Spacer()
         }
-        .listRowBackground(theme.secondaryBackgroundColor)
+//        .listRowBackground(theme.secondaryBackgroundColor)
         .listRowSeparator(.hidden)
         .listRowInsets(.init(top: 8,
                              leading: .layoutPadding,

@@ -21,22 +21,22 @@ import TMDb
 //    }
 //}
 
-struct PreviewData {
-    static var mockMovie = Movie(id: Int.random(in: 10000...99999),
-                                 title: "Top Gun: Maverick",
-                                 overview: "After more than thirty years of service as one of the Navy’s top aviators, and dodging the "
-                                 + "advancement in rank that would ground him, Pete “Maverick” Mitchell finds himself training a detachment "
-                                 + "of TOP GUN graduates for a specialized mission the likes of which no living pilot has ever seen.",
-                                 runtime: 9840,
-                                 genres: [
-                                     Genre(id: 1, name: "Adventure"),
-                                     Genre(id: 2, name: "Drama")
-                                 ],
-                                 releaseDate: DateFormatter.theMovieDatabase.date(from: "2023-11-24"),
-                                 posterPath: URL(string: "/62HCnUTziyWcpDaBO2i1DX17ljH.jpg"),
-                                 voteAverage: 7.3
-                            )
-    
-    static var mockMovieArray = [mockMovie, mockMovie, mockMovie]
-    
-}
+//struct PreviewData {
+//    static var mockMovie = Movie(id: Int.random(in: 10000...99999),
+//                                 title: "Top Gun: Maverick",
+//                                 overview: "After more than thirty years of service as one of the Navy’s top aviators, and dodging the "
+//                                 + "advancement in rank that would ground him, Pete “Maverick” Mitchell finds himself training a detachment "
+//                                 + "of TOP GUN graduates for a specialized mission the likes of which no living pilot has ever seen.",
+//                                 runtime: 9840,
+//                                 genres: [
+//                                     Genre(id: 1, name: "Adventure"),
+//                                     Genre(id: 2, name: "Drama")
+//                                 ],
+//                                 releaseDate: DateFormatter.theMovieDatabase.date(from: "2023-11-24"),
+//                                 posterPath: URL(string: "/62HCnUTziyWcpDaBO2i1DX17ljH.jpg"),
+//                                 voteAverage: 7.3
+//                            )
+//    
+//    static var mockMovieArray = [mockMovie, mockMovie, mockMovie]
+//    
+//}

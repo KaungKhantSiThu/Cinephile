@@ -27,10 +27,10 @@ import Networking
   public var availableAccounts: [AppAccount]
   public var currentClient: Client
 
-//  public var pushAccounts: [PushAccount] {
-//    availableAccounts.filter { $0.oauthToken != nil }
-//      .map { .init(server: $0.server, token: $0.oauthToken!, accountName: $0.accountName) }
-//  }
+  public var pushAccounts: [PushAccount] {
+    availableAccounts.filter { $0.oauthToken != nil }
+      .map { .init(server: $0.server, token: $0.oauthToken!, accountName: $0.accountName) }
+  }
 
   public static var shared = AppAccountsManager()
 

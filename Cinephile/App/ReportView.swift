@@ -36,7 +36,7 @@ public struct ReportView: View {
       .navigationTitle("report.title")
       .navigationBarTitleDisplayMode(.inline)
       .scrollContentBackground(.hidden)
-      .background(theme.secondaryBackgroundColor)
+//      .background(theme.secondaryBackgroundColor)
       .scrollDismissesKeyboard(.immediately)
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {

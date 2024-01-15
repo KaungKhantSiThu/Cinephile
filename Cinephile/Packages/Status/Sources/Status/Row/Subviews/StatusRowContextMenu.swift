@@ -161,7 +161,7 @@ struct StatusRowContextMenu: View {
           .environment(viewModel.client)
           .preferredColorScheme(Theme.shared.selectedScheme == .dark ? .dark : .light)
           .foregroundColor(Theme.shared.labelColor)
-          .background(Theme.shared.primaryBackgroundColor)
+//          .background(Theme.shared.primaryBackgroundColor)
           .frame(width: sceneDelegate.windowWidth - 12)
           .tint(Theme.shared.tintColor)
           let renderer = ImageRenderer(content: view)

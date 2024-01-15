@@ -397,7 +397,10 @@
         }
       }
     },
-    "Hello, World!" : {
+    "Error: %@" : {
+
+    },
+    "Fetching data failed" : {
 
     },
     "New" : {
@@ -418,6 +421,9 @@
           }
         }
       }
+    },
+    "Search Movies, Series, Cast" : {
+
     },
     "Show" : {
 
@@ -945,6 +951,9 @@
         }
       }
     },
+    "status.editor.tracker-media.navigation-title" : {
+
+    },
     "status.error.loading.message" : {
 
     },
@@ -1218,6 +1227,12 @@
           }
         }
       }
+    },
+    "Trending Movies" : {
+
+    },
+    "Trending TV Series" : {
+
     },
     "Your post" : {
       "localizations" : {

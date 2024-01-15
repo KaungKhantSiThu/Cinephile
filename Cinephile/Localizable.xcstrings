@@ -1,9 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "" : {
-
-    },
     "#%@" : {
 
     },
@@ -76,18 +73,6 @@
     "Add" : {
 
     },
-    "Add Moive" : {
-
-    },
-    "Add Series" : {
-
-    },
-    "All Episodes" : {
-
-    },
-    "Cast" : {
-
-    },
     "Confirm Password" : {
 
     },
@@ -100,25 +85,10 @@
     "EMAIL" : {
 
     },
-    "Error: %@" : {
-
-    },
-    "Explore" : {
-
-    },
-    "Hello, World!" : {
-
-    },
-    "Kelvin Gao" : {
-
-    },
     "Log out" : {
 
     },
     "Login" : {
-
-    },
-    "No search Results" : {
 
     },
     "Notifications" : {
@@ -128,12 +98,6 @@
 
     },
     "PASSWORD" : {
-
-    },
-    "Popular Movie" : {
-
-    },
-    "Popular TV Series" : {
 
     },
     "Remove" : {
@@ -161,12 +125,6 @@
           }
         }
       }
-    },
-    "Retry" : {
-
-    },
-    "Search Movies, Series, Cast" : {
-
     },
     "settings.account.action.delete-cache" : {
       "localizations" : {
@@ -249,6 +207,42 @@
     "settings.other.social-keyboard" : {
 
     },
+    "settings.push.boosts" : {
+
+    },
+    "settings.push.duplicate.button.fix" : {
+
+    },
+    "settings.push.duplicate.footer" : {
+
+    },
+    "settings.push.duplicate.title" : {
+
+    },
+    "settings.push.favorites" : {
+
+    },
+    "settings.push.follows" : {
+
+    },
+    "settings.push.main-toggle" : {
+
+    },
+    "settings.push.main-toggle.description" : {
+
+    },
+    "settings.push.mentions" : {
+
+    },
+    "settings.push.navigation-title" : {
+
+    },
+    "settings.push.new-posts" : {
+
+    },
+    "settings.push.polls" : {
+
+    },
     "settings.section.cache" : {
 
     },
@@ -262,9 +256,6 @@
 
     },
     "Sing Up" : {
-
-    },
-    "There was an error regarding %@" : {
 
     },
     "timeline.federated" : {
@@ -364,16 +355,10 @@
         }
       }
     },
-    "Tracker" : {
-
-    },
     "Username" : {
 
     },
     "USERNAME" : {
-
-    },
-    "View for Watchlist" : {
 
     }
   },

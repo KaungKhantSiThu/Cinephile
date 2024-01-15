@@ -310,14 +310,14 @@ struct BlurOverLay: View {
                 Image(systemName: "eye")
               }
               .lineLimit(1)
-              .foregroundColor(theme.labelColor)
+              //.foregroundColor(theme.labelColor)
               .matchedGeometryEffect(id: "text", in: buttonSpace)
             } else {
               Image(systemName: "eye.slash")
                 .matchedGeometryEffect(id: "text", in: buttonSpace)
             }
           }
-          .foregroundColor(theme.labelColor)
+          //.foregroundColor(theme.labelColor)
           .buttonStyle(.borderedProminent)
           .padding(theme.statusDisplayStyle == .compact ? 0 : 10)
         }

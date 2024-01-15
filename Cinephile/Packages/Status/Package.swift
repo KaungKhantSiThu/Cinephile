@@ -35,6 +35,7 @@ let package = Package(
               .product(name: "Environment", package: "Environment"),
               .product(name: "LRUCache", package: "lrucache"),
               .product(name: "CinephileUI", package: "CinephileUI"),
+              .product(name: "TrackerUI", package: "CinephileUI"),
             ]
         ),
         .testTarget(

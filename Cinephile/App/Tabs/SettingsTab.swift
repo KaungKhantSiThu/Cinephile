@@ -147,7 +147,7 @@ struct SettingsTab: View {
         } footer: {
             Text("settings.section.other.footer")
         }
-        .listRowBackground(theme.primaryBackgroundColor)
+//        .listRowBackground(theme.primaryBackgroundColor)
     }
     
     private var cacheSection: some View {

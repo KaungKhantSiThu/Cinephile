@@ -76,6 +76,7 @@ public struct StatusRowView: View {
                 AvatarView(viewModel.finalStatus.account.avatar)
               }
             }
+              
             VStack(alignment: .leading) {
               if !isCompact, theme.avatarPosition == .top {
                 StatusRowReblogView(viewModel: viewModel)
@@ -153,7 +154,7 @@ public struct StatusRowView: View {
         StatusRowSwipeView(viewModel: viewModel, mode: .leading)
       }
     }
-    .listRowBackground(viewModel.highlightRowColor)
+//    .listRowBackground(viewModel.highlightRowColor)
     .listRowInsets(.init(top: 12,
                          leading: .layoutPadding,
                          bottom: 12,

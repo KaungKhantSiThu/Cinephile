@@ -11,8 +11,23 @@
 		</dict>
 		<key>Lists.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>10</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>Lists</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>ListsTests</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>

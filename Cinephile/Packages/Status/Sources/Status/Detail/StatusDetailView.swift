@@ -56,10 +56,11 @@ public struct StatusDetailView: View {
             }
 
             Rectangle()
-              .foregroundColor(theme.secondaryBackgroundColor)
+//              .foregroundColor(theme.secondaryBackgroundColor)
+                  .foregroundStyle(.secondary)
               .frame(minHeight: reader.frame(in: .local).size.height - statusHeight)
               .listRowSeparator(.hidden)
-              .listRowBackground(theme.secondaryBackgroundColor)
+//              .listRowBackground(theme.secondaryBackgroundColor)
               .listRowInsets(.init())
               .accessibilityHidden(true)
 
@@ -70,7 +71,7 @@ public struct StatusDetailView: View {
         .environment(\.defaultMinListRowHeight, 1)
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
-        .background(theme.primaryBackgroundColor)
+        //.background(theme.primaryBackgroundColor)
         .onChange(of: viewModel.scrollToId) { _, newValue in
           if let newValue {
             viewModel.scrollToId = nil
@@ -134,7 +135,7 @@ public struct StatusDetailView: View {
           }
         }
         .id(status.id)
-        .listRowBackground(viewModel.highlightRowColor)
+//        .listRowBackground(viewModel.highlightRowColor)
         .listRowInsets(.init(top: 12,
                              leading: .layoutPadding,
                              bottom: 12,
@@ -151,7 +152,7 @@ public struct StatusDetailView: View {
         await viewModel.fetch()
       }
     }
-    .listRowBackground(theme.primaryBackgroundColor)
+//    .listRowBackground(theme.primaryBackgroundColor)
     .listRowSeparator(.hidden)
   }
 
@@ -171,13 +172,13 @@ public struct StatusDetailView: View {
     }
     .frame(height: 50)
     .listRowSeparator(.hidden)
-    .listRowBackground(theme.secondaryBackgroundColor)
+//    .listRowBackground(theme.secondaryBackgroundColor)
     .listRowInsets(.init())
   }
 
   private var topPaddingView: some View {
     HStack { EmptyView() }
-      .listRowBackground(theme.primaryBackgroundColor)
+//      .listRowBackground(theme.primaryBackgroundColor)
       .listRowSeparator(.hidden)
       .listRowInsets(.init())
       .frame(height: .layoutPadding)

@@ -17,19 +17,19 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                    didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool
   {
     try? AVAudioSession.sharedInstance().setCategory(.ambient)
-//    PushNotificationsService.shared.setAccounts(accounts: AppAccountsManager.shared.pushAccounts)
+    PushNotificationsService.shared.setAccounts(accounts: AppAccountsManager.shared.pushAccounts)
     return true
   }
 
-//  func application(_: UIApplication,
-//                   didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data)
-//  {
-//    PushNotificationsService.shared.pushToken = deviceToken
-//    Task {
-//      PushNotificationsService.shared.setAccounts(accounts: AppAccountsManager.shared.pushAccounts)
-//      await PushNotificationsService.shared.updateSubscriptions(forceCreate: false)
-//    }
-//  }
+  func application(_: UIApplication,
+                   didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data)
+  {
+    PushNotificationsService.shared.pushToken = deviceToken
+    Task {
+      PushNotificationsService.shared.setAccounts(accounts: AppAccountsManager.shared.pushAccounts)
+      await PushNotificationsService.shared.updateSubscriptions(forceCreate: false)
+    }
+  }
 
   func application(_: UIApplication, didFailToRegisterForRemoteNotificationsWithError _: Error) {}
 

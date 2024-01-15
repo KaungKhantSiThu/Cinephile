@@ -27,7 +27,7 @@ public struct MediaPage: View {
             }
         .task {
             do {
-                posterImage = try await ImageLoader.generate(from: image, width: 260)
+                posterImage = try await ImageLoaderS.generate(from: image)
             } catch {
                 print("poster URL is nil")
             }

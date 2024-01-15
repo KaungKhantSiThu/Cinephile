@@ -25,7 +25,7 @@ public enum SheetDestination: Identifiable {
 //    case addTagGroup
     case statusEditHistory(status: String)
     case settings
-//    case accountPushNotficationsSettings
+    case accountPushNotficationsSettings
     case report(status: Models.Status)
     case shareImage(image: UIImage, status: Models.Status)
 //    case editTagGroup(tagGroup: TagGroup, onSaved: ((TagGroup) -> Void)?)
@@ -51,7 +51,7 @@ public enum SheetDestination: Identifiable {
 //            "addTagGroup"
         case .statusEditHistory:
             "statusEditHistory"
-        case .settings:
+        case .settings, .accountPushNotficationsSettings:
             "settings"
         case .report:
             "report"

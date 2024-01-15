@@ -28,7 +28,7 @@ extension View {
             case let .seriesDetail(id):
                 SeriesDetailView(id: id)
             case .trackerSearchView:
-                SearchView()
+                TrackerExploreView()
             case .socialSearchView:
                 ExploreView(scrollToTopSignal: .constant(0))
             case .episodeListView(id: let id, inSeason: let seasonNumber):
@@ -52,11 +52,11 @@ extension View {
                              selectedTagGroup: .constant(nil),
                              scrollToTopSignal: .constant(0),
                              canFilterTimeline: false)
-//            case .list(list: let list):
-//                TimelineView(timeline: .constant(.list(list: list)),
-//                             selectedTagGroup: .constant(nil),
-//                             scrollToTopSignal: .constant(0),
-//                             canFilterTimeline: false)
+                //            case .list(list: let list):
+                //                TimelineView(timeline: .constant(.list(list: list)),
+                //                             selectedTagGroup: .constant(nil),
+                //                             scrollToTopSignal: .constant(0),
+                //                             canFilterTimeline: false)
             case .followers(id: let id):
                 AccountsListView(mode: .followers(accountId: id))
             case .following(id: let id):
@@ -73,103 +73,109 @@ extension View {
                              scrollToTopSignal: .constant(0),
                              canFilterTimeline: false)
             case .trendingLinks(cards: _):
-//                CardsListView(cards: cards)
+                //                CardsListView(cards: cards)
                 EmptyView()
             case .tagsList(tags: _):
-//                TagsListView(tags: tags)
+                //                TagsListView(tags: tags)
                 EmptyView()
             }
         }
     }
     
     func withSheetDestinations(sheetDestinations: Binding<SheetDestination?>) -> some View {
-      sheet(item: sheetDestinations) { destination in
-        Group {
-            switch destination {
-            case let .replyToStatusEditor(status):
-              StatusEditorView(mode: .replyTo(status: status))
-            case let .newStatusEditor(visibility):
-              StatusEditorView(mode: .new(visibility: visibility))
-            case let .editStatusEditor(status):
-              StatusEditorView(mode: .edit(status: status))
-            case let .quoteStatusEditor(status):
-              StatusEditorView(mode: .quote(status: status))
-            case let .mentionStatusEditor(account, visibility):
-              StatusEditorView(mode: .mention(account: account, visibility: visibility))
-            case let .statusEditHistory(status):
-              StatusEditHistoryView(statusId: status)
-            case .settings:
-              SettingsTab(popToRootTab: .constant(.settings), isModal: true)
-            case let .report(status):
-              ReportView(status: status)
-            case let .shareImage(image, status):
-              ActivityView(image: image, status: status)
-            case .addAccount:
-                AddAccountView()
+        sheet(item: sheetDestinations) { destination in
+            Group {
+                switch destination {
+                case let .replyToStatusEditor(status):
+                    StatusEditor.MainView(mode: .replyTo(status: status))
+                case let .newStatusEditor(visibility):
+                    StatusEditor.MainView(mode: .new(visibility: visibility))
+                case let .editStatusEditor(status):
+                    StatusEditor.MainView(mode: .edit(status: status))
+                case let .quoteStatusEditor(status):
+                    StatusEditor.MainView(mode: .quote(status: status))
+                case let .mentionStatusEditor(account, visibility):
+                    StatusEditor.MainView(mode: .mention(account: account, visibility: visibility))
+                case let .statusEditHistory(status):
+                    StatusEditHistoryView(statusId: status)
+                case .settings:
+                    SettingsTab(popToRootTab: .constant(.settings), isModal: true)
+                case let .report(status):
+                    ReportView(status: status)
+                case let .shareImage(image, status):
+                    ActivityView(image: image, status: status)
+                case .addAccount:
+                    AddAccountView()
+                case .accountPushNotficationsSettings:
+                    if let subscription = PushNotificationsService.shared.subscriptions.first(where: { $0.account.token == AppAccountsManager.shared.currentAccount.oauthToken }) {
+                        NavigationSheet { PushNotificationsView(subscription: subscription) }
+                    } else {
+                        EmptyView()
+                    }
+                }
             }
+            .withEnvironments()
+            
         }
-        .withEnvironments()
-
-      }
     }
     
     func withEnvironments() -> some View {
         environment(CurrentAccount.shared)
-        .environment(UserPreferences.shared)
-        .environment(CurrentInstance.shared)
-        .environment(Theme.shared)
-        .environment(AppAccountsManager.shared)
-//        .environment(PushNotificationsService.shared)
-        .environment(AppAccountsManager.shared.currentClient)
-        .environment(QuickLook.shared)
+            .environment(UserPreferences.shared)
+            .environment(CurrentInstance.shared)
+            .environment(Theme.shared)
+            .environment(AppAccountsManager.shared)
+            .environment(PushNotificationsService.shared)
+            .environment(AppAccountsManager.shared.currentClient)
+            .environment(QuickLook.shared)
     }
     
     func withModelContainer() -> some View {
-      modelContainer(for: [
-        Draft.self,
-        LocalTimeline.self,
-        TagGroup.self,
-      ])
+        modelContainer(for: [
+            Draft.self,
+            LocalTimeline.self,
+            TagGroup.self,
+        ])
     }
-
+    
 }
 
 struct ActivityView: UIViewControllerRepresentable {
-  let image: UIImage
-  let status: Status
-
-  class LinkDelegate: NSObject, UIActivityItemSource {
     let image: UIImage
     let status: Status
-
-    init(image: UIImage, status: Status) {
-      self.image = image
-      self.status = status
+    
+    class LinkDelegate: NSObject, UIActivityItemSource {
+        let image: UIImage
+        let status: Status
+        
+        init(image: UIImage, status: Status) {
+            self.image = image
+            self.status = status
+        }
+        
+        func activityViewControllerLinkMetadata(_: UIActivityViewController) -> LPLinkMetadata? {
+            let imageProvider = NSItemProvider(object: image)
+            let metadata = LPLinkMetadata()
+            metadata.imageProvider = imageProvider
+            metadata.title = status.reblog?.content.asRawText ?? status.content.asRawText
+            return metadata
+        }
+        
+        func activityViewControllerPlaceholderItem(_: UIActivityViewController) -> Any {
+            image
+        }
+        
+        func activityViewController(_: UIActivityViewController,
+                                    itemForActivityType _: UIActivity.ActivityType?) -> Any?
+        {
+            nil
+        }
     }
-
-    func activityViewControllerLinkMetadata(_: UIActivityViewController) -> LPLinkMetadata? {
-      let imageProvider = NSItemProvider(object: image)
-      let metadata = LPLinkMetadata()
-      metadata.imageProvider = imageProvider
-      metadata.title = status.reblog?.content.asRawText ?? status.content.asRawText
-      return metadata
+    
+    func makeUIViewController(context _: UIViewControllerRepresentableContext<ActivityView>) -> UIActivityViewController {
+        UIActivityViewController(activityItems: [image, LinkDelegate(image: image, status: status)],
+                                 applicationActivities: nil)
     }
-
-    func activityViewControllerPlaceholderItem(_: UIActivityViewController) -> Any {
-      image
-    }
-
-    func activityViewController(_: UIActivityViewController,
-                                itemForActivityType _: UIActivity.ActivityType?) -> Any?
-    {
-      nil
-    }
-  }
-
-  func makeUIViewController(context _: UIViewControllerRepresentableContext<ActivityView>) -> UIActivityViewController {
-    UIActivityViewController(activityItems: [image, LinkDelegate(image: image, status: status)],
-                             applicationActivities: nil)
-  }
-
-  func updateUIViewController(_: UIActivityViewController, context _: UIViewControllerRepresentableContext<ActivityView>) {}
+    
+    func updateUIViewController(_: UIActivityViewController, context _: UIViewControllerRepresentableContext<ActivityView>) {}
 }

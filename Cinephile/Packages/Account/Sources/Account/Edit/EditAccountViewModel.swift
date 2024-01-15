@@ -184,7 +184,7 @@ private let logger = Logger(subsystem: "Account", category: "EditAccountViewMode
     private func getItemImageData(item: PhotosPickerItem) async -> Data? {
       guard let imageFile = try? await item.loadTransferable(type: ImageFileTranseferable.self) else { return nil }
 
-      let compressor = StatusEditorCompressor()
+        let compressor = StatusEditor.Compressor()
 
       guard let compressedData = await compressor.compressImageFrom(url: imageFile.url),
               let image = UIImage(data: compressedData),

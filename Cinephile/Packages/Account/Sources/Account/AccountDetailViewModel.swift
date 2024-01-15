@@ -98,7 +98,7 @@ private let logger = Logger(subsystem: "Account", category: "DetailViewModel")
       case .statuses, .postsAndReplies, .media:
         tabTask?.cancel()
         tabTask = Task {
-          await fetchNewestStatuses()
+          await fetchNewestStatuses(pullToRefresh: false)
         }
       default:
         reloadTabState()
@@ -177,7 +177,7 @@ private let logger = Logger(subsystem: "Account", category: "DetailViewModel")
     self.familiarFollowers = familiarFollowers?.first?.accounts ?? []
   }
 
-  func fetchNewestStatuses() async {
+    func fetchNewestStatuses(pullToRefresh: Bool) async {
     guard let client else { return }
     do {
       tabState = .statuses(statusesState: .loading)

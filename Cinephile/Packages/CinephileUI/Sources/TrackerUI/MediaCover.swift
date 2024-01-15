@@ -12,46 +12,40 @@ public struct MediaCover: View {
     let title: String
     let releaseDate: Date?
     let posterPath: URL?
+    
     @State private var posterImage = URL(string: "https://picsum.photos/200/300")!
     public var body: some View {
         VStack(alignment: .leading) {
             PosterImage(url: posterImage)
-
-                
+            
+            
             VStack(alignment: .leading, spacing: 5) {
                 Text(title)
                     .fontWeight(.semibold)
                     .lineLimit(1)
                     .font(.caption)
                     .foregroundStyle(.primary)
-                    
-                Text(formatReleasedDate(date: releaseDate))
+                
+                Text(format(date: releaseDate))
                     .font(.caption2)
                     .foregroundStyle(.secondary)
             }
         }
         .task {
             do {
-                posterImage = try await ImageLoader.generate(from: posterPath, width: 200)
+                posterImage = try await ImageLoaderS.generate(from: posterPath)
             } catch {
-                print("poster URL is nil")
+                print(error.localizedDescription)
             }
         }
     }
     
-    private func formatReleasedDate(date: Date?) -> String {
-        let dateFormatter = {
-            let formatter = DateFormatter()
-            formatter.dateFormat = "dd/MM/yyyy"
-            return formatter
-        }()
+    private func format(date: Date?) -> String {
+        guard let date = date else { return "No Date" }
         
-        if let date = date {
-            return dateFormatter.string(from: date)
-        } else {
-            return "No Date"
-        }
+        return date.formatted(date: .abbreviated, time: .omitted)
     }
+    
 }
 
 public extension MediaCover {
@@ -68,13 +62,12 @@ public extension MediaCover {
     }
 }
 
-//struct MovieCoverView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        MediaCover(movie: .preview)
-//            .previewLayout(.sizeThatFits)
-//    }
-//}
+
+
 
 #Preview(traits: .sizeThatFitsLayout) {
-    MediaCover(title: "Some Name", releaseDate: .now, posterPath: nil)
+    let tmdbConfiguration = TMDbConfiguration(apiKey: "0b8723760cac397ab78965e78c1cd188")
+    TMDb.configure(tmdbConfiguration)
+    
+    return MediaCover(title: "Fight Club", releaseDate: .now, posterPath: URL(string: "/fCayJrkfRaCRCTh8GqN30f8oyQF.jpg"))
 }

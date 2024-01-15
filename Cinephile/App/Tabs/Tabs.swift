@@ -25,7 +25,7 @@ enum Tab: Int, Identifiable, Hashable {
     }
     
     @ViewBuilder
-    func makeContentView(popToRootTab: Binding<Tab>) -> some View {
+    func makeContentView(selectedTab: Binding<Tab>, popToRootTab: Binding<Tab>) -> some View {
         switch self {
         case .tracker:
             TrackerTab(popToRootTab: popToRootTab)
@@ -34,7 +34,7 @@ enum Tab: Int, Identifiable, Hashable {
         case .profile:
             ProfileTab(popToRootTab: popToRootTab)
         case .notifications:
-            NotificationsTab(popToRootTab: popToRootTab)
+            NotificationsTab(selectedTab: selectedTab, popToRootTab: popToRootTab, lockedType: nil)
         case .settings:
             SettingsTab(popToRootTab: popToRootTab, isModal: false)
         case .other:

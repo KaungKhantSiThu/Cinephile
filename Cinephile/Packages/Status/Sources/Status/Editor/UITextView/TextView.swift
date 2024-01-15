@@ -45,7 +45,8 @@ public struct TextView: View {
     .accessibilityValue($text.wrappedValue.string.isEmpty ? (placeholderText ?? "") : $text.wrappedValue.string)
     .background(
       placeholderView?
-        .foregroundColor(Color(.placeholderText))
+//        .foregroundColor(Color(.placeholderText))
+        .foregroundColor(.secondary)
         .multilineTextAlignment(.leading)
         .font(.scaledBody)
         .padding(.horizontal, 0)
