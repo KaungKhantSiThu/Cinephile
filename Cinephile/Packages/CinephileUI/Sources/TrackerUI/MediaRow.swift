@@ -17,40 +17,45 @@ public struct MediaRow: View {
     
     @State private var posterImage = URL(string: "https://picsum.photos/200/300")!
      
-//    var handler: (Int) -> Void
+    var action: () -> Void
     
     public var body: some View {
         HStack {
             PosterImage(url: posterImage)
             
-            VStack(alignment: .leading, spacing: 15) {
+            VStack(alignment: .leading) {
                 Text(type.rawValue)
                     .foregroundStyle(.red)
                 
                 Text(name)
-                    .font(.title3)
+                    .font(.title2)
                     .lineLimit(2)
                     .bold()
                 
-                Text(releaseDate?.formattedDate() ?? "No Date")
+                Text(releaseDate ?? Date.now, format: .dateTime.year())
                     .foregroundStyle(.secondary)
                 
             }
-//            
-//            Spacer()
-//            
-//            Button(action: { handler(id) }, label: {
-//                Image(systemName: "plus.circle")
-//                    .resizable()
-//                    .frame(width: 30, height: 30)
-//            })
-//            .padding(.trailing, 10)
+            
+            Spacer()
+            
+            Button {
+                action()
+            } label: {
+                Image(systemName: "plus.circle.fill")
+                    .resizable()
+                    .symbolRenderingMode(.multicolor)
+                    .frame(width: 30, height: 30)
+            }
+            .padding(.trailing, 10)
+            .disabled(type == .person)
+            .opacity( type == .person ? 0 : 1)
         }
         .padding()
         .frame(height: 150)
         .task {
             do {
-                posterImage = try await ImageLoader.generate(from: posterPath, width: 200)
+                posterImage = try await ImageLoaderS.generate(from: posterPath)
             } catch {
                 print("poster URL is nil")
             }
@@ -59,28 +64,29 @@ public struct MediaRow: View {
 }
 
 public extension MediaRow {
-    init(movie: Movie) {
+    init(movie: Movie, action: @escaping () -> Void) {
         self.name = movie.title
         self.posterPath = movie.posterPath
         self.releaseDate = movie.releaseDate
-//        self.handler = handler
         self.type = .movie
+        self.action = action
     }
     
-    init(tvSeries: TVSeries) {
+    init(tvSeries: TVSeries, action: @escaping () -> Void) {
         self.name = tvSeries.name
         self.posterPath = tvSeries.posterPath
         self.releaseDate = tvSeries.firstAirDate
-//        self.handler = handler
         self.type = .tvSeries
+        self.action = action
+
     }
     
-    init(person: Person) {
+    init(person: Person, action: @escaping () -> Void) {
         self.name = person.name
         self.posterPath = person.profilePath
         self.releaseDate = person.birthday
-//        self.handler = handler
         self.type = .person
+        self.action = action
     }
 }
 
@@ -94,6 +100,8 @@ public extension MediaRow {
 
 
 #Preview(traits: .sizeThatFitsLayout) {
-    MediaRow(name: "Some Movie", releaseDate: .now, posterPath: nil, type: .movie)
+    MediaRow(name: "Some Movie", releaseDate: .now, posterPath: nil, type: .movie) {
+        print("Hello")
+    }
 }
 

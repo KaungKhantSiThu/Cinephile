@@ -137,7 +137,7 @@ var loadingView: some View {
         .padding(.vertical, 8)
         .redacted(reason: .placeholder)
 //        .allowsHitTesting(false)
-        .listRowBackground(theme.primaryBackgroundColor)
+//        .listRowBackground(theme.primaryBackgroundColor)
     }
   }
 
@@ -148,18 +148,19 @@ var loadingView: some View {
         ForEach(results.accounts) { account in
           if let relationship = results.relationships.first(where: { $0.id == account.id }) {
             AccountsListRow(viewModel: .init(account: account, relationShip: relationship))
-              .listRowBackground(theme.primaryBackgroundColor)
+//              .listRowBackground(theme.primaryBackgroundColor)
           }
         }
       } header: {
           Text("explore.section.users", bundle: .module)
       }
     }
+      
     if !results.hashtags.isEmpty, viewModel.searchScope == .all || viewModel.searchScope == .hashtags {
       Section {
         ForEach(results.hashtags) { tag in
           TagRowView(tag: tag)
-            .listRowBackground(theme.primaryBackgroundColor)
+//            .listRowBackground(theme.primaryBackgroundColor)
             .padding(.vertical, 4)
         }
       } header: {
@@ -170,7 +171,7 @@ var loadingView: some View {
       Section {
         ForEach(results.statuses) { status in
           StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
-            .listRowBackground(theme.primaryBackgroundColor)
+//            .listRowBackground(theme.primaryBackgroundColor)
             .padding(.vertical, 8)
         }
       } header: {
@@ -186,14 +187,14 @@ var loadingView: some View {
       { account in
         if let relationship = viewModel.suggestedAccountsRelationShips.first(where: { $0.id == account.id }) {
           AccountsListRow(viewModel: .init(account: account, relationShip: relationship))
-            .listRowBackground(theme.primaryBackgroundColor)
+//            .listRowBackground(theme.primaryBackgroundColor)
         }
       }
       NavigationLink(value: RouterDestination.accountsList(accounts: viewModel.suggestedAccounts)) {
         Text("see-more", bundle: .module)
           .foregroundColor(theme.tintColor)
       }
-      .listRowBackground(theme.primaryBackgroundColor)
+//      .listRowBackground(theme.primaryBackgroundColor)
     } header: {
         Text("explore.section.suggested-users", bundle: .module)
     }
@@ -205,14 +206,14 @@ var loadingView: some View {
         .prefix(upTo: viewModel.trendingTags.count > 5 ? 5 : viewModel.trendingTags.count))
       { tag in
         TagRowView(tag: tag)
-          .listRowBackground(theme.primaryBackgroundColor)
+//          .listRowBackground(theme.primaryBackgroundColor)
           .padding(.vertical, 4)
       }
       NavigationLink(value: RouterDestination.tagsList(tags: viewModel.trendingTags)) {
           Text("see-more", bundle: .module)
           .foregroundColor(theme.tintColor)
       }
-      .listRowBackground(theme.primaryBackgroundColor)
+//      .listRowBackground(theme.primaryBackgroundColor)
     } header: {
         Text("explore.section.trending.tags", bundle: .module)
     }

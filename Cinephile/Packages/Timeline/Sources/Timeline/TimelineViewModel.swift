@@ -35,7 +35,7 @@ private let logger = Logger(subsystem: "Timeline", category: "ViewModel")
                 }
                 
                 logger.info("Fetching newest statuses")
-                await fetchNewestStatuses()
+                await fetchNewestStatuses(pullToRefresh: false)
                 switch timeline {
                 case let .hashtag(tag, _):
                     await fetchTag(id: tag)
@@ -60,7 +60,13 @@ private let logger = Logger(subsystem: "Timeline", category: "ViewModel")
     @ObservationIgnored
     private var visibileStatuses: [Status] = []
     
-    private var canStreamEvents: Bool = true
+    private var canStreamEvents: Bool = true {
+        didSet {
+            if canStreamEvents {
+                pendingStatusesObserver.isLoadingNewStatuses = false
+            }
+        }
+    }
     
     @ObservationIgnored
     var canFilterTimeline: Bool = true
@@ -88,7 +94,7 @@ private let logger = Logger(subsystem: "Timeline", category: "ViewModel")
     }
     
     var isTimelineVisible: Bool = false
-    let pendingStatusesObserver: PendingStatusesObserver = .init()
+    let pendingStatusesObserver: TimelineUnreadStatusesObserver = .init()
     var scrollToIndexAnimated: Bool = false
     var marker: Marker.Content?
     
@@ -128,38 +134,38 @@ private let logger = Logger(subsystem: "Timeline", category: "ViewModel")
     }
     
     func handleEvent(event: any StreamEvent) async {
-      if let event = event as? StreamEventUpdate,
-         let client,
-         timeline == .home,
-         canStreamEvents,
-         isTimelineVisible,
-         await !datasource.contains(statusId: event.status.id)
-      {
-        pendingStatusesObserver.pendingStatuses.insert(event.status.id, at: 0)
-        let newStatus = event.status
-        await datasource.insert(newStatus, at: 0)
-        await cache()
-        StatusDataControllerProvider.shared.updateDataControllers(for: [event.status], client: client)
-        let statuses = await datasource.get()
-        withAnimation {
-          statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
+        if let event = event as? StreamEventUpdate,
+           let client,
+           timeline == .home,
+           canStreamEvents,
+           isTimelineVisible,
+           await !datasource.contains(statusId: event.status.id)
+        {
+            pendingStatusesObserver.pendingStatuses.insert(event.status.id, at: 0)
+            let newStatus = event.status
+            await datasource.insert(newStatus, at: 0)
+            await cache()
+            StatusDataControllerProvider.shared.updateDataControllers(for: [event.status], client: client)
+            let statuses = await datasource.get()
+            withAnimation {
+                statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
+            }
+        } else if let event = event as? StreamEventDelete {
+            await datasource.remove(event.status)
+            await cache()
+            let statuses = await datasource.get()
+            withAnimation {
+                statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
+            }
+        } else if let event = event as? StreamEventStatusUpdate, let client {
+            if let originalIndex = await datasource.indexOf(statusId: event.status.id) {
+                StatusDataControllerProvider.shared.updateDataControllers(for: [event.status], client: client)
+                await datasource.replace(event.status, at: originalIndex)
+                let statuses = await datasource.get()
+                await cache()
+                statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
+            }
         }
-      } else if let event = event as? StreamEventDelete {
-        await datasource.remove(event.status)
-        await cache()
-        let statuses = await datasource.get()
-        withAnimation {
-          statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
-        }
-      } else if let event = event as? StreamEventStatusUpdate, let client {
-        if let originalIndex = await datasource.indexOf(statusId: event.status.id) {
-          StatusDataControllerProvider.shared.updateDataControllers(for: [event.status], client: client)
-          await datasource.replace(event.status, at: originalIndex)
-          let statuses = await datasource.get()
-          await cache()
-          statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
-        }
-      }
     }
 }
 
@@ -195,12 +201,13 @@ extension TimelineViewModel {
 // MARK: - StatusesFetcher
 
 extension TimelineViewModel: StatusesFetcher {
+    
     func pullToRefresh() async {
         timelineTask?.cancel()
         if !timeline.supportNewestPagination || UserPreferences.shared.fastRefreshEnabled {
             await reset()
         }
-        await fetchNewestStatuses()
+        await fetchNewestStatuses(pullToRefresh: true)
     }
     
     func refreshTimeline() {
@@ -209,7 +216,7 @@ extension TimelineViewModel: StatusesFetcher {
             if UserPreferences.shared.fastRefreshEnabled {
                 await reset()
             }
-            await fetchNewestStatuses()
+            await fetchNewestStatuses(pullToRefresh: false)
         }
     }
     
@@ -232,10 +239,10 @@ extension TimelineViewModel: StatusesFetcher {
             statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
         }
         
-        await fetchNewestStatuses()
+        await fetchNewestStatuses(pullToRefresh: false)
     }
     
-    func fetchNewestStatuses() async {
+    func fetchNewestStatuses(pullToRefresh: Bool) async {
         guard let client else { return }
         do {
             if let marker {
@@ -243,6 +250,7 @@ extension TimelineViewModel: StatusesFetcher {
             } else if await datasource.isEmpty {
                 try await fetchFirstPage(client: client)
             } else if let latest = await datasource.get().first, timeline.supportNewestPagination {
+                pendingStatusesObserver.isLoadingNewStatuses = !pullToRefresh
                 try await fetchNewPagesFrom(latestStatus: latest.id, client: client)
             }
         } catch {
@@ -284,7 +292,7 @@ extension TimelineViewModel: StatusesFetcher {
                 }
             }
             // And then we fetch statuses again toget newest statuses from there.
-            await fetchNewestStatuses()
+            await fetchNewestStatuses(pullToRefresh: false)
         } else {
             var statuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
                                                                                       maxId: nil,

@@ -16,12 +16,12 @@ public struct CardsListView: View {
     List {
       ForEach(cards) { card in
         StatusRowCardView(card: card)
-          .listRowBackground(theme.primaryBackgroundColor)
+//          .listRowBackground(theme.primaryBackgroundColor)
           .padding(.vertical, 8)
       }
     }
     .scrollContentBackground(.hidden)
-    .background(theme.primaryBackgroundColor)
+    //.background(theme.primaryBackgroundColor)
     .listStyle(.plain)
     .navigationTitle("explore.section.trending.links")
     .navigationBarTitleDisplayMode(.inline)

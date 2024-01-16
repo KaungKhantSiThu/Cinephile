@@ -5,10 +5,10 @@ import TMDb
 @MainActor
 public struct EpisodeListView: View {
     @State private var episodes: [TVEpisode] = []
-    let id: TVSeries.ID
+    let id: TVSeason.ID
     let inSeason: Int
     
-    public init(id: TVSeries.ID, inSeason: Int) {
+    public init(id: TVSeason.ID, inSeason: Int) {
         self.id = id
         self.inSeason = inSeason
     }
@@ -35,7 +35,7 @@ public struct EpisodeListView: View {
 }
 
 //#Preview {
-//    EpisodeListView(id: 12345)
+//    EpisodeListView(id: 3573, inSeason: 2)
 //}
 
 
@@ -74,7 +74,7 @@ public struct EpisodeView: View {
                     .font(.headline)
                     
                 
-                Text(airDate?.formattedDate() ?? "No date")
+                Text(airDate ?? Date.now, style: .date)
                     .foregroundStyle(.secondary)
                 
             }
@@ -82,7 +82,7 @@ public struct EpisodeView: View {
         .padding()
         .task {
             do {
-                stillImage = try await ImageLoader.generate(from: stillPath, width: 140)
+                stillImage = try await ImageLoaderS.generate(from: stillPath)
             } catch {
                 print("poster URL is nil")
             }
@@ -95,4 +95,16 @@ public struct EpisodeView: View {
         self.airDate = episode.airDate
         self.stillPath = episode.stillPath
     }
+    
+    init(number: Int, name: String, airDate: Date?, stillPath: URL?) {
+        self.number = number
+        self.name = name
+        self.airDate = airDate
+        self.stillPath = stillPath
+    }
 }
+
+#Preview("EpisodeView") {
+    EpisodeView(number: 1, name: "Seven Thirty-Seven", airDate: Date.distantPast, stillPath: nil)
+}
+

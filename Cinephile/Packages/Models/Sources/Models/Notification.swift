@@ -20,7 +20,7 @@ public struct Notification: Decodable, Identifiable, Equatable {
           type: NotificationType.favourite.rawValue,
           createdAt: ServerDate(),
           account: .placeholder(),
-          status: .preview)
+          status: .placeholder())
   }
 }
 

@@ -23,7 +23,7 @@ struct AccountPopoverView: View {
       }
       .frame(width: 500, height: 150)
       .clipped()
-      .background(theme.secondaryBackgroundColor)
+//      .background(theme.secondaryBackgroundColor)
 
       VStack(alignment: .leading) {
         HStack(alignment: .bottomAvatar) {
@@ -37,7 +37,7 @@ struct AccountPopoverView: View {
 
         EmojiTextApp(.init(stringValue: account.safeDisplayName), emojis: account.emojis)
           .font(.headline)
-          .foregroundColor(theme.labelColor)
+          //.foregroundColor(theme.labelColor)
           .emojiSize(Font.scaledHeadlineFont.emojiSize)
           .emojiBaselineOffset(Font.scaledHeadlineFont.emojiBaselineOffset)
           .accessibilityAddTraits(.isHeader)

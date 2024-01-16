@@ -1,13 +1,58 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "" : {
+
+    },
     "0" : {
 
     },
     "10" : {
 
     },
+    "Add Moive" : {
+
+    },
+    "Add Series" : {
+
+    },
+    "all" : {
+
+    },
+    "All Episodes" : {
+
+    },
+    "Cast" : {
+
+    },
     "Days" : {
+
+    },
+    "Error: %@" : {
+
+    },
+    "Explore" : {
+
+    },
+    "Hello, World!" : {
+
+    },
+    "Kelvin Gao" : {
+
+    },
+    "movie" : {
+
+    },
+    "No search Results" : {
+
+    },
+    "people" : {
+
+    },
+    "Popular Movies" : {
+
+    },
+    "Popular TV Series" : {
 
     },
     "Rating" : {
@@ -16,10 +61,34 @@
     "RATINGS" : {
 
     },
+    "Retry" : {
+
+    },
+    "Search Movies, TV Series, People" : {
+
+    },
     "Season %lld" : {
 
     },
+    "Streaming is not available at the moment" : {
+
+    },
+    "There was an error regarding %@" : {
+
+    },
+    "Tracker" : {
+
+    },
+    "tvSeries" : {
+
+    },
+    "Upcoming Movies" : {
+
+    },
     "Videos" : {
+
+    },
+    "View for Watchlist" : {
 
     }
   },

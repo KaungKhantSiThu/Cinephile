@@ -1,0 +1,93 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "" : {
+
+    },
+    " " : {
+
+    },
+    "          " : {
+
+    },
+    " ⸱ " : {
+
+    },
+    "@%@" : {
+
+    },
+    "action.retry" : {
+
+    },
+    "notifications-others-count %lld" : {
+
+    },
+    "notifications.empty.message" : {
+
+    },
+    "notifications.empty.title" : {
+
+    },
+    "notifications.error.message" : {
+
+    },
+    "notifications.error.title" : {
+
+    },
+    "notifications.label.favorite %lld" : {
+
+    },
+    "notifications.label.follow %lld" : {
+
+    },
+    "notifications.label.follow-request" : {
+
+    },
+    "notifications.label.poll" : {
+
+    },
+    "notifications.label.reblog %lld" : {
+
+    },
+    "notifications.label.status" : {
+
+    },
+    "notifications.label.update" : {
+
+    },
+    "notifications.menu-title.favorite" : {
+
+    },
+    "notifications.menu-title.follow" : {
+
+    },
+    "notifications.menu-title.follow-request" : {
+
+    },
+    "notifications.menu-title.mention" : {
+
+    },
+    "notifications.menu-title.poll" : {
+
+    },
+    "notifications.menu-title.reblog" : {
+
+    },
+    "notifications.menu-title.status" : {
+
+    },
+    "notifications.menu-title.update" : {
+
+    },
+    "notifications.navigation-title" : {
+
+    },
+    "notifications.tab.all" : {
+
+    },
+    "notifications.tab.mentions" : {
+
+    }
+  },
+  "version" : "1.0"
+}

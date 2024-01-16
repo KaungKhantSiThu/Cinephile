@@ -26,7 +26,7 @@ public struct AccountsListView: View {
             .redacted(reason: .placeholder)
             .allowsHitTesting(false)
 //            .shimmering()
-            .listRowBackground(theme.primaryBackgroundColor)
+//            .listRowBackground(theme.primaryBackgroundColor)
         }
       case let .display(accounts, relationships, nextPageState):
         if case .followers = viewModel.mode,
@@ -49,7 +49,7 @@ public struct AccountsListView: View {
                   }
                 }
               )
-              .listRowBackground(theme.primaryBackgroundColor)
+//              .listRowBackground(theme.primaryBackgroundColor)
             }
           }
         }
@@ -58,7 +58,7 @@ public struct AccountsListView: View {
             if let relationship = relationships.first(where: { $0.id == account.id }) {
               AccountsListRow(viewModel: .init(account: account,
                                                relationShip: relationship))
-                .listRowBackground(theme.primaryBackgroundColor)
+//                .listRowBackground(theme.primaryBackgroundColor)
             }
           }
         }
@@ -66,7 +66,7 @@ public struct AccountsListView: View {
         switch nextPageState {
         case .hasNextPage:
           loadingRow
-            .listRowBackground(theme.primaryBackgroundColor)
+//            .listRowBackground(theme.primaryBackgroundColor)
             .onAppear {
               Task {
                 await viewModel.fetchNextPage()
@@ -75,18 +75,18 @@ public struct AccountsListView: View {
 
         case .loadingNextPage:
           loadingRow
-            .listRowBackground(theme.primaryBackgroundColor)
+//            .listRowBackground(theme.primaryBackgroundColor)
         case .none:
           EmptyView()
         }
 
       case let .error(error):
         Text(error.localizedDescription)
-          .listRowBackground(theme.primaryBackgroundColor)
+//          .listRowBackground(theme.primaryBackgroundColor)
       }
     }
     .scrollContentBackground(.hidden)
-    .background(theme.primaryBackgroundColor)
+    //.background(theme.primaryBackgroundColor)
     .listStyle(.plain)
     .navigationTitle(viewModel.mode.title)
     .navigationBarTitleDisplayMode(.inline)

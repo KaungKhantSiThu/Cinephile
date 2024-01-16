@@ -77,8 +77,17 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/adamayoung/TMDb.git",
       "state" : {
-        "revision" : "f32c112564ad1b1a7f03993560a782cd0d1ae966",
-        "version" : "10.0.0"
+        "revision" : "59070ab6dd846a1c7ce5837e905df1af5187f5b2",
+        "version" : "10.2.0"
+      }
+    },
+    {
+      "identity" : "youtubeplayerkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SvenTiigi/YouTubePlayerKit.git",
+      "state" : {
+        "revision" : "fe26e1c3f24e227547f8de5abde86c36ae105b6a",
+        "version" : "1.6.0"
       }
     }
   ],

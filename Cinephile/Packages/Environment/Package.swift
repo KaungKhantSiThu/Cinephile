@@ -18,7 +18,7 @@ let package = Package(
     dependencies: [
         .package(name: "Models", path: "../Models"),
         .package(name: "Networking", path: "../Networking"),
-        .package(url: "https://github.com/adamayoung/TMDb", exact: "10.0.0"),
+        .package(url: "https://github.com/adamayoung/TMDb", from: "10.0.0"),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.

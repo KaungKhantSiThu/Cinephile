@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1500"
+   LastUpgradeVersion = "1520"
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -53,7 +53,7 @@
       <EnvironmentVariables>
          <EnvironmentVariable
             key = "TMDB_API_KEY"
-            value = "a03aa105bd50498abba5719ade062653"
+            value = "0b8723760cac397ab78965e78c1cd188"
             isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>

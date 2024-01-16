@@ -31,6 +31,7 @@ public struct PosterImage: View {
                     
             } else if state.error != nil {
                 Color.red
+                    .aspectRatio(contentMode: .fit)
             } else {
                 ProgressView()
             }
@@ -41,6 +42,8 @@ public struct PosterImage: View {
         )
     }
 }
+
+
 
 
 #Preview {

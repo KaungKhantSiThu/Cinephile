@@ -70,10 +70,10 @@ extension StatusRowHistory {
 }
 
 #Preview("en", traits: .sizeThatFitsLayout) {
-    StatusRowHistory(status: .preview)
+    StatusRowHistory(status: .placeholder())
 }
 
 #Preview("my", traits: .sizeThatFitsLayout) {
-    StatusRowHistory(status: .preview)
+    StatusRowHistory(status: .placeholder())
         .environment(\.locale, .init(identifier: "my"))
 }

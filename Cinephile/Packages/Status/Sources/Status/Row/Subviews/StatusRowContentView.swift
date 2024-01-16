@@ -29,7 +29,7 @@ struct StatusRowContentView: View {
       if !reasons.contains(.placeholder),
          !isCompact,
          viewModel.isEmbedLoading || viewModel.embeddedStatus != nil {
-        StatusEmbeddedView(status: viewModel.embeddedStatus ?? Status.preview,
+        StatusEmbeddedView(status: viewModel.embeddedStatus ?? Status.placeholder(),
                            client: viewModel.client,
                            routerPath: viewModel.routerPath)
           .fixedSize(horizontal: false, vertical: true)
@@ -65,7 +65,7 @@ struct StatusRowContentView: View {
 #Preview {
     StatusRowContentView(
         viewModel: .init(
-            status: .preview,
+            status: .placeholder(),
             client: Client(server: ""),
             routerPath: RouterPath())
     )

@@ -397,10 +397,16 @@
         }
       }
     },
-    "Hello, World!" : {
+    "Error: %@" : {
+
+    },
+    "Fetching data failed" : {
 
     },
     "New" : {
+
+    },
+    "No genres" : {
 
     },
     "Preview for %lld item(s)" : {
@@ -418,6 +424,9 @@
           }
         }
       }
+    },
+    "Search Movies, Series, Cast" : {
+
     },
     "Show" : {
 
@@ -945,6 +954,9 @@
         }
       }
     },
+    "status.editor.tracker-media.navigation-title" : {
+
+    },
     "status.error.loading.message" : {
 
     },
@@ -1033,6 +1045,9 @@
         }
       }
     },
+    "status.poll.hide-results" : {
+
+    },
     "status.poll.n-votes %lld" : {
       "localizations" : {
         "en" : {
@@ -1078,6 +1093,9 @@
           }
         }
       }
+    },
+    "status.poll.show-results" : {
+
     },
     "status.post-from-%@" : {
       "localizations" : {
@@ -1218,6 +1236,12 @@
           }
         }
       }
+    },
+    "Trending Movies" : {
+
+    },
+    "Trending TV Series" : {
+
     },
     "Your post" : {
       "localizations" : {

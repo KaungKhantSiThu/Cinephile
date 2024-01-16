@@ -26,18 +26,18 @@ final class TimelineViewModelTests: XCTestCase {
     func testStreamEventInsertNewStatus() async throws {
         let isEmpty = await subject.datasource.isEmpty
         XCTAssertTrue(isEmpty)
-        await subject.datasource.append(.preview)
+        await subject.datasource.append(.placeholder())
         var count = await subject.datasource.count()
         XCTAssertTrue(count == 1)
-        await subject.handleEvent(event: StreamEventUpdate(status: .preview))
+        await subject.handleEvent(event: StreamEventUpdate(status: .placeholder()))
         count = await subject.datasource.count()
-        XCTAssertTrue(count == 1)
+        XCTAssertTrue(count == 2)
     }
     
     func testStreamEventInsertDuplicateStatus() async throws {
         let isEmpty = await subject.datasource.isEmpty
         XCTAssertTrue(isEmpty)
-        let status = Status.preview
+        let status = Status.placeholder()
         await subject.datasource.append(status)
         var count = await subject.datasource.count()
         XCTAssertTrue(count == 1)
@@ -49,7 +49,7 @@ final class TimelineViewModelTests: XCTestCase {
     func testStreamEventRemove() async throws {
         let isEmpty = await subject.datasource.isEmpty
         XCTAssertTrue(isEmpty)
-        let status = Status.preview
+        let status = Status.placeholder()
         await subject.datasource.append(status)
         var count = await subject.datasource.count()
         XCTAssertTrue(count == 1)
@@ -59,7 +59,7 @@ final class TimelineViewModelTests: XCTestCase {
     }
     
     func testStreamEventUpdateStatus() async throws {
-        var status = Status.preview
+        var status = Status.placeholder()
         let isEmpty = await subject.datasource.isEmpty
         XCTAssertTrue(isEmpty)
         await subject.datasource.append(status)

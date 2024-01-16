@@ -94,7 +94,7 @@ public struct AppAccountView: View {
           VStack(alignment: .leading) {
             if let account = viewModel.account {
               EmojiTextApp(.init(stringValue: account.safeDisplayName), emojis: account.emojis)
-//                .foregroundColor(theme.labelColor)
+//                //.foregroundColor(theme.labelColor)
               Text("\(account.username)@\(viewModel.appAccount.server)")
                 .font(.scaledSubheadline)
                 .emojiSize(Font.scaledSubheadlineFont.emojiSize)

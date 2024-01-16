@@ -24,7 +24,7 @@ extension CinephileApp {
                 selectedTab = newTab
             })) {
                 ForEach(availableTabs) { tab in
-                  tab.makeContentView(popToRootTab: $popToRootTab)
+                    tab.makeContentView(selectedTab: $selectedTab, popToRootTab: $popToRootTab)
                     .tabItem {
 //                      if userPreferences.showiPhoneTabLabel {
 //                        tab.label

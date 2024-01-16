@@ -119,7 +119,7 @@ public struct AccountsListRow: View {
 //      }
 //      .listStyle(.plain)
 //      .scrollContentBackground(.hidden)
-//      .background(theme.primaryBackgroundColor)
+//      //.background(theme.primaryBackgroundColor)
 //      .environment(theme)
 //      .environment(currentAccount)
 //      .environment(client)

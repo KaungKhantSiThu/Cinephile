@@ -8,6 +8,7 @@
 import SwiftUI
 import TMDb
 
+
 @MainActor
 public struct VideosRowView: View {
     let videos: [VideoMetadata]

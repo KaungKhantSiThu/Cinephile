@@ -40,6 +40,6 @@ struct StatusRowSpoilerView: View {
 }
 
 #Preview(traits: .sizeThatFitsLayout) {
-    StatusRowSpoilerView(status: Status.preview, displaySpoiler: .constant(false))
+    StatusRowSpoilerView(status: Status.placeholder(), displaySpoiler: .constant(false))
 }
 

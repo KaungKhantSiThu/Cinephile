@@ -31,6 +31,6 @@ struct StatusRowReblogView: View {
 }
 
 #Preview(traits: .sizeThatFitsLayout) {
-    StatusRowReblogView(viewModel: .init(status: .preview, client: .init(server: "mastodon.social"), routerPath: .init()))
+    StatusRowReblogView(viewModel: .init(status: .placeholder(), client: .init(server: "mastodon.social"), routerPath: .init()))
 }
 
