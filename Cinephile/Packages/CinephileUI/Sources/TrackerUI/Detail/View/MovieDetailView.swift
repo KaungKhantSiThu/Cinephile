@@ -26,6 +26,17 @@ public struct MovieDetailView: View {
                 // make it button so the users can search based on genre
                 Text(data.movie.genres?.map(\.name).joined(separator: ", ") ?? "No genre")
                 
+                Divider()
+                
+                if let watchProviders = data.showWatchProvider?.buy {
+                    WatchProvidersView(providers: watchProviders)
+                } else {
+                    Text("Streaming is not available at the moment")
+                        .font(.title3)
+                }
+                
+                Divider()
+                
                 HStack(spacing: 30) {
                     Rating(voteCount: data.movie.voteCount ?? 0, voteAverage: data.movie.voteAverage ?? 0.0)
                     Button {
@@ -40,7 +51,7 @@ public struct MovieDetailView: View {
                     }
                     .buttonStyle(CustomButtonStyle())
                 }
-                
+                                
                 Text(data.movie.overview ?? "No overview")
                     .padding()
                 
@@ -54,8 +65,10 @@ public struct MovieDetailView: View {
 
 
 
-//#Preview {
-//    NavigationStack {
-//        MovieDetailView(id: Movie.preview.id)
-//    }
-//}
+#Preview {
+    let tmdbConfiguration = TMDbConfiguration(apiKey: ProcessInfo.processInfo.environment["TMDB_API_KEY"] ?? "")
+    TMDb.configure(tmdbConfiguration)
+    return NavigationStack {
+        MovieDetailView(id: 550)
+    }
+}

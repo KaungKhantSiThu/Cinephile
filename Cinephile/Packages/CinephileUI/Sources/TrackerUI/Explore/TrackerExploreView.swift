@@ -107,18 +107,18 @@ public struct TrackerExploreView: View {
         }
         .task(id: model.searchText) {
             do {
-                try await Task.sleep(for: .milliseconds(150))
-                await model.search()
+//                try await Task.sleep(for: .milliseconds(150))
+                try await model.search()
             } catch {
-                print("Search Failed")
+                print(error.localizedDescription)
             }
         }
         .task(id: model.searchScope) {
             do {
-                try await Task.sleep(for: .milliseconds(150))
-                await model.search()
+//                try await Task.sleep(for: .milliseconds(150))
+                try await model.search()
             } catch {
-                print("Search Failed")
+                print(error.localizedDescription)
             }
         }
         .navigationTitle("Explore")
@@ -150,10 +150,10 @@ public struct TrackerExploreView: View {
 }
     
 
-//#Preview {
-//    let tmdbConfiguration = TMDbConfiguration(apiKey: ProcessInfo.processInfo.environment["TMDB_API_KEY"] ?? "")
-//    TMDb.configure(tmdbConfiguration)
-//    return NavigationStack {
-//        SearchView()
-//    }
-//}
+#Preview {
+    let tmdbConfiguration = TMDbConfiguration(apiKey: ProcessInfo.processInfo.environment["TMDB_API_KEY"] ?? "")
+    TMDb.configure(tmdbConfiguration)
+    return NavigationStack {
+        TrackerExploreView()
+    }
+}

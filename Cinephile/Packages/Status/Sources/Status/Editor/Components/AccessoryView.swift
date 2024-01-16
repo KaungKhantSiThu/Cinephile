@@ -396,7 +396,7 @@ extension StatusEditor {
                 .task(id: model.searchText) {
                     do {
                         try await Task.sleep(for: .milliseconds(150))
-                        await model.search()
+                        try await model.search()
                     } catch {
                         print("Search Failed")
                     }

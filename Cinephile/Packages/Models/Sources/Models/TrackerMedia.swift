@@ -25,17 +25,56 @@ public struct TrackerMedia: Codable, Equatable, Hashable, Identifiable {
         }
     }
     
+    public struct Genre: Identifiable, Codable, Equatable, Hashable {
+
+        ///
+        /// Genre Identifier.
+        ///
+        public let id: Int
+
+        ///
+        /// Genre name.
+        ///
+        public let name: String
+
+        ///
+        /// Creates a genre object.
+        ///
+        /// - Parameters:
+        ///    - id: Genre Identifier.
+        ///    - name: Genre name.
+        ///
+        public init(id: Int, name: String) {
+            self.id = id
+            self.name = name
+        }
+
+    }
+    
     public let id: Int
     public let title: String
     public let posterURL: URL?
+    public let runtime: Int?
+    public let genres: [Genre]?
     public let releasedDate: Date?
     public let voteAverage: Double?
     public let mediaType: MediaType
     
-    public init(id: Int, title: String, posterURL: URL?, releasedDate: Date?, voteAverage: Double?, mediaType: MediaType) {
+    public init(
+        id: Int,
+        title: String,
+        posterURL: URL? = nil,
+        runtime: Int? = nil,
+        genres: [Genre]? = nil,
+        releasedDate: Date? = nil,
+        voteAverage: Double? = nil,
+        mediaType: MediaType
+    ) {
         self.id = id
         self.title = title
         self.posterURL = posterURL
+        self.runtime = runtime
+        self.genres = genres
         self.releasedDate = releasedDate
         self.voteAverage = voteAverage
         self.mediaType = mediaType
@@ -43,3 +82,5 @@ public struct TrackerMedia: Codable, Equatable, Hashable, Identifiable {
 }
 
 extension TrackerMedia: Sendable {}
+
+extension TrackerMedia.Genre: Sendable {}

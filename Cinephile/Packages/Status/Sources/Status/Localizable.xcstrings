@@ -406,6 +406,9 @@
     "New" : {
 
     },
+    "No genres" : {
+
+    },
     "Preview for %lld item(s)" : {
 
     },
@@ -1042,6 +1045,9 @@
         }
       }
     },
+    "status.poll.hide-results" : {
+
+    },
     "status.poll.n-votes %lld" : {
       "localizations" : {
         "en" : {
@@ -1087,6 +1093,9 @@
           }
         }
       }
+    },
+    "status.poll.show-results" : {
+
     },
     "status.post-from-%@" : {
       "localizations" : {

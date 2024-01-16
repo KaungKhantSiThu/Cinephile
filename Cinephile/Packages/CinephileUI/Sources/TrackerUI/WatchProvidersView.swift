@@ -21,8 +21,10 @@ struct WatchProvidersView: View {
     }
 }
 
-#Preview {
-    WatchProvidersView(providers: [
+#Preview(traits: .sizeThatFitsLayout) {
+    let tmdbConfiguration = TMDbConfiguration(apiKey: ProcessInfo.processInfo.environment["TMDB_API_KEY"] ?? "")
+    TMDb.configure(tmdbConfiguration)
+    return WatchProvidersView(providers: [
         .init(
             id: 8,
             name: "Netflix",

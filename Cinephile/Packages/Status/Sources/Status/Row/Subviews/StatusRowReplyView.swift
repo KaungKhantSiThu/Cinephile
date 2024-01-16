@@ -40,5 +40,5 @@ struct StatusRowReplyView: View {
 }
 
 #Preview(traits: .sizeThatFitsLayout) {
-    StatusRowReplyView(viewModel: .init(status: .preview, client: .init(server: "mastodon.social"), routerPath: .init()))
+    StatusRowReplyView(viewModel: .init(status: .placeholder(), client: .init(server: "mastodon.social"), routerPath: .init()))
 }

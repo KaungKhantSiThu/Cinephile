@@ -7,13 +7,15 @@
 
 import TMDb
 import SwiftUI
+import OSLog
+
+private var logger = Logger(subsystem: "TrackerExploreView", category: "ViewModel")
 
 @MainActor
 @Observable public class TrackerExploreViewModel {
     
     public enum SearchScope: String, CaseIterable, Equatable {
         case all, movie, tvSeries, people
-        
         public var localizedString: LocalizedStringKey {
             switch self {
             case .all:
@@ -41,13 +43,14 @@ import SwiftUI
     public var searchScope: SearchScope = .all
     
     
-    public var searchText = "" {
-        didSet {
-            isSearching = true
-        }
-    }
+    public var searchText = "" 
+//    {
+//        didSet {
+//            isSearching = true
+//        }
+//    }
     
-    public var isSearching = false
+//    public var isSearching = false
     public var isSearchPresented = false
     
     public private(set) var state: LoadingState<DiscoverMedia> = .idle
@@ -66,10 +69,12 @@ import SwiftUI
         self.state = .loading
         Task {
             do {
+                logger.info("Fetching popular and upcoming movies and tv series")
                 let data = try await fetchDiscoverMedia()
+                logger.info("Fetching complete")
                 self.state = .loaded(data)
             } catch {
-                print(error.localizedDescription)
+                logger.error("Fetching failed: \(error.localizedDescription)")
                 self.state = .failed(error)
             }
         }
@@ -94,10 +99,9 @@ import SwiftUI
         )
     }
     
-    public func search() async {
+    public func search() async throws {
         guard !self.searchText.isEmpty else { return }
         do {
-            try await Task.sleep(for: .milliseconds(250))
             switch searchScope {
             case .all:
                 self.medias = try await searchService.searchAll(query: searchText, page: 1).results
@@ -109,9 +113,11 @@ import SwiftUI
                 self.medias = try await searchService.searchPeople(query: searchText, page: 1).results.map { Media.person($0) }
             }
             
-            isSearching = false
+//            isSearching = false
         } catch {
-            isSearching = false
+//            isSearching = false
+            logger.error("Fetching search results failed: \(error.localizedDescription)")
+            throw error
         }
     }
 }

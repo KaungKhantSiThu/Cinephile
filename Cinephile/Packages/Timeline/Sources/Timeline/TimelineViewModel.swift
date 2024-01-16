@@ -62,11 +62,11 @@ private let logger = Logger(subsystem: "Timeline", category: "ViewModel")
     
     private var canStreamEvents: Bool = true {
         didSet {
-          if canStreamEvents {
-            pendingStatusesObserver.isLoadingNewStatuses = false
-          }
+            if canStreamEvents {
+                pendingStatusesObserver.isLoadingNewStatuses = false
+            }
         }
-      }
+    }
     
     @ObservationIgnored
     var canFilterTimeline: Bool = true
@@ -134,38 +134,38 @@ private let logger = Logger(subsystem: "Timeline", category: "ViewModel")
     }
     
     func handleEvent(event: any StreamEvent) async {
-      if let event = event as? StreamEventUpdate,
-         let client,
-         timeline == .home,
-         canStreamEvents,
-         isTimelineVisible,
-         await !datasource.contains(statusId: event.status.id)
-      {
-        pendingStatusesObserver.pendingStatuses.insert(event.status.id, at: 0)
-        let newStatus = event.status
-        await datasource.insert(newStatus, at: 0)
-        await cache()
-        StatusDataControllerProvider.shared.updateDataControllers(for: [event.status], client: client)
-        let statuses = await datasource.get()
-        withAnimation {
-          statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
+        if let event = event as? StreamEventUpdate,
+           let client,
+           timeline == .home,
+           canStreamEvents,
+           isTimelineVisible,
+           await !datasource.contains(statusId: event.status.id)
+        {
+            pendingStatusesObserver.pendingStatuses.insert(event.status.id, at: 0)
+            let newStatus = event.status
+            await datasource.insert(newStatus, at: 0)
+            await cache()
+            StatusDataControllerProvider.shared.updateDataControllers(for: [event.status], client: client)
+            let statuses = await datasource.get()
+            withAnimation {
+                statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
+            }
+        } else if let event = event as? StreamEventDelete {
+            await datasource.remove(event.status)
+            await cache()
+            let statuses = await datasource.get()
+            withAnimation {
+                statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
+            }
+        } else if let event = event as? StreamEventStatusUpdate, let client {
+            if let originalIndex = await datasource.indexOf(statusId: event.status.id) {
+                StatusDataControllerProvider.shared.updateDataControllers(for: [event.status], client: client)
+                await datasource.replace(event.status, at: originalIndex)
+                let statuses = await datasource.get()
+                await cache()
+                statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
+            }
         }
-      } else if let event = event as? StreamEventDelete {
-        await datasource.remove(event.status)
-        await cache()
-        let statuses = await datasource.get()
-        withAnimation {
-          statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
-        }
-      } else if let event = event as? StreamEventStatusUpdate, let client {
-        if let originalIndex = await datasource.indexOf(statusId: event.status.id) {
-          StatusDataControllerProvider.shared.updateDataControllers(for: [event.status], client: client)
-          await datasource.replace(event.status, at: originalIndex)
-          let statuses = await datasource.get()
-          await cache()
-          statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
-        }
-      }
     }
 }
 

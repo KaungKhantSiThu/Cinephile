@@ -145,7 +145,7 @@ struct StatusRowHeaderView: View {
 
 #Preview(traits: .sizeThatFitsLayout) {
     StatusRowHeaderView(viewModel: .init(
-        status: .preview,
+        status: .placeholder(),
         client: Client(server: ""),
         routerPath: RouterPath()))
     .environment(Theme.shared)

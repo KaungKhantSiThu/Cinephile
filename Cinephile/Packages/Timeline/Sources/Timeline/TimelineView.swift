@@ -45,37 +45,35 @@ public struct TimelineView: View {
     
     public var body: some View {
         ScrollViewReader { proxy in
-            ZStack(alignment: .top) {
-                List {
-                    scrollToTopView
-                    //          tagGroupHeaderView
-                    tagHeaderView
-                    switch viewModel.timeline {
-                    case .remoteLocal:
-                        StatusesListView(fetcher: viewModel, client: client, routerPath: routerPath, isRemote: true)
-                    default:
-                        StatusesListView(fetcher: viewModel, client: client, routerPath: routerPath)
-                            .environment(\.isHomeTimeline, timeline == .home)
-                    }
+            List {
+                scrollToTopView
+                //          tagGroupHeaderView
+                tagHeaderView
+                switch viewModel.timeline {
+                case .remoteLocal:
+                    StatusesListView(fetcher: viewModel, client: client, routerPath: routerPath, isRemote: true)
+                default:
+                    StatusesListView(fetcher: viewModel, client: client, routerPath: routerPath)
+                        .environment(\.isHomeTimeline, timeline == .home)
                 }
-                .id(client.id)
-                .environment(\.defaultMinListRowHeight, 1)
-                .listStyle(.plain)
-                .scrollContentBackground(.hidden)
-                //.background(theme.primaryBackgroundColor)
-                .introspect(.list, on: .iOS(.v17)) { (collectionView: UICollectionView) in
-                    DispatchQueue.main.async {
-                        self.collectionView = collectionView
-                    }
-                    prefetcher.viewModel = viewModel
-                    collectionView.isPrefetchingEnabled = true
-                    collectionView.prefetchDataSource = prefetcher
+            }
+            .id(client.id)
+            .environment(\.defaultMinListRowHeight, 1)
+            .listStyle(.plain)
+            .scrollContentBackground(.hidden)
+            //.background(theme.primaryBackgroundColor)
+            .introspect(.list, on: .iOS(.v17)) { (collectionView: UICollectionView) in
+                DispatchQueue.main.async {
+                    self.collectionView = collectionView
                 }
-                
+                prefetcher.viewModel = viewModel
+                collectionView.isPrefetchingEnabled = true
+                collectionView.prefetchDataSource = prefetcher
+            }
+            .safeAreaInset(edge: .top, alignment: .center, spacing: 0) {
                 if viewModel.timeline.supportNewestPagination {
                     TimelineUnreadStatusesView(observer: viewModel.pendingStatusesObserver)
                 }
-                
             }
             .onChange(of: viewModel.scrollToIndex) { _, newValue in
                 if let collectionView,

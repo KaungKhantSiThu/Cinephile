@@ -9,18 +9,34 @@ import SwiftUI
 import WebKit
 import AVKit
 import TMDb
+import YouTubePlayerKit
 
 @MainActor
 public struct VideoView: View {
     let name: String
     let id: String
+    
+    @State private var youtubePlayer: YouTubePlayer
+    
+//    @State private var youtubePlayer: YouTubePlayer
 
     public var body: some View {
         VStack(alignment: .leading) {
             YouTubeView(videoId: id)
+                
+//            YouTubePlayerView(self.youtubePlayer) 
+//            { state in
+//                switch state {
+//                case .idle:
+//                    ProgressView()
+//                case .ready:
+//                    EmptyView()
+//                case .error(_):
+//                    Text(verbatim: "YouTube player couldn't be loaded")
+//                }
+//            }
                 .clipShape(RoundedRectangle(cornerRadius: 25))
                 .frame(width: 320, height: 180)
-            
             Text(name)
                 .font(.headline)
                 .lineLimit(2)
@@ -32,11 +48,13 @@ public struct VideoView: View {
     init(metaData: VideoMetadata) {
         self.name = metaData.name
         self.id = metaData.id
+        self._youtubePlayer = State(wrappedValue: .init(source: .video(id: metaData.id)))
     }
     
     init(name: String, id: String) {
         self.name = name
         self.id = id
+        self._youtubePlayer = State(wrappedValue: .init(source: .video(id: id)))
     }
 }
 

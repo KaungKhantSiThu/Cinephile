@@ -34,7 +34,7 @@ public struct ConsolidatedNotification: Identifiable {
               type: type,
               createdAt: ServerDate(),
               accounts: [.placeholder()],
-              status: .preview)
+              status: .placeholder())
     }
     
     public static func placeholders() -> [ConsolidatedNotification] {

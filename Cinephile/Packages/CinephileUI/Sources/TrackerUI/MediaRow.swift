@@ -48,6 +48,8 @@ public struct MediaRow: View {
                     .frame(width: 30, height: 30)
             }
             .padding(.trailing, 10)
+            .disabled(type == .person)
+            .opacity( type == .person ? 0 : 1)
         }
         .padding()
         .frame(height: 150)

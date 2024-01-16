@@ -15,5 +15,5 @@ public extension CGFloat {
   static let statusColumnsSpacing: CGFloat = 8
   static let secondaryColumnWidth: CGFloat = 400
   static let sidebarWidth: CGFloat = 90
-  static let pollBarHeight: CGFloat = 30
+  static let pollBarHeight: CGFloat = 40
 }

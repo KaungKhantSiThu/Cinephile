@@ -47,6 +47,14 @@ extension StatusEditor {
                         
                         if let voteAverage = trackerMedia.voteAverage {
                             PopularityBadge(score: Int(voteAverage * 10))
+                        } else {
+                            PopularityBadge(score: 0, textColor: .gray)
+                        }
+                        
+                        if let genres = trackerMedia.genres {
+                            Text(genres.map { $0.name }.joined(separator: ", "))
+                        } else {
+                            Text("No genres")
                         }
                         
                         Text(trackerMedia.releasedDate ?? Date.now, format: .dateTime.year().month())
@@ -69,9 +77,11 @@ extension StatusEditor {
                 Button {
                     discardAction()
                 } label: {
-                    Image(systemName: "xmark.circle.fill")
+                    Image(systemName: "minus.circle.fill")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
                         .foregroundStyle(.white, .red)
-//                        .frame(width: 50, height: 50)
+                        .frame(width: 30, height: 30)
                 }
             }
             .padding(12)
@@ -90,8 +100,7 @@ extension StatusEditor {
 }
 
 #Preview(traits: .sizeThatFitsLayout) {
-    StatusEditor.TrackerMediaView(media: TrackerMedia(id: 12345, title: "Napoleon", posterURL: nil, releasedDate: Date.now, voteAverage: 6.4, mediaType: .movie)) {
+    StatusEditor.TrackerMediaView(media: TrackerMedia(id: 12345, title: "Napoleon", genres: [.init(id: 1, name: "Drama"), .init(id: 2, name: "History")], releasedDate: Date.now, voteAverage: 6.4, mediaType: .movie)) {
         print("Close view")
     }
-    .border(.red)
 }

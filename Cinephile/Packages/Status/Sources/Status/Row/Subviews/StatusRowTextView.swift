@@ -61,6 +61,6 @@ struct StatusRowTextView: View {
 }
 
 #Preview(traits: .sizeThatFitsLayout) {
-    StatusRowTextView(viewModel: .init(status: .preview, client: .init(server: "mastodon.social"), routerPath: .init()))
+    StatusRowTextView(viewModel: .init(status: .placeholder(), client: .init(server: "mastodon.social"), routerPath: .init()))
         .environment(Theme.shared)
 }

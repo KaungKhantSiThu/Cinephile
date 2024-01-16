@@ -16,10 +16,10 @@ protocol DataLoader {
     func loadRecommendedItems(withID id: Output.ID) async throws -> [Output]
     func loadUpcomingItems() async throws -> [Output]
     func loadVideos(withID id: Output.ID) async throws -> [VideoMetadata]
+    func loadShowWatchProvider(withID id: Output.ID) async throws -> ShowWatchProvider?
 }
 
 struct MovieLoader: DataLoader {
-    
 
     var movieService: MovieService!
     var trendingService: TrendingService!
@@ -54,6 +54,9 @@ struct MovieLoader: DataLoader {
         return try await movieService.videos(forMovie: id).results
     }
     
+    func loadShowWatchProvider(withID id: Int) async throws -> ShowWatchProvider? {
+        return try await movieService.watchProviders(forMovie: id)
+    }
     
 }
 
@@ -94,5 +97,9 @@ struct TVSeriesLoader: DataLoader {
     
     func loadVideos(withID id: TVSeries.ID) async throws -> [VideoMetadata] {
         return try await tvSeriesService.videos(forTVSeries: id).results
+    }
+    
+    func loadShowWatchProvider(withID id: Int) async throws -> ShowWatchProvider? {
+        return try await tvSeriesService.watchProviders(forTVSeries: id)
     }
 }

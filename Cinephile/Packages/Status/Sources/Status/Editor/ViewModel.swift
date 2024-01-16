@@ -316,7 +316,7 @@ extension StatusEditor {
         
         private func processText() {
             guard markedTextRange == nil else { return }
-            statusText.addAttributes([.foregroundColor: UIColor(Theme.shared.labelColor),
+            statusText.addAttributes([
                                       .font: Font.scaledBodyUIFont,
                                       .backgroundColor: UIColor.clear,
                                       .underlineColor: UIColor.clear],
