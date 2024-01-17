@@ -34,7 +34,7 @@ struct TimelineUnreadStatusesView: View {
     @State var observer: TimelineUnreadStatusesObserver
     @Environment(UserPreferences.self) private var preferences
     @Environment(Theme.self) private var theme
-
+    
     var body: some View {
         if observer.pendingStatusesCount > 0 {
             Button {
@@ -42,22 +42,22 @@ struct TimelineUnreadStatusesView: View {
             } label: {
                 if observer.isLoadingNewStatuses {
                     ProgressView()
-//                        .tint(theme.labelColor)
+                    //                        .tint(theme.labelColor)
                 }
                 if observer.pendingStatusesCount > 0 {
                     Label("\(observer.pendingStatusesCount)", systemImage: "arrow.up.circle")
                     // Accessibility: this results in a frame with a size of at least 44x44 at regular font size
-//                        .frame(minWidth: 16, minHeight: 16)
+                    //                        .frame(minWidth: 16, minHeight: 16)
                         .fontWeight(.bold)
-//                        .foregroundStyle(theme.labelColor)
+                    //                        .foregroundStyle(theme.labelColor)
                 }
             }
-//            .accessibilityLabel("accessibility.tabs.timeline.unread-posts.label-\(observer.pendingStatusesCount)")
-//            .accessibilityHint("accessibility.tabs.timeline.unread-posts.hint")
+            //            .accessibilityLabel("accessibility.tabs.timeline.unread-posts.label-\(observer.pendingStatusesCount)")
+            //            .accessibilityHint("accessibility.tabs.timeline.unread-posts.hint")
             .buttonStyle(.borderedProminent)
             .buttonBorderShape(.capsule)
             .padding(8)
-//            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: preferences.pendingLocation)
+            //            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: preferences.pendingLocation)
         }
     }
 }

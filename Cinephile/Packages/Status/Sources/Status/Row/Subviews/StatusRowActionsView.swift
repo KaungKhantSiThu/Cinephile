@@ -179,7 +179,7 @@ struct StatusRowActionsView: View {
                         .image(dataController: statusDataController, privateBoost: privateBoost())
                         .imageScale(.medium)
                         .font(.scaledBody)
-//                        .fontWeight(.black)
+                    //                        .fontWeight(.black)
                 } else {
                     action
                         .image(dataController: statusDataController, privateBoost: privateBoost())
