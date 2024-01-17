@@ -10,13 +10,13 @@ struct StatusRowReblogView: View {
           Image(systemName: "arrow.left.arrow.right")
         AvatarView(viewModel.status.account.avatar, config: .boost)
         EmojiTextApp(.init(stringValue: viewModel.status.account.safeDisplayName), emojis: viewModel.status.account.emojis)
-        Text("status.row.was-boosted")
+        Text("status.row.was-boosted", bundle: .module)
       }
       .accessibilityElement(children: .combine)
       .accessibilityLabel(
-        Text("\(viewModel.status.account.safeDisplayName)")
-          + Text(" ")
-          + Text("status.row.was-boosted")
+        Text("\(viewModel.status.account.safeDisplayName)", bundle: .module)
+          + Text(" ", bundle: .module)
+          + Text("status.row.was-boosted", bundle: .module)
       )
       .font(.scaledFootnote)
       .emojiSize(Font.scaledFootnoteFont.emojiSize)

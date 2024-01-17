@@ -206,7 +206,7 @@ public struct AccountDetailView: View {
                 routerPath.presentedSheet = .settings
             } label: {
                 Label(
-                    title: { Text("account.settings") },
+                    title: { Text("account.settings", bundle: .module) },
                     icon: { Image(systemName: "gear") }
                 )
             }
@@ -218,7 +218,7 @@ public struct AccountDetailView: View {
                   isEditingAccount = true
                 } label: {
                     Label(
-                        title: { Text("account.edit.info") },
+                        title: { Text("account.edit.info", bundle: .module) },
                         icon: { Image(systemName: "pencil") }
                     )
                 }

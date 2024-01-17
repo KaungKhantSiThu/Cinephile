@@ -181,7 +181,7 @@ extension StatusEditor {
                                 isLanguageSheetDisplayed.toggle()
                             } label: {
                                 if let language = viewModel.selectedLanguage {
-                                    Text(language.uppercased())
+                                    Text("\(language.uppercased())", bundle: .module)
                                 } else {
                                     Image(systemName: "globe")
                                 }
@@ -226,9 +226,9 @@ extension StatusEditor {
         @ViewBuilder
         private func languageTextView(isoCode: String, nativeName: String?, name: String?) -> some View {
             if let nativeName, let name {
-                Text("\(nativeName) (\(name))", comment: "Native name - Name for languages ")
+                Text("\(nativeName) (\(name))", bundle: .module, comment: "Native name - Name for languages ")
             } else {
-                Text(isoCode.uppercased())
+                Text("\(isoCode.uppercased())", bundle: .module)
             }
         }
         
@@ -324,7 +324,7 @@ extension StatusEditor {
                                 }
                                 .scrollIndicators(.hidden)
                             } header: {
-                                Text("Trending Movies")
+                                Text("Trending Movies", bundle: .module)
                                     .font(.title).bold()
                             }
                             
@@ -392,7 +392,7 @@ extension StatusEditor {
                 .searchable(text: $model.searchText,
                             isPresented: $model.isSearchPresented,
                             placement: .navigationBarDrawer(displayMode: .always),
-                            prompt: Text("Search Movies, Series, Cast"))
+                            prompt: Text("Search Movies, Series, Cast", bundle: .module))
                 .task(id: model.searchText) {
                     do {
                         try await Task.sleep(for: .milliseconds(150))
@@ -422,7 +422,7 @@ extension StatusEditor {
                 ScrollView {
                     ForEach(viewModel.customEmojiContainer) { container in
                         VStack(alignment: .leading) {
-                            Text(container.categoryName)
+                            Text("\(container.categoryName)", bundle: .module)
                                 .font(.scaledFootnote)
                             LazyVGrid(columns: [GridItem(.adaptive(minimum: 40))], spacing: 9) {
                                 ForEach(container.emojis) { emoji in
@@ -473,7 +473,7 @@ extension StatusEditor {
         private var characterCountView: some View {
             let value = (currentInstance.instance?.configuration?.statuses.maxCharacters ?? 500) + viewModel.statusTextCharacterLength
             
-            Text("\(value)")
+            Text("\(value)", bundle: .module)
                 .foregroundColor(value < 0 ? .red : .secondary)
                 .font(.scaledCallout)
             //      .accessibilityLabel("accessibility.editor.button.characters-remaining")

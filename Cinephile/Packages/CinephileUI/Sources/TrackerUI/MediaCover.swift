@@ -20,13 +20,13 @@ public struct MediaCover: View {
             
             
             VStack(alignment: .leading, spacing: 5) {
-                Text(title)
+                Text("\(title)", bundle: .module)
                     .fontWeight(.semibold)
                     .lineLimit(1)
                     .font(.caption)
                     .foregroundStyle(.primary)
                 
-                Text(format(date: releaseDate))
+                Text("\(format(date: releaseDate))", bundle: .module)
                     .font(.caption2)
                     .foregroundStyle(.secondary)
             }

@@ -26,7 +26,7 @@ public struct TrackerExploreView: View {
                 case .loading:
                     ProgressView()
                 case .failed(let error):
-                    ContentUnavailableView("No search Results", systemImage: "magnifyingglass", description: Text("Error: \(error.localizedDescription)"))
+                    ContentUnavailableView("No search Results", systemImage: "magnifyingglass", description: Text("Error: \(error.localizedDescription)", bundle: .module))
                         .symbolVariant(.slash)
                 case .loaded(let value):
                     Section {
@@ -98,7 +98,7 @@ public struct TrackerExploreView: View {
         .searchable(text: $model.searchText,
                     isPresented: $model.isSearchPresented,
                     placement: .navigationBarDrawer(displayMode: .always),
-                    prompt: Text("Search Movies, TV Series, People"))
+                    prompt: Text("Search Movies, TV Series, People", bundle: .module))
         .searchScopes($model.searchScope) {
             ForEach(TrackerExploreViewModel.SearchScope.allCases, id: \.self) { scope in
                 Text(scope.localizedString, bundle: .module)

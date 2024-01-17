@@ -22,7 +22,7 @@ public struct MovieRow: View {
 //                .frame(height: 90)
                 
             VStack(alignment: .leading) {
-                Text(movie.title)
+                Text("\(movie.title)", bundle: .module)
                     .font(.headline)
                 Text(movie.genres?.map(\.name).joined(separator: ", ") ?? "No genre")
                     .font(.callout)
@@ -32,14 +32,14 @@ public struct MovieRow: View {
             }
             Spacer()
             Gauge(value: movie.voteAverage ?? 0.0, in: 0...10) {
-               Text("Rating")
+               Text("Rating", bundle: .module)
            } currentValueLabel: {
                Text(movie.voteAverage ?? 0.0, format: .number.precision(.fractionLength(1)))
                    .foregroundColor(formatColor(value: movie.voteAverage ?? 0.0))
            } minimumValueLabel: {
-               Text("0").foregroundColor(.red)
+               Text("0", bundle: .module).foregroundColor(.red)
            } maximumValueLabel: {
-               Text("10").foregroundColor(.green)
+               Text("10", bundle: .module).foregroundColor(.green)
            }
            
            .gaugeStyle(.accessoryCircular)
@@ -82,12 +82,12 @@ public struct CountDownView: View {
     let releasedDate: Date
     public var body: some View {
         VStack {
-            Text(remainingDays(from: releasedDate))
+            Text("\(remainingDays(from: releasedDate))", bundle: .module)
                 .font(.title)
                 .fontWeight(.semibold)
             
             if remainingDays(from: releasedDate) != "Out!" {
-                Text("Days")
+                Text("Days", bundle: .module)
                     .font(.callout)
             }
         }

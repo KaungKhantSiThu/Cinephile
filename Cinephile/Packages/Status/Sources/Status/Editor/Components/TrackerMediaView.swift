@@ -40,7 +40,7 @@ extension StatusEditor {
                     
                     VStack(alignment: .leading, spacing: 8) {
                         
-                        Text(trackerMedia.title)
+                        Text("\(trackerMedia.title)", bundle: .module)
                             .font(.title3)
                             .fontWeight(.bold)
                             .lineLimit(2)
@@ -54,7 +54,7 @@ extension StatusEditor {
                         if let genres = trackerMedia.genres {
                             Text(genres.map { $0.name }.joined(separator: ", "))
                         } else {
-                            Text("No genres")
+                            Text("No genres", bundle: .module)
                         }
                         
                         Text(trackerMedia.releasedDate ?? Date.now, format: .dateTime.year().month())

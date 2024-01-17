@@ -22,7 +22,7 @@ struct DraftsListView: View {
             dismiss()
           } label: {
             VStack(alignment: .leading, spacing: 8) {
-              Text(draft.content)
+              Text("\(draft.content)", bundle: .module)
                 .font(.body)
                 .lineLimit(3)
                 .foregroundStyle(theme.labelColor)

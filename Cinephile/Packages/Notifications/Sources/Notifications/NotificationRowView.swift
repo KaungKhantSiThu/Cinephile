@@ -134,7 +134,7 @@ struct NotificationRowView: View {
                     .fixedSize(horizontal: false, vertical: true)
                     if let status = notification.status, notification.type == .mention {
                         Group {
-                            Text(" ⸱ ")
+                            Text(" ⸱ ", bundle: .module)
                             Text(Image(systemName: status.visibility.iconName))
                         }
                         .accessibilityHidden(true)
@@ -145,7 +145,7 @@ struct NotificationRowView: View {
                     Spacer()
                 }
             } else {
-                Text("          ")
+                Text("          ", bundle: .module)
                     .font(.scaledSubheadline)
                     .fontWeight(.semibold)
             }
@@ -183,7 +183,7 @@ struct NotificationRowView: View {
             .environment(\.isCompact, true)
         } else {
             Group {
-                Text("@\(notification.accounts[0].acct)")
+                Text("@\(notification.accounts[0].acct)", bundle: .module)
                     .font(.scaledCallout)
                     .foregroundStyle(.secondary)
                 

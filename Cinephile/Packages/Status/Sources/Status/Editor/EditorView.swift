@@ -75,7 +75,7 @@ extension StatusEditor {
                     VStack(alignment: .leading, spacing: 4) {
                         PrivacyMenu(visibility: $viewModel.visibility, tint: theme.tintColor)
                         
-                        Text("@\(account.acct)@\(appAccounts.currentClient.server)")
+                        Text("@\(account.acct)@\(appAccounts.currentClient.server)", bundle: .module)
                             .font(.scaledFootnote)
                             .foregroundStyle(.secondary)
                     }

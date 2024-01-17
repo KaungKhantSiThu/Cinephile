@@ -24,7 +24,7 @@ public struct SeriesDetailView: View {
             ScrollView {
                 PosterImage(url: model.posterImageURL, height: 240)
                 
-                Text(data.tvSeries.name)
+                Text("\(data.tvSeries.name)", bundle: .module)
                     .font(.title)
                     .fontWeight(.bold)
                 

@@ -51,7 +51,7 @@ public struct AccountsListRow: View {
           .emojiSize(Font.scaledSubheadlineFont.emojiSize)
           .emojiBaselineOffset(Font.scaledSubheadlineFont.emojiBaselineOffset)
           .fontWeight(.semibold)
-        Text("@\(viewModel.account.acct)")
+        Text("@\(viewModel.account.acct)", bundle: .module)
           .font(.scaledFootnote)
           .foregroundStyle(Color.secondary)
 

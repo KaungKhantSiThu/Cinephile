@@ -31,7 +31,7 @@ extension StatusEditor {
                         case .loading:
                             ProgressView()
                         case .failed(let error):
-                            ContentUnavailableView("Fetching data failed", systemImage: "magnifyingglass", description: Text("Error: \(error.localizedDescription)"))
+                            ContentUnavailableView("Fetching data failed", systemImage: "magnifyingglass", description: Text("Error: \(error.localizedDescription)", bundle: .module))
                                 .symbolVariant(.slash)
                         case .loaded(let value):
                             Section {
@@ -47,7 +47,7 @@ extension StatusEditor {
                                 }
                                 .scrollIndicators(.hidden)
                             } header: {
-                                Text("Trending Movies")
+                                Text("Trending Movies", bundle: .module)
                                     .font(.title).bold()
                             }
                             
@@ -64,7 +64,7 @@ extension StatusEditor {
                                 }
                                 .scrollIndicators(.hidden)
                             } header: {
-                                Text("Trending TV Series")
+                                Text("Trending TV Series", bundle: .module)
                                     .font(.title).bold()
                             }
                             
@@ -80,7 +80,7 @@ extension StatusEditor {
                 .searchable(text: $model.searchText,
                             isPresented: $model.isSearchPresented,
                             placement: .navigationBarDrawer(displayMode: .always),
-                            prompt: Text("Search Movies, Series, Cast"))
+                            prompt: Text("Search Movies, Series, Cast", bundle: .module))
                 .searchScopes($model.searchScope) {
                     ForEach(TrackerExploreViewModel.SearchScope.allCases, id: \.self) { scope in
                         Text(scope.localizedString, bundle: .module)

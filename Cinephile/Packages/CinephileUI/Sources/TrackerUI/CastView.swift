@@ -37,8 +37,8 @@ public struct CastView: View {
             )
  
             VStack(alignment: .leading) {
-                Text(self.name)
-                Text(self.character)
+                Text("\(self.name)", bundle: .module)
+                Text("\(self.character)", bundle: .module)
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
             }

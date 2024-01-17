@@ -30,10 +30,10 @@ struct AccountDetailHeaderView: View {
         VStack {
             accountAvatarView
             VStack(alignment: .leading) {
-                Text(account.safeDisplayName)
+                Text("\(account.safeDisplayName)", bundle: .module)
                     .font(.title)
                     .foregroundStyle(.primary)
-                Text("@\(account.acct)")
+                Text("@\(account.acct)", bundle: .module)
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
             }
@@ -68,7 +68,7 @@ struct AccountDetailHeaderView: View {
     private var accountInfoView: some View {
         HStack(spacing: 20) {
             VStack {
-                Text("\(account.statusesCount ?? 999)")
+                Text("\(account.statusesCount ?? 999)", bundle: .module)
                     .font(.title2)
                     .fontWeight(.bold)
                 Text("Posts")
@@ -76,7 +76,7 @@ struct AccountDetailHeaderView: View {
             }
 
             VStack {
-                Text("\(account.followingCount ?? 999)")
+                Text("\(account.followingCount ?? 999)", bundle: .module)
                     .font(.title2)
                     .fontWeight(.bold)
                 Text("Following")
@@ -84,10 +84,10 @@ struct AccountDetailHeaderView: View {
             }
 
             VStack {
-                Text("\(account.followersCount ?? 999)")
+                Text("\(account.followersCount ?? 999)", bundle: .module)
                     .font(.title2)
                     .fontWeight(.bold)
-                Text("Followers")
+                Text("Followers", bundle: .module)
                     .font(.caption)
             }
         }

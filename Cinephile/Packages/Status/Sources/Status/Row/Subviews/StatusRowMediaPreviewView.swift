@@ -118,11 +118,11 @@ public struct StatusRowMediaPreviewView: View {
 
   private static func accessibilityLabel(for attachment: MediaAttachment) -> Text {
     if let altText = attachment.description {
-      Text("accessibility.image.alt-text-\(altText)")
+      Text("accessibility.image.alt-text-\(altText)", bundle: .module)
     } else if let typeDescription = attachment.localizedTypeDescription {
       Text(typeDescription)
     } else {
-      Text("accessibility.tabs.profile.picker.media")
+      Text("accessibility.tabs.profile.picker.media", bundle: .module)
     }
   }
 }
@@ -171,7 +171,7 @@ private struct MediaPreview: View {
     // #965: do not create overlapping tappable areas, when multiple images are shown
     .contentShape(Rectangle())
     .accessibilityElement(children: .ignore)
-    .accessibilityLabel(Text(displayData.accessibilityText))
+    .accessibilityLabel(Text("\(displayData.accessibilityText)", bundle: .module))
     .accessibilityAddTraits(displayData.type == .image ? [.isImage, .isButton] : .isButton)
   }
 }
@@ -305,7 +305,7 @@ struct BlurOverLay: View {
                 }
                 HStack {
                   Image(systemName: "eye")
-                  Text("Show")
+                  Text("Show", bundle: .module)
                 }
                 Image(systemName: "eye")
               }

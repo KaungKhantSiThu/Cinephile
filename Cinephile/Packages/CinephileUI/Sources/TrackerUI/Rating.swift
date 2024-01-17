@@ -21,7 +21,7 @@ public struct Rating: View {
         VStack {
             HStack {
                 Text(voteCount, format: .number)
-                Text("RATINGS")
+                Text("RATINGS", bundle: .module)
             }
             .font(.caption)
             .fontWeight(.semibold)

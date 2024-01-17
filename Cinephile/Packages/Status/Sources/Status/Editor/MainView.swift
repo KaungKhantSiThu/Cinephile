@@ -59,7 +59,7 @@ extension StatusEditor {
                         Button {
                             
                         } label: {
-                            Text("alert.button.ok")
+                            Text("alert.button.ok", bundle: .module)
                         }
                     }, message: {
                         Text(viewModel.postingError ?? "")

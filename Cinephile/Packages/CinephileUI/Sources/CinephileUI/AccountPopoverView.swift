@@ -43,7 +43,7 @@ struct AccountPopoverView: View {
           .accessibilityAddTraits(.isHeader)
           .help(account.safeDisplayName)
 
-        Text("@\(account.acct)")
+        Text("@\(account.acct)", bundle: .module)
           .font(.callout)
           .foregroundStyle(.secondary)
           .textSelection(.enabled)
@@ -53,7 +53,7 @@ struct AccountPopoverView: View {
         HStack(spacing: 4) {
           Image(systemName: "calendar")
             .accessibilityHidden(true)
-          Text("account.joined")
+          Text("account.joined", bundle: .module)
           Text(account.createdAt.asDate, style: .date)
         }
         .foregroundStyle(.secondary)
@@ -108,7 +108,7 @@ struct AccountPopoverView: View {
               .offset(x: 12)
           }
         }
-      Text(title)
+      Text(title, bundle: .module)
         .font(.scaledFootnote)
         .foregroundStyle(.secondary)
         .alignmentGuide(.bottomAvatar, computeValue: { dimension in

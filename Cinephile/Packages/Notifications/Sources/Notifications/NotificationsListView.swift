@@ -67,7 +67,11 @@ public struct NotificationsListView: View {
                             await viewModel.fetchNotifications()
                         }
                     } label: {
-                        Label("notifications.navigation-title", systemImage: "bell.fill")
+                        Label {
+                            Text("notifications.navigation-title", bundle: .module)
+                        } icon: {
+                            Image(systemName: "bell.fill")
+                        }
                     }
                     Divider()
                     ForEach(Notification.NotificationType.allCases, id: \.self) { type in

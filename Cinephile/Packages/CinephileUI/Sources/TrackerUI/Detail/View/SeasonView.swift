@@ -10,7 +10,7 @@ struct SeasonView: View {
     let seasons: [TVSeason]
     var body: some View {
         VStack(alignment: .leading) {
-            Text("All Episodes")
+            Text("All Episodes", bundle: .module)
                 .foregroundStyle(.black)
                 .font(.title)
                 .fontWeight(.semibold)

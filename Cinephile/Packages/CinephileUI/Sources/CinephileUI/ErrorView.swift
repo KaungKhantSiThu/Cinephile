@@ -21,17 +21,17 @@ public struct ErrorView: View {
           .resizable()
           .aspectRatio(contentMode: .fit)
           .frame(maxHeight: 50)
-        Text(title)
+        Text(title, bundle: .module)
           .font(.scaledTitle)
           .padding(.top, 16)
-        Text(message)
+        Text(message, bundle: .module)
           .font(.scaledSubheadline)
           .multilineTextAlignment(.center)
           .foregroundStyle(.secondary)
         Button {
           onButtonPress()
         } label: {
-          Text(buttonTitle)
+          Text(buttonTitle, bundle: .module)
         }
         .buttonStyle(.bordered)
         .padding(.top, 16)
