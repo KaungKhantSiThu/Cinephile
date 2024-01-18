@@ -243,16 +243,16 @@ public struct TimelineView: View {
             VStack(alignment: .center) {
                 switch timeline {
                 case let .remoteLocal(_, filter):
-                    Text(filter.localizedTitle(), bundle: .module)
+                    Text(filter.localizedTitle())
                         .font(.headline)
-                    Text(timeline.localizedTitle(), bundle: .module)
+                    Text(timeline.localizedTitle())
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 case .home:
                     Text(timeline.localizedTitle())
                         .font(.headline)
                 default:
-                    Text(timeline.localizedTitle(), bundle: .module)
+                    Text(timeline.localizedTitle())
                         .font(.headline)
                 }
             }

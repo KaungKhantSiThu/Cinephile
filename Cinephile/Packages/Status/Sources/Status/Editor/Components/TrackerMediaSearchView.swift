@@ -31,7 +31,7 @@ extension StatusEditor {
                         case .loading:
                             ProgressView()
                         case .failed(let error):
-                            ContentUnavailableView("Fetching data failed", systemImage: "magnifyingglass", description: Text("Error: \(error.localizedDescription)"))
+                            ContentUnavailableView("Fetching data failed", systemImage: "magnifyingglass", description: Text("Error: \(error.localizedDescription)", bundle: .module))
                                 .symbolVariant(.slash)
                         case .loaded(let value):
                             Section {
@@ -83,7 +83,7 @@ extension StatusEditor {
                             prompt: Text("Search Movies, Series, Cast"))
                 .searchScopes($model.searchScope) {
                     ForEach(TrackerExploreViewModel.SearchScope.allCases, id: \.self) { scope in
-                        Text(scope.localizedString, bundle: .module)
+                        Text(scope.localizedString)
                     }
                 }
                 .task(id: model.searchText) {

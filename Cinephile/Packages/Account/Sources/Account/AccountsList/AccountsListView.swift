@@ -33,8 +33,8 @@ public struct AccountsListView: View {
            !currentAccount.followRequests.isEmpty
         {
           Section(
-            header: Text("account.follow-requests.pending-requests"),
-            footer: Text("account.follow-requests.instructions")
+            header: Text("account.follow-requests.pending-requests", bundle: .module),
+            footer: Text("account.follow-requests.instructions", bundle: .module)
               .font(.scaledFootnote)
               .foregroundColor(.secondary)
               .offset(y: -8)

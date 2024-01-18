@@ -87,7 +87,7 @@ struct StatusRowHeaderView: View {
             .foregroundStyle(.secondary)
             .lineLimit(1)
         } else if theme.displayFullUsername, theme.avatarPosition == .leading {
-          Text("@\(viewModel.finalStatus.account.acct)")
+          Text("@\(viewModel.finalStatus.account.acct)", bundle: .module)
             .font(.scaledFootnote)
             .foregroundStyle(.secondary)
             .lineLimit(1)

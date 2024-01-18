@@ -51,13 +51,13 @@ public struct AccountsListRow: View {
           .emojiSize(Font.scaledSubheadlineFont.emojiSize)
           .emojiBaselineOffset(Font.scaledSubheadlineFont.emojiBaselineOffset)
           .fontWeight(.semibold)
-        Text("@\(viewModel.account.acct)")
+        Text("@\(viewModel.account.acct)", bundle: .module)
           .font(.scaledFootnote)
           .foregroundStyle(Color.secondary)
 
         // First parameter is the number for the plural
         // Second parameter is the formatted string to show , format: .number.notation(.compactName)
-          Text("\(viewModel.account.followersCount ?? 0) followers", bundle: .module)
+          Text("\(viewModel.account.followersCount ?? 0) followers")
           .font(.scaledFootnote)
 
         if let field = viewModel.account.fields.filter({ $0.verifiedAt != nil }).first {

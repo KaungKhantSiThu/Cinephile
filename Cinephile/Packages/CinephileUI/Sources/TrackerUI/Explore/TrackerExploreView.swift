@@ -101,7 +101,7 @@ public struct TrackerExploreView: View {
                     prompt: Text("Search Movies, TV Series, People"))
         .searchScopes($model.searchScope) {
             ForEach(TrackerExploreViewModel.SearchScope.allCases, id: \.self) { scope in
-                Text(scope.localizedString, bundle: .module)
+                Text(scope.localizedString)
                     .tag(scope)
             }
         }

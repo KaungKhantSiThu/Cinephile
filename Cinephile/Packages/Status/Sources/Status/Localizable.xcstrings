@@ -404,10 +404,24 @@
 
     },
     "New" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New"
+          }
+        }
+      }
     },
     "No genres" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No genres"
+          }
+        }
+      }
     },
     "Preview for %lld item(s)" : {
 
@@ -882,7 +896,14 @@
       }
     },
     "status.editor.language-select.confirmation.selected-%@" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Post in %@ (Selected language)"
+          }
+        }
+      }
     },
     "status.editor.language-select.navigation-title" : {
       "localizations" : {
@@ -958,22 +979,64 @@
 
     },
     "status.error.loading.message" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "An error occurred while loading posts, please try again."
+          }
+        }
+      }
     },
     "status.error.message" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "An error occurred in the context of this post, please try again."
+          }
+        }
+      }
     },
     "status.error.posting.title" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error while posting"
+          }
+        }
+      }
     },
     "status.error.title" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "An error occurred"
+          }
+        }
+      }
     },
     "status.filter.filtered-by-%@" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtered by: %@"
+          }
+        }
+      }
     },
     "status.filter.show-anyway" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show anyway"
+          }
+        }
+      }
     },
     "status.image.alt-text.abbreviation" : {
       "localizations" : {

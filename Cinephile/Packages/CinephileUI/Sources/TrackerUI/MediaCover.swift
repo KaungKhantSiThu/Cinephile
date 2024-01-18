@@ -20,7 +20,7 @@ public struct MediaCover: View {
             
             
             VStack(alignment: .leading, spacing: 5) {
-                Text(title)
+                Text("\(title)", bundle: .module)
                     .fontWeight(.semibold)
                     .lineLimit(1)
                     .font(.caption)

@@ -8,7 +8,7 @@ struct StatusRowSpoilerView: View {
 
   var body: some View {
     HStack(alignment: .top) {
-      Text("⚠︎")
+      Text("⚠︎", bundle: .module)
         .font(.system(.subheadline, weight: .bold))
         .foregroundColor(.secondary)
       EmojiTextApp(status.spoilerText, emojis: status.emojis, language: status.language)

@@ -14,7 +14,7 @@ public struct TagRowView: View {
   public var body: some View {
     HStack {
       VStack(alignment: .leading) {
-        Text("#\(tag.name)")
+        Text("#\(tag.name)", bundle: .module)
           .font(.scaledHeadline)
         Text("design.tag.n-posts-from-n-participants \(tag.totalUses) \(tag.totalAccounts)")
           .font(.scaledFootnote)

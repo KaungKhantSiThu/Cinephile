@@ -28,7 +28,7 @@ public struct Rating: View {
             .foregroundStyle(.secondary)
             
             HStack {
-                Image("tmdb_logo", bundle: .module)
+                Image("tmdb_logo")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 50)

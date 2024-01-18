@@ -10,6 +10,9 @@
     "#%@" : {
 
     },
+    "%@" : {
+
+    },
     "%lld" : {
 
     },
@@ -36,25 +39,74 @@
       }
     },
     "accessibility.tabs.profile.picker.bookmarks" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bookmarks"
+          }
+        }
+      }
     },
     "accessibility.tabs.profile.picker.favorites" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Favorites"
+          }
+        }
+      }
     },
     "accessibility.tabs.profile.picker.followed-tags" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tags"
+          }
+        }
+      }
     },
     "accessibility.tabs.profile.picker.lists" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lists"
+          }
+        }
+      }
     },
     "accessibility.tabs.profile.picker.media" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Media"
+          }
+        }
+      }
     },
     "accessibility.tabs.profile.picker.posts-and-replies" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Posts and replies "
+          }
+        }
+      }
     },
     "accessibility.tabs.profile.picker.statuses" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Posts"
+          }
+        }
+      }
     },
     "account.boosted-by" : {
       "localizations" : {
@@ -67,10 +119,24 @@
       }
     },
     "account.detail.familiar-followers" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Also followed by"
+          }
+        }
+      }
     },
     "account.detail.featured-tags-n-posts %lld" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld posts"
+          }
+        }
+      }
     },
     "account.edit.about" : {
       "localizations" : {
@@ -339,7 +405,14 @@
       }
     },
     "account.settings" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Setting"
+          }
+        }
+      }
     },
     "action.cancel" : {
       "localizations" : {

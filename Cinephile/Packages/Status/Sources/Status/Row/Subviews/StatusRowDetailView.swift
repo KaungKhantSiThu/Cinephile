@@ -55,7 +55,7 @@ struct StatusRowDetailView: View {
           viewModel.routerPath.navigate(to: .rebloggedBy(id: viewModel.status.id))
         } label: {
           HStack {
-            Text("status.summary.n-boosts \(statusDataController.reblogsCount)")
+            Text("status.summary.n-boosts \(statusDataController.reblogsCount)", bundle: .module)
               .font(.scaledCallout)
             Spacer()
             makeAccountsScrollView(accounts: viewModel.rebloggers)

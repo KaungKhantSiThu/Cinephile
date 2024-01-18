@@ -40,7 +40,7 @@ extension StatusEditor {
                             .emojiBaselineOffset(Font.scaledFootnoteFont.emojiBaselineOffset)
                             .font(.scaledFootnote)
                             //.foregroundColor(theme.labelColor)
-                            Text("@\(account.acct)", comment: "Account name")
+                            Text("@\(account.acct)", bundle: .module, comment: "Account name")
                                 .font(.scaledCaption)
                                 .foregroundColor(theme.tintColor)
                         }
@@ -55,7 +55,7 @@ extension StatusEditor {
                     viewModel.selectHashtagSuggestion(tag: tag)
                 } label: {
                     VStack(alignment: .leading) {
-                        Text("#\(tag.name)", comment: "Tag name")
+                        Text("#\(tag.name)", bundle: .module ,comment: "Tag name")
                             .font(.scaledFootnote)
                             .foregroundColor(theme.tintColor)
                         Text("tag.suggested.mentions-\(tag.totalUses)", bundle: .module)

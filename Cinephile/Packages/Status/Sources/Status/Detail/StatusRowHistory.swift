@@ -42,7 +42,7 @@ struct StatusRowHistory: View {
             Button {
               openURL(url)
             } label: {
-              Text(name)
+                Text(name)
                 .underline()
             }
             .buttonStyle(.plain)

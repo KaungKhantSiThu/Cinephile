@@ -140,7 +140,7 @@ public struct StatusPollView: View {
     func combinedAccessibilityLabel(for option: Poll.Option, index: Int) -> Text {
         let showPercentage = viewModel.poll.expired || viewModel.poll.voted ?? false
         return Text("accessibility.status.poll.option-prefix-\(index + 1)-of-\(viewModel.poll.options.count)", bundle: .module) +
-        Text(", ") +
+        Text(",") +
         Text(option.title) +
         Text(showPercentage ? ", \(percentForOption(option: option))%" : "")
     }

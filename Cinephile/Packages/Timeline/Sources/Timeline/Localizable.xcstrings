@@ -222,14 +222,21 @@
       }
     },
     "timeline.resume" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Resume"
+          }
+        }
+      }
     },
     "timeline.trending" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Trending"
+            "value" : "o"
           }
         }
       }

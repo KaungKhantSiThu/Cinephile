@@ -110,7 +110,7 @@ struct NotificationRowView: View {
                                  emojis: notification.accounts[0].emojis,
                                  append: {
                         (notification.accounts.count > 1
-                         ? Text("notifications-others-count \(notification.accounts.count - 1)")
+                         ? Text("notifications-others-count \(notification.accounts.count - 1)", bundle: .module)
                             .font(.scaledSubheadline)
                             .fontWeight(.regular)
                          : Text(" ")) +
@@ -183,7 +183,7 @@ struct NotificationRowView: View {
             .environment(\.isCompact, true)
         } else {
             Group {
-                Text("@\(notification.accounts[0].acct)")
+                Text("@\(notification.accounts[0].acct)", bundle: .module)
                     .font(.scaledCallout)
                     .foregroundStyle(.secondary)
                 
