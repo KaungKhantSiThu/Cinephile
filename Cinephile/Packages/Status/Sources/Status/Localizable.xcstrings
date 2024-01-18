@@ -10,6 +10,9 @@
     " ⸱ " : {
 
     },
+    "," : {
+
+    },
     ", " : {
 
     },
@@ -68,7 +71,7 @@
     "⚠︎" : {
 
     },
-    "100%" : {
+    "100" : {
 
     },
     "accessibility.editor.button.custom-emojis" : {
@@ -976,7 +979,14 @@
       }
     },
     "status.editor.tracker-media.navigation-title" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Titles"
+          }
+        }
+      }
     },
     "status.error.loading.message" : {
       "localizations" : {

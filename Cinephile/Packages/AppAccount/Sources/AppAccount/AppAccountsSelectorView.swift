@@ -115,7 +115,7 @@ public struct AppAccountsSelectorView: View {
                 routerPath.presentedSheet = .addAccount
               }
             } label: {
-              Label("app-account.button.add", systemImage: "person.badge.plus")
+              Label("Add", systemImage: "person.badge.plus")
             }
             settingsButton
           }
@@ -125,14 +125,14 @@ public struct AppAccountsSelectorView: View {
       .listStyle(.insetGrouped)
       .scrollContentBackground(.hidden)
       .background(.clear)
-      .navigationTitle("settings.section.accounts")
+      .navigationTitle("Account Setting")
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
           Button {
             isPresented.toggle()
           } label: {
-            Text("action.done").bold()
+              Text("Done").bold()
           }
         }
       }
@@ -148,7 +148,7 @@ public struct AppAccountsSelectorView: View {
         routerPath.presentedSheet = .settings
       }
     } label: {
-      Label("tab.settings", systemImage: "gear")
+      Label("settings", systemImage: "gear")
     }
   }
 
