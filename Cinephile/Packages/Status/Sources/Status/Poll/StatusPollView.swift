@@ -83,7 +83,7 @@ public struct StatusPollView: View {
                         // Make sure they're all the same width using a ZStack with 100% hiding behind the
                         // real percentage.
                         ZStack(alignment: .trailing) {
-                            Text("100")
+                            Text("100%")
                                 .hidden()
                             
                             Text("\(percentForOption(option: option))%", bundle: .module)
