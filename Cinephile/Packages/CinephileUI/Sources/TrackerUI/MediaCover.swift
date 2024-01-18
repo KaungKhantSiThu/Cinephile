@@ -26,7 +26,7 @@ public struct MediaCover: View {
                     .font(.caption)
                     .foregroundStyle(.primary)
                 
-                Text("\(format(date: releaseDate))", bundle: .module)
+                Text(format(date: releaseDate))
                     .font(.caption2)
                     .foregroundStyle(.secondary)
             }

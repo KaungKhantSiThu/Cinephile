@@ -47,7 +47,7 @@ extension StatusEditor {
                                 }
                                 .scrollIndicators(.hidden)
                             } header: {
-                                Text("Trending Movies", bundle: .module)
+                                Text("Trending Movies")
                                     .font(.title).bold()
                             }
                             
@@ -64,7 +64,7 @@ extension StatusEditor {
                                 }
                                 .scrollIndicators(.hidden)
                             } header: {
-                                Text("Trending TV Series", bundle: .module)
+                                Text("Trending TV Series")
                                     .font(.title).bold()
                             }
                             
@@ -80,10 +80,10 @@ extension StatusEditor {
                 .searchable(text: $model.searchText,
                             isPresented: $model.isSearchPresented,
                             placement: .navigationBarDrawer(displayMode: .always),
-                            prompt: Text("Search Movies, Series, Cast", bundle: .module))
+                            prompt: Text("Search Movies, Series, Cast"))
                 .searchScopes($model.searchScope) {
                     ForEach(TrackerExploreViewModel.SearchScope.allCases, id: \.self) { scope in
-                        Text(scope.localizedString, bundle: .module)
+                        Text(scope.localizedString)
                     }
                 }
                 .task(id: model.searchText) {

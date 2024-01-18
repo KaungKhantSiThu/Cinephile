@@ -54,7 +54,7 @@ public struct ListCreateView: View {
             if isSaving {
               ProgressView()
             } else {
-              Text("lists.create.confirm")
+                Text("lists.create.confirm")
             }
           }
         }

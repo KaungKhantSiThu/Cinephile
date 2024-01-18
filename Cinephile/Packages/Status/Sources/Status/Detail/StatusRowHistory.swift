@@ -29,11 +29,11 @@ struct StatusRowHistory: View {
 
     var body: some View {
         HStack {
-            Text("\(formattedDate) · \(formattedTime)", bundle: .module)
+            Text("\(formattedDate) · \(formattedTime)")
 //            Text(date, style: .date)
 //            Text(date, style: .time)
             if let iconName {
-                Text("·", bundle: .module)
+                Text("·")
                 Image(systemName: iconName)
                   .accessibilityHidden(true)
             }
@@ -42,8 +42,7 @@ struct StatusRowHistory: View {
             Button {
               openURL(url)
             } label: {
-                Text("\(name)", bundle: .module
-                )
+                Text(name)
                 .underline()
             }
             .buttonStyle(.plain)

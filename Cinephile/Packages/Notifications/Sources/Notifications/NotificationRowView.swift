@@ -110,7 +110,7 @@ struct NotificationRowView: View {
                                  emojis: notification.accounts[0].emojis,
                                  append: {
                         (notification.accounts.count > 1
-                         ? Text("notifications-others-count \(notification.accounts.count - 1)")
+                         ? Text("notifications-others-count \(notification.accounts.count - 1)", bundle: .module)
                             .font(.scaledSubheadline)
                             .fontWeight(.regular)
                          : Text(" ")) +
@@ -134,7 +134,7 @@ struct NotificationRowView: View {
                     .fixedSize(horizontal: false, vertical: true)
                     if let status = notification.status, notification.type == .mention {
                         Group {
-                            Text(" ⸱ ", bundle: .module)
+                            Text(" ⸱ ")
                             Text(Image(systemName: status.visibility.iconName))
                         }
                         .accessibilityHidden(true)
@@ -145,7 +145,7 @@ struct NotificationRowView: View {
                     Spacer()
                 }
             } else {
-                Text("          ", bundle: .module)
+                Text("          ")
                     .font(.scaledSubheadline)
                     .fontWeight(.semibold)
             }

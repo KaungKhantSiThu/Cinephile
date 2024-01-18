@@ -18,7 +18,7 @@ public struct VideosRowView: View {
     }
     public var body: some View {
         VStack(alignment: .leading) {
-            Text("Videos", bundle: .module)
+            Text("Videos")
                 .font(.title)
                 .fontWeight(.semibold)
                 .padding([.leading, .bottom], 10)

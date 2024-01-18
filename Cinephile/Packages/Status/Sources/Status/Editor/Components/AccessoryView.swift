@@ -181,7 +181,7 @@ extension StatusEditor {
                                 isLanguageSheetDisplayed.toggle()
                             } label: {
                                 if let language = viewModel.selectedLanguage {
-                                    Text("\(language.uppercased())", bundle: .module)
+                                    Text(language.uppercased())
                                 } else {
                                     Image(systemName: "globe")
                                 }
@@ -324,7 +324,7 @@ extension StatusEditor {
                                 }
                                 .scrollIndicators(.hidden)
                             } header: {
-                                Text("Trending Movies", bundle: .module)
+                                Text("Trending Movies")
                                     .font(.title).bold()
                             }
                             
@@ -392,7 +392,7 @@ extension StatusEditor {
                 .searchable(text: $model.searchText,
                             isPresented: $model.isSearchPresented,
                             placement: .navigationBarDrawer(displayMode: .always),
-                            prompt: Text("Search Movies, Series, Cast", bundle: .module))
+                            prompt: Text("Search Movies, Series, Cast"))
                 .task(id: model.searchText) {
                     do {
                         try await Task.sleep(for: .milliseconds(150))

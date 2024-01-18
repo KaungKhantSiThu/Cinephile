@@ -6,7 +6,7 @@ struct CastMemberView: View {
     var castMembers: [CastMember]
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Cast", bundle: .module)
+            Text("Cast")
                 .font(.title)
                 .fontWeight(.semibold)
                 .padding([.leading, .bottom], 10)

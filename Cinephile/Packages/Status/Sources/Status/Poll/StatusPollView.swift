@@ -83,7 +83,7 @@ public struct StatusPollView: View {
                         // Make sure they're all the same width using a ZStack with 100% hiding behind the
                         // real percentage.
                         ZStack(alignment: .trailing) {
-                            Text("100%", bundle: .module)
+                            Text("100")
                                 .hidden()
                             
                             Text("\(percentForOption(option: option))%", bundle: .module)
@@ -140,8 +140,8 @@ public struct StatusPollView: View {
     func combinedAccessibilityLabel(for option: Poll.Option, index: Int) -> Text {
         let showPercentage = viewModel.poll.expired || viewModel.poll.voted ?? false
         return Text("accessibility.status.poll.option-prefix-\(index + 1)-of-\(viewModel.poll.options.count)", bundle: .module) +
-        Text(", ", bundle: .module) +
-        Text("\(option.title)", bundle: .module) +
+        Text(",") +
+        Text(option.title) +
         Text(showPercentage ? ", \(percentForOption(option: option))%" : "")
     }
     
@@ -201,7 +201,7 @@ public struct StatusPollView: View {
                     
                     HStack {
                         buttonImage
-                        Text("\(option.title)", bundle: .module)
+                        Text(option.title)
                         //.foregroundColor(theme.labelColor)
                             .font(.scaledBody)
                             .minimumScaleFactor(0.7)

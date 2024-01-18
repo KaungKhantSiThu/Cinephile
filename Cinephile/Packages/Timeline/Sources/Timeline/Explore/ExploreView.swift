@@ -76,7 +76,7 @@ public struct ExploreView: View {
                       prompt: Text("explore.search.prompt", bundle: .module))
           .searchScopes($viewModel.searchScope) {
             ForEach(ExploreViewModel.SearchScope.allCases, id: \.self) { scope in
-                Text(scope.localizedString, bundle: .module)
+                Text(scope.localizedString)
             }
           }
           .task(id: viewModel.searchQuery) {
@@ -191,7 +191,7 @@ var loadingView: some View {
         }
       }
       NavigationLink(value: RouterDestination.accountsList(accounts: viewModel.suggestedAccounts)) {
-        Text("see-more", bundle: .module)
+        Text("see-more")
           .foregroundColor(theme.tintColor)
       }
 //      .listRowBackground(theme.primaryBackgroundColor)
@@ -210,7 +210,7 @@ var loadingView: some View {
           .padding(.vertical, 4)
       }
       NavigationLink(value: RouterDestination.tagsList(tags: viewModel.trendingTags)) {
-          Text("see-more", bundle: .module)
+          Text("see-more")
           .foregroundColor(theme.tintColor)
       }
 //      .listRowBackground(theme.primaryBackgroundColor)

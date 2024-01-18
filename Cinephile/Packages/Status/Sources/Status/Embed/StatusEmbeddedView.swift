@@ -54,8 +54,8 @@ public struct StatusEmbeddedView: View {
           .emojiBaselineOffset(Font.scaledFootnoteFont.emojiBaselineOffset)
           .fontWeight(.semibold)
         Group {
-          Text("@\(account.acct)", bundle: .module) +
-            Text(" ⸱ ", bundle: .module) +
+          Text(account.acct) +
+            Text(" ⸱ ") +
             Text(status.reblog?.createdAt.relativeFormatted ?? status.createdAt.relativeFormatted)
         }
         .font(.scaledCaption)

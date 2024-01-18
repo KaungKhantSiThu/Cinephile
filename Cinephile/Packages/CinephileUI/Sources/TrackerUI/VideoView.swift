@@ -37,7 +37,7 @@ public struct VideoView: View {
 //            }
                 .clipShape(RoundedRectangle(cornerRadius: 25))
                 .frame(width: 320, height: 180)
-            Text("\(name)", bundle: .module)
+            Text(name)
                 .font(.headline)
                 .lineLimit(2)
                 .frame(width: 300)

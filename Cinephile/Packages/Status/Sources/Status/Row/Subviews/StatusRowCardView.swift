@@ -108,7 +108,7 @@ public struct StatusRowCardView: View {
     }
     HStack {
       VStack(alignment: .leading, spacing: 6) {
-        Text("\(title)", bundle: .module)
+        Text(title)
           .font(.scaledHeadline)
           .lineLimit(3)
 //        if let description = card.description, !description.isEmpty {

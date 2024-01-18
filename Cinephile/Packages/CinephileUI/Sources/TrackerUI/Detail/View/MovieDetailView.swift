@@ -17,7 +17,7 @@ public struct MovieDetailView: View {
             ScrollView {
                 PosterImage(url: viewModel.posterImageURL, height: 240)
                 
-                Text("\(data.movie.title)", bundle: .module)
+                Text(data.movie.title)
                     .font(.title)
                     .fontWeight(.bold)
                 

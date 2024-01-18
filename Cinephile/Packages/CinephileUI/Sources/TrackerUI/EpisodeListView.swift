@@ -70,7 +70,7 @@ public struct EpisodeView: View {
             
             .frame(height: 70)
             VStack(alignment: .leading) {
-                Text("\(name)", bundle: .module)
+                Text(name)
                     .font(.headline)
                     
                 

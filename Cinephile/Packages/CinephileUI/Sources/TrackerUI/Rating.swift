@@ -21,14 +21,14 @@ public struct Rating: View {
         VStack {
             HStack {
                 Text(voteCount, format: .number)
-                Text("RATINGS", bundle: .module)
+                Text("RATINGS")
             }
             .font(.caption)
             .fontWeight(.semibold)
             .foregroundStyle(.secondary)
             
             HStack {
-                Image("tmdb_logo", bundle: .module)
+                Image("tmdb_logo")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 50)

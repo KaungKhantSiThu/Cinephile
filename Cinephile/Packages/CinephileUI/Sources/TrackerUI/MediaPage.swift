@@ -16,7 +16,7 @@ public struct MediaPage: View {
         PosterImage(url: posterImage, height: 390)
             .overlay(alignment: .bottom) {
                 HStack {
-                    Text("\(title)", bundle: .module)
+                    Text(title)
                     
                     Spacer()
                     

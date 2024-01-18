@@ -14,7 +14,7 @@ public struct MediaTrackerView: View {
     
     public var body: some View {
         VStack {
-            Text("View for Watchlist", bundle: .module)
+            Text("View for Watchlist")
         }
         .navigationTitle("Tracker")
         .navigationBarTitleDisplayMode(.inline)
