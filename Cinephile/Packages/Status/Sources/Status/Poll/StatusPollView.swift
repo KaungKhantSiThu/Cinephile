@@ -89,14 +89,15 @@ public struct StatusPollView: View {
                             Text("\(percentForOption(option: option))%", bundle: .module)
                                 .font(.scaledSubheadline)
                         }
+                        .frame(height: .pollBarHeight)
                     }
                 }
-                .accessibilityElement(children: .combine)
-                .accessibilityLabel(combinedAccessibilityLabel(for: option, index: index))
-                .accessibilityRespondsToUserInteraction(isInteractive)
-                .accessibilityAddTraits(isSelected(option: option) ? .isSelected : [])
-                .accessibilityAddTraits(isInteractive ? [] : .isStaticText)
-                .accessibilityRemoveTraits(isInteractive ? [] : .isButton)
+//                .accessibilityElement(children: .combine)
+//                .accessibilityLabel(combinedAccessibilityLabel(for: option, index: index))
+//                .accessibilityRespondsToUserInteraction(isInteractive)
+//                .accessibilityAddTraits(isSelected(option: option) ? .isSelected : [])
+//                .accessibilityAddTraits(isInteractive ? [] : .isStaticText)
+//                .accessibilityRemoveTraits(isInteractive ? [] : .isButton)
             }
             if !viewModel.poll.expired, !(viewModel.poll.voted ?? false) {
                 HStack {

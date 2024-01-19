@@ -154,7 +154,7 @@ import SwiftUI
 
   func markSeen() {
     // called in on appear so we can cache that the status has been seen.
-    if UserPreferences.shared.suppressDupeReblogs, !seen {
+    if UserPreferences.shared.suppressDuplicateReblogs, !seen {
       DispatchQueue.global().async { [weak self] in
         guard let self else { return }
         ReblogCache.shared.cache(status, seen: true)

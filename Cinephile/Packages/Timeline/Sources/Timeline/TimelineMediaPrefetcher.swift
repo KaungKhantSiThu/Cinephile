@@ -14,13 +14,13 @@ private let logger = Logger(subsystem: "Timeline", category: "Prefetcher")
     
     func collectionView(_: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         let imageURLs = getImageURLs(for: indexPaths)
-        logger.log("starting Timeline Prefetching")
+        logger.log("starting Image Prefetching for Timeline")
         prefetcher.startPrefetching(with: imageURLs)
     }
     
     func collectionView(_: UICollectionView, cancelPrefetchingForItemsAt indexPaths: [IndexPath]) {
         let imageURLs = getImageURLs(for: indexPaths)
-        logger.log("stopping Timeline Prefetching")
+        logger.log("stopping Image Prefetching for Timeline")
         prefetcher.stopPrefetching(with: imageURLs)
     }
     

@@ -56,7 +56,7 @@ public struct StatusRowCardView: View {
         }
         .frame(maxWidth: maxWidth)
         .fixedSize(horizontal: false, vertical: true)
-        .background(theme.secondaryBackgroundColor.opacity(0.3))
+//        .background(theme.secondaryBackgroundColor.opacity(0.3))
 //        .cornerRadius(16)
         .overlay(
           RoundedRectangle(cornerRadius: 16)
@@ -119,7 +119,7 @@ public struct StatusRowCardView: View {
 //        }
         Text(url.host() ?? url.absoluteString)
           .font(.scaledFootnote)
-          .foregroundColor(theme.tintColor)
+//          .foregroundColor(theme.tintColor)
           .lineLimit(1)
       }
       Spacer()
@@ -170,5 +170,6 @@ public struct StatusRowCardView: View {
 
 #Preview(traits: .sizeThatFitsLayout) {
     StatusRowCardView(card: .preview)
+        .padding()
         .environment(Theme.shared)
 }

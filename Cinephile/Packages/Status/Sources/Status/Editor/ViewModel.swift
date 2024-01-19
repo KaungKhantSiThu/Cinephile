@@ -78,7 +78,7 @@ extension StatusEditor {
         
         var backupStatusText: NSAttributedString?
         
-//        var showTrackerMedia: Bool = false
+        //        var showTrackerMedia: Bool = false
         var trackerMedia: TrackerMedia?
         
         
@@ -317,9 +317,9 @@ extension StatusEditor {
         private func processText() {
             guard markedTextRange == nil else { return }
             statusText.addAttributes([
-                                      .font: Font.scaledBodyUIFont,
-                                      .backgroundColor: UIColor.clear,
-                                      .underlineColor: UIColor.clear],
+                .font: Font.scaledBodyUIFont,
+                .backgroundColor: UIColor.clear,
+                .underlineColor: UIColor.clear],
                                      range: NSMakeRange(0, statusText.string.utf16.count))
             let hashtagPattern = "(#+[\\w0-9(_)]{1,})"
             let mentionPattern = "(@+[a-zA-Z0-9(_).-]{1,})"
@@ -396,11 +396,11 @@ extension StatusEditor {
             let url = URL.temporaryDirectory.appending(path: "\(UUID().uuidString).gif")
             try? data.write(to: url)
             let container = MediaContainer(id: UUID().uuidString,
-                                                       image: nil,
-                                                       movieTransferable: nil,
-                                                       gifTransferable: .init(url: url),
-                                                       mediaAttachment: nil,
-                                                       error: nil)
+                                           image: nil,
+                                           movieTransferable: nil,
+                                           gifTransferable: .init(url: url),
+                                           mediaAttachment: nil,
+                                           error: nil)
             prepareToPost(for: container)
         }
         
@@ -552,9 +552,17 @@ extension StatusEditor {
         }
         
         private func resetAutoCompletion() {
-            tagsSuggestions = []
-            mentionsSuggestions = []
-            currentSuggestionRange = nil
+            
+            if !tagsSuggestions.isEmpty ||
+                !mentionsSuggestions.isEmpty ||
+                currentSuggestionRange != nil {
+                withAnimation {
+                    tagsSuggestions = []
+                    mentionsSuggestions = []
+                    currentSuggestionRange = nil
+                }
+            }
+            
         }
         
         func selectMentionSuggestion(account: Account) {
