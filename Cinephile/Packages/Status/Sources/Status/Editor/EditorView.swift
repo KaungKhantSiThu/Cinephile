@@ -11,7 +11,6 @@ extension StatusEditor {
     struct EditorView: View {
         @Bindable var viewModel: StatusEditor.ViewModel
         @Binding var editingMediaContainer: MediaContainer?
-        
         @FocusState<UUID?>.Binding var isSpoilerTextFocused: UUID?
         
         @Environment(Theme.self) private var theme
@@ -50,7 +49,8 @@ extension StatusEditor {
         @ViewBuilder
         private var spoilerTextView: some View {
             if viewModel.spoilerOn {
-                TextField("status.editor.spoiler", text: $viewModel.spoilerText)
+                
+                TextField(String(localized: "status.editor.spoiler", bundle: .module), text: $viewModel.spoilerText)
                     .focused($isSpoilerTextFocused, equals: viewModel.id)
                     .padding(.horizontal, .layoutPadding)
                     .padding(.vertical)

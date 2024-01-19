@@ -114,7 +114,7 @@ struct NotificationRowView: View {
                             .font(.scaledSubheadline)
                             .fontWeight(.regular)
                          : Text(" ")) +
-                        Text(type.label(count: notification.accounts.count))
+                        Text(type.label(count: notification.accounts.count), bundle: .module)
                             .font(.scaledSubheadline)
                             .fontWeight(.regular) +
                         Text(" ⸱ ")
