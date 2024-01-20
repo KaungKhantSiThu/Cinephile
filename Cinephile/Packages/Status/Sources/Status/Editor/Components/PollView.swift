@@ -68,7 +68,7 @@ extension StatusEditor {
           HStack {
             Picker("status.poll.frequency", selection: $viewModel.pollVotingFrequency) {
               ForEach(PollVotingFrequency.allCases, id: \.rawValue) {
-                Text($0.displayString)
+                  Text($0.displayString, bundle: .module)
                   .tag($0)
               }
             }

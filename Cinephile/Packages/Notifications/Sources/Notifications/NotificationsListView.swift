@@ -41,7 +41,8 @@ public struct NotificationsListView: View {
         }
         .toolbar {
             ToolbarItem(placement: .principal) {
-                let title = lockedType?.menuTitle() ?? viewModel.selectedType?.menuTitle() ?? "notifications.navigation-title"
+//                let title = lockedType?.menuTitle() ?? viewModel.selectedType?.menuTitle() ?? LocalizedStringKey("notifications.navigation-title")
+                let title = "All Notifications"
                 if lockedType == nil {
                     Text(title)
                         .font(.headline)
@@ -82,7 +83,7 @@ public struct NotificationsListView: View {
                             }
                         } label: {
                             Label {
-                                Text(type.menuTitle())
+                                Text(type.menuTitle(), bundle: .module)
                             } icon: {
                                 type.icon(isPrivate: false)
                             }

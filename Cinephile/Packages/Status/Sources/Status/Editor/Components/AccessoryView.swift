@@ -43,20 +43,32 @@ extension StatusEditor {
                                 Button {
                                     isPhotosPickerPresented = true
                                 } label: {
-                                    Label("status.editor.photo-library", systemImage: "photo")
+                                    Label {
+                                        Text("status.editor.photo-library", bundle: .module)
+                                    } icon: {
+                                        Image(systemName: "photo")
+                                    }
                                 }
                                 
 #if !targetEnvironment(macCatalyst)
                                 Button {
                                     isCameraPickerPresented = true
                                 } label: {
-                                    Label("status.editor.camera-picker", systemImage: "camera")
+                                    Label {
+                                        Text("status.editor.camera-picker", bundle: .module)
+                                    } icon: {
+                                        Image(systemName: "camera")
+                                    }
                                 }
 #endif
                                 Button {
                                     isFileImporterPresented = true
                                 } label: {
-                                    Label("status.editor.browse-file", systemImage: "folder")
+                                    Label {
+                                        Text("status.editor.browse-file", bundle: .module)
+                                    } icon: {
+                                        Image(systemName: "folder")
+                                    }
                                 }
                                 
                                 //              Button {

@@ -5,7 +5,14 @@
 
     },
     "accessibility.tabs.timeline.add-account" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add Account"
+          }
+        }
+      }
     },
     "account.action.edit-filters" : {
       "localizations" : {
@@ -114,7 +121,14 @@
       }
     },
     "report.comment.placeholder" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Additional Info"
+          }
+        }
+      }
     },
     "report.title" : {
       "localizations" : {
@@ -183,7 +197,14 @@
       }
     },
     "settings.general.browser.in-app.readerview" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In-App Browser Reader View"
+          }
+        }
+      }
     },
     "settings.general.browser.system" : {
       "localizations" : {
@@ -202,61 +223,194 @@
       }
     },
     "settings.other.fast-refresh" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fast refresh"
+          }
+        }
+      }
     },
     "settings.other.social-keyboard" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enable Social Keyboard"
+          }
+        }
+      }
     },
     "settings.push.boosts" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Boosts"
+          }
+        }
+      }
     },
     "settings.push.duplicate.button.fix" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🪄 Fix It"
+          }
+        }
+      }
     },
     "settings.push.duplicate.footer" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Receiving duplicate notifications? Try this magic button in order to fix it"
+          }
+        }
+      }
     },
     "settings.push.duplicate.title" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Duplicate Notifications Fixer"
+          }
+        }
+      }
     },
     "settings.push.favorites" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Favorites"
+          }
+        }
+      }
     },
     "settings.push.follows" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Follows"
+          }
+        }
+      }
     },
     "settings.push.main-toggle" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Push Notifications"
+          }
+        }
+      }
     },
     "settings.push.main-toggle.description" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Receive push notifications on new activities"
+          }
+        }
+      }
     },
     "settings.push.mentions" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mentions"
+          }
+        }
+      }
     },
     "settings.push.navigation-title" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Push Notifications"
+          }
+        }
+      }
     },
     "settings.push.new-posts" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New Posts"
+          }
+        }
+      }
     },
     "settings.push.polls" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Poll Results"
+          }
+        }
+      }
     },
     "settings.section.cache" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cache"
+          }
+        }
+      }
     },
     "settings.section.other" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Other"
+          }
+        }
+      }
     },
     "settings.section.other.footer" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fast refresh disables timeline position saving and caching. It'll always fetch a fresh timeline."
+          }
+        }
+      }
     },
     "SignIn" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SignIn"
+          }
+        }
+      }
     },
     "Sing Up" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign Up"
+          }
+        }
+      }
     },
     "timeline.federated" : {
       "extractionState" : "manual",
@@ -340,6 +494,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Local"
+          }
+        }
+      }
+    },
+    "timeline.resume" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Resume"
           }
         }
       }
