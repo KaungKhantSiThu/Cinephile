@@ -21,6 +21,7 @@ let package = Package(
       .package(name: "Networking", path: "../Networking"),
       .package(name: "Environment", path: "../Environment"),
       .package(name: "CinephileUI", path: "../CinephileUI"),
+      .package(name: "MediaClient", path: "../MediaClient"),
       .package(url: "https://github.com/nicklockwood/LRUCache.git", from: "1.0.4"),
     ],
     targets: [
@@ -36,6 +37,8 @@ let package = Package(
               .product(name: "LRUCache", package: "lrucache"),
               .product(name: "CinephileUI", package: "CinephileUI"),
               .product(name: "TrackerUI", package: "CinephileUI"),
+              .product(name: "MediaClient", package: "MediaClient"),
+
             ]
         ),
         .testTarget(

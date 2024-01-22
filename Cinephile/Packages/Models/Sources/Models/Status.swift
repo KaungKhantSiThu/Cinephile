@@ -28,11 +28,15 @@ public protocol AnyStatus {
     var sensitive: Bool { get }
     var language: String? { get }
     var isHidden: Bool { get }
+    var isEntertainment: Bool { get }
+    var entertainments: [Entertainment] { get }
 }
 
 
 
 public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable {
+    
+    
     public static func == (lhs: Status, rhs: Status) -> Bool {
         lhs.id == rhs.id && lhs.editedAt?.asDate == rhs.editedAt?.asDate
     }
@@ -68,12 +72,14 @@ public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable
     public let filtered: [Filtered]?
     public let sensitive: Bool
     public let language: String?
+    public let isEntertainment: Bool
+    public let entertainments: [Entertainment]
     
     public var isHidden: Bool {
         filtered?.first?.filter.filterAction == .hide
     }
     
-    public init(id: String, content: HTMLString, account: Account, createdAt: ServerDate, editedAt: ServerDate?, reblog: ReblogStatus?, mediaAttachments: [MediaAttachment], mentions: [Mention], repliesCount: Int, reblogsCount: Int, favouritesCount: Int, card: Card?, favourited: Bool?, reblogged: Bool?, pinned: Bool?, bookmarked: Bool?, emojis: [Emoji], url: String?, application: Application?, inReplyToId: String?, inReplyToAccountId: String?, visibility: Visibility, poll: Poll?, spoilerText: HTMLString, filtered: [Filtered]?, sensitive: Bool, language: String?) {
+    public init(id: String, content: HTMLString, account: Account, createdAt: ServerDate, editedAt: ServerDate?, reblog: ReblogStatus?, mediaAttachments: [MediaAttachment], mentions: [Mention], repliesCount: Int, reblogsCount: Int, favouritesCount: Int, card: Card?, favourited: Bool?, reblogged: Bool?, pinned: Bool?, bookmarked: Bool?, emojis: [Emoji], url: String?, application: Application?, inReplyToId: String?, inReplyToAccountId: String?, visibility: Visibility, poll: Poll?, spoilerText: HTMLString, filtered: [Filtered]?, sensitive: Bool, language: String?, isEntertainment: Bool, entertainments: [Entertainment]) {
         self.id = id
         self.content = content
         self.account = account
@@ -101,6 +107,8 @@ public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable
         self.filtered = filtered
         self.sensitive = sensitive
         self.language = language
+        self.isEntertainment = isEntertainment
+        self.entertainments = entertainments
     }
     
     public static func placeholder(forSettings: Bool = false, language: String? = nil) -> Status {
@@ -132,7 +140,13 @@ public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable
               spoilerText: .init(stringValue: ""),
               filtered: [],
               sensitive: false,
-              language: language)
+              language: language,
+              isEntertainment: true,
+              entertainments: [
+                .init(id: 1, domain: "themoviedb.org", mediaType: .movie, mediaId: "507086"),
+                .init(id: 2, domain: "themoviedb.org", mediaType: .tvSeries, mediaId: "90802")
+              ]
+        )
     }
     
     
@@ -169,7 +183,11 @@ public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable
                          spoilerText: reblog.spoilerText,
                          filtered: reblog.filtered,
                          sensitive: reblog.sensitive,
-                         language: reblog.language)
+                         language: reblog.language,
+                         isEntertainment: true,
+                         entertainments: [
+                           .init(id: 1, domain: "themoviedb.org", mediaType: .movie, mediaId: "507086")
+                         ])
         }
         return nil
     }
@@ -210,12 +228,14 @@ public final class ReblogStatus: AnyStatus, Codable, Identifiable, Equatable, Ha
     public let filtered: [Filtered]?
     public let sensitive: Bool
     public let language: String?
+    public let isEntertainment: Bool
+    public let entertainments: [Entertainment]
     
     public var isHidden: Bool {
         filtered?.first?.filter.filterAction == .hide
     }
     
-    public init(id: String, content: HTMLString, account: Account, createdAt: ServerDate, editedAt: ServerDate?, mediaAttachments: [MediaAttachment], mentions: [Mention], repliesCount: Int, reblogsCount: Int, favouritesCount: Int, card: Card?, favourited: Bool?, reblogged: Bool?, pinned: Bool?, bookmarked: Bool?, emojis: [Emoji], url: String?, application: Application? = nil, inReplyToId: String?, inReplyToAccountId: String?, visibility: Visibility, poll: Poll?, spoilerText: HTMLString, filtered: [Filtered]?, sensitive: Bool, language: String?) {
+    public init(id: String, content: HTMLString, account: Account, createdAt: ServerDate, editedAt: ServerDate?, mediaAttachments: [MediaAttachment], mentions: [Mention], repliesCount: Int, reblogsCount: Int, favouritesCount: Int, card: Card?, favourited: Bool?, reblogged: Bool?, pinned: Bool?, bookmarked: Bool?, emojis: [Emoji], url: String?, application: Application? = nil, inReplyToId: String?, inReplyToAccountId: String?, visibility: Visibility, poll: Poll?, spoilerText: HTMLString, filtered: [Filtered]?, sensitive: Bool, language: String?, isEntertainment: Bool, entertainments: [Entertainment]) {
         self.id = id
         self.content = content
         self.account = account
@@ -242,6 +262,8 @@ public final class ReblogStatus: AnyStatus, Codable, Identifiable, Equatable, Ha
         self.filtered = filtered
         self.sensitive = sensitive
         self.language = language
+        self.isEntertainment = isEntertainment
+        self.entertainments = entertainments
     }
 }
 

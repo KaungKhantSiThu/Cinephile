@@ -6,6 +6,9 @@ import NaturalLanguage
 import Networking
 import PhotosUI
 import SwiftUI
+import OSLog
+
+private let logger = Logger(subsystem: "Status", category: "ViewModel")
 
 extension StatusEditor {
     @MainActor
@@ -118,6 +121,10 @@ extension StatusEditor {
         var replyToStatus: Status?
         var embeddedStatus: Status?
         
+        var entertainment: Entertainment?
+        
+        var entertainmentId: Int?
+        
         var customEmojiContainer: [CategorizedEmojiContainer] = []
         
         var postingError: String?
@@ -195,6 +202,32 @@ extension StatusEditor {
                                      multiple: pollVotingFrequency.canVoteMultipleTimes,
                                      expires_in: pollDuration.rawValue)
                 }
+                
+                if let trackerMedia = self.trackerMedia {
+                    
+                    logger.info("Tracker Media attached")
+                    
+                    let data: EntertainmentData = .init(
+                        domain: "themoviedb.org",
+                        mediaType: trackerMedia.mediaType,
+                        mediaId: String(trackerMedia.id))
+                    
+                    logger.log("Checking if Tracker Media: \(trackerMedia.id) is already in the database")
+                    let entertainments: [Entertainment] = try await client.post(endpoint: Entertainments.search(json: EntertainmentSearchData(mediaType: trackerMedia.mediaType, mediaId: String(trackerMedia.id))))
+                    
+                    if !entertainments.isEmpty, let result = entertainments.first {
+                        logger.log("Tracker Media is already in the database")
+                        self.entertainmentId = result.id
+                    } else {
+                        logger.log("Creating Tracker Media in the database")
+                        entertainment = try await client.post(endpoint: Entertainments.post(json: data))
+                        logger.log("Successfully created Tracker Media in the database")
+                        self.entertainmentId = entertainment?.id
+
+                    }
+                    
+                }
+                
                 let data = StatusData(status: statusText.string,
                                       visibility: visibility,
                                       inReplyToId: mode.replyToStatus?.id,
@@ -206,8 +239,19 @@ extension StatusEditor {
                 switch mode {
                 case .new, .replyTo, .quote, .mention, .shareExtension:
                     postStatus = try await client.post(endpoint: Statuses.postStatus(json: data))
+                    
+                    if let entertainmentId = self.entertainmentId, let statusId = Int(postStatus!.id) {
+                        let data: StatusEntertainmentData = .init(statusId: statusId, entertainmentId: entertainmentId)
+                        let _ = try await client.post(endpoint: StatusEntertainment.post(json: data))
+                    }
+                    
                 case let .edit(status):
                     postStatus = try await client.put(endpoint: Statuses.editStatus(id: status.id, json: data))
+                    
+                    if let entertainmentId = self.entertainmentId, let statusId = Int(postStatus!.id) {
+                        let data: StatusEntertainmentData = .init(statusId: statusId, entertainmentId: entertainmentId)
+                        let _ = try await client.post(endpoint: StatusEntertainment.post(json: data))
+                    }
                 }
                 //      HapticManager.shared.fireHaptic(.notification(.success))
                 if hasExplicitlySelectedLanguage, let selectedLanguage {
@@ -215,6 +259,7 @@ extension StatusEditor {
                 }
                 isPosting = false
                 return postStatus
+                
             } catch {
                 if let error = error as? Models.ServerError {
                     postingError = error.error

@@ -329,6 +329,7 @@ extension StatusEditor {
                                                     releasedDate: movie.releaseDate,
                                                     voteAverage: movie.voteAverage,
                                                     mediaType: .movie)
+                                                
                                                 isTrackerMediaPickerSheetDisplay = false
                                             }
                                         }

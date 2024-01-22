@@ -25,7 +25,7 @@ struct DraftsListView: View {
               Text(draft.content)
                 .font(.body)
                 .lineLimit(3)
-                .foregroundStyle(theme.labelColor)
+//                .foregroundStyle(theme.labelColor)
               Text(draft.creationDate, style: .relative)
                 .font(.footnote)
                 .foregroundStyle(.gray)

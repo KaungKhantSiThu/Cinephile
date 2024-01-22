@@ -65,6 +65,7 @@ public struct StatusRowView: View {
                 } else {
                     if !isCompact && context != .detail {
                         Group {
+                            StatusRowTagView(viewModel: viewModel)
                             StatusRowReblogView(viewModel: viewModel)
                             StatusRowReplyView(viewModel: viewModel)
                         }
@@ -82,56 +83,41 @@ public struct StatusRowView: View {
                             }
                         }
                         
-                        VStack(alignment: .leading) {
-                            if !isCompact, theme.avatarPosition == .top {
-                                StatusRowReblogView(viewModel: viewModel)
-                                StatusRowReplyView(viewModel: viewModel)
-                                if isHomeTimeline {
-                                    StatusRowTagView(viewModel: viewModel)
-                                }
+                        VStack(alignment: .leading, spacing: .statusComponentSpacing) {
+                            if !isCompact {
+                                StatusRowHeaderView(viewModel: viewModel)
                             }
-                            VStack(alignment: .leading, spacing: 8) {
-                                if !isCompact {
-                                    StatusRowHeaderView(viewModel: viewModel)
+                            
+                            StatusRowContentView(viewModel: viewModel)
+                                .contentShape(Rectangle())
+                                .onTapGesture {
+                                    guard !isFocused else { return }
+                                    viewModel.navigateToDetail()
                                 }
-                                
-                                StatusRowContentView(viewModel: viewModel)
+
+                            if !reasons.contains(.placeholder), viewModel.showActions, isFocused || theme.statusActionsDisplay != .none, !isInCaptureMode {
+                                StatusRowActionsView(viewModel: viewModel)
+                                    .padding(.top, 8)
+                                    .tint(isFocused ? theme.tintColor : .gray)
                                     .contentShape(Rectangle())
                                     .onTapGesture {
                                         guard !isFocused else { return }
                                         viewModel.navigateToDetail()
                                     }
-                                //                  .accessibilityActions {
-                                //                    if isFocused, viewModel.showActions {
-                                //                      accessibilityActions
-                                //                    }
-                                //                  }
                             }
                             
-                            VStack(alignment: .leading, spacing: 12) {
-                                if viewModel.showActions, isFocused || theme.statusActionsDisplay != .none, !isInCaptureMode {
-                                    StatusRowActionsView(viewModel: viewModel)
-                                        .padding(.top, 8)
-                                        .tint(isFocused ? theme.tintColor : .gray)
-                                        .contentShape(Rectangle())
-                                        .onTapGesture {
-                                            guard !isFocused else { return }
-                                            viewModel.navigateToDetail()
-                                        }
-                                }
-                                
-                                if isFocused, !isCompact {
-                                    StatusRowDetailView(viewModel: viewModel)
-                                }
+                            if isFocused, !isCompact {
+                                StatusRowDetailView(viewModel: viewModel)
                             }
                         }
                     }
                 }
             }
+            .padding(EdgeInsets(top: isCompact ? 6 : 12, leading: 0, bottom: isFocused ? 12 : 6, trailing: 0))
         }
         .onAppear {
             viewModel.markSeen()
-            if reasons.isEmpty {
+            if !reasons.contains(.placeholder) {
                 if !isCompact, viewModel.embeddedStatus == nil {
                     Task {
                         await viewModel.loadEmbeddedStatus()

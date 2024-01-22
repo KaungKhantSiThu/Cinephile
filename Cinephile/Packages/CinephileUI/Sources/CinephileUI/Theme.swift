@@ -20,7 +20,7 @@ import SwiftUI
 
     @AppStorage("is_previously_set") public var isThemePreviouslySet: Bool = false
     @AppStorage(ThemeKey.selectedScheme.rawValue) public var selectedScheme: ColorScheme = .dark
-    @AppStorage(ThemeKey.tint.rawValue) public var tintColor: Color = .black
+    @AppStorage(ThemeKey.tint.rawValue) public var tintColor: Color = .red
     @AppStorage(ThemeKey.primaryBackground.rawValue) public var primaryBackgroundColor: Color = .white
     @AppStorage(ThemeKey.secondaryBackground.rawValue) public var secondaryBackgroundColor: Color = .gray
     @AppStorage(ThemeKey.label.rawValue) public var labelColor: Color = .black
