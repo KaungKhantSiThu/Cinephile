@@ -108,7 +108,7 @@ struct AccountPopoverView: View {
               .offset(x: 12)
           }
         }
-      Text(title)
+        Text(title, bundle: .module)
         .font(.scaledFootnote)
         .foregroundStyle(.secondary)
         .alignmentGuide(.bottomAvatar, computeValue: { dimension in

@@ -66,31 +66,64 @@ struct AccountDetailHeaderView: View {
     }
     
     private var accountInfoView: some View {
-        HStack(spacing: 20) {
-            VStack {
-                Text("\(account.statusesCount ?? 999)")
-                    .font(.title2)
-                    .fontWeight(.bold)
-                Text("Posts")
-                    .font(.caption)
+        HStack {
+          Button {
+            withAnimation {
+              scrollViewProxy?.scrollTo("status", anchor: .top)
             }
+          } label: {
+            makeCustomInfoLabel(title: "account.posts", count: account.statusesCount ?? 0)
+          }
+          .accessibilityHint("accessibility.tabs.profile.post-count.hint")
+          .buttonStyle(.borderless)
+          .padding()
 
-            VStack {
-                Text("\(account.followingCount ?? 999)")
-                    .font(.title2)
-                    .fontWeight(.bold)
-                Text("Following")
-                    .font(.caption)
-            }
+          Button {
+            routerPath.navigate(to: .following(id: account.id))
+          } label: {
+            makeCustomInfoLabel(title: "account.following", count: account.followingCount ?? 0)
+          }
+          .accessibilityHint("accessibility.tabs.profile.following-count.hint")
+          .buttonStyle(.borderless)
+          .padding()
 
-            VStack {
-                Text("\(account.followersCount ?? 999)")
-                    .font(.title2)
-                    .fontWeight(.bold)
-                Text("Followers")
-                    .font(.caption)
+
+          Button {
+            routerPath.navigate(to: .followers(id: account.id))
+          } label: {
+            makeCustomInfoLabel(
+              title: "account.followers",
+              count: account.followersCount ?? 0,
+              needsBadge: currentAccount.account?.id == account.id && !currentAccount.followRequests.isEmpty
+            )
+          }
+          .accessibilityHint("accessibility.tabs.profile.follower-count.hint")
+          .buttonStyle(.borderless)
+          .padding()
+
+        }.offset(y: 20)
+    }
+    
+    private func makeCustomInfoLabel(title: LocalizedStringKey, count: Int, needsBadge: Bool = false) -> some View {
+      VStack {
+        Text(count, format: .number.notation(.compactName))
+          .font(.scaledHeadline)
+          .foregroundColor(.primary)
+          .overlay(alignment: .trailing) {
+            if needsBadge {
+              Circle()
+                .fill(Color.red)
+                .frame(width: 9, height: 9)
+                .offset(x: 12)
             }
-        }
+          }
+          Text(title, bundle: .module)
+          .font(.scaledFootnote)
+          .foregroundStyle(.secondary)
+      }
+      .accessibilityElement(children: .ignore)
+      .accessibilityLabel(title)
+      .accessibilityValue("\(count)")
     }
 }
 

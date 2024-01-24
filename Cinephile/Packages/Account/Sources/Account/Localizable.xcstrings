@@ -38,6 +38,12 @@
         }
       }
     },
+    "accessibility.tabs.profile.follower-count.hint" : {
+
+    },
+    "accessibility.tabs.profile.following-count.hint" : {
+
+    },
     "accessibility.tabs.profile.picker.bookmarks" : {
       "localizations" : {
         "en" : {
@@ -107,6 +113,9 @@
           }
         }
       }
+    },
+    "accessibility.tabs.profile.post-count.hint" : {
+
     },
     "account.boosted-by" : {
       "localizations" : {
@@ -404,6 +413,16 @@
         }
       }
     },
+    "account.posts" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Posts"
+          }
+        }
+      }
+    },
     "account.settings" : {
       "localizations" : {
         "en" : {
@@ -443,15 +462,6 @@
           }
         }
       }
-    },
-    "Followers" : {
-
-    },
-    "Following" : {
-
-    },
-    "Posts" : {
-
     },
     "status.visibility.direct" : {
       "extractionState" : "manual",
