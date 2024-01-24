@@ -13,8 +13,6 @@ import AppAccount
 import CinephileUI
 
 class AppDelegate: NSObject, UIApplicationDelegate {
-    weak var router: RouterPath?
-    
     
     func application(_: UIApplication,
                      didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool
@@ -48,13 +46,12 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         }
         return configuration
     }
-    return configuration
-  }
-    
 }
 
+
+
 //extension AppDelegate: UNUserNotificationCenterDelegate {
-//    
+//
 //    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
 ////        routerPath.navigate(to: MovieDetailView(id: response.))
 //    }

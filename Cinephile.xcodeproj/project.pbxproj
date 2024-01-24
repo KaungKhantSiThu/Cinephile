@@ -22,7 +22,6 @@
 		7002F7162B1F5C99006DD407 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7002F7152B1F5C99006DD407 /* AppRouter.swift */; };
 		7002F72C2B2070F6006DD407 /* TrackerTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7002F72B2B2070F6006DD407 /* TrackerTab.swift */; };
 		700C9E282B32CDB30009038D /* CinephileApp+AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700C9E272B32CDB30009038D /* CinephileApp+AppDelegate.swift */; };
-		7013700D2B5D5F2B0054B2CA /* MediaClient in Frameworks */ = {isa = PBXBuildFile; productRef = 7013700C2B5D5F2B0054B2CA /* MediaClient */; };
 		701858AC2B511E1B000A9EC6 /* TMDb in Frameworks */ = {isa = PBXBuildFile; productRef = 701858AB2B511E1B000A9EC6 /* TMDb */; };
 		701F56EE2B2EBBE10043B71B /* AccountSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701F56ED2B2EBBE10043B71B /* AccountSettingView.swift */; };
 		701F56FB2B2EF0570043B71B /* Account in Frameworks */ = {isa = PBXBuildFile; productRef = 701F56FA2B2EF0570043B71B /* Account */; };
@@ -31,6 +30,8 @@
 		701F57012B2EF0610043B71B /* Environment in Frameworks */ = {isa = PBXBuildFile; productRef = 701F57002B2EF0610043B71B /* Environment */; };
 		701F57032B2EF0640043B71B /* Models in Frameworks */ = {isa = PBXBuildFile; productRef = 701F57022B2EF0640043B71B /* Models */; };
 		701F57052B2EF0670043B71B /* Networking in Frameworks */ = {isa = PBXBuildFile; productRef = 701F57042B2EF0670043B71B /* Networking */; };
+		702BF58E2B610B380021C34D /* MediaClient in Frameworks */ = {isa = PBXBuildFile; productRef = 702BF58D2B610B380021C34D /* MediaClient */; };
+		702BF5902B610B430021C34D /* MediaClient in Frameworks */ = {isa = PBXBuildFile; productRef = 702BF58F2B610B430021C34D /* MediaClient */; };
 		7035F6692AF75A3700F42910 /* GentyDemo-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7035F6682AF75A3700F42910 /* GentyDemo-Regular.otf */; };
 		7051983C2AEFF7D400452564 /* PreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7051983B2AEFF7D400452564 /* PreviewData.swift */; };
 		70525BAE2AF7635F006E7CD6 /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70525BAD2AF7635F006E7CD6 /* NotificationsView.swift */; };
@@ -179,7 +180,7 @@
 				70BCF7582B2C9A9F00D7AB7E /* Nuke in Frameworks */,
 				709704A02B31FA290037F272 /* Lists in Frameworks */,
 				70E2E1C92B314A7400EC1180 /* Status in Frameworks */,
-				7013700D2B5D5F2B0054B2CA /* MediaClient in Frameworks */,
+				702BF5902B610B430021C34D /* MediaClient in Frameworks */,
 				706768EC2B4BC2F4008ACBF8 /* AVKit.framework in Frameworks */,
 				70967F452B53CB5E00EB4CD2 /* Notifications in Frameworks */,
 				701F56FF2B2EF05E0043B71B /* CinephileUI in Frameworks */,
@@ -206,6 +207,7 @@
 				70967F382B53C1F300EB4CD2 /* Status in Frameworks */,
 				70967F2E2B53C1F300EB4CD2 /* CinephileUI in Frameworks */,
 				70967F2A2B53C1F300EB4CD2 /* Account in Frameworks */,
+				702BF58E2B610B380021C34D /* MediaClient in Frameworks */,
 				70967F322B53C1F300EB4CD2 /* Environment in Frameworks */,
 				70967F362B53C1F300EB4CD2 /* Notifications in Frameworks */,
 				70967F302B53C1F300EB4CD2 /* TrackerUI in Frameworks */,
@@ -461,7 +463,7 @@
 				701858AB2B511E1B000A9EC6 /* TMDb */,
 				70967F442B53CB5E00EB4CD2 /* Notifications */,
 				70967F472B53CC0200EB4CD2 /* Notifications */,
-				7013700C2B5D5F2B0054B2CA /* MediaClient */,
+				702BF58F2B610B430021C34D /* MediaClient */,
 			);
 			productName = "TMDB Test";
 			productReference = 7079602C2AEBA0A700AB748D /* Cinephile.app */;
@@ -490,6 +492,7 @@
 				70967F352B53C1F300EB4CD2 /* Notifications */,
 				70967F372B53C1F300EB4CD2 /* Status */,
 				70967F392B53C1F300EB4CD2 /* KeychainSwift */,
+				702BF58D2B610B380021C34D /* MediaClient */,
 			);
 			productName = CinephileNotifications;
 			productReference = 70967F1D2B53C1A700EB4CD2 /* CinephileNotifications.appex */;
@@ -942,10 +945,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		7013700C2B5D5F2B0054B2CA /* MediaClient */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = MediaClient;
-		};
 		701858AB2B511E1B000A9EC6 /* TMDb */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 701858AA2B511E1B000A9EC6 /* XCRemoteSwiftPackageReference "TMDb" */;
@@ -974,6 +973,14 @@
 		701F57042B2EF0670043B71B /* Networking */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Networking;
+		};
+		702BF58D2B610B380021C34D /* MediaClient */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = MediaClient;
+		};
+		702BF58F2B610B430021C34D /* MediaClient */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = MediaClient;
 		};
 		708B80292B31E85100D72A35 /* Timeline */ = {
 			isa = XCSwiftPackageProductDependency;
