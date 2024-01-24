@@ -23,6 +23,7 @@ let package = Package(
         .package(url: "https://github.com/adamayoung/TMDb.git", from: "10.0.0"),
         .package(url: "https://github.com/divadretlaw/EmojiText", from: "3.2.1"),
         .package(url: "https://github.com/SvenTiigi/YouTubePlayerKit.git", from: "1.6.0"),
+        .package(name: "MediaClient", path: "../MediaClient"),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -43,6 +44,7 @@ let package = Package(
                 "Environment",
                 .product(name: "NukeUI", package: "Nuke"),
                 "YouTubePlayerKit",
+                .product(name: "MediaClient", package: "MediaClient")
             ]
         ),
         .testTarget(

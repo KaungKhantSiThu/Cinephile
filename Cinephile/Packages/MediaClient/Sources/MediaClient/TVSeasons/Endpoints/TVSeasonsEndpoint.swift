@@ -1,6 +1,6 @@
 import Foundation
 
-enum TVSeasonsEndpoint {
+public enum TVSeasonsEndpoint {
 
     case details(tvSeriesID: TVSeries.ID, seasonNumber: Int)
     case images(tvSeriesID: TVSeries.ID, seasonNumber: Int, languageCode: String?)
@@ -15,7 +15,7 @@ extension TVSeasonsEndpoint: Endpoint {
             .appendingPathComponent("season")
     }
 
-    var path: URL {
+    public var path: URL {
         switch self {
         case .details(let tvSeriesID, let seasonNumber):
             return Self.basePath(for: tvSeriesID)

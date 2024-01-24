@@ -99,6 +99,52 @@ public class MediaNotificationManager: NSObject, ObservableObject {
         print("Pending: \(pendingRequests.count)")
     }
     
+    public func notificationAttachment(name: String, url: URL) async {
+        let center = UNUserNotificationCenter.current()
+        let content = UNMutableNotificationContent()
+        content.title = "Cinephile Release Alert"
+        content.body = "\(name) is out tomorrow "
+        content.categoryIdentifier = NotificationCateogry.general.rawValue
+        do {
+            let (imageData, _) = try await URLSession.shared.data(from: url)
+            if let attachment = UNNotificationAttachment.create(image: imageData, identifier: "imageAttachment") {
+                content.attachments = [attachment]
+            }
+        } catch {
+            logger.error("Error Fetching Image Data: \(error.localizedDescription)")
+        }
+        
+//        if let imageData = try? Data(contentsOf: url),
+//        let attachment = UNNotificationAttachment.create(image: imageData, identifier: "imageAttachment") {
+//            content.attachments = [attachment]
+//        }
+
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+
+        
+        
+        let request = UNNotificationRequest(identifier: "identifier", content: content, trigger: trigger)
+        
+        let dismiss = UNNotificationAction(identifier: NotificationAction.dismiss.rawValue, title: "Dismiss")
+        
+        let reminder = UNNotificationAction(identifier: NotificationAction.reminder.rawValue, title: "Reminder")
+        
+        let generalCategory = UNNotificationCategory(identifier: NotificationCateogry.general.rawValue, actions: [dismiss, reminder], intentIdentifiers: [], options: [])
+        
+        center.setNotificationCategories([generalCategory])
+        
+//        center.add(request) { error in
+//            if let error = error {
+//                print(error)
+//            }
+//        }
+        do {
+            try await center.add(request)
+        } catch {
+            logger.error("Error adding notification request: \(error.localizedDescription)")
+        }
+    }
+    
     public func notificationAttachment(name: String, url: URL, scheduleAt date: Date) async {
         let center = UNUserNotificationCenter.current()
         let content = UNMutableNotificationContent()

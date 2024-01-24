@@ -25,8 +25,13 @@ public class ImageService {
         }
     }
     
-    public func posterURL(for path: URL) -> URL {
-        return Size.original.path(poster: path.absoluteString)
+    public func posterURL(for path: URL?) -> URL {
+        if let path = path {
+            return Size.original.path(poster: path.absoluteString)
+        } else {
+            return URL(string: "https://picsum.photos/200/300")!
+        }
+        
     }
 }
 

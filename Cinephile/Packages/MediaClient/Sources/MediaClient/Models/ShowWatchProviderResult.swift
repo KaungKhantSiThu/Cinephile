@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct ShowWatchProviderResult: Equatable, Decodable {
-    let id: Int
-    let results: [String: ShowWatchProvider]
+public struct ShowWatchProviderResult: Equatable, Decodable {
+    public let id: Int
+    public let results: [String: ShowWatchProvider]
 }
 
 public struct ShowWatchProvider: Equatable, Decodable {

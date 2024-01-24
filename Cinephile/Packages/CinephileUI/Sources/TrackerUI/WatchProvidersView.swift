@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import TMDb
+import MediaClient
 
 struct WatchProvidersView: View {
     let providers: [WatchProvider]
@@ -21,19 +21,19 @@ struct WatchProvidersView: View {
     }
 }
 
-#Preview(traits: .sizeThatFitsLayout) {
-    let tmdbConfiguration = TMDbConfiguration(apiKey: ProcessInfo.processInfo.environment["TMDB_API_KEY"] ?? "")
-    TMDb.configure(tmdbConfiguration)
-    return WatchProvidersView(providers: [
-        .init(
-            id: 8,
-            name: "Netflix",
-            logoPath: URL(string: "/t2yyOv40HZeVlLjYsCsPHnWLk4W.jpg")!
-        ),
-        .init(
-            id: 9,
-            name: "Amazon Prime Video",
-            logoPath: URL(string: "/emthp39XA2YScoYL1p0sdbAH2WA.jpg")!
-        )
-    ])
-}
+//#Preview(traits: .sizeThatFitsLayout) {
+//    let tmdbConfiguration = TMDbConfiguration(apiKey: ProcessInfo.processInfo.environment["TMDB_API_KEY"] ?? "")
+//    TMDb.configure(tmdbConfiguration)
+//    return WatchProvidersView(providers: [
+//        .init(
+//            id: 8,
+//            name: "Netflix",
+//            logoPath: URL(string: "/t2yyOv40HZeVlLjYsCsPHnWLk4W.jpg")!
+//        ),
+//        .init(
+//            id: 9,
+//            name: "Amazon Prime Video",
+//            logoPath: URL(string: "/emthp39XA2YScoYL1p0sdbAH2WA.jpg")!
+//        )
+//    ])
+//}

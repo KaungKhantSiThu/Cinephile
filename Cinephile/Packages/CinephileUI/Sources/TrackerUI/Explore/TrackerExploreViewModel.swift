@@ -5,9 +5,9 @@
 //  Created by Kaung Khant Si Thu on 31/10/2023.
 
 
-import TMDb
 import SwiftUI
 import OSLog
+import MediaClient
 
 private var logger = Logger(subsystem: "TrackerExploreView", category: "ViewModel")
 
@@ -55,15 +55,8 @@ private var logger = Logger(subsystem: "TrackerExploreView", category: "ViewMode
     
     public private(set) var state: LoadingState<DiscoverMedia> = .idle
     
-    private let movieService: MovieService!
-    private let seriesService: TVSeriesService!
-    private let searchService: SearchService!
     
-    public init() {
-        movieService = MovieService()
-        seriesService = TVSeriesService()
-        searchService = SearchService()
-    }
+    public init() { }
     
     public func fetchTrending() {
         self.state = .loading
@@ -88,14 +81,15 @@ private var logger = Logger(subsystem: "TrackerExploreView", category: "ViewMode
     
     
     private func fetchDiscoverMedia() async throws -> DiscoverMedia {
-        async let popularMovies: [Movie] = movieService.popular().results
-        async let popularTVSeries: [TVSeries] = seriesService.popular().results
-        async let upcomingMovies: [Movie] = movieService.upcoming().results
+        async let popularMovies: MoviePageableList = APIService.shared.get(endpoint: MoviesEndpoint.popular())
+        async let popularTVSeries: TVSeriesPageableList = APIService.shared.get(endpoint: TVSeriesEndpoint.popular())
+        async let upcomingMovies: MoviePageableList = APIService.shared.get(endpoint: MoviesEndpoint.upcoming())
+        
 
         return try await .init(
-            popularMovies: popularMovies,
-            popularTVSeries: popularTVSeries,
-            upcomingMovies: upcomingMovies
+            popularMovies: popularMovies.results,
+            popularTVSeries: popularTVSeries.results,
+            upcomingMovies: upcomingMovies.results
         )
     }
     
@@ -104,13 +98,17 @@ private var logger = Logger(subsystem: "TrackerExploreView", category: "ViewMode
         do {
             switch searchScope {
             case .all:
-                self.medias = try await searchService.searchAll(query: searchText, page: 1).results
+                let mediaPagableList: MediaPageableList = try await APIService.shared.get(endpoint: SearchEndpoint.multi(query: searchText))
+                self.medias = mediaPagableList.results
             case .movie:
-                self.medias = try await searchService.searchMovies(query: searchText, page: 1).results.map { Media.movie($0) }
+                let mediaPagableList: MoviePageableList = try await APIService.shared.get(endpoint: SearchEndpoint.movies(query: searchText))
+                self.medias = mediaPagableList.results.map { Media.movie($0) }
             case .tvSeries:
-                self.medias = try await searchService.searchTVSeries(query: searchText, page: 1).results.map { Media.tvSeries($0) }
+                let mediaPagableList: TVSeriesPageableList = try await APIService.shared.get(endpoint: SearchEndpoint.tvSeries(query: searchText))
+                self.medias = mediaPagableList.results.map { Media.tvSeries($0) }
             case .people:
-                self.medias = try await searchService.searchPeople(query: searchText, page: 1).results.map { Media.person($0) }
+                let mediaPagableList: PersonPageableList = try await APIService.shared.get(endpoint: SearchEndpoint.people(query: searchText))
+                self.medias = mediaPagableList.results.map { Media.person($0) }
             }
             
 //            isSearching = false

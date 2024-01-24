@@ -6,14 +6,14 @@
 //
 
 import SwiftUI
-import TMDb
+import MediaClient
 
 public struct MediaPage: View {
     let title: String
     let image: URL?
-    @State private var posterImage = URL(string: "https://picsum.photos/200/300")!
+//    @State private var posterImage = URL(string: "https://picsum.photos/200/300")!
     public var body: some View {
-        PosterImage(url: posterImage, height: 390)
+        PosterImage(url: ImageService.shared.posterURL(for: image), height: 390)
             .overlay(alignment: .bottom) {
                 HStack {
                     Text(title)
@@ -25,13 +25,13 @@ public struct MediaPage: View {
                 .padding()
                 .background(.thinMaterial)
             }
-        .task {
-            do {
-                posterImage = try await ImageLoaderS.generate(from: image)
-            } catch {
-                print("poster URL is nil")
-            }
-        }
+//        .task {
+//            do {
+//                posterImage = try await ImageLoaderS.generate(from: image)
+//            } catch {
+//                print("poster URL is nil")
+//            }
+//        }
     }
 }
 

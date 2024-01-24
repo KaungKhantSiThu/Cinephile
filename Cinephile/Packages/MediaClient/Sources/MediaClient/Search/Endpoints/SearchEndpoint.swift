@@ -1,6 +1,6 @@
 import Foundation
 
-enum SearchEndpoint {
+public enum SearchEndpoint {
 
     case multi(query: String, page: Int? = nil)
     case movies(query: String, year: Int? = nil, page: Int? = nil)
@@ -17,7 +17,7 @@ extension SearchEndpoint: Endpoint {
         static let query = "query"
     }
 
-    var path: URL {
+    public var path: URL {
         switch self {
 
         case .multi(let query, let page):

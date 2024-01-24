@@ -45,5 +45,13 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     }
     return configuration
   }
+    
 }
+
+//extension AppDelegate: UNUserNotificationCenterDelegate {
+//    
+//    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+////        routerPath.navigate(to: MovieDetailView(id: response.))
+//    }
+//}
 

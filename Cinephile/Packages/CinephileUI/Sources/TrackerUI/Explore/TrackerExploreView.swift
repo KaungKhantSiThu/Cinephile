@@ -6,7 +6,7 @@
 ////
 //
 import SwiftUI
-import TMDb
+import MediaClient
 import Environment
 
 @MainActor
@@ -150,10 +150,10 @@ public struct TrackerExploreView: View {
 }
     
 
-#Preview {
-    let tmdbConfiguration = TMDbConfiguration(apiKey: ProcessInfo.processInfo.environment["TMDB_API_KEY"] ?? "")
-    TMDb.configure(tmdbConfiguration)
-    return NavigationStack {
-        TrackerExploreView()
-    }
-}
+//#Preview {
+//    let tmdbConfiguration = TMDbConfiguration(apiKey: ProcessInfo.processInfo.environment["TMDB_API_KEY"] ?? "")
+//    TMDb.configure(tmdbConfiguration)
+//    return NavigationStack {
+//        TrackerExploreView()
+//    }
+//}

@@ -6,17 +6,17 @@
 //
 
 import SwiftUI
-import TMDb
+import MediaClient
 
 public struct MediaCover: View {
     let title: String
     let releaseDate: Date?
     let posterPath: URL?
     
-    @State private var posterImage = URL(string: "https://picsum.photos/200/300")!
+//    @State private var posterImage = URL(string: "https://picsum.photos/200/300")!
     public var body: some View {
         VStack(alignment: .leading) {
-            PosterImage(url: posterImage)
+            PosterImage(url: ImageService.shared.posterURL(for: posterPath))
             
             
             VStack(alignment: .leading, spacing: 5) {
@@ -31,13 +31,13 @@ public struct MediaCover: View {
                     .foregroundStyle(.secondary)
             }
         }
-        .task {
-            do {
-                posterImage = try await ImageLoaderS.generate(from: posterPath)
-            } catch {
-                print(error.localizedDescription)
-            }
-        }
+//        .task {
+//            do {
+//                posterImage = try await ImageLoaderS.generate(from: posterPath)
+//            } catch {
+//                print(error.localizedDescription)
+//            }
+//        }
     }
     
     private func format(date: Date?) -> String {
@@ -65,9 +65,9 @@ public extension MediaCover {
 
 
 
-#Preview(traits: .sizeThatFitsLayout) {
-    let tmdbConfiguration = TMDbConfiguration(apiKey: "0b8723760cac397ab78965e78c1cd188")
-    TMDb.configure(tmdbConfiguration)
-    
-    return MediaCover(title: "Fight Club", releaseDate: .now, posterPath: URL(string: "/fCayJrkfRaCRCTh8GqN30f8oyQF.jpg"))
-}
+//#Preview(traits: .sizeThatFitsLayout) {
+//    let tmdbConfiguration = TMDbConfiguration(apiKey: "0b8723760cac397ab78965e78c1cd188")
+//    TMDb.configure(tmdbConfiguration)
+//    
+//    return MediaCover(title: "Fight Club", releaseDate: .now, posterPath: URL(string: "/fCayJrkfRaCRCTh8GqN30f8oyQF.jpg"))
+//}

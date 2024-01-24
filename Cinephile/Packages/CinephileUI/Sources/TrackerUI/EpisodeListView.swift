@@ -1,6 +1,6 @@
 import Foundation
 import SwiftUI
-import TMDb
+import MediaClient
 
 @MainActor
 public struct EpisodeListView: View {
@@ -24,9 +24,9 @@ public struct EpisodeListView: View {
         .navigationTitle("Season \(inSeason)")
         .navigationBarTitleDisplayMode(.inline)
         .task {
-            let service = TVSeasonService()
             do {
-                self.episodes = try await service.details(forSeason: inSeason, inTVSeries: id).episodes ?? []
+                let results: TVSeason = try await APIService.shared.get(endpoint: TVSeasonsEndpoint.details(tvSeriesID: id, seasonNumber: inSeason))
+                self.episodes = results.episodes ?? []
             } catch {
                 print("No episodes")
             }
@@ -45,7 +45,7 @@ public struct EpisodeView: View {
     let name: String
     let airDate: Date?
     let stillPath: URL?
-    @State private var stillImage = URL(string: "https://picsum.photos/200/300")!
+//    @State private var stillImage = URL(string: "https://picsum.photos/200/300")!
     public var body: some View {
         HStack(spacing: 20) {
             Text(number, format: .number)
@@ -53,7 +53,7 @@ public struct EpisodeView: View {
                 .bold()
                 .frame(width: 40)
             
-            AsyncImage(url: stillImage) { image in
+            AsyncImage(url: ImageService.shared.posterURL(for: stillPath)) { image in
                 image
                     .resizable()
                     .scaledToFit()
@@ -80,13 +80,13 @@ public struct EpisodeView: View {
             }
         }
         .padding()
-        .task {
-            do {
-                stillImage = try await ImageLoaderS.generate(from: stillPath)
-            } catch {
-                print("poster URL is nil")
-            }
-        }
+//        .task {
+//            do {
+//                stillImage = try await ImageLoaderS.generate(from: stillPath)
+//            } catch {
+//                print("poster URL is nil")
+//            }
+//        }
     }
     
     public init(episode: TVEpisode) {

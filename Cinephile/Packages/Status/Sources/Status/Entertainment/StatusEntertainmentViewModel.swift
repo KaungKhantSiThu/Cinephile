@@ -36,7 +36,7 @@ import MediaClient
             case .movie:
                 let movie: Movie = try await APIService.shared.get(endpoint: MoviesEndpoint.details(movieID: Int(entertainment.mediaId)!))
                 isTrackerMediaLoading = false
-                self.posterImage = ImageService.shared.posterURL(for: movie.posterPath ?? URL(string: "https://picsum.photos/200/300")!)
+                self.posterImage = ImageService.shared.posterURL(for: movie.posterPath)
                 trackerMedia = TrackerMedia(
                     id: movie.id,
                     title: movie.title,

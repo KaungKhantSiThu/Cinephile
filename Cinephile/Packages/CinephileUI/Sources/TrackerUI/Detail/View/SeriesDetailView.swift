@@ -1,5 +1,5 @@
 import SwiftUI
-import TMDb
+import MediaClient
 import Environment
 
 enum SeriesPage: String, Equatable, CaseIterable {

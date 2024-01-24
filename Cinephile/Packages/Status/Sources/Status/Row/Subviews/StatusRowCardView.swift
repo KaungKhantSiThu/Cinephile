@@ -7,165 +7,224 @@ import SwiftUI
 
 @MainActor
 public struct StatusRowCardView: View {
-  @Environment(\.openURL) private var openURL
-  @Environment(\.isInCaptureMode) private var isInCaptureMode: Bool
-
-  @Environment(Theme.self) private var theme
-
-  let card: Card
-
-  public init(card: Card) {
-    self.card = card
-  }
-
-  private var maxWidth: CGFloat? {
-    if theme.statusDisplayStyle == .medium {
-      return 300
+    @Environment(\.openURL) private var openURL
+    @Environment(\.isInCaptureMode) private var isInCaptureMode: Bool
+    
+    @Environment(Theme.self) private var theme
+    
+    let card: Card
+    
+    public init(card: Card) {
+        self.card = card
     }
-    return nil
-  }
-
-  private func imageWidthFor(proxy: GeometryProxy) -> CGFloat {
-    if theme.statusDisplayStyle == .medium, let maxWidth {
-        return maxWidth
-    }
-    return proxy.frame(in: .local).width
-  }
-
-  private var imageHeight: CGFloat {
-    if theme.statusDisplayStyle == .medium {
-      return 100
-    }
-    return 200
-  }
-
-  public var body: some View {
-    Button {
-      if let url = URL(string: card.url) {
-        openURL(url)
-      }
-    } label: {
-      if let title = card.title, let url = URL(string: card.url) {
-        VStack(alignment: .leading) {
-          let sitesWithIcons = ["apps.apple.com", "music.apple.com", "open.spotify.com"]
-          if let host = url.host(), sitesWithIcons.contains(host) {
-            iconLinkPreview(title, url)
-          } else {
-            defaultLinkPreview(title, url)
-          }
+    
+    private var maxWidth: CGFloat? {
+        if theme.statusDisplayStyle == .medium {
+            return 300
         }
-        .frame(maxWidth: maxWidth)
-        .fixedSize(horizontal: false, vertical: true)
-//        .background(theme.secondaryBackgroundColor.opacity(0.3))
-//        .cornerRadius(16)
-        .overlay(
-          RoundedRectangle(cornerRadius: 16)
-            .stroke(.gray.opacity(0.35), lineWidth: 1)
-        )
-        .contextMenu {
-          ShareLink(item: url) {
-            Label("status.card.share", systemImage: "square.and.arrow.up")
-          }
-          Button { openURL(url) } label: {
-            Label("status.action.view-in-browser", systemImage: "safari")
-          }
-          Divider()
-          Button {
-            UIPasteboard.general.url = url
-          } label: {
-            Label("status.card.copy", systemImage: "doc.on.doc")
-          }
-        }
-//        .accessibilityElement(children: .combine)
-//        .accessibilityAddTraits(.isLink)
-//        .accessibilityRemoveTraits(.isStaticText)
-      }
+        return nil
     }
-    .buttonStyle(.plain)
-  }
+    
+    private func imageWidthFor(proxy: GeometryProxy) -> CGFloat {
+        if theme.statusDisplayStyle == .medium, let maxWidth {
+            return maxWidth
+        }
+        return proxy.frame(in: .local).width
+    }
+    
+    private var imageHeight: CGFloat {
+        if theme.statusDisplayStyle == .medium {
+            return 100
+        }
+        return 200
+    }
+    
+    public var body: some View {
+        Button {
+            if let url = URL(string: card.url) {
+                openURL(url)
+            }
+        } label: {
+            if let title = card.title, let url = URL(string: card.url) {
+                VStack(alignment: .leading, spacing: 0) {
+                    let sitesWithIcons = ["apps.apple.com", "music.apple.com", "open.spotify.com"]
+                    if let host = url.host(), sitesWithIcons.contains(host) {
+                        iconLinkPreview(title, url)
+                    } else {
+                        defaultLinkPreview(title, url)
+                    }
+                }
+                .frame(maxWidth: maxWidth)
+                .fixedSize(horizontal: false, vertical: true)
+                //        .background(theme.secondaryBackgroundColor.opacity(0.3))
+                //        .cornerRadius(16)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(.gray.opacity(0.35), lineWidth: 1)
+                )
+                .contextMenu {
+                    ShareLink(item: url) {
+                        Label("status.card.share", systemImage: "square.and.arrow.up")
+                    }
+                    Button { openURL(url) } label: {
+                        Label("status.action.view-in-browser", systemImage: "safari")
+                    }
+                    Divider()
+                    Button {
+                        UIPasteboard.general.url = url
+                    } label: {
+                        Label("status.card.copy", systemImage: "doc.on.doc")
+                    }
+                }
+                //        .accessibilityElement(children: .combine)
+                //        .accessibilityAddTraits(.isLink)
+                //        .accessibilityRemoveTraits(.isStaticText)
+            }
+        }
+        .buttonStyle(.plain)
+    }
+    
+    @ViewBuilder
+    private func defaultLinkPreview(_ title: String, _ url: URL) -> some View {
+        if let imageURL = card.image, !isInCaptureMode {
+            DefaultPreviewImage(url: imageURL, originalWidth: card.width, originalHeight: card.height)
+//            LazyResizableImage(url: imageURL) { state, proxy in
+//                let width = imageWidthFor(proxy: proxy)
+//                if let image = state.image {
+//                    image
+//                        .resizable()
+//                        .aspectRatio(contentMode: .fill)
+//                        .frame(height: imageHeight)
+//                        .frame(maxWidth: width)
+//                        .clipped()
+//                } else if state.isLoading {
+//                    Rectangle()
+//                        .fill(Color.gray)
+//                        .frame(height: imageHeight)
+//                }
+//            }
+//            // This image is decorative
+//            .accessibilityHidden(true)
+//            .frame(height: imageHeight)
+        }
+        VStack(alignment: .leading, spacing: 6) {
+            Text(title)
+                .font(.scaledHeadline)
+                .lineLimit(1)
+            //        if let description = card.description, !description.isEmpty {
+            //          Text(description)
+            //            .font(.scaledBody)
+            //            .foregroundStyle(.secondary)
+            //            .lineLimit(3)
+            //        }
+            Text(url.host() ?? url.absoluteString)
+                .font(.scaledFootnote)
+            //          .foregroundColor(theme.tintColor)
+                .lineLimit(1)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(16)
+    }
+    
+    private func iconLinkPreview(_ title: String, _ url: URL) -> some View {
+        // ..where the image is known to be a square icon
+        HStack {
+            if let imageURL = card.image, !isInCaptureMode {
+                LazyResizableImage(url: imageURL) { state, _ in
+                    if let image = state.image {
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: imageHeight, height: imageHeight)
+                            .clipped()
+                    } else if state.isLoading {
+                        Rectangle()
+                            .fill(Color.gray)
+                            .frame(width: imageHeight, height: imageHeight)
+                    }
+                }
+                // This image is decorative
+                .accessibilityHidden(true)
+                .frame(width: imageHeight, height: imageHeight)
+            }
+            
+            VStack(alignment: .leading, spacing: 6) {
+                Text("\(title)", bundle: .module)
+                    .font(.scaledHeadline)
+                    .lineLimit(1)
+//                if let description = card.description, !description.isEmpty {
+//                    Text("\(description)", bundle: .module)
+//                        .font(.scaledBody)
+//                        .foregroundStyle(.secondary)
+//                        .lineLimit(3)
+//                }
+                Text(url.host() ?? url.absoluteString)
+                    .font(.scaledFootnote)
+                    .foregroundColor(theme.tintColor)
+                    .lineLimit(1)
+            }
+            .padding(16)
+        }
+    }
+}
 
-  @ViewBuilder
-  private func defaultLinkPreview(_ title: String, _ url: URL) -> some View {
-    if let imageURL = card.image, !isInCaptureMode {
-      LazyResizableImage(url: imageURL) { state, proxy in
-        let width = imageWidthFor(proxy: proxy)
-        if let image = state.image {
-          image
-            .resizable()
-            .aspectRatio(contentMode: .fill)
-            .frame(height: imageHeight)
-            .frame(maxWidth: width)
+struct DefaultPreviewImage: View {
+    @Environment(Theme.self) private var theme
+    
+    let url: URL
+    let originalWidth: CGFloat
+    let originalHeight: CGFloat
+    
+    var body: some View {
+        _Layout(originalWidth: originalWidth, originalHeight: originalHeight) {
+            LazyResizableImage(url: url) { state, _ in
+                Rectangle()
+                    .fill(theme.secondaryBackgroundColor)
+                    .overlay {
+                        if let image = state.image {
+                            image.resizable()
+                                .scaledToFill()
+                        }
+                    }
+            }
+            .accessibilityHidden(true) // This image is decorative
             .clipped()
-        } else if state.isLoading {
-          Rectangle()
-            .fill(Color.gray)
-            .frame(height: imageHeight)
         }
-      }
-      // This image is decorative
-      .accessibilityHidden(true)
-      .frame(height: imageHeight)
     }
-    HStack {
-      VStack(alignment: .leading, spacing: 6) {
-        Text(title)
-          .font(.scaledHeadline)
-          .lineLimit(3)
-//        if let description = card.description, !description.isEmpty {
-//          Text(description)
-//            .font(.scaledBody)
-//            .foregroundStyle(.secondary)
-//            .lineLimit(3)
-//        }
-        Text(url.host() ?? url.absoluteString)
-          .font(.scaledFootnote)
-//          .foregroundColor(theme.tintColor)
-          .lineLimit(1)
-      }
-      Spacer()
-    }
-    .padding(16)
-  }
-
-  private func iconLinkPreview(_ title: String, _ url: URL) -> some View {
-    // ..where the image is known to be a square icon
-    HStack {
-      if let imageURL = card.image, !isInCaptureMode {
-        LazyResizableImage(url: imageURL) { state, _ in
-          if let image = state.image {
-            image
-              .resizable()
-              .aspectRatio(contentMode: .fill)
-              .frame(width: imageHeight, height: imageHeight)
-              .clipped()
-          } else if state.isLoading {
-            Rectangle()
-              .fill(Color.gray)
-              .frame(width: imageHeight, height: imageHeight)
-          }
+    
+    private struct _Layout: Layout {
+        let originalWidth: CGFloat
+        let originalHeight: CGFloat
+        
+        func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
+            guard !subviews.isEmpty else { return CGSize.zero }
+            return calculateSize(proposal)
         }
-        // This image is decorative
-        .accessibilityHidden(true)
-        .frame(width: imageHeight, height: imageHeight)
-      }
-
-      VStack(alignment: .leading, spacing: 6) {
-        Text("\(title)", bundle: .module)
-          .font(.scaledHeadline)
-          .lineLimit(3)
-        if let description = card.description, !description.isEmpty {
-          Text("\(description)", bundle: .module)
-            .font(.scaledBody)
-            .foregroundStyle(.secondary)
-            .lineLimit(3)
+        
+        func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
+            guard let view = subviews.first else { return }
+            
+            let size = calculateSize(proposal)
+            view.place(at: bounds.origin, proposal: ProposedViewSize(size))
         }
-        Text(url.host() ?? url.absoluteString)
-          .font(.scaledFootnote)
-          .foregroundColor(theme.tintColor)
-          .lineLimit(1)
-      }.padding(16)
+        
+        private func calculateSize(_ proposal: ProposedViewSize) -> CGSize {
+            switch (proposal.width, proposal.height) {
+            case (nil, nil):
+                CGSize(width: originalWidth, height: originalWidth)
+            case let (nil, .some(height)):
+                CGSize(width: originalWidth, height: min(height, originalWidth))
+            case (0, _):
+                CGSize.zero
+            case let (.some(width), _):
+                if originalWidth == 0 {
+                    CGSize(width: width, height: width / 2)
+                } else {
+                    CGSize(width: width, height: width / originalWidth * originalHeight)
+                }
+            }
+        }
     }
-  }
 }
 
 #Preview(traits: .sizeThatFitsLayout) {

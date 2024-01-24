@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import TMDb
+import MediaClient
 import SwiftUI
 
 @MainActor

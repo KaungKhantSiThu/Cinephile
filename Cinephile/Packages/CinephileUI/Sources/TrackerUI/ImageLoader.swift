@@ -5,50 +5,50 @@
 //  Created by Kaung Khant Si Thu on 25/11/2023.
 //
 
-import Foundation
-import TMDb
-import SwiftUI
-import Combine
+//import Foundation
+//import MediaClient
+//import SwiftUI
+//import Combine
+//
+//public struct ImageLoaderS {
+//    
+//    enum ImageLoaderError: Error {
+//        case urlNil
+//    }
+//
+//    public static func generate(from url: URL?) async throws -> URL {
+//        if let url = url {
+//            let configurationService = ConfigurationService()
+//            let apiConfiguration = try await configurationService.apiConfiguration()
+//            let imagesConfiguration = apiConfiguration.images
+//            return imagesConfiguration.posterURL(for: url) ?? URL(string: "https://picsum.photos/200/300")!
+//        } else {
+//            throw ImageLoaderError.urlNil
+//        }
+//    }
+//    
+//    public static func generateLogo(from url: URL?) async throws -> URL {
+//        if let url = url {
+//            let configurationService = ConfigurationService()
+//            let apiConfiguration = try await configurationService.apiConfiguration()
+//            let imagesConfiguration = apiConfiguration.images
+//            return imagesConfiguration.logoURL(for: url) ?? URL(string: "https://picsum.photos/200/300")!
+//        } else {
+//            throw ImageLoaderError.urlNil
+//        }
+//    }
+//}
 
-public struct ImageLoaderS {
-    
-    enum ImageLoaderError: Error {
-        case urlNil
-    }
-
-    public static func generate(from url: URL?) async throws -> URL {
-        if let url = url {
-            let configurationService = ConfigurationService()
-            let apiConfiguration = try await configurationService.apiConfiguration()
-            let imagesConfiguration = apiConfiguration.images
-            return imagesConfiguration.posterURL(for: url) ?? URL(string: "https://picsum.photos/200/300")!
-        } else {
-            throw ImageLoaderError.urlNil
-        }
-    }
-    
-    public static func generateLogo(from url: URL?) async throws -> URL {
-        if let url = url {
-            let configurationService = ConfigurationService()
-            let apiConfiguration = try await configurationService.apiConfiguration()
-            let imagesConfiguration = apiConfiguration.images
-            return imagesConfiguration.logoURL(for: url) ?? URL(string: "https://picsum.photos/200/300")!
-        } else {
-            throw ImageLoaderError.urlNil
-        }
-    }
-}
-
-public final class ImageLoader {
-    
-    var configuration: ImagesConfiguration {
-        get async throws {
-            let configurationService = ConfigurationService()
-            let apiConfiguration = try await configurationService.apiConfiguration()
-            return apiConfiguration.images
-        }
-    }
-}
+//public final class ImageLoader {
+//    
+//    var configuration: ImagesConfiguration {
+//        get async throws {
+//            let configurationService = ConfigurationService()
+//            let apiConfiguration = try await configurationService.apiConfiguration()
+//            return apiConfiguration.images
+//        }
+//    }
+//}
 
 //public class ImageService {
 //    public static let shared = ImageService()
