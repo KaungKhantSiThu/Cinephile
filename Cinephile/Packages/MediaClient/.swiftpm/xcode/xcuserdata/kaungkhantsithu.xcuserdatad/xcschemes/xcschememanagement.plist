@@ -4,17 +4,17 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Timeline-Package.xcscheme_^#shared#^_</key>
+		<key>MediaClient-Package.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>22</integer>
+			<integer>0</integer>
 		</dict>
-		<key>Timeline.xcscheme_^#shared#^_</key>
+		<key>MediaClient.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>4</integer>
+			<integer>14</integer>
 		</dict>
-		<key>TimelineTests.xcscheme_^#shared#^_</key>
+		<key>MediaClientTests.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>15</integer>
@@ -22,7 +22,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>Timeline</key>
+		<key>MediaClient</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>MediaClientTests</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -102,8 +102,8 @@ public class MediaNotificationManager: NSObject, ObservableObject {
     public func notificationAttachment(name: String, url: URL, scheduleAt date: Date) async {
         let center = UNUserNotificationCenter.current()
         let content = UNMutableNotificationContent()
-        content.title = "Cinephile Release Alert"
-        content.body = "\(name) is out tomorrow "
+        content.title = "Release Alert"
+        content.body = "\(name) is out tomorrow"
         content.categoryIdentifier = NotificationCateogry.general.rawValue
         do {
             let (imageData, _) = try await URLSession.shared.data(from: url)
