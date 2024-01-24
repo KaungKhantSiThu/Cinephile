@@ -106,25 +106,31 @@ struct StatusRowSwipeView: View {
   private func makeSwipeLabel(action: StatusAction, style: UserPreferences.SwipeActionsIconStyle, privateBoost: Bool = false) -> some View {
     switch style {
     case .iconOnly:
-      Label(action.displayName(isReblogged: statusDataController.isReblogged,
-                               isFavorited: statusDataController.isFavorited,
-                               isBookmarked: statusDataController.isBookmarked,
-                               privateBoost: privateBoost),
-            imageNamed: action.iconName(isReblogged: statusDataController.isReblogged,
-                                        isFavorited: statusDataController.isFavorited,
-                                        isBookmarked: statusDataController.isBookmarked,
-                                        privateBoost: privateBoost))
+        Label {
+            Text(action.displayName(isReblogged: statusDataController.isReblogged,
+                                    isFavorited: statusDataController.isFavorited,
+                                    isBookmarked: statusDataController.isBookmarked,
+                                    privateBoost: privateBoost), bundle: .module)
+        } icon: {
+            Image(action.iconName(isReblogged: statusDataController.isReblogged,
+                                         isFavorited: statusDataController.isFavorited,
+                                         isBookmarked: statusDataController.isBookmarked,
+                                         privateBoost: privateBoost))
+        }
         .labelStyle(.iconOnly)
         .environment(\.symbolVariants, .none)
     case .iconWithText:
-      Label(action.displayName(isReblogged: statusDataController.isReblogged,
-                               isFavorited: statusDataController.isFavorited,
-                               isBookmarked: statusDataController.isBookmarked,
-                               privateBoost: privateBoost),
-            imageNamed: action.iconName(isReblogged: statusDataController.isReblogged,
-                                        isFavorited: statusDataController.isFavorited,
-                                        isBookmarked: statusDataController.isBookmarked,
-                                        privateBoost: privateBoost))
+        Label {
+            Text(action.displayName(isReblogged: statusDataController.isReblogged,
+                                    isFavorited: statusDataController.isFavorited,
+                                    isBookmarked: statusDataController.isBookmarked,
+                                    privateBoost: privateBoost), bundle: .module)
+        } icon: {
+            Image(action.iconName(isReblogged: statusDataController.isReblogged,
+                                         isFavorited: statusDataController.isFavorited,
+                                         isBookmarked: statusDataController.isBookmarked,
+                                         privateBoost: privateBoost))
+        }
         .labelStyle(.titleAndIcon)
         .environment(\.symbolVariants, .none)
     }
