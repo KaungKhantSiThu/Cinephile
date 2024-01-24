@@ -88,7 +88,7 @@ public struct AccountsListView: View {
     .scrollContentBackground(.hidden)
     //.background(theme.primaryBackgroundColor)
     .listStyle(.plain)
-    .navigationTitle(viewModel.mode.title)
+    .navigationTitle(Text(viewModel.mode.title, bundle: .module))
     .navigationBarTitleDisplayMode(.inline)
     .task {
       viewModel.client = client
