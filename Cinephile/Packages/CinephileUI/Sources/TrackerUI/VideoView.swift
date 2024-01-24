@@ -8,7 +8,7 @@
 import SwiftUI
 import WebKit
 import AVKit
-import TMDb
+import MediaClient
 import YouTubePlayerKit
 
 @MainActor

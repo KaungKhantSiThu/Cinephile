@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import TMDb
+import MediaClient
 import NukeUI
 
 @MainActor
@@ -14,11 +14,11 @@ public struct CastView: View {
     let name: String
     let character: String
     let profilePath: URL?
-    @State private var posterImage = URL(string: "https://picsum.photos/200/300")!
+//    @State private var posterImage = URL(string: "https://picsum.photos/200/300")!
     
     public var body: some View {
         VStack(spacing: 20) {
-            LazyImage(url: posterImage) { state in
+            LazyImage(url: ImageService.shared.posterURL(for: profilePath)) { state in
                 if let image = state.image {
                     image
                         .resizable()
@@ -45,13 +45,13 @@ public struct CastView: View {
             .frame(maxWidth: 100)
         }
         .padding(.leading, 20)
-        .task {
-            do {
-                posterImage = try await ImageLoaderS.generate(from: self.profilePath)
-            } catch {
-                print(error.localizedDescription)
-            }
-        }
+//        .task {
+//            do {
+//                posterImage = try await ImageLoaderS.generate(from: self.profilePath)
+//            } catch {
+//                print(error.localizedDescription)
+//            }
+//        }
     }
 }
 

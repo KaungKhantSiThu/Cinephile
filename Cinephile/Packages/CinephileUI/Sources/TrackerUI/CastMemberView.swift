@@ -1,5 +1,5 @@
 import SwiftUI
-import TMDb
+import MediaClient
 
 @MainActor
 struct CastMemberView: View {

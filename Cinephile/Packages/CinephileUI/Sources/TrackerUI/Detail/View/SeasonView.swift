@@ -1,6 +1,6 @@
 import Foundation
 import SwiftUI
-import TMDb
+import MediaClient
 import Environment
 
 
@@ -38,11 +38,10 @@ struct SeasonView: View {
 struct SeasonRow: View {
     let name: String
     let posterPath: URL?
-    @State private var posterImage = URL(string: "https://picsum.photos/200/300")!
     var body: some View {
         HStack(spacing: 20) {
             
-            PosterImage(url: posterImage, height: 100, roundedCorner: false)
+            PosterImage(url: ImageService.shared.posterURL(for: posterPath), height: 100, roundedCorner: false)
             
             Text(name)
                 .font(.title2)
@@ -50,13 +49,6 @@ struct SeasonRow: View {
             
         }
         .padding(.leading, 20)
-        .task {
-            do {
-                posterImage = try await ImageLoaderS.generate(from: posterPath)
-            } catch {
-                print("poster URL is nil")
-            }
-        }
     }
 }
 

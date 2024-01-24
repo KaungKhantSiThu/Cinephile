@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import TMDb
+import MediaClient
 import Environment
 import TrackerUI
 import CinephileUI
@@ -85,14 +85,15 @@ extension StatusEditor {
                 }
             }
             .padding(12)
-            .task(id: self.trackerMedia) {
+            .onChange(of: self.trackerMedia) { _, _ in
                 if let posterURL = trackerMedia.posterURL {
                     
-                    do {
-                        posterImage = try await ImageLoaderS.generate(from: posterURL)
-                    } catch {
-                        print("poster URL is nil")
-                    }
+//                    do {
+//                        posterImage = try await ImageLoaderS.generate(from: posterURL)
+//                    } catch {
+//                        print("poster URL is nil")
+//                    }
+                    posterImage = ImageService.shared.posterURL(for: posterURL)
                 }
             }
         }

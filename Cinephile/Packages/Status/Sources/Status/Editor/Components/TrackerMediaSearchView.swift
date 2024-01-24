@@ -7,7 +7,7 @@
 
 import SwiftUI
 import TrackerUI
-import TMDb
+import MediaClient
 
 extension StatusEditor {
     @MainActor

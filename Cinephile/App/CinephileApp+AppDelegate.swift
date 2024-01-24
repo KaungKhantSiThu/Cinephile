@@ -48,18 +48,15 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         }
         return configuration
     }
+    return configuration
+  }
+    
 }
 
-extension AppDelegate: UNUserNotificationCenterDelegate {
-    
-    
-    
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        print("Notification Created")
-    }
-    
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        let userInfo = response.notification.request.content.userInfo
-        
-    }
-}
+//extension AppDelegate: UNUserNotificationCenterDelegate {
+//    
+//    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+////        routerPath.navigate(to: MovieDetailView(id: response.))
+//    }
+//}
+

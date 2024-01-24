@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import TMDb
+import MediaClient
 
 
 
@@ -30,7 +30,7 @@ import TMDb
         Task {
             do {
                 let data = try await fetchMovieDetailData()
-                self.posterImageURL = try await ImageLoaderS.generate(from: data.movie.posterPath)
+                self.posterImageURL = ImageService.shared.posterURL(for: data.movie.posterPath)
                 self.state = .loaded(data)
             } catch {
                 self.state = .failed(error)

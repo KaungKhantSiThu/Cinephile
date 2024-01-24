@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import TMDb
+import MediaClient
 
 protocol DataLoader {
     associatedtype Output: Identifiable
@@ -21,41 +21,43 @@ protocol DataLoader {
 
 struct MovieLoader: DataLoader {
 
-    var movieService: MovieService!
-    var trendingService: TrendingService!
-
     
     init() {
-        movieService = MovieService()
-        trendingService = TrendingService()
+        
     }
     
     func loadItem(withID id: Movie.ID) async throws -> Movie {
-        return try await movieService.details(forMovie: id)
+        return try await APIService.shared.get(endpoint: MoviesEndpoint.details(movieID: id))
     }
     
     func loadTrendingItems() async throws -> [Movie] {
-        return try await trendingService.movies(inTimeWindow: .week, page: 1).results
+        let moviePagebleList: MoviePageableList = try await APIService.shared.get(endpoint: TrendingEndpoint.movies(timeWindow: .week))
+        return moviePagebleList.results
     }
     
     func loadCastMembers(withID id: Movie.ID) async throws -> [CastMember] {
-        return try await movieService.credits(forMovie: id).cast
+        let showCredits: ShowCredits = try await APIService.shared.get(endpoint: MoviesEndpoint.credits(movieID: id))
+        return showCredits.cast
     }
     
     func loadRecommendedItems(withID id: Movie.ID) async throws -> [Movie] {
-        return try await movieService.recommendations(forMovie: id).results
+        let moviePagebleList: MoviePageableList = try await APIService.shared.get(endpoint: MoviesEndpoint.recommendations(movieID: id))
+        return moviePagebleList.results
     }
     
     func loadUpcomingItems() async throws -> [Movie] {
-        return try await movieService.upcoming().results
+        let moviePagebleList: MoviePageableList = try await APIService.shared.get(endpoint: MoviesEndpoint.upcoming())
+        return moviePagebleList.results
     }
     
     func loadVideos(withID id: Movie.ID) async throws -> [VideoMetadata] {
-        return try await movieService.videos(forMovie: id).results
+        let videoCollection: VideoCollection = try await APIService.shared.get(endpoint: MoviesEndpoint.videos(movieID: id, languageCode: Locale.preferredLanguages[0]))
+        return videoCollection.results
     }
     
     func loadShowWatchProvider(withID id: Int) async throws -> ShowWatchProvider? {
-        return try await movieService.watchProviders(forMovie: id)
+        let result: ShowWatchProviderResult = try await APIService.shared.get(endpoint: MoviesEndpoint.watch(movieID: id))
+        return result.results[Locale.current.region?.identifier ?? "us"]
     }
     
 }
@@ -64,42 +66,40 @@ struct TVSeriesLoader: DataLoader {
     
     typealias Output = TVSeries
     
-    var tvSeriesService: TVSeriesService!
-    var trendingService: TrendingService!
-    var episodeService: TVEpisodeService!
     
-    init() {
-        tvSeriesService = TVSeriesService()
-        trendingService = TrendingService()
-        episodeService = TVEpisodeService()
-    }
+    init() { }
     
     func loadItem(withID id: TVSeries.ID) async throws -> TVSeries {
-        return try await tvSeriesService.details(forTVSeries: id)
+        return try await APIService.shared.get(endpoint: TVSeriesEndpoint.details(tvSeriesID: id))
     }
     
     func loadTrendingItems() async throws -> [TVSeries] {
-        return try await trendingService.tvSeries(inTimeWindow: .week, page: 1).results
+        let tvSeriesPagebleList: TVSeriesPageableList = try await APIService.shared.get(endpoint: TrendingEndpoint.tvSeries(timeWindow: .week))
+        return tvSeriesPagebleList.results
     }
     
-    func loadCastMembers(withID id: Int) async throws -> [CastMember] {
-        return try await tvSeriesService.credits(forTVSeries: id).cast
+    func loadCastMembers(withID id: TVSeries.ID) async throws -> [CastMember] {
+        let showCredits: ShowCredits = try await APIService.shared.get(endpoint: TVSeriesEndpoint.credits(tvSeriesID: id))
+        return showCredits.cast
     }
     
     func loadRecommendedItems(withID id: TVSeries.ID) async throws -> [TVSeries] {
-        return try await tvSeriesService.recommendations(forTVSeries: id).results
+        let tvSeriesPagebleList: TVSeriesPageableList = try await APIService.shared.get(endpoint: TVSeriesEndpoint.recommendations(tvSeriesID: id))
+        return tvSeriesPagebleList.results
     }
     
-    //Need to be fixed
     func loadUpcomingItems() async throws -> [TVSeries] {
-        return try await tvSeriesService.popular().results
+        let tvSeriesPagebleList: TVSeriesPageableList = try await APIService.shared.get(endpoint: TVSeriesEndpoint.popular())
+        return tvSeriesPagebleList.results
     }
     
     func loadVideos(withID id: TVSeries.ID) async throws -> [VideoMetadata] {
-        return try await tvSeriesService.videos(forTVSeries: id).results
+        let videoCollection: VideoCollection = try await APIService.shared.get(endpoint: TVSeriesEndpoint.videos(tvSeriesID: id, languageCode: Locale.preferredLanguages[0]))
+        return videoCollection.results
     }
     
     func loadShowWatchProvider(withID id: Int) async throws -> ShowWatchProvider? {
-        return try await tvSeriesService.watchProviders(forTVSeries: id)
+        let result: ShowWatchProviderResult = try await APIService.shared.get(endpoint: TVSeriesEndpoint.watch(tvSeriesID: id))
+        return result.results[Locale.current.region?.identifier ?? "us"]
     }
 }

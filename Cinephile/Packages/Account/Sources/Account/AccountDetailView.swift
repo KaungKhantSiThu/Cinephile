@@ -180,12 +180,14 @@ public struct AccountDetailView: View {
                                bottom: 0,
                                trailing: .layoutPadding))
           .listRowSeparator(.hidden)
-          .listRowBackground(theme.primaryBackgroundColor)
+//          .listRowBackground(theme.primaryBackgroundColor)
         ForEach(viewModel.pinned) { status in
           StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
+                .padding(12)
+                .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
         }
         Rectangle()
-          .fill(theme.secondaryBackgroundColor)
+              .fill(.secondary)
           .frame(height: 12)
           .listRowInsets(.init())
           .listRowSeparator(.hidden)

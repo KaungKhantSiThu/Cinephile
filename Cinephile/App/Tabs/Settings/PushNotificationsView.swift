@@ -69,7 +69,7 @@ struct PushNotificationsView: View {
                         subscription.isReblogNotificationEnabled = newValue
                         updateSubscription()
                     })) {
-                        Label("settings.push.boosts", image: "Rocket")
+                        Label("settings.push.boosts", systemImage: "arrow.2.squarepath")
                     }
                     Toggle(isOn: .init(get: {
                         subscription.isPollNotificationEnabled

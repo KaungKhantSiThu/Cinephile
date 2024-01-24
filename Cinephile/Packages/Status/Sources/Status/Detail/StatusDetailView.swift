@@ -120,7 +120,7 @@ public struct StatusDetailView: View {
                                                       scrollToId: $viewModel.scrollToId)
             let isFocused = self.viewModel.statusId == status.id
             
-            StatusRowView(viewModel: viewModel)
+            StatusRowView(viewModel: viewModel, context: .detail)
                 .environment(\.extraLeadingInset, !isCompact ? extraInsets : 0)
                 .environment(\.indentationLevel, !isCompact ? indentationLevel : 0)
                 .environment(\.isStatusFocused, isFocused)

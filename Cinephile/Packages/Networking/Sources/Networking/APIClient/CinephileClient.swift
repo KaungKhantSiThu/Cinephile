@@ -129,6 +129,7 @@ import os
       encoder.outputFormatting = .sortedKeys
       do {
         let jsonData = try encoder.encode(json)
+          print(String(data: jsonData, encoding: .utf8) ?? "")
         request.httpBody = jsonData
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
       } catch {

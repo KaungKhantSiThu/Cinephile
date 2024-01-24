@@ -22,6 +22,7 @@
 		7002F7162B1F5C99006DD407 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7002F7152B1F5C99006DD407 /* AppRouter.swift */; };
 		7002F72C2B2070F6006DD407 /* TrackerTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7002F72B2B2070F6006DD407 /* TrackerTab.swift */; };
 		700C9E282B32CDB30009038D /* CinephileApp+AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700C9E272B32CDB30009038D /* CinephileApp+AppDelegate.swift */; };
+		7013700D2B5D5F2B0054B2CA /* MediaClient in Frameworks */ = {isa = PBXBuildFile; productRef = 7013700C2B5D5F2B0054B2CA /* MediaClient */; };
 		701858AC2B511E1B000A9EC6 /* TMDb in Frameworks */ = {isa = PBXBuildFile; productRef = 701858AB2B511E1B000A9EC6 /* TMDb */; };
 		701F56EE2B2EBBE10043B71B /* AccountSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701F56ED2B2EBBE10043B71B /* AccountSettingView.swift */; };
 		701F56FB2B2EF0570043B71B /* Account in Frameworks */ = {isa = PBXBuildFile; productRef = 701F56FA2B2EF0570043B71B /* Account */; };
@@ -120,6 +121,7 @@
 		7002F7152B1F5C99006DD407 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		7002F72B2B2070F6006DD407 /* TrackerTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerTab.swift; sourceTree = "<group>"; };
 		700C9E272B32CDB30009038D /* CinephileApp+AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CinephileApp+AppDelegate.swift"; sourceTree = "<group>"; };
+		7013700B2B5CF45C0054B2CA /* MediaClient */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = MediaClient; path = Cinephile/Packages/MediaClient; sourceTree = "<group>"; };
 		701F56ED2B2EBBE10043B71B /* AccountSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingView.swift; sourceTree = "<group>"; };
 		701F56F32B2EEDB70043B71B /* Environment */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Environment; path = Cinephile/Packages/Environment; sourceTree = "<group>"; };
 		701F56F42B2EEE110043B71B /* Models */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Models; path = Cinephile/Packages/Models; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 				70BCF7582B2C9A9F00D7AB7E /* Nuke in Frameworks */,
 				709704A02B31FA290037F272 /* Lists in Frameworks */,
 				70E2E1C92B314A7400EC1180 /* Status in Frameworks */,
+				7013700D2B5D5F2B0054B2CA /* MediaClient in Frameworks */,
 				706768EC2B4BC2F4008ACBF8 /* AVKit.framework in Frameworks */,
 				70967F452B53CB5E00EB4CD2 /* Notifications in Frameworks */,
 				701F56FF2B2EF05E0043B71B /* CinephileUI in Frameworks */,
@@ -308,6 +311,7 @@
 		707960232AEBA0A700AB748D = {
 			isa = PBXGroup;
 			children = (
+				7013700B2B5CF45C0054B2CA /* MediaClient */,
 				70967F492B53CC7500EB4CD2 /* Notifications */,
 				7097049E2B31F97B0037F272 /* Lists */,
 				708B801E2B31DC0500D72A35 /* Timeline */,
@@ -457,6 +461,7 @@
 				701858AB2B511E1B000A9EC6 /* TMDb */,
 				70967F442B53CB5E00EB4CD2 /* Notifications */,
 				70967F472B53CC0200EB4CD2 /* Notifications */,
+				7013700C2B5D5F2B0054B2CA /* MediaClient */,
 			);
 			productName = "TMDB Test";
 			productReference = 7079602C2AEBA0A700AB748D /* Cinephile.app */;
@@ -937,6 +942,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		7013700C2B5D5F2B0054B2CA /* MediaClient */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = MediaClient;
+		};
 		701858AB2B511E1B000A9EC6 /* TMDb */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 701858AA2B511E1B000A9EC6 /* XCRemoteSwiftPackageReference "TMDb" */;

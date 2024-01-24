@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import TMDb
+import MediaClient
 import Environment
 
 struct MoviesSection<Header: View, Content: View>: View {

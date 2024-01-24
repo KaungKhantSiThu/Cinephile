@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import TMDb
+import MediaClient
 
 
 @Observable class TVSeriesDetailViewModel: ObservableObject, LoadableObject {
@@ -29,7 +29,7 @@ import TMDb
         Task {
             do {
                 let data = try await fetchTVSeriesDetailData()
-                self.posterImageURL = try await ImageLoaderS.generate(from: data.tvSeries.posterPath)
+                self.posterImageURL = ImageService.shared.posterURL(for: data.tvSeries.posterPath)
                 self.state = .loaded(data)
             } catch {
                 self.state = .failed(error)

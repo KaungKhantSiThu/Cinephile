@@ -220,11 +220,11 @@ extension TimelineViewModel: StatusesFetcher {
         }
     }
     
-    func fetchStatuses(from: Marker.Content) async throws {
+    func fetchStatuses(from marker: Marker.Content) async throws {
         guard let client else { return }
         statusesState = .loading
         var statuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
-                                                                                  maxId: from.lastReadId,
+                                                                                  maxId: marker.lastReadId,
                                                                                   minId: nil,
                                                                                   offset: 0))
         
@@ -233,7 +233,7 @@ extension TimelineViewModel: StatusesFetcher {
         
         await datasource.set(statuses)
         await cache()
-        marker = nil
+        self.marker = nil
         
         withAnimation {
             statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
@@ -246,10 +246,13 @@ extension TimelineViewModel: StatusesFetcher {
         guard let client else { return }
         do {
             if let marker {
+                logger.info("Fetching Newest Statuses using marker")
                 try await fetchStatuses(from: marker)
             } else if await datasource.isEmpty {
+                logger.info("Fetching Newest Statuses from the first page")
                 try await fetchFirstPage(client: client)
             } else if let latest = await datasource.get().first, timeline.supportNewestPagination {
+                logger.info("Fetching Newest Statuses since the latest status")
                 pendingStatusesObserver.isLoadingNewStatuses = !pullToRefresh
                 try await fetchNewPagesFrom(latestStatus: latest.id, client: client)
             }

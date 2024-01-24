@@ -7,6 +7,15 @@
 
 import Foundation
 
+public enum MediaType: String, Codable, CaseIterable, Hashable, Equatable, Sendable {
+    case movie
+    case tvSeries = "series"
+    
+    public static func == (lhs: MediaType, rhs: MediaType) -> Bool {
+      lhs.rawValue == rhs.rawValue
+    }
+}
+
 public struct TrackerMedia: Codable, Equatable, Hashable, Identifiable {
     public static func == (lhs: TrackerMedia, rhs: TrackerMedia) -> Bool {
       lhs.id == rhs.id
@@ -14,15 +23,6 @@ public struct TrackerMedia: Codable, Equatable, Hashable, Identifiable {
 
     public func hash(into hasher: inout Hasher) {
       hasher.combine(id)
-    }
-    
-    public enum MediaType: String, Codable, CaseIterable, Hashable, Equatable, Sendable {
-        case movie
-        case tvSeries
-        
-        public static func == (lhs: MediaType, rhs: MediaType) -> Bool {
-          lhs.rawValue == rhs.rawValue
-        }
     }
     
     public struct Genre: Identifiable, Codable, Equatable, Hashable {

@@ -36,7 +36,7 @@ public struct PosterImage: View {
                 ProgressView()
             }
         }
-        .frame(height: height)
+        .frame(width: height * 0.7, height: height)
         .clipShape(
             RoundedRectangle(cornerRadius: roundedCorner ? 10 : 0)
         )

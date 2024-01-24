@@ -189,6 +189,7 @@ extension StatusEditor {
                                 trackerMediaSheet
                             }
                             
+                            //language button
                             Button {
                                 isLanguageSheetDisplayed.toggle()
                             } label: {
@@ -329,6 +330,7 @@ extension StatusEditor {
                                                     releasedDate: movie.releaseDate,
                                                     voteAverage: movie.voteAverage,
                                                     mediaType: .movie)
+                                                
                                                 isTrackerMediaPickerSheetDisplay = false
                                             }
                                         }

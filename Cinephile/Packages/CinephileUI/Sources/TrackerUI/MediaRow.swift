@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import TMDb
+import MediaClient
 import NukeUI
 
 public struct MediaRow: View {
@@ -15,13 +15,13 @@ public struct MediaRow: View {
     let posterPath: URL?
     let type: MediaType
     
-    @State private var posterImage = URL(string: "https://picsum.photos/200/300")!
+//    @State private var posterImage = URL(string: "https://picsum.photos/200/300")!
      
     var action: () -> Void
     
     public var body: some View {
         HStack {
-            PosterImage(url: posterImage)
+            PosterImage(url: ImageService.shared.posterURL(for: posterPath))
             
             VStack(alignment: .leading) {
                 Text(type.rawValue)
@@ -53,13 +53,13 @@ public struct MediaRow: View {
         }
         .padding()
         .frame(height: 150)
-        .task {
-            do {
-                posterImage = try await ImageLoaderS.generate(from: posterPath)
-            } catch {
-                print("poster URL is nil")
-            }
-        }
+//        .task {
+//            do {
+//                posterImage = try await ImageLoaderS.generate(from: posterPath)
+//            } catch {
+//                print("poster URL is nil")
+//            }
+//        }
     }
 }
 

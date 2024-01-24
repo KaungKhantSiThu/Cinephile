@@ -1,5 +1,5 @@
 import SwiftUI
-import TMDb
+import MediaClient
 import Environment
 
 @MainActor
@@ -43,7 +43,7 @@ public struct MovieDetailView: View {
                         // what if there isn't a released date and the user wanna just add it to watchlist
                         if let releaseDate = data.movie.releaseDate {
                             Task {
-                                await notificationManager.notificationAttachment(name: data.movie.title, url: viewModel.posterImageURL, scheduleAt:  releaseDate)
+                                await notificationManager.notificationAttachment(name: data.movie.title, url: viewModel.posterImageURL)
                             }
                         }
                     } label: {
@@ -65,10 +65,10 @@ public struct MovieDetailView: View {
 
 
 
-#Preview {
-    let tmdbConfiguration = TMDbConfiguration(apiKey: ProcessInfo.processInfo.environment["TMDB_API_KEY"] ?? "")
-    TMDb.configure(tmdbConfiguration)
-    return NavigationStack {
-        MovieDetailView(id: 550)
-    }
-}
+//#Preview {
+//    let tmdbConfiguration = TMDbConfiguration(apiKey: ProcessInfo.processInfo.environment["TMDB_API_KEY"] ?? "")
+//    TMDb.configure(tmdbConfiguration)
+//    return NavigationStack {
+//        MovieDetailView(id: 550)
+//    }
+//}

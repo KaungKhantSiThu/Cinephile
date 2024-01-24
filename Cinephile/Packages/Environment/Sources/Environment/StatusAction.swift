@@ -60,11 +60,11 @@ public enum StatusAction: String, CaseIterable, Identifiable {
         case .reply:
             return outside ? .gray : Color(white: 0.45)
         case .quote:
-            return outside ? .gray : Color(white: 0.45)
+            return outside ? .yellow : Color(white: 0.45)
         case .boost:
-            return themeTintColor
+            return .green
         case .favorite:
-            return .yellow
+            return .red
         case .bookmark:
             return .pink
         }
