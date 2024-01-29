@@ -92,6 +92,9 @@
     "EMAIL" : {
 
     },
+    "Log in" : {
+
+    },
     "Log out" : {
 
     },
@@ -392,7 +395,14 @@
         }
       }
     },
+    "Sign up" : {
+
+    },
+    "Sign Up" : {
+
+    },
     "SignIn" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -403,11 +413,23 @@
       }
     },
     "Sing Up" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sign Up"
+          }
+        }
+      }
+    },
+    "timeline.entertainment" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entertainment"
           }
         }
       }

@@ -10,7 +10,7 @@ struct StatusRowTagView: View {
     if let tag = viewModel.finalStatus.content.links.first(where: { link in
       link.type == .hashtag && currentAccount.tags.contains(where: { $0.name.lowercased() == link.title.lowercased() })
     }) {
-      Text("#\(tag.title)", bundle: .module)
+      Text("#\(tag.title)")
         .font(.scaledFootnote)
         .foregroundStyle(.secondary)
         .fontWeight(.semibold)

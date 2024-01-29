@@ -21,8 +21,8 @@ public enum Notifications: Endpoint {
 
   public func queryItems() -> [URLQueryItem]? {
     switch self {
-    case let .notifications(mindId, maxId, types, limit):
-      var params = makePaginationParam(sinceId: nil, maxId: maxId, mindId: mindId) ?? []
+    case let .notifications(minId, maxId, types, limit):
+      var params = makePaginationParam(sinceId: nil, maxId: maxId, minId: minId) ?? []
       params.append(.init(name: "limit", value: String(limit)))
       if let types {
         for type in types {

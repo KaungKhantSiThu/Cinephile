@@ -41,9 +41,21 @@ public struct MovieDetailView: View {
                     Rating(voteCount: data.movie.voteCount ?? 0, voteAverage: data.movie.voteAverage ?? 0.0)
                     Button {
                         // what if there isn't a released date and the user wanna just add it to watchlist
+                        
                         if let releaseDate = data.movie.releaseDate {
+                            let _ = Calendar.current.dateComponents([.year, .month, .day], from: releaseDate)
                             Task {
-                                await notificationManager.notificationAttachment(name: data.movie.title, url: viewModel.posterImageURL)
+                                let mediaNotification = MediaNotification(
+                                    scheduleType: .time,
+                                    title: "Release Alert",
+                                    body: "\(data.movie.title) is out tomorrow",
+                                    imageURL: viewModel.posterImageURL,
+                                    userInfo: [
+                                        "id": data.movie.id,
+                                        "type": "movie"
+                                    ],
+                                    timeInterval: 5)
+                                await notificationManager.schedule(localNotification: mediaNotification)
                             }
                         }
                     } label: {

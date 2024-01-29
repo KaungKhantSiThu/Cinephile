@@ -445,6 +445,9 @@
         }
       }
     },
+    "Search Movies" : {
+
+    },
     "Search Movies, Series, Cast" : {
 
     },
@@ -1391,9 +1394,6 @@
       }
     },
     "Trending Movies" : {
-
-    },
-    "Trending TV Series" : {
 
     },
     "Your post" : {

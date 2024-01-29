@@ -4,6 +4,9 @@
     "#%@" : {
       "comment" : "Tag name"
     },
+    "%@" : {
+
+    },
     "%lld" : {
 
     },
@@ -161,12 +164,25 @@
         }
       }
     },
+    "Info" : {
+
+    },
     "see-more" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "See more"
+          }
+        }
+      }
+    },
+    "timeline.entertainment" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entertainment"
           }
         }
       }

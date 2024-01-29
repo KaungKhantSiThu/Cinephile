@@ -24,7 +24,7 @@ struct CinephileApp: App {
     @State var currentInstance = CurrentInstance.shared
     @State var userPreferences = UserPreferences.shared
     @State var pushNotificationsService = PushNotificationsService.shared
-    @State var watcher = StreamWatcher()
+    @State var watcher = StreamWatcher.shared
     @State var quickLook = QuickLook.shared
     @State var theme = Theme.shared
     //    @State var sideBarRouterPath = RouterPath()
@@ -51,6 +51,7 @@ struct CinephileApp: App {
                 .onAppear {
                     setNewClientsInEnv(client: appAccountsManager.currentClient)
                     refreshPushSubs()
+                    appDelegate.routerPath = RouterPath()
                 }
                 .task {
                     do {

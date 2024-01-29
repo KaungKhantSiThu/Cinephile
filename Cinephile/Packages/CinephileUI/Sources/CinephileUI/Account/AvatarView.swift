@@ -23,18 +23,18 @@ public struct AvatarView: View {
     }
     
     public init(_ avatar: URL? = nil, config: FrameConfiguration = .status) {
-      self.avatar = avatar
-      self.config = config
+        self.avatar = avatar
+        self.config = config
     }
     
     private var adaptiveConfiguration: FrameConfiguration {
-      var cornerRadius: CGFloat
-      if config == .badge {
-        cornerRadius = config.width / 2
-      } else {
-        cornerRadius = config.cornerRadius
-      }
-      return FrameConfiguration(width: config.width, height: config.height, cornerRadius: cornerRadius)
+        var cornerRadius: CGFloat
+        if config == .badge {
+            cornerRadius = config.width / 2
+        } else {
+            cornerRadius = config.cornerRadius
+        }
+        return FrameConfiguration(width: config.width, height: config.height, cornerRadius: cornerRadius)
     }
 }
 
@@ -46,62 +46,66 @@ struct AvatarImage: View {
     
     var body: some View {
         if reasons == .placeholder {
-            
+            AvatarPlaceHolder(config: config)
         } else {
             LazyImage(request: ImageRequest(url: avatar, processors: [.resize(size: config.size)])
             ) { state in
-              if let image = state.image {
-                image
-                      .resizable()
-                      .scaledToFit()
-              } else if state.error != nil {
-                  Image("avatar_placeholder", bundle: .module)
-                      .resizable()
-                      .scaledToFit()
-              }
+                if let image = state.image {
+                  image
+                    .resizable()
+                    .scaledToFit()
+                    .clipShape(RoundedRectangle(cornerRadius: config.cornerRadius))
+                    .overlay(
+                      RoundedRectangle(cornerRadius: config.cornerRadius)
+                        .stroke(.primary.opacity(0.25), lineWidth: 1)
+                    )
+                } else {
+                  RoundedRectangle(cornerRadius: config.cornerRadius)
+                    .stroke(.primary.opacity(0.25), lineWidth: 1)
+                }
             }
             
             .clipShape(Circle())
             .overlay(
-              Circle()
-                .stroke(.primary.opacity(0.25), lineWidth: 1)
+                Circle()
+                    .stroke(.primary.opacity(0.25), lineWidth: 1)
             )
         }
     }
 }
 
 struct AvatarPlaceHolder: View {
-  let config: AvatarView.FrameConfiguration
-
-  var body: some View {
-    RoundedRectangle(cornerRadius: config.cornerRadius)
-      .fill(.gray)
-      .frame(width: config.width, height: config.height)
-  }
+    let config: AvatarView.FrameConfiguration
+    
+    var body: some View {
+        RoundedRectangle(cornerRadius: config.cornerRadius)
+            .fill(.gray)
+            .frame(width: config.width, height: config.height)
+    }
 }
 
 extension AvatarView {
     public struct FrameConfiguration: Equatable {
-      public let size: CGSize
-      public var width: CGFloat { size.width }
-      public var height: CGFloat { size.height }
-      let cornerRadius: CGFloat
-
-      init(width: CGFloat, height: CGFloat, cornerRadius: CGFloat = 4) {
-        self.size = CGSize(width: width, height: height)
-        self.cornerRadius = cornerRadius
-      }
-
-      public static let account = FrameConfiguration(width: 80, height: 80)
-  #if targetEnvironment(macCatalyst)
-      public static let status = FrameConfiguration(width: 48, height: 48)
-  #else
-      public static let status = FrameConfiguration(width: 40, height: 40)
-  #endif
-      public static let embed = FrameConfiguration(width: 34, height: 34)
-      public static let badge = FrameConfiguration(width: 28, height: 28, cornerRadius: 14)
-      public static let list = FrameConfiguration(width: 20, height: 20, cornerRadius: 10)
-      public static let boost = FrameConfiguration(width: 12, height: 12, cornerRadius: 6)
+        public let size: CGSize
+        public var width: CGFloat { size.width }
+        public var height: CGFloat { size.height }
+        let cornerRadius: CGFloat
+        
+        init(width: CGFloat, height: CGFloat, cornerRadius: CGFloat = 4) {
+            self.size = CGSize(width: width, height: height)
+            self.cornerRadius = cornerRadius
+        }
+        
+        public static let account = FrameConfiguration(width: 80, height: 80)
+#if targetEnvironment(macCatalyst)
+        public static let status = FrameConfiguration(width: 48, height: 48)
+#else
+        public static let status = FrameConfiguration(width: 40, height: 40)
+#endif
+        public static let embed = FrameConfiguration(width: 34, height: 34)
+        public static let badge = FrameConfiguration(width: 28, height: 28, cornerRadius: 14)
+        public static let list = FrameConfiguration(width: 20, height: 20, cornerRadius: 10)
+        public static let boost = FrameConfiguration(width: 12, height: 12, cornerRadius: 6)
     }
 }
 

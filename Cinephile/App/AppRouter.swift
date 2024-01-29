@@ -78,6 +78,12 @@ extension View {
             case .tagsList(tags: _):
                 //                TagsListView(tags: tags)
                 EmptyView()
+            case let .media(id, title):
+                TimelineView(timeline: .constant(.media(id: id, title: title)),
+                             selectedTagGroup: .constant(nil),
+                             scrollToTopSignal: .constant(0),
+                             canFilterTimeline: false)
+
             }
         }
     }

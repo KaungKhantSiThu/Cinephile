@@ -16,12 +16,12 @@ public enum Entertainments: Endpoint {
     public func path() -> String {
         switch self {
         case .post:
-            "cinphile/entertainments"
+            "cinephile/entertainments"
         case let .get(id):
-            "cinphile/entertainments/\(id)"
+            "cinephile/entertainments/\(id)"
             
         case .search:
-            "cinphile/entertainments/search"
+            "cinephile/entertainments/search"
         }
     }
     

@@ -8,7 +8,7 @@ struct StatusRowContentView: View {
     @Environment(\.redactionReasons) private var reasons
     @Environment(\.isCompact) private var isCompact
     @Environment(\.isStatusFocused) private var isFocused
-    
+    @Environment(RouterPath.self) private var routerPath
     @Environment(Theme.self) private var theme
     
     var viewModel: StatusRowViewModel
@@ -29,6 +29,14 @@ struct StatusRowContentView: View {
             if let entertainment = viewModel.finalStatus.entertainments.first {
                 StatusEntertainmentView(entertainment: entertainment)
                     .padding(.top, 10)
+                    .onTapGesture {
+                        switch entertainment.mediaType {
+                        case .movie:
+                            routerPath.navigate(to: .media(id: entertainment.id, title: ""))
+                        case .tvSeries:
+                            routerPath.navigate(to: .seriesDetail(id: Int(entertainment.mediaId) ?? entertainment.id))
+                        }
+                    }
             }
             
             if !reasons.contains(.placeholder),
@@ -75,5 +83,6 @@ struct StatusRowContentView: View {
             routerPath: RouterPath())
     )
     .environment(Theme.shared)
+    .environment(RouterPath())
     .environment(\.isStatusFocused, true)
 }

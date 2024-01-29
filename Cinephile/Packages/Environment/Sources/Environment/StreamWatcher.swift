@@ -27,6 +27,8 @@ import Observation
     public var unreadNotificationsCount: Int = 0
     public var latestEvent: (any StreamEvent)?
     
+    public static let shared = StreamWatcher()
+    
     public init() {
         decoder.keyDecodingStrategy = .convertFromSnakeCase
     }
@@ -149,5 +151,23 @@ import Observation
             print("Raw data: \(rawEvent.payload)")
             return nil
         }
+    }
+    
+    public func emitDeleteEvent(for status: String) {
+      let event = StreamEventDelete(status: status)
+      self.events.append(event)
+      self.latestEvent = event
+    }
+    
+    public func emitEditEvent(for status: Status) {
+      let event = StreamEventStatusUpdate(status: status)
+      self.events.append(event)
+      self.latestEvent = event
+    }
+    
+    public func emitPostEvent(for status: Status) {
+      let event = StreamEventUpdate(status: status)
+      self.events.append(event)
+      self.latestEvent = event
     }
 }

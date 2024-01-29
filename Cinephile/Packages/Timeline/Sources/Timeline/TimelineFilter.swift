@@ -38,6 +38,8 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable {
     case remoteLocal(server: String, filter: RemoteTimelineFilter)
     case latest
     case resume
+    case entertainment
+    case media(id: Int, title: String)
     
     public var id: String {
         title
@@ -49,9 +51,9 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable {
     
     public static func availableTimeline(client: Client) -> [TimelineFilter] {
         if !client.isAuth {
-            return [.local, .federated, .trending]
+            return [.local, .federated, .trending, .entertainment]
         }
-        return [.home, .local, .federated, .trending]
+        return [.home, .local, .federated, .trending, .entertainment]
     }
     
     public var supportNewestPagination: Bool {
@@ -81,12 +83,16 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable {
             "Home"
         case let .hashtag(tag, _):
             "#\(tag)"
-//        case let .tagGroup(title, _):
-//            title
-//        case let .list(list):
-//            list.title
+            //        case let .tagGroup(title, _):
+            //            title
+            //        case let .list(list):
+            //            list.title
         case let .remoteLocal(server, _):
             server
+        case .entertainment:
+            "Entertainment"
+        case let .media(_, title):
+            "\(title)"
         }
     }
     
@@ -106,12 +112,16 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable {
             "timeline.home"
         case let .hashtag(tag, _):
             "#\(tag)"
-//        case let .tagGroup(title, _):
-//            LocalizedStringKey(title) // ?? not sure since this can't be localized.
-//        case let .list(list):
-//            LocalizedStringKey(list.title)
+            //        case let .tagGroup(title, _):
+            //            LocalizedStringKey(title) // ?? not sure since this can't be localized.
+            //        case let .list(list):
+            //            LocalizedStringKey(list.title)
         case let .remoteLocal(server, _):
             LocalizedStringKey(server)
+        case .entertainment:
+            "timeline.entertainment"
+        case let .media(_, title):
+            "\(title)"
         }
     }
     
@@ -129,18 +139,28 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable {
             "chart.line.uptrend.xyaxis"
         case .home:
             "house"
-//        case .list:
-//            "list.bullet"
+            //        case .list:
+            //            "list.bullet"
         case .remoteLocal:
             "dot.radiowaves.right"
-//        case .tagGroup:
-//            "tag"
+            //        case .tagGroup:
+            //            "tag"
         case .hashtag:
             "number"
+        case .entertainment:
+            "movieclapper"
+        case .media:
+            "movieclapper"
         }
     }
     
-    public func endpoint(sinceId: String?, maxId: String?, minId: String?, offset: Int?) -> Endpoint {
+    public func endpoint(sinceId: String?,
+                         maxId: String?,
+                         minId: String?,
+                         offset: Int?,
+                         entertainmentId: Int? = nil,
+                         mediaType: MediaType? = nil
+    ) -> Endpoint {
         switch self {
         case .federated: return Timelines.pub(sinceId: sinceId, maxId: maxId, minId: minId, local: false)
         case .local: return Timelines.pub(sinceId: sinceId, maxId: maxId, minId: minId, local: true)
@@ -157,21 +177,23 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable {
         case .resume: return Timelines.home(sinceId: nil, maxId: nil, minId: nil)
         case .home: return Timelines.home(sinceId: sinceId, maxId: maxId, minId: minId)
         case .trending: return Trends.statuses(offset: offset)
-//        case let .list(list): return Timelines.list(listId: list.id, sinceId: sinceId, maxId: maxId, minId: minId)
+            //        case let .list(list): return Timelines.list(listId: list.id, sinceId: sinceId, maxId: maxId, minId: minId)
         case let .hashtag(tag, accountId):
             if let accountId {
                 return Accounts.statuses(id: accountId, sinceId: nil, tag: tag, onlyMedia: nil, excludeReplies: nil, pinned: nil)
             } else {
                 return Timelines.hashtag(tag: tag, additional: nil, maxId: maxId)
             }
-//        case let .tagGroup(_, tags):
-//            var tags = tags
-//            if !tags.isEmpty {
-//                let tag = tags.removeFirst()
-//                return Timelines.hashtag(tag: tag, additional: tags, maxId: maxId, minId: minId)
-//            } else {
-//                return Timelines.hashtag(tag: "", additional: tags, maxId: maxId, minId: minId)
-//            }
+            //        case let .tagGroup(_, tags):
+            //            var tags = tags
+            //            if !tags.isEmpty {
+            //                let tag = tags.removeFirst()
+            //                return Timelines.hashtag(tag: tag, additional: tags, maxId: maxId, minId: minId)
+            //            } else {
+            //                return Timelines.hashtag(tag: "", additional: tags, maxId: maxId, minId: minId)
+            //            }
+        case .entertainment: return Timelines.entertainment(entertainmentId: entertainmentId, mediaType: mediaType, sinceId: sinceId, maxId: maxId, minId: minId, onlyMedia: nil, withReplies: nil, onlyEntertainment: true, local: true)
+        case let .media(id, _): return Timelines.entertainment(entertainmentId: id, mediaType: mediaType, sinceId: sinceId, maxId: maxId, minId: minId, onlyMedia: nil, withReplies: nil, onlyEntertainment: true, local: true)
         }
     }
 }
@@ -183,11 +205,13 @@ extension TimelineFilter: Codable {
         case federated
         case trending
         case hashtag
-        case tagGroup
-        case list
+        //        case tagGroup
+        //        case list
         case remoteLocal
         case latest
         case resume
+        case entertainment
+        case media
     }
     
     public init(from decoder: Decoder) throws {
@@ -210,20 +234,20 @@ extension TimelineFilter: Codable {
                 tag: tag,
                 accountId: accountId
             )
-//        case .tagGroup:
-//            var nestedContainer = try container.nestedUnkeyedContainer(forKey: .tagGroup)
-//            let title = try nestedContainer.decode(String.self)
-//            let tags = try nestedContainer.decode([String].self)
-//            self = .tagGroup(
-//                title: title,
-//                tags: tags
-//            )
-//        case .list:
-//            let list = try container.decode(
-//                Models.List.self,
-//                forKey: .list
-//            )
-//            self = .list(list: list)
+            //        case .tagGroup:
+            //            var nestedContainer = try container.nestedUnkeyedContainer(forKey: .tagGroup)
+            //            let title = try nestedContainer.decode(String.self)
+            //            let tags = try nestedContainer.decode([String].self)
+            //            self = .tagGroup(
+            //                title: title,
+            //                tags: tags
+            //            )
+            //        case .list:
+            //            let list = try container.decode(
+            //                Models.List.self,
+            //                forKey: .list
+            //            )
+            //            self = .list(list: list)
         case .remoteLocal:
             var nestedContainer = try container.nestedUnkeyedContainer(forKey: .remoteLocal)
             let server = try nestedContainer.decode(String.self)
@@ -234,6 +258,14 @@ extension TimelineFilter: Codable {
             )
         case .latest:
             self = .latest
+            
+        case .entertainment:
+            self = .entertainment
+        case .media:
+            var nestedContainer = try container.nestedUnkeyedContainer(forKey: .media)
+            let id = try nestedContainer.decode(Int.self)
+            let title = try nestedContainer.decode(String.self)
+            self = .media(id: id, title: title)
         default:
             throw DecodingError.dataCorrupted(
                 DecodingError.Context(
@@ -259,12 +291,12 @@ extension TimelineFilter: Codable {
             var nestedContainer = container.nestedUnkeyedContainer(forKey: .hashtag)
             try nestedContainer.encode(tag)
             try nestedContainer.encode(accountId)
-//        case let .tagGroup(title, tags):
-//            var nestedContainer = container.nestedUnkeyedContainer(forKey: .tagGroup)
-//            try nestedContainer.encode(title)
-//            try nestedContainer.encode(tags)
-//        case let .list(list):
-//            try container.encode(list, forKey: .list)
+            //        case let .tagGroup(title, tags):
+            //            var nestedContainer = container.nestedUnkeyedContainer(forKey: .tagGroup)
+            //            try nestedContainer.encode(title)
+            //            try nestedContainer.encode(tags)
+            //        case let .list(list):
+            //            try container.encode(list, forKey: .list)
         case let .remoteLocal(server, filter):
             var nestedContainer = container.nestedUnkeyedContainer(forKey: .remoteLocal)
             try nestedContainer.encode(server)
@@ -273,6 +305,12 @@ extension TimelineFilter: Codable {
             try container.encode(CodingKeys.latest.rawValue, forKey: .latest)
         case .resume:
             try container.encode(CodingKeys.resume.rawValue, forKey: .latest)
+        case .entertainment:
+            try container.encode(CodingKeys.entertainment.rawValue, forKey: .entertainment)
+        case let .media(id, title):
+            var nestedContainer = container.nestedUnkeyedContainer(forKey: .media)
+            try nestedContainer.encode(id)
+            try nestedContainer.encode(title)
         }
     }
 }

@@ -75,20 +75,17 @@ private var logger = Logger(subsystem: "TrackerExploreView", category: "ViewMode
     
     public struct DiscoverMedia {
         public let popularMovies: [Movie]
-        public let popularTVSeries: [TVSeries]
         public let upcomingMovies: [Movie]
     }
     
     
     private func fetchDiscoverMedia() async throws -> DiscoverMedia {
         async let popularMovies: MoviePageableList = APIService.shared.get(endpoint: MoviesEndpoint.popular())
-        async let popularTVSeries: TVSeriesPageableList = APIService.shared.get(endpoint: TVSeriesEndpoint.popular())
         async let upcomingMovies: MoviePageableList = APIService.shared.get(endpoint: MoviesEndpoint.upcoming())
         
 
         return try await .init(
             popularMovies: popularMovies.results,
-            popularTVSeries: popularTVSeries.results,
             upcomingMovies: upcomingMovies.results
         )
     }
@@ -96,20 +93,21 @@ private var logger = Logger(subsystem: "TrackerExploreView", category: "ViewMode
     public func search() async throws {
         guard !self.searchText.isEmpty else { return }
         do {
-            switch searchScope {
-            case .all:
-                let mediaPagableList: MediaPageableList = try await APIService.shared.get(endpoint: SearchEndpoint.multi(query: searchText))
-                self.medias = mediaPagableList.results
-            case .movie:
-                let mediaPagableList: MoviePageableList = try await APIService.shared.get(endpoint: SearchEndpoint.movies(query: searchText))
-                self.medias = mediaPagableList.results.map { Media.movie($0) }
-            case .tvSeries:
-                let mediaPagableList: TVSeriesPageableList = try await APIService.shared.get(endpoint: SearchEndpoint.tvSeries(query: searchText))
-                self.medias = mediaPagableList.results.map { Media.tvSeries($0) }
-            case .people:
-                let mediaPagableList: PersonPageableList = try await APIService.shared.get(endpoint: SearchEndpoint.people(query: searchText))
-                self.medias = mediaPagableList.results.map { Media.person($0) }
-            }
+            let mediaPagableList: MoviePageableList = try await APIService.shared.get(endpoint: SearchEndpoint.movies(query: searchText))
+            self.medias = mediaPagableList.results.map { Media.movie($0) }
+//            switch searchScope {
+//            case .all:
+//                let mediaPagableList: MediaPageableList = try await APIService.shared.get(endpoint: SearchEndpoint.multi(query: searchText))
+//                self.medias = mediaPagableList.results
+//            case .movie:
+//                
+//            case .tvSeries:
+//                let mediaPagableList: TVSeriesPageableList = try await APIService.shared.get(endpoint: SearchEndpoint.tvSeries(query: searchText))
+//                self.medias = mediaPagableList.results.map { Media.tvSeries($0) }
+//            case .people:
+//                let mediaPagableList: PersonPageableList = try await APIService.shared.get(endpoint: SearchEndpoint.people(query: searchText))
+//                self.medias = mediaPagableList.results.map { Media.person($0) }
+//            }
             
 //            isSearching = false
         } catch {

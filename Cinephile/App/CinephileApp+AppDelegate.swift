@@ -13,6 +13,7 @@ import AppAccount
 import CinephileUI
 
 class AppDelegate: NSObject, UIApplicationDelegate {
+    weak var routerPath: RouterPath?
     
     func application(_: UIApplication,
                      didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool
@@ -50,10 +51,23 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 
 
-//extension AppDelegate: UNUserNotificationCenterDelegate {
-//
-//    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-////        routerPath.navigate(to: MovieDetailView(id: response.))
-//    }
-//}
+extension AppDelegate: UNUserNotificationCenterDelegate {
+
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        print("Notification tapped!")
+
+        let userInfo = response.notification.request.content.userInfo
+        let id = userInfo["id"] as! Int
+        let type = userInfo["type"] as! String
+        print("\(id) : \(type)")
+        if type == "movie" {
+            print("Going to Movie Detail from notification")
+            routerPath?.navigate(to: .movieDetail(id: id))
+        } else {
+            print("Going to TV Series Detail from notification")
+            routerPath?.navigate(to: .seriesDetail(id: id))
+        }
+        
+    }
+}
 

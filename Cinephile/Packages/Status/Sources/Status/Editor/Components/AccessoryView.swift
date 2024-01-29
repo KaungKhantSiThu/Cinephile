@@ -342,28 +342,28 @@ extension StatusEditor {
                                     .font(.title).bold()
                             }
                             
-                            Section {
-                                ScrollView {
-                                    VStack {
-                                        ForEach(value.popularTVSeries) { series in
-                                            MediaRow(tvSeries: series) {
-                                                viewModel.trackerMedia = TrackerMedia(
-                                                    id: series.id,
-                                                    title: series.name,
-                                                    posterURL: series.posterPath,
-                                                    releasedDate: series.firstAirDate,
-                                                    voteAverage: series.voteAverage,
-                                                    mediaType: .tvSeries)
-                                                isTrackerMediaPickerSheetDisplay = false
-                                            }
-                                        }
-                                    }
-                                }
-                                .scrollIndicators(.hidden)
-                            } header: {
-                                Text("Trending TV Series")
-                                    .font(.title).bold()
-                            }
+//                            Section {
+//                                ScrollView {
+//                                    VStack {
+//                                        ForEach(value.popularTVSeries) { series in
+//                                            MediaRow(tvSeries: series) {
+//                                                viewModel.trackerMedia = TrackerMedia(
+//                                                    id: series.id,
+//                                                    title: series.name,
+//                                                    posterURL: series.posterPath,
+//                                                    releasedDate: series.firstAirDate,
+//                                                    voteAverage: series.voteAverage,
+//                                                    mediaType: .tvSeries)
+//                                                isTrackerMediaPickerSheetDisplay = false
+//                                            }
+//                                        }
+//                                    }
+//                                }
+//                                .scrollIndicators(.hidden)
+//                            } header: {
+//                                Text("Trending TV Series")
+//                                    .font(.title).bold()
+//                            }
                             
                             
                         }

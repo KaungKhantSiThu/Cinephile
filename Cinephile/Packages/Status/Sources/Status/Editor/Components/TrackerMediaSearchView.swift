@@ -51,22 +51,22 @@ extension StatusEditor {
                                     .font(.title).bold()
                             }
                             
-                            Section {
-                                ScrollView {
-                                    VStack {
-                                        ForEach(value.popularTVSeries) { series in
-                                            MediaRow(tvSeries: series) {
-                                                print("")
-                                            }
-                                            .frame(width: 100)
-                                        }
-                                    }
-                                }
-                                .scrollIndicators(.hidden)
-                            } header: {
-                                Text("Trending TV Series")
-                                    .font(.title).bold()
-                            }
+//                            Section {
+//                                ScrollView {
+//                                    VStack {
+//                                        ForEach(value.popularTVSeries) { series in
+//                                            MediaRow(tvSeries: series) {
+//                                                print("")
+//                                            }
+//                                            .frame(width: 100)
+//                                        }
+//                                    }
+//                                }
+//                                .scrollIndicators(.hidden)
+//                            } header: {
+//                                Text("Trending TV Series")
+//                                    .font(.title).bold()
+//                            }
                             
                             
                         }
@@ -80,12 +80,12 @@ extension StatusEditor {
                 .searchable(text: $model.searchText,
                             isPresented: $model.isSearchPresented,
                             placement: .navigationBarDrawer(displayMode: .always),
-                            prompt: Text("Search Movies, Series, Cast"))
-                .searchScopes($model.searchScope) {
-                    ForEach(TrackerExploreViewModel.SearchScope.allCases, id: \.self) { scope in
-                        Text(scope.localizedString)
-                    }
-                }
+                            prompt: Text("Search Movies"))
+//                .searchScopes($model.searchScope) {
+//                    ForEach(TrackerExploreViewModel.SearchScope.allCases, id: \.self) { scope in
+//                        Text(scope.localizedString)
+//                    }
+//                }
                 .task(id: model.searchText) {
                     do {
                         try await Task.sleep(for: .milliseconds(150))

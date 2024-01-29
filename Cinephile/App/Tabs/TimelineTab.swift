@@ -120,6 +120,9 @@ struct TimelineTab: View {
         .onReceive(NotificationCenter.default.publisher(for: .homeTimeline)) { _ in
             timeline = .home
         }
+        .onReceive(NotificationCenter.default.publisher(for: .entertainmentTimeline)) { _ in
+            timeline = .entertainment
+        }
         .withSafariRouter()
         .environment(routerPath)
     }

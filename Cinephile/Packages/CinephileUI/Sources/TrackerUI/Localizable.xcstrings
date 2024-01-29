@@ -140,6 +140,7 @@
       }
     },
     "Popular TV Series" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -172,7 +173,11 @@
         }
       }
     },
+    "Search Movies" : {
+
+    },
     "Search Movies, TV Series, People" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

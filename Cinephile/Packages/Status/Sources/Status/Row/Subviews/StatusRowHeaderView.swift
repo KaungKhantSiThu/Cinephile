@@ -54,7 +54,7 @@ struct StatusRowHeaderView: View {
       VStack(alignment: .leading, spacing: 2) {
         HStack(alignment: .firstTextBaseline, spacing: 2) {
           Group {
-            EmojiTextApp(.init(stringValue: viewModel.finalStatus.account.safeDisplayName),
+              EmojiTextApp(viewModel.finalStatus.account.cachedDisplayName,
                          emojis: viewModel.finalStatus.account.emojis)
               .font(.scaledSubheadline)
               //.foregroundColor(theme.labelColor)

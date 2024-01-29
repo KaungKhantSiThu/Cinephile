@@ -69,9 +69,9 @@ public enum Statuses: Endpoint {
   public func queryItems() -> [URLQueryItem]? {
     switch self {
     case let .rebloggedBy(_, maxId):
-      return makePaginationParam(sinceId: nil, maxId: maxId, mindId: nil)
+      return makePaginationParam(sinceId: nil, maxId: maxId, minId: nil)
     case let .favoritedBy(_, maxId):
-      return makePaginationParam(sinceId: nil, maxId: maxId, mindId: nil)
+      return makePaginationParam(sinceId: nil, maxId: maxId, minId: nil)
     case let .translate(_, lang):
       if let lang {
         return [.init(name: "lang", value: lang)]

@@ -93,7 +93,10 @@ extension StatusEditor {
         var spoilerOn: Bool = false
         var spoilerText: String = ""
         
+        var postingProgress: Double = 0.0
+        var postingTimer: Timer?
         var isPosting: Bool = false
+        
         var mediaPickers: [PhotosPickerItem] = [] {
             didSet {
                 if mediaPickers.count > 4 {
@@ -136,6 +139,18 @@ extension StatusEditor {
         
         var shouldDisablePollButton: Bool {
             !mediaPickers.isEmpty
+        }
+        
+        var allMediaHasDescription: Bool {
+            var everyMediaHasAltText: Bool = true;
+            mediaContainers.forEach { mediaContainer in
+                if (((mediaContainer.mediaAttachment?.description) == nil) ||
+                    mediaContainer.mediaAttachment?.description?.count == 0) {
+                    everyMediaHasAltText = false
+                }
+            }
+
+            return everyMediaHasAltText;
         }
         
         var shouldDisplayDismissWarning: Bool {
@@ -194,6 +209,19 @@ extension StatusEditor {
         func postStatus() async -> Status? {
             guard let client else { return nil }
             do {
+                if postingTimer == nil {
+                  Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { timer in
+                    Task { @MainActor in
+                      if self.postingProgress < 100 {
+                        self.postingProgress += 0.5
+                      }
+                      if self.postingProgress >= 100 {
+                        self.postingTimer?.invalidate()
+                        self.postingTimer = nil
+                      }
+                    }
+                  }
+                }
                 isPosting = true
                 let postStatus: Status?
                 var pollData: StatusData.PollData?
@@ -239,20 +267,36 @@ extension StatusEditor {
                 switch mode {
                 case .new, .replyTo, .quote, .mention, .shareExtension:
                     postStatus = try await client.post(endpoint: Statuses.postStatus(json: data))
-                    
-                    if let entertainmentId = self.entertainmentId, let statusId = Int(postStatus!.id) {
-                        let data: StatusEntertainmentData = .init(statusId: statusId, entertainmentId: entertainmentId)
-                        let _ = try await client.post(endpoint: StatusEntertainment.post(json: data))
+                    if let postStatus {
+                        if let entertainmentId = self.entertainmentId, let statusId = Int(postStatus.id) {
+                            let data: StatusEntertainmentData = .init(statusId: statusId, entertainmentId: entertainmentId)
+                            let _ = try await client.post(endpoint: StatusEntertainment.post(json: data))
+                        }
+                        
+                        StreamWatcher.shared.emitPostEvent(for: postStatus)
                     }
+                    
                     
                 case let .edit(status):
                     postStatus = try await client.put(endpoint: Statuses.editStatus(id: status.id, json: data))
-                    
-                    if let entertainmentId = self.entertainmentId, let statusId = Int(postStatus!.id) {
-                        let data: StatusEntertainmentData = .init(statusId: statusId, entertainmentId: entertainmentId)
-                        let _ = try await client.post(endpoint: StatusEntertainment.post(json: data))
+                    if let postStatus {
+                        if let entertainmentId = self.entertainmentId, let statusId = Int(postStatus.id) {
+                            let data: StatusEntertainmentData = .init(statusId: statusId, entertainmentId: entertainmentId)
+                            let _ = try await client.post(endpoint: StatusEntertainment.post(json: data))
+                        }
+                        
+                        StreamWatcher.shared.emitEditEvent(for: postStatus)
+
                     }
                 }
+                
+                postingTimer?.invalidate()
+                postingTimer = nil
+                
+                withAnimation {
+                    postingProgress = 99.0
+                }
+                
                 //      HapticManager.shared.fireHaptic(.notification(.success))
                 if hasExplicitlySelectedLanguage, let selectedLanguage {
                     preferences?.markLanguageAsSelected(isoCode: selectedLanguage)
@@ -263,6 +307,10 @@ extension StatusEditor {
             } catch {
                 if let error = error as? Models.ServerError {
                     postingError = error.error
+                    showPostingErrorAlert = true
+                }
+                if let postError = error as? PostError {
+                    postingError = postError.description
                     showPostingErrorAlert = true
                 }
                 isPosting = false
@@ -647,7 +695,7 @@ extension StatusEditor {
             }
         }
         
-        func makeMediaContainer(from pickerItem: PhotosPickerItem) async -> MediaContainer? {
+        nonisolated func makeMediaContainer(from pickerItem: PhotosPickerItem) async -> MediaContainer? {
             await withTaskGroup(of: MediaContainer?.self, returning: MediaContainer?.self) { taskGroup in
                 taskGroup.addTask(priority: .high) { await Self.makeImageContainer(from: pickerItem) }
                 taskGroup.addTask(priority: .high) { await Self.makeGifContainer(from: pickerItem) }

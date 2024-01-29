@@ -69,7 +69,7 @@ public struct StatusRowView: View {
                             StatusRowReblogView(viewModel: viewModel)
                             StatusRowReplyView(viewModel: viewModel)
                         }
-                        .padding(.leading, AvatarView.FrameConfiguration.status.width + .statusColumnsSpacing)
+//                        .padding(.leading, AvatarView.FrameConfiguration.status.width + .statusColumnsSpacing)
                     }
                     
                     HStack(alignment: .top, spacing: .statusColumnsSpacing) {

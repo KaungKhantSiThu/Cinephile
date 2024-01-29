@@ -49,6 +49,7 @@ public struct TimelineView: View {
                 scrollToTopView
                 //          tagGroupHeaderView
                 tagHeaderView
+                entertainmentHeaderView
                 switch viewModel.timeline {
                 case .remoteLocal:
                     StatusesListView(fetcher: viewModel, client: client, routerPath: routerPath, isRemote: true)
@@ -97,6 +98,16 @@ public struct TimelineView: View {
         .toolbar {
             toolbarTitleView
             //      toolbarTagGroupButton
+            if let entertainment = viewModel.entertainment {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        routerPath.navigate(to: .movieDetail(id: Int(entertainment.mediaId) ?? entertainment.id))
+                    } label: {
+                        Label("Info", imageNamed: "info.circle")
+                    }
+
+                }
+            }
         }
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
@@ -170,7 +181,7 @@ public struct TimelineView: View {
                             .font(.scaledFootnote)
                             .foregroundStyle(.secondary)
                     }
-                    .accessibilityElement(children: .combine)
+//                    .accessibilityElement(children: .combine)
                     Spacer()
                     
                     Button {
@@ -186,6 +197,15 @@ public struct TimelineView: View {
                     }
                     .buttonStyle(.bordered)
                 }
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private var entertainmentHeaderView: some View {
+        if let entertainment = viewModel.entertainment {
+            headerView {
+                StatusEntertainmentView(entertainment: entertainment)
             }
         }
     }

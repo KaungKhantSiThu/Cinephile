@@ -100,6 +100,9 @@
         }
       }
     },
+    "action.cancel" : {
+
+    },
     "alert.button.ok" : {
       "localizations" : {
         "en" : {

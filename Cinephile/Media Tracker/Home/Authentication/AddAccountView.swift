@@ -26,7 +26,7 @@ struct AddAccountView: View {
         NavigationStack {
             VStack {
                 NavigationLink(destination: SignUpView()) {
-                         Text("SignIn")
+                         Text("Sign up")
                              .padding()
                              .background(Color.blue)
                              .foregroundColor(.white)
@@ -45,7 +45,7 @@ struct AddAccountView: View {
                     RoundedRectangle(cornerRadius: 10)
                         .frame(height: 60)
                         .overlay(
-                            Text("Login")
+                            Text("Log in")
                                 .foregroundColor(.white)
                                 .fontWeight(.bold)
                         )

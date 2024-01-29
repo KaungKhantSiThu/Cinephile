@@ -142,7 +142,7 @@ extension StatusEditor {
 }
 
 
-struct MovieFileTranseferable: Transferable {
+struct MovieFileTranseferable: Transferable, Sendable {
   let url: URL
 
   static var transferRepresentation: some TransferRepresentation {
@@ -166,7 +166,7 @@ public struct ImageFileTranseferable: Transferable, Sendable {
   }
 }
 
-struct GifFileTranseferable: Transferable {
+struct GifFileTranseferable: Transferable, Sendable {
   let url: URL
 
   var data: Data? {
