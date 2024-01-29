@@ -80,6 +80,9 @@
     "Add" : {
 
     },
+    "Already have an account? Login" : {
+
+    },
     "Confirm Password" : {
 
     },
@@ -89,22 +92,13 @@
     "Email" : {
 
     },
-    "EMAIL" : {
-
-    },
     "Log out" : {
-
-    },
-    "Login" : {
 
     },
     "Notifications" : {
 
     },
     "Password" : {
-
-    },
-    "PASSWORD" : {
 
     },
     "Remove" : {
@@ -392,7 +386,11 @@
         }
       }
     },
+    "Sign Up" : {
+
+    },
     "SignIn" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -521,9 +519,6 @@
       }
     },
     "Username" : {
-
-    },
-    "USERNAME" : {
 
     }
   },

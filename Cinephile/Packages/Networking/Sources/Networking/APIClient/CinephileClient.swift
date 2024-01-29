@@ -1,14 +1,6 @@
-//
-//  File.swift
-//  
-//
-//  Created by Kaung Khant Si Thu on 13/12/2023.
-//
-
 import Foundation
 import Models
 import os
-
 
 @Observable public final class Client: Equatable, Identifiable, Hashable {
   public static func == (lhs: Client, rhs: Client) -> Bool {

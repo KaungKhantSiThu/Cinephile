@@ -85,8 +85,3 @@ struct TrackerTab: View {
         }
     }
 }
-
-//#Preview {
-//    TrackerTab()
-//        .environment(RouterPath())
-//}
