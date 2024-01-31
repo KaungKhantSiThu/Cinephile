@@ -24,7 +24,23 @@ public struct MovieDetailView: View {
                 Text(data.movie.releaseDate ?? Date.now, format: .dateTime.year())
                 
                 // make it button so the users can search based on genre
-                Text(data.movie.genres?.map(\.name).joined(separator: ", ") ?? "No genre")
+                if let genres = data.movie.genres {
+                    
+                    FlowLayout(alignment: .center) {
+                        ForEach(genres) { genre in
+                            Label {
+                                Text(genre.name)
+                            } icon: {
+                                Image(systemName: "tag")
+                            }
+                            .labelStyle(.genre)
+                        }
+                    }
+                }
+                
+                if let status = data.movie.status {
+                    Text(status.rawValue)
+                }
                 
                 Divider()
                 
@@ -70,6 +86,14 @@ public struct MovieDetailView: View {
                 VideosRowView(videos: data.videos)
                 
                 CastMemberView(castMembers: data.castMembers)
+                
+                ScrollView(.horizontal) {
+                    HStack {
+                        ForEach(data.recommendations.prefix(10)) { movie in
+                            PosterImage(url: ImageService.shared.posterURL(for: movie.posterPath))
+                        }
+                    }
+                }
             }
         }
     }
@@ -77,10 +101,8 @@ public struct MovieDetailView: View {
 
 
 
-//#Preview {
-//    let tmdbConfiguration = TMDbConfiguration(apiKey: ProcessInfo.processInfo.environment["TMDB_API_KEY"] ?? "")
-//    TMDb.configure(tmdbConfiguration)
-//    return NavigationStack {
-//        MovieDetailView(id: 550)
-//    }
-//}
+#Preview {
+    return NavigationStack {
+        MovieDetailView(id: 550)
+    }
+}

@@ -13,7 +13,7 @@ protocol DataLoader {
     func loadItem(withID id: Output.ID) async throws -> Output
     func loadTrendingItems() async throws -> [Output]
     func loadCastMembers(withID id: Output.ID) async throws -> [CastMember]
-    func loadRecommendedItems(withID id: Output.ID) async throws -> [Output]
+    func loadRecommendations(withID id: Output.ID) async throws -> [Output]
     func loadUpcomingItems() async throws -> [Output]
     func loadVideos(withID id: Output.ID) async throws -> [VideoMetadata]
     func loadShowWatchProvider(withID id: Output.ID) async throws -> ShowWatchProvider?
@@ -40,7 +40,7 @@ struct MovieLoader: DataLoader {
         return showCredits.cast
     }
     
-    func loadRecommendedItems(withID id: Movie.ID) async throws -> [Movie] {
+    func loadRecommendations(withID id: Movie.ID) async throws -> [Movie] {
         let moviePagebleList: MoviePageableList = try await APIService.shared.get(endpoint: MoviesEndpoint.recommendations(movieID: id))
         return moviePagebleList.results
     }
@@ -83,7 +83,7 @@ struct TVSeriesLoader: DataLoader {
         return showCredits.cast
     }
     
-    func loadRecommendedItems(withID id: TVSeries.ID) async throws -> [TVSeries] {
+    func loadRecommendations(withID id: TVSeries.ID) async throws -> [TVSeries] {
         let tvSeriesPagebleList: TVSeriesPageableList = try await APIService.shared.get(endpoint: TVSeriesEndpoint.recommendations(tvSeriesID: id))
         return tvSeriesPagebleList.results
     }

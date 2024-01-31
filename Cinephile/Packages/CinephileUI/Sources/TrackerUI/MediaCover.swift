@@ -17,19 +17,21 @@ public struct MediaCover: View {
     public var body: some View {
         VStack(alignment: .leading) {
             PosterImage(url: ImageService.shared.posterURL(for: posterPath))
+            Text(format(date: releaseDate))
+                .font(.caption2)
+                .foregroundStyle(.secondary)
             
-            
-            VStack(alignment: .leading, spacing: 5) {
-                Text("\(title)", bundle: .module)
-                    .fontWeight(.semibold)
-                    .lineLimit(1)
-                    .font(.caption)
-                    .foregroundStyle(.primary)
-                
-                Text(format(date: releaseDate))
-                    .font(.caption2)
-                    .foregroundStyle(.secondary)
-            }
+//            VStack(alignment: .leading, spacing: 5) {
+//                Text("\(title)", bundle: .module)
+//                    .fontWeight(.semibold)
+//                    .lineLimit(1)
+//                    .font(.caption)
+//                    .foregroundStyle(.primary)
+//                
+//                Text(format(date: releaseDate))
+//                    .font(.caption2)
+//                    .foregroundStyle(.secondary)
+//            }
         }
 //        .task {
 //            do {
