@@ -51,7 +51,8 @@ extension StatusEditor {
                             PopularityBadge(score: 0, textColor: .gray)
                         }
                         
-                        if let genres = trackerMedia.genres {
+                        if let genres = trackerMedia.genres, !genres.isEmpty {
+                            
                             Text(genres.map { $0.name }.joined(separator: ", "))
                         } else {
                             Text("No genres")

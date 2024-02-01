@@ -47,6 +47,7 @@ import MediaClient
 
         return try await .init(movie: movie, castMembers: castMembers, videos: videos, showWatchProvider: showWatchProvider, recommendations: recommendations)
     }
+
 }
 
 extension MovieDetailViewModel {

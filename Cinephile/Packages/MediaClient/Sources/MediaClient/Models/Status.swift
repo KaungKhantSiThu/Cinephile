@@ -1,9 +1,9 @@
 import Foundation
-
+import SwiftUI
 ///
 /// A model representing a show's status.
 ///
-public enum Status: String, Codable, Equatable, Hashable {
+public enum Status: String, Codable, Equatable, Hashable, Identifiable, CaseIterable {
 
     ///
     /// Rumoured.
@@ -34,5 +34,22 @@ public enum Status: String, Codable, Equatable, Hashable {
     /// Cancelled.
     ///
     case cancelled = "Canceled"
+    
+    public var id: String { rawValue }
+    
+    public var color: Color {
+        switch self {
+        case .rumoured, .planned:
+            Color.gray
+        case .inProduction:
+            Color.yellow
+        case .postProduction:
+            Color.orange
+        case .released:
+            Color.green
+        case .cancelled:
+            Color.red
+        }
+    }
 
 }

@@ -12,10 +12,11 @@ import OSLog
 private let logger = Logger(subsystem: "Tracker", category: "NotificationManager")
 
 @MainActor
-public class MediaNotificationManager: NSObject, ObservableObject {
+@Observable
+public class MediaNotificationManager: NSObject {
     let notificationCenter = UNUserNotificationCenter.current()
-    @Published var isGranted = false
-    @Published var pendingRequests: [UNNotificationRequest] = []
+    var isGranted = false
+    var pendingRequests: [UNNotificationRequest] = []
     
     public override init() {
         super.init()

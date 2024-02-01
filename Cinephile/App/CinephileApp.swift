@@ -13,7 +13,7 @@ import Networking
 
 @main
 struct CinephileApp: App {
-    @StateObject var notificationManager = MediaNotificationManager()
+    @State var notificationManager = MediaNotificationManager()
     
     @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate
     
@@ -27,6 +27,7 @@ struct CinephileApp: App {
     @State var watcher = StreamWatcher.shared
     @State var quickLook = QuickLook.shared
     @State var theme = Theme.shared
+    @State var networkManager = NetworkManager()
     //    @State var sideBarRouterPath = RouterPath()
     
     @State var isSupporter: Bool = false
@@ -61,7 +62,7 @@ struct CinephileApp: App {
                     }
                     
                 }
-                .environmentObject(notificationManager)
+                .environment(notificationManager)
                 .environment(appAccountsManager)
                 .environment(appAccountsManager.currentClient)
                 .environment(quickLook)
@@ -71,6 +72,7 @@ struct CinephileApp: App {
                 .environment(theme)
                 .environment(watcher)
                 .environment(pushNotificationsService)
+                .environment(networkManager)
                 .environment(\.isSupporter, isSupporter)
                 .sheet(item: $quickLook.selectedMediaAttachment) { selectedMediaAttachment in
                     MediaUIView(selectedAttachment: selectedMediaAttachment,

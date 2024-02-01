@@ -32,7 +32,7 @@ public struct VideosRowView: View {
             }
             .scrollIndicators(.never)
         }
-        .padding()
+        .padding([.leading, .trailing], 20)
     }
 }
 

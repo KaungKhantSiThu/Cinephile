@@ -14,6 +14,7 @@
 
     },
     "Add Moive" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -32,6 +33,9 @@
           }
         }
       }
+    },
+    "Added" : {
+
     },
     "all" : {
       "localizations" : {
@@ -62,6 +66,9 @@
           }
         }
       }
+    },
+    "Connect to the internet and try again." : {
+
     },
     "Days" : {
       "localizations" : {
@@ -108,6 +115,9 @@
           }
         }
       }
+    },
+    "No connection" : {
+
     },
     "No search Results" : {
       "localizations" : {
@@ -161,6 +171,9 @@
       }
     },
     "RATINGS" : {
+
+    },
+    "Recommendations" : {
 
     },
     "Retry" : {
@@ -252,6 +265,9 @@
           }
         }
       }
+    },
+    "Watchlist" : {
+
     }
   },
   "version" : "1.0"

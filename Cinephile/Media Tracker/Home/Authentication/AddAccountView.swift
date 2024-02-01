@@ -18,7 +18,7 @@ struct AddAccountView: View {
     @State private var isSigninIn  = false
     @State private var instanceFetchError: String?
     
-    private let instanceName: String = "polar-brushlands-19893-4c4dfbb9419d.herokuapp.com"
+    private let instanceName: String = "cinephile-26be9689548e.herokuapp.com"
 
 //    @StateObject private var formViewModel = FormViewModel()
     

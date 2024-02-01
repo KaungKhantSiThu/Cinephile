@@ -406,7 +406,7 @@ extension StatusEditor {
                 .searchable(text: $model.searchText,
                             isPresented: $model.isSearchPresented,
                             placement: .navigationBarDrawer(displayMode: .always),
-                            prompt: Text("Search Movies, Series, Cast"))
+                            prompt: Text("Search Movies"))
                 .task(id: model.searchText) {
                     do {
                         try await Task.sleep(for: .milliseconds(150))

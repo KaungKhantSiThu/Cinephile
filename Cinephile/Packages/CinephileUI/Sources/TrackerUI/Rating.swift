@@ -18,9 +18,9 @@ public struct Rating: View {
     }
     
     public var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             HStack {
-                Text(voteCount, format: .number)
+                Text(voteCount, format: .number.notation(.compactName))
                 Text("RATINGS")
             }
             .font(.caption)
@@ -28,19 +28,19 @@ public struct Rating: View {
             .foregroundStyle(.secondary)
             
             HStack {
-                Image("tmdb_logo")
+                Image("tmdb_logo", bundle: .module)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 50)
+                    .frame(width: 40)
                 Text(voteAverage, format: .number.precision(.fractionLength(1)))
                     .font(.title)
                     .fontWeight(.bold)
             }
-            
-            StarsView(rating: voteAverage / 2 , maxRating: 5)
-                .frame(width: 80)
-                .padding(.top, -10)
+//            StarsView(rating: voteAverage / 2 , maxRating: 5)
+//                .frame(width: 80)
+//                .padding(.top, -10)
         }
+        .padding()
     }
 }
 

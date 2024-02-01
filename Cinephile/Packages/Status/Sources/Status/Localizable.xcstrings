@@ -448,9 +448,6 @@
     "Search Movies" : {
 
     },
-    "Search Movies, Series, Cast" : {
-
-    },
     "settings.swipeactions.status.action.bookmark" : {
       "extractionState" : "manual",
       "localizations" : {

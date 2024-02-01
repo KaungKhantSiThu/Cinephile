@@ -44,11 +44,9 @@ public struct StatusEntertainmentView: View {
                             PopularityBadge(score: 0, textColor: .gray)
                         }
                         
-                        if let genres = trackerMedia.genres  {
-                            if !genres.isEmpty {
-                                Text(genres.map { $0.name }.joined(separator: ", "))
-                                    .lineLimit(2)
-                            }
+                        if let genres = trackerMedia.genres, !genres.isEmpty  {
+                            Text(genres.map { $0.name }.joined(separator: ", "))
+                                .lineLimit(2)
                         } else {
                             Text("No genres")
                         }
@@ -68,7 +66,7 @@ public struct StatusEntertainmentView: View {
                     Spacer()
                 }
                 .padding(12)
-                .background(.thickMaterial, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+                .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
                 
 //                .task(id: trackerMedia) {
 //                    if let posterURL = trackerMedia.posterURL {
@@ -88,5 +86,5 @@ public struct StatusEntertainmentView: View {
 }
 
 #Preview {
-    return StatusEntertainmentView(entertainment: Status.placeholder().entertainments[1])
+    StatusEntertainmentView(entertainment: Status.placeholder().entertainments[1])
 }

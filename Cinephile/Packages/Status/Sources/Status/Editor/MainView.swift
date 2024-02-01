@@ -30,6 +30,9 @@ extension StatusEditor {
             NavigationStack {
                 ScrollView {
                     VStackLayout(spacing: 0) {
+//                        if viewModel.isPosting {
+//                            ProgressView(value: viewModel.postingProgress, total: 100.0)
+//                        }
                         EditorView(
                             viewModel: viewModel,
                             editingMediaContainer: $editingMediaContainer,

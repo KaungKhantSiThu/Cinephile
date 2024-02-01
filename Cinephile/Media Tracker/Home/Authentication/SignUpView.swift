@@ -21,7 +21,7 @@ struct SignUpView: View {
     //    @State private var instance: Instance?
     //    @State private var instanceFetchError: String?
     @State private var isSigningUp = false
-    private let instanceName: String = "polar-brushlands-19893-4c4dfbb9419d.herokuapp.com"
+    private let instanceName: String = "cinephile-26be9689548e.herokuapp.com"
     var body: some View {
         VStack {
             Form {
