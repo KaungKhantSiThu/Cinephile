@@ -67,24 +67,24 @@ public struct TrackerExploreView: View {
                             .bold()
                     }
                     
-                    Section {
-                        ScrollView(.horizontal) {
-                            HStack {
-                                ForEach(value.popularTVSeries) { series in
-                                    NavigationLink(value: RouterDestination.seriesDetail(id: series.id)) {
-                                        MediaCover(tvSeries: series)
-                                            .frame(width: 100)
-                                    }
-                                    .buttonStyle(.plain)
-                                }
-                            }
-                        }
-                        .scrollIndicators(.hidden)
-                    } header: {
-                        Label("Popular TV Series", systemImage: "flame")
-                            .font(.title)
-                            .bold()
-                    }
+//                    Section {
+//                        ScrollView(.horizontal) {
+//                            HStack {
+//                                ForEach(value.popularTVSeries) { series in
+//                                    NavigationLink(value: RouterDestination.seriesDetail(id: series.id)) {
+//                                        MediaCover(tvSeries: series)
+//                                            .frame(width: 100)
+//                                    }
+//                                    .buttonStyle(.plain)
+//                                }
+//                            }
+//                        }
+//                        .scrollIndicators(.hidden)
+//                    } header: {
+//                        Label("Popular TV Series", systemImage: "flame")
+//                            .font(.title)
+//                            .bold()
+//                    }
                     
                     
                 }
@@ -98,13 +98,7 @@ public struct TrackerExploreView: View {
         .searchable(text: $model.searchText,
                     isPresented: $model.isSearchPresented,
                     placement: .navigationBarDrawer(displayMode: .always),
-                    prompt: Text("Search Movies, TV Series, People"))
-        .searchScopes($model.searchScope) {
-            ForEach(TrackerExploreViewModel.SearchScope.allCases, id: \.self) { scope in
-                Text(scope.localizedString)
-                    .tag(scope)
-            }
-        }
+                    prompt: Text("Search Movies"))
         .task(id: model.searchText) {
             do {
 //                try await Task.sleep(for: .milliseconds(150))

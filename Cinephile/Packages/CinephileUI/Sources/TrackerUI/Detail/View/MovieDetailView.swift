@@ -4,7 +4,7 @@ import Environment
 
 @MainActor
 public struct MovieDetailView: View {
-    @EnvironmentObject var notificationManager: MediaNotificationManager
+    @Environment(MediaNotificationManager.self) var notificationManager: MediaNotificationManager
     @State private var isMovieAdded = false
     @State private var viewModel: MovieDetailViewModel
     
@@ -21,10 +21,31 @@ public struct MovieDetailView: View {
                     .font(.title)
                     .fontWeight(.bold)
                 
-                Text(data.movie.releaseDate ?? Date.now, format: .dateTime.year())
+                HStack {
+                    Text(data.movie.releaseDate ?? Date.now, format: .dateTime.year())
+                    
+                    if let status = data.movie.status {
+                        MediaStatus(status: status)
+                    }
+                }
+                
                 
                 // make it button so the users can search based on genre
-                Text(data.movie.genres?.map(\.name).joined(separator: ", ") ?? "No genre")
+                if let genres = data.movie.genres {
+                    
+                    FlowLayout(alignment: .center) {
+                        ForEach(genres) { genre in
+                            Label {
+                                Text(genre.name)
+                            } icon: {
+                                Image(systemName: "tag")
+                            }
+                            .labelStyle(.genre)
+                        }
+                    }
+                }
+                
+                
                 
                 Divider()
                 
@@ -39,17 +60,33 @@ public struct MovieDetailView: View {
                 
                 HStack(spacing: 30) {
                     Rating(voteCount: data.movie.voteCount ?? 0, voteAverage: data.movie.voteAverage ?? 0.0)
-                    Button {
-                        // what if there isn't a released date and the user wanna just add it to watchlist
-                        if let releaseDate = data.movie.releaseDate {
-                            Task {
-                                await notificationManager.notificationAttachment(name: data.movie.title, url: viewModel.posterImageURL)
-                            }
-                        }
-                    } label: {
-                        Label("Add Moive", systemImage: "plus.circle.fill")
-                    }
-                    .buttonStyle(CustomButtonStyle())
+                    
+                    TrackerActionButton()
+                    
+//                    Button {
+//                        // what if there isn't a released date and the user wanna just add it to watchlist
+//                        
+//                        if let releaseDate = data.movie.releaseDate {
+//                            let _ = Calendar.current.dateComponents([.year, .month, .day], from: releaseDate)
+//                            Task {
+//                                let mediaNotification = MediaNotification(
+//                                    scheduleType: .time,
+//                                    title: "Release Alert",
+//                                    body: "\(data.movie.title) is out tomorrow",
+//                                    imageURL: viewModel.posterImageURL,
+//                                    userInfo: [
+//                                        "id": data.movie.id,
+//                                        "type": "movie"
+//                                    ],
+//                                    timeInterval: 5)
+//                                await notificationManager.schedule(localNotification: mediaNotification)
+//                            }
+//                        }
+//                    } label: {
+//                        Label("Watchlist", systemImage: "plus.circle.fill")
+//                    }
+//                    .tint(.accentColor)
+//                    .buttonStyle(.borderedProminent)
                 }
                                 
                 Text(data.movie.overview ?? "No overview")
@@ -58,6 +95,27 @@ public struct MovieDetailView: View {
                 VideosRowView(videos: data.videos)
                 
                 CastMemberView(castMembers: data.castMembers)
+                
+                VStack(alignment: .leading) {
+                    Text("Recommendations")
+                        .font(.title)
+                        .fontWeight(.semibold)
+                        .padding(.bottom, 10)
+                    
+                    ScrollView(.horizontal) {
+                        HStack {
+                            ForEach(data.recommendations) { movie in
+                                NavigationLink(value: RouterDestination.movieDetail(id: movie.id)) {
+                                    MediaCover(movie: movie)
+                                        .frame(width: 100)
+                                }
+                                .buttonStyle(.plain)
+                            }
+                        }
+                    }
+                    .scrollIndicators(.hidden)
+                }
+                .padding([.leading, .trailing], 20)
             }
         }
     }
@@ -65,10 +123,9 @@ public struct MovieDetailView: View {
 
 
 
-//#Preview {
-//    let tmdbConfiguration = TMDbConfiguration(apiKey: ProcessInfo.processInfo.environment["TMDB_API_KEY"] ?? "")
-//    TMDb.configure(tmdbConfiguration)
-//    return NavigationStack {
-//        MovieDetailView(id: 550)
-//    }
-//}
+#Preview {
+    return NavigationStack {
+        MovieDetailView(id: 550)
+            .environment(MediaNotificationManager())
+    }
+}

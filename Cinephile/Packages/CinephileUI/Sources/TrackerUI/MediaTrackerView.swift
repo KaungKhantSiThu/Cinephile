@@ -7,14 +7,19 @@
 
 import SwiftUI
 import MediaClient
+import Environment
 
 public struct MediaTrackerView: View {
-    
+    @Environment(NetworkManager.self) private var networkManager: NetworkManager
     public init() {}
     
     public var body: some View {
         VStack {
-            Text("View for Watchlist")
+            if networkManager.isConnected {
+                Text("View for Watchlist")
+            } else {
+                ContentUnavailableView("No connection", systemImage: "wifi.slash", description: Text("Connect to the internet and try again."))
+            }
         }
         .navigationTitle("Tracker")
         .navigationBarTitleDisplayMode(.inline)

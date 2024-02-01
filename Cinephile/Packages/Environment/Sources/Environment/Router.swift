@@ -93,6 +93,7 @@ public enum RouterDestination: Hashable {
     case trendingTimeline
     case trendingLinks(cards: [Card])
     case tagsList(tags: [Tag])
+    case media(id: Int, title: String)
 }
 
 @MainActor

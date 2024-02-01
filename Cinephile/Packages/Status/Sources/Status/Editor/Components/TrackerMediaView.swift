@@ -35,7 +35,7 @@ extension StatusEditor {
         var body: some View {
             ZStack(alignment: .topTrailing) {
                 HStack(alignment: .top, spacing: 25) {
-                    PosterImage(url: posterImage)
+                    PosterImage(url: ImageService.shared.posterURL(for: trackerMedia.posterURL))
                     
                     
                     VStack(alignment: .leading, spacing: 8) {
@@ -51,7 +51,8 @@ extension StatusEditor {
                             PopularityBadge(score: 0, textColor: .gray)
                         }
                         
-                        if let genres = trackerMedia.genres {
+                        if let genres = trackerMedia.genres, !genres.isEmpty {
+                            
                             Text(genres.map { $0.name }.joined(separator: ", "))
                         } else {
                             Text("No genres")
@@ -85,17 +86,17 @@ extension StatusEditor {
                 }
             }
             .padding(12)
-            .onChange(of: self.trackerMedia) { _, _ in
-                if let posterURL = trackerMedia.posterURL {
-                    
-//                    do {
-//                        posterImage = try await ImageLoaderS.generate(from: posterURL)
-//                    } catch {
-//                        print("poster URL is nil")
-//                    }
-                    posterImage = ImageService.shared.posterURL(for: posterURL)
-                }
-            }
+//            .onChange(of: self.trackerMedia) { _, _ in
+//                if let posterURL = trackerMedia.posterURL {
+//                    
+////                    do {
+////                        posterImage = try await ImageLoaderS.generate(from: posterURL)
+////                    } catch {
+////                        print("poster URL is nil")
+////                    }
+//                    posterImage = ImageService.shared.posterURL(for: posterURL)
+//                }
+//            }
         }
     }
 }

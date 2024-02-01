@@ -41,10 +41,10 @@ public struct NotificationsListView: View {
         }
         .toolbar {
             ToolbarItem(placement: .principal) {
-//                let title = lockedType?.menuTitle() ?? viewModel.selectedType?.menuTitle() ?? LocalizedStringKey("notifications.navigation-title")
-                let title = "All Notifications"
+                let title = lockedType?.menuTitle() ?? viewModel.selectedType?.menuTitle() ?? "notifications.navigation-title"
+
                 if lockedType == nil {
-                    Text(title)
+                    Text(title, bundle: .module)
                         .font(.headline)
                         .accessibilityRepresentation {
                             Menu(title) {}
@@ -53,7 +53,7 @@ public struct NotificationsListView: View {
                         .accessibilityRemoveTraits(.isButton)
                         .accessibilityRespondsToUserInteraction(true)
                 } else {
-                    Text(title)
+                    Text(title, bundle: .module)
                         .font(.headline)
                         .accessibilityAddTraits(.isHeader)
                 }

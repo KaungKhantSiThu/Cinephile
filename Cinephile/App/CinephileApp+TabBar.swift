@@ -27,17 +27,26 @@ extension CinephileApp {
                     tab.makeContentView(selectedTab: $selectedTab, popToRootTab: $popToRootTab)
                     .tabItem {
 //                      if userPreferences.showiPhoneTabLabel {
-//                        tab.label
+//                        tab.label 
 //                      } else {
 //                        Image(systemName: tab.iconName)
 //                      }
                         Label(tab.tabName, systemImage: tab.iconName)
                     }
                     .tag(tab)
-//                    .badge(badgeFor(tab: tab))
+                    .badge(badgeFor(tab: tab))
 //                    .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .tabBar)
                 }
             }
             .id(appAccountsManager.currentClient.id)
+//            .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
+    }
+    private func badgeFor(tab: Tab) -> Int {
+      if tab == .notifications, selectedTab != tab,
+         let token = appAccountsManager.currentAccount.oauthToken
+      {
+        return watcher.unreadNotificationsCount + (userPreferences.notificationsCount[token] ?? 0)
+      }
+      return 0
     }
 }

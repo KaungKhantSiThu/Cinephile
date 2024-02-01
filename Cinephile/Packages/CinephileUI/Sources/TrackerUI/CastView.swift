@@ -17,34 +17,22 @@ public struct CastView: View {
 //    @State private var posterImage = URL(string: "https://picsum.photos/200/300")!
     
     public var body: some View {
-        VStack(spacing: 20) {
-            LazyImage(url: ImageService.shared.posterURL(for: profilePath)) { state in
-                if let image = state.image {
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        
-                        
-                } else if state.error != nil {
-                    Color.red
-                } else {
-                    Color.gray
-                }
-            }
-            .frame(height: 140)
-            .clipShape(
-                RoundedRectangle(cornerRadius: 10)
-            )
+        VStack(alignment: .leading, spacing: 0) {
+            PosterImage(url: ImageService.shared.posterURL(for: profilePath))
  
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 0) {
                 Text(self.name)
+                    .fontWeight(.semibold)
+                    .lineLimit(1)
+                    .font(.caption)
+                    .foregroundStyle(.primary)
+                
                 Text(self.character)
-                    .font(.subheadline)
+                    .font(.caption2)
                     .foregroundStyle(.secondary)
             }
             .frame(maxWidth: 100)
         }
-        .padding(.leading, 20)
 //        .task {
 //            do {
 //                posterImage = try await ImageLoaderS.generate(from: self.profilePath)

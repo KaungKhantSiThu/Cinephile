@@ -14,6 +14,7 @@
 
     },
     "Add Moive" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -32,6 +33,9 @@
           }
         }
       }
+    },
+    "Added" : {
+
     },
     "all" : {
       "localizations" : {
@@ -62,6 +66,9 @@
           }
         }
       }
+    },
+    "Connect to the internet and try again." : {
+
     },
     "Days" : {
       "localizations" : {
@@ -109,6 +116,9 @@
         }
       }
     },
+    "No connection" : {
+
+    },
     "No search Results" : {
       "localizations" : {
         "en" : {
@@ -140,6 +150,7 @@
       }
     },
     "Popular TV Series" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -162,6 +173,9 @@
     "RATINGS" : {
 
     },
+    "Recommendations" : {
+
+    },
     "Retry" : {
       "localizations" : {
         "en" : {
@@ -172,7 +186,11 @@
         }
       }
     },
+    "Search Movies" : {
+
+    },
     "Search Movies, TV Series, People" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -247,6 +265,9 @@
           }
         }
       }
+    },
+    "Watchlist" : {
+
     }
   },
   "version" : "1.0"

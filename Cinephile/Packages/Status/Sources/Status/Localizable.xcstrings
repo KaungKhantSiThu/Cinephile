@@ -445,7 +445,7 @@
         }
       }
     },
-    "Search Movies, Series, Cast" : {
+    "Search Movies" : {
 
     },
     "settings.swipeactions.status.action.bookmark" : {
@@ -1391,9 +1391,6 @@
       }
     },
     "Trending Movies" : {
-
-    },
-    "Trending TV Series" : {
 
     },
     "Your post" : {

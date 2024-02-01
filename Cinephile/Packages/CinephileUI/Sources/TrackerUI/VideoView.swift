@@ -18,36 +18,22 @@ public struct VideoView: View {
     
     @State private var youtubePlayer: YouTubePlayer
     
-//    @State private var youtubePlayer: YouTubePlayer
-
     public var body: some View {
         VStack(alignment: .leading) {
             YouTubeView(videoId: id)
-                
-//            YouTubePlayerView(self.youtubePlayer) 
-//            { state in
-//                switch state {
-//                case .idle:
-//                    ProgressView()
-//                case .ready:
-//                    EmptyView()
-//                case .error(_):
-//                    Text(verbatim: "YouTube player couldn't be loaded")
-//                }
-//            }
                 .clipShape(RoundedRectangle(cornerRadius: 25))
                 .frame(width: 320, height: 180)
             Text(name)
                 .font(.headline)
                 .lineLimit(2)
-                .frame(width: 300)
+                .frame(maxWidth: 300)
         }
     }
     
 
     init(metaData: VideoMetadata) {
         self.name = metaData.name
-        self.id = metaData.id
+        self.id = metaData.key
         self._youtubePlayer = State(wrappedValue: .init(source: .video(id: metaData.id)))
     }
     

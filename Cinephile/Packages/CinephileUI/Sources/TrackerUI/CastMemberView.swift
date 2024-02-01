@@ -19,6 +19,7 @@ struct CastMemberView: View {
             }
             .scrollIndicators(.hidden)
         }
+        .padding([.leading, .trailing], 20)
     }
 }
 //

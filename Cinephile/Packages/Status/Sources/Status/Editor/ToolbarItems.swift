@@ -37,11 +37,12 @@ extension StatusEditor {
                         .opacity(viewModel.isPosting ? 0 : 1)
                         .overlay {
                             if viewModel.isPosting {
-                                ProgressView()
+                                ProgressView(value: viewModel.postingProgress, total: 100.0)
+                                    .progressViewStyle(.circular)
                             }
                         }
                 }
-                .disabled(!viewModel.canPost)
+                .disabled(!viewModel.canPost || viewModel.isPosting)
                 .keyboardShortcut(.return, modifiers: .command)
                 .confirmationDialog("", isPresented: $isLanguageConfirmPresented, actions: {
                     languageConfirmationDialog

@@ -10,7 +10,7 @@ import SwiftUI
 
 @MainActor
 enum Tab: Int, Identifiable, Hashable {
-    case tracker, timeline, profile, notifications, settings, other
+    case tracker, timeline, mentions, profile, notifications, settings, other
     
     nonisolated var id: Int {
         rawValue
@@ -39,6 +39,9 @@ enum Tab: Int, Identifiable, Hashable {
             SettingsTab(popToRootTab: popToRootTab, isModal: false)
         case .other:
             EmptyView()
+        case .mentions:
+            NotificationsTab(selectedTab: selectedTab, popToRootTab: popToRootTab, lockedType: .mention)
+
         }
     }
     
@@ -48,6 +51,8 @@ enum Tab: Int, Identifiable, Hashable {
         "person.3"
       case .notifications:
         "bell"
+      case .mentions:
+        "at"
       case .settings:
         "gear"
       case .profile:
@@ -69,6 +74,8 @@ enum Tab: Int, Identifiable, Hashable {
             "Profile"
         case .notifications:
             "Notifications"
+        case .mentions:
+            "Mentions"
         case .settings:
             "Settings"
         case .other:

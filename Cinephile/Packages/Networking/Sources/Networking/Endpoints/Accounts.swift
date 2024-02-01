@@ -129,9 +129,9 @@ public enum Accounts: Endpoint {
     case let .familiarFollowers(withAccount):
       return [.init(name: "id[]", value: withAccount)]
     case let .followers(_, maxId):
-      return makePaginationParam(sinceId: nil, maxId: maxId, mindId: nil)
+      return makePaginationParam(sinceId: nil, maxId: maxId, minId: nil)
     case let .following(_, maxId):
-      return makePaginationParam(sinceId: nil, maxId: maxId, mindId: nil)
+      return makePaginationParam(sinceId: nil, maxId: maxId, minId: nil)
     case let .favorites(sinceId):
       guard let sinceId else { return nil }
       return [.init(name: "max_id", value: sinceId)]
@@ -161,15 +161,15 @@ public struct AccountData : Codable, Sendable {
     var username : String
     var email : String
     var password : String
-    var aggreement : Bool
+    var agreement : Bool
     var reason : String
     var locale : String
     
-    init(username: String, email: String, password: String, aggreement: Bool = true, reason: String = "test", locale: String = "en") {
+    public init(username: String, email: String, password: String, agreement: Bool = true, reason: String = "test", locale: String = "en") {
         self.username = username
         self.email = email
         self.password = password
-        self.aggreement = aggreement
+        self.agreement = agreement
         self.reason = reason
         self.locale = locale
     }

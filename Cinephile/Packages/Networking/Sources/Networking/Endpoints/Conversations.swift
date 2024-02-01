@@ -19,7 +19,7 @@ public enum Conversations: Endpoint {
   public func queryItems() -> [URLQueryItem]? {
     switch self {
     case let .conversations(maxId):
-      makePaginationParam(sinceId: nil, maxId: maxId, mindId: nil)
+      makePaginationParam(sinceId: nil, maxId: maxId, minId: nil)
     default:
       nil
     }

@@ -43,9 +43,11 @@ import MediaClient
         async let castMembers = loader.loadCastMembers(withID: id)
         async let videos = loader.loadVideos(withID: id)
         async let showWatchProvider = loader.loadShowWatchProvider(withID: id)
-        
-        return try await .init(movie: movie, castMembers: castMembers, videos: videos, showWatchProvider: showWatchProvider)
+        async let recommendations = loader.loadRecommendations(withID: id)
+
+        return try await .init(movie: movie, castMembers: castMembers, videos: videos, showWatchProvider: showWatchProvider, recommendations: recommendations)
     }
+
 }
 
 extension MovieDetailViewModel {
@@ -54,5 +56,6 @@ extension MovieDetailViewModel {
         var castMembers: [CastMember]
         var videos: [VideoMetadata]
         var showWatchProvider: ShowWatchProvider?
+        var recommendations: [Movie]
     }
 }

@@ -39,6 +39,9 @@ private let logger = Logger(subsystem: "Timeline", category: "ViewModel")
                 switch timeline {
                 case let .hashtag(tag, _):
                     await fetchTag(id: tag)
+                    
+                case let .media(id, _):
+                    await fetchEntertainment(id: id)
                 default:
                     break
                 }
@@ -49,6 +52,8 @@ private let logger = Logger(subsystem: "Timeline", category: "ViewModel")
     private(set) var timelineTask: Task<Void, Never>?
     
     var tag: Tag?
+    
+    var entertainment: Entertainment?
     
     // Internal source of truth for a timeline.
     private(set) var datasource = TimelineDatasource()
@@ -113,7 +118,17 @@ private let logger = Logger(subsystem: "Timeline", category: "ViewModel")
             withAnimation {
                 self.tag = tag
             }
-        } catch {}
+        } catch { }
+    }
+    
+    private func fetchEntertainment(id: Int) async {
+        guard let client else { return }
+        do {
+            entertainment = try await client.get(endpoint: Entertainments.get(id: id))
+            withAnimation {
+                self.entertainment = entertainment
+            }
+        } catch { }
     }
     
     func reset() async {

@@ -10,16 +10,16 @@ import Models
 import TrackerUI
 
 @MainActor
-struct StatusEntertainmentView: View {
+public struct StatusEntertainmentView: View {
 //    @State private var posterImage = URL(string: "https://picsum.photos/200/300")!
     
     @State private var viewModel: StatusEntertainmentViewModel
     
-    init(entertainment: Entertainment) {
+    public init(entertainment: Entertainment) {
         _viewModel = State(wrappedValue: StatusEntertainmentViewModel(entertainment: entertainment))
     }
     
-    var body: some View {
+    public var body: some View {
         ZStack {
             if viewModel.isTrackerMediaLoading {
                 ProgressView()
@@ -44,8 +44,9 @@ struct StatusEntertainmentView: View {
                             PopularityBadge(score: 0, textColor: .gray)
                         }
                         
-                        if let genres = trackerMedia.genres {
+                        if let genres = trackerMedia.genres, !genres.isEmpty  {
                             Text(genres.map { $0.name }.joined(separator: ", "))
+                                .lineLimit(2)
                         } else {
                             Text("No genres")
                         }
@@ -65,7 +66,7 @@ struct StatusEntertainmentView: View {
                     Spacer()
                 }
                 .padding(12)
-                .background(.thickMaterial, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+                .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
                 
 //                .task(id: trackerMedia) {
 //                    if let posterURL = trackerMedia.posterURL {
@@ -85,5 +86,5 @@ struct StatusEntertainmentView: View {
 }
 
 #Preview {
-    return StatusEntertainmentView(entertainment: Status.placeholder().entertainments[1])
+    StatusEntertainmentView(entertainment: Status.placeholder().entertainments[1])
 }

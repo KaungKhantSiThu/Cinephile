@@ -342,28 +342,28 @@ extension StatusEditor {
                                     .font(.title).bold()
                             }
                             
-                            Section {
-                                ScrollView {
-                                    VStack {
-                                        ForEach(value.popularTVSeries) { series in
-                                            MediaRow(tvSeries: series) {
-                                                viewModel.trackerMedia = TrackerMedia(
-                                                    id: series.id,
-                                                    title: series.name,
-                                                    posterURL: series.posterPath,
-                                                    releasedDate: series.firstAirDate,
-                                                    voteAverage: series.voteAverage,
-                                                    mediaType: .tvSeries)
-                                                isTrackerMediaPickerSheetDisplay = false
-                                            }
-                                        }
-                                    }
-                                }
-                                .scrollIndicators(.hidden)
-                            } header: {
-                                Text("Trending TV Series")
-                                    .font(.title).bold()
-                            }
+//                            Section {
+//                                ScrollView {
+//                                    VStack {
+//                                        ForEach(value.popularTVSeries) { series in
+//                                            MediaRow(tvSeries: series) {
+//                                                viewModel.trackerMedia = TrackerMedia(
+//                                                    id: series.id,
+//                                                    title: series.name,
+//                                                    posterURL: series.posterPath,
+//                                                    releasedDate: series.firstAirDate,
+//                                                    voteAverage: series.voteAverage,
+//                                                    mediaType: .tvSeries)
+//                                                isTrackerMediaPickerSheetDisplay = false
+//                                            }
+//                                        }
+//                                    }
+//                                }
+//                                .scrollIndicators(.hidden)
+//                            } header: {
+//                                Text("Trending TV Series")
+//                                    .font(.title).bold()
+//                            }
                             
                             
                         }
@@ -406,7 +406,7 @@ extension StatusEditor {
                 .searchable(text: $model.searchText,
                             isPresented: $model.isSearchPresented,
                             placement: .navigationBarDrawer(displayMode: .always),
-                            prompt: Text("Search Movies, Series, Cast"))
+                            prompt: Text("Search Movies"))
                 .task(id: model.searchText) {
                     do {
                         try await Task.sleep(for: .milliseconds(150))

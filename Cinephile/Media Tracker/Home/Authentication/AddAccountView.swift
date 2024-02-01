@@ -18,7 +18,7 @@ struct AddAccountView: View {
     @State private var isSigninIn  = false
     @State private var instanceFetchError: String?
     
-    private let instanceName: String = "polar-brushlands-19893-4c4dfbb9419d.herokuapp.com"
+    private let instanceName: String = "cinephile-26be9689548e.herokuapp.com"
 
 //    @StateObject private var formViewModel = FormViewModel()
     
@@ -26,7 +26,7 @@ struct AddAccountView: View {
         NavigationStack {
             VStack {
                 NavigationLink(destination: SignUpView()) {
-                         Text("SignIn")
+                         Text("Sign up")
                              .padding()
                              .background(Color.blue)
                              .foregroundColor(.white)
@@ -45,7 +45,7 @@ struct AddAccountView: View {
                     RoundedRectangle(cornerRadius: 10)
                         .frame(height: 60)
                         .overlay(
-                            Text("Login")
+                            Text("Log in")
                                 .foregroundColor(.white)
                                 .fontWeight(.bold)
                         )

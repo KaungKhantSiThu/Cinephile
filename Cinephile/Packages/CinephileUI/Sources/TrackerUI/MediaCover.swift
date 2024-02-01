@@ -15,12 +15,11 @@ public struct MediaCover: View {
     
 //    @State private var posterImage = URL(string: "https://picsum.photos/200/300")!
     public var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 0) {
             PosterImage(url: ImageService.shared.posterURL(for: posterPath))
             
-            
-            VStack(alignment: .leading, spacing: 5) {
-                Text("\(title)", bundle: .module)
+            VStack(alignment: .leading, spacing: 0) {
+                Text("\(title)")
                     .fontWeight(.semibold)
                     .lineLimit(1)
                     .font(.caption)
@@ -65,9 +64,10 @@ public extension MediaCover {
 
 
 
-//#Preview(traits: .sizeThatFitsLayout) {
-//    let tmdbConfiguration = TMDbConfiguration(apiKey: "0b8723760cac397ab78965e78c1cd188")
-//    TMDb.configure(tmdbConfiguration)
-//    
-//    return MediaCover(title: "Fight Club", releaseDate: .now, posterPath: URL(string: "/fCayJrkfRaCRCTh8GqN30f8oyQF.jpg"))
-//}
+#Preview(traits: .sizeThatFitsLayout) {
+    
+    return MediaCover(
+        title: "Fight Club",
+        releaseDate: .now,
+        posterPath: URL(string: "/fCayJrkfRaCRCTh8GqN30f8oyQF.jpg"))
+}
