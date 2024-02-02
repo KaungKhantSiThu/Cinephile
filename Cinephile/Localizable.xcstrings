@@ -80,6 +80,12 @@
     "Add" : {
 
     },
+    "Already have an account? Login" : {
+
+    },
+    "Cinephile" : {
+
+    },
     "Confirm Password" : {
 
     },
@@ -92,13 +98,7 @@
     "EMAIL" : {
 
     },
-    "Log in" : {
-
-    },
     "Log out" : {
-
-    },
-    "Login" : {
 
     },
     "Notifications" : {
@@ -395,9 +395,6 @@
         }
       }
     },
-    "Sign up" : {
-
-    },
     "Sign Up" : {
 
     },
@@ -413,7 +410,6 @@
       }
     },
     "Sing Up" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
