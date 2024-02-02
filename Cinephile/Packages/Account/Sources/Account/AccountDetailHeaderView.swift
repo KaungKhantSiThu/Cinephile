@@ -1,10 +1,3 @@
-//
-//  AccountDetailHeaderView.swift
-//
-//
-//  Created by Kaung Khant Si Thu on 15/12/2023.
-//
-
 import SwiftUI
 import Environment
 import Models
@@ -19,7 +12,6 @@ struct AccountDetailHeaderView: View {
     @Environment(RouterPath.self) private var routerPath
     @Environment(CurrentAccount.self) private var currentAccount
     @Environment(QuickLook.self) private var quickLook
-
     @Environment(\.isSupporter) private var isSupporter: Bool
 
     let viewModel: AccountDetailViewModel
@@ -27,29 +19,49 @@ struct AccountDetailHeaderView: View {
     let scrollViewProxy: ScrollViewProxy?
     
     var body: some View {
-        VStack {
-            accountAvatarView
+        ZStack {
             VStack(alignment: .leading) {
-                Text(account.safeDisplayName)
-                    .font(.title)
-                    .foregroundStyle(.primary)
-                Text("@\(account.acct)")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
+                accountAvatarView
+                VStack(alignment: .leading) {
+                    Text(account.safeDisplayName)
+                        .font(.subheadline)
+                        .foregroundStyle(.primary)
+                        .padding(.top, 10)
+//                    Text("@\(account.acct)")
+//                        .font(.subheadline)
+//                        .foregroundStyle(.secondary)
+                }
             }
-                .padding(.top, 20)
-            accountInfoView
         }
+//        VStack(alignment: .leading) {
+//            accountAvatarView
+//            VStack(alignment: .leading) {
+//                Text(account.safeDisplayName)
+//                    .font(.title)
+//                    .foregroundStyle(.primary)
+//                Text("@\(account.acct)")
+//                    .font(.subheadline)
+//                    .foregroundStyle(.secondary)
+//            }
+////                .padding(.top, 10)
+//        }
     }
     
     private var accountAvatarView: some View {
-        ZStack(alignment: .topTrailing) {
-            AvatarView(account.avatar, config: .account)
-            if viewModel.isCurrentUser, isSupporter {
-                Image(systemName: "checkmark.seal.fill")
-                    .resizable()
-                    .frame(width: 25, height: 25)
+        ZStack {
+            HStack(spacing: 60) {
+                AvatarView(account.avatar, config: .account)
+                    .frame(width: 20, height: 20)
+                    .padding(.leading, 10)
+                    .padding(.trailing, 20)
+                if viewModel.isCurrentUser, isSupporter {
+                    Image(systemName: "checkmark.seal.fill")
+                        .resizable()
+                        .frame(width: 25, height: 25)
+                }
+                accountInfoView
             }
+            .padding()
         }
         .onTapGesture {
             guard account.haveAvatar else {
@@ -66,7 +78,7 @@ struct AccountDetailHeaderView: View {
     }
     
     private var accountInfoView: some View {
-        HStack {
+        HStack(spacing: 20) {
           Button {
             withAnimation {
               scrollViewProxy?.scrollTo("status", anchor: .top)
@@ -76,7 +88,6 @@ struct AccountDetailHeaderView: View {
           }
           .accessibilityHint("accessibility.tabs.profile.post-count.hint")
           .buttonStyle(.borderless)
-          .padding()
 
           Button {
             routerPath.navigate(to: .following(id: account.id))
@@ -85,7 +96,6 @@ struct AccountDetailHeaderView: View {
           }
           .accessibilityHint("accessibility.tabs.profile.following-count.hint")
           .buttonStyle(.borderless)
-          .padding()
 
 
           Button {
@@ -99,9 +109,7 @@ struct AccountDetailHeaderView: View {
           }
           .accessibilityHint("accessibility.tabs.profile.follower-count.hint")
           .buttonStyle(.borderless)
-          .padding()
-
-        }.offset(y: 20)
+        }
     }
     
     private func makeCustomInfoLabel(title: LocalizedStringKey, count: Int, needsBadge: Bool = false) -> some View {
@@ -119,7 +127,7 @@ struct AccountDetailHeaderView: View {
           }
           Text(title, bundle: .module)
           .font(.scaledFootnote)
-          .foregroundStyle(.secondary)
+          .foregroundStyle(.primary)
       }
       .accessibilityElement(children: .ignore)
       .accessibilityLabel(title)
