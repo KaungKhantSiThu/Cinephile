@@ -6,6 +6,7 @@
 	<true/>
 	<key>UIAppFonts</key>
 	<array>
+		<string>fonts/NovaMono-Regular.ttf</string>
 		<string>fonts/GentyDemo-Regular.otf</string>
 	</array>
 </dict>
