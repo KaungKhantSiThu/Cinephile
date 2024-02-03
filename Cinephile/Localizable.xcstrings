@@ -80,6 +80,12 @@
     "Add" : {
 
     },
+    "Already have an account? Login" : {
+
+    },
+    "Cinephile" : {
+
+    },
     "Confirm Password" : {
 
     },
@@ -89,25 +95,13 @@
     "Email" : {
 
     },
-    "EMAIL" : {
-
-    },
-    "Log in" : {
-
-    },
     "Log out" : {
-
-    },
-    "Login" : {
 
     },
     "Notifications" : {
 
     },
     "Password" : {
-
-    },
-    "PASSWORD" : {
 
     },
     "Remove" : {
@@ -395,9 +389,6 @@
         }
       }
     },
-    "Sign up" : {
-
-    },
     "Sign Up" : {
 
     },
@@ -543,9 +534,6 @@
       }
     },
     "Username" : {
-
-    },
-    "USERNAME" : {
 
     }
   },

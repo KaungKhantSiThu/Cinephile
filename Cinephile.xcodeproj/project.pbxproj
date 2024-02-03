@@ -39,7 +39,6 @@
 		706768EC2B4BC2F4008ACBF8 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 706768EB2B4BC2F4008ACBF8 /* AVKit.framework */; };
 		706768EE2B4BC2FF008ACBF8 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 706768ED2B4BC2FF008ACBF8 /* QuickLook.framework */; };
 		707405EC2B3C169C00539526 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 707405EB2B3C169C00539526 /* Localizable.xcstrings */; };
-		707405EE2B3D5C9400539526 /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707405ED2B3D5C9400539526 /* SignupView.swift */; };
 		707960302AEBA0A700AB748D /* CinephileApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7079602F2AEBA0A700AB748D /* CinephileApp.swift */; };
 		707960342AEBA0A900AB748D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 707960332AEBA0A900AB748D /* Assets.xcassets */; };
 		707960372AEBA0A900AB748D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 707960362AEBA0A900AB748D /* Preview Assets.xcassets */; };
@@ -138,7 +137,6 @@
 		706768EB2B4BC2F4008ACBF8 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		706768ED2B4BC2FF008ACBF8 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
 		707405EB2B3C169C00539526 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
-		707405ED2B3D5C9400539526 /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 		7079602C2AEBA0A700AB748D /* Cinephile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cinephile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7079602F2AEBA0A700AB748D /* CinephileApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CinephileApp.swift; sourceTree = "<group>"; };
 		707960332AEBA0A900AB748D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -221,7 +219,6 @@
 			isa = PBXGroup;
 			children = (
 				3910A41E2B1EF52300EBE18A /* AddAccountView.swift */,
-				707405ED2B3D5C9400539526 /* SignupView.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -530,6 +527,7 @@
 				70BCF7442B2B536F00D7AB7E /* XCRemoteSwiftPackageReference "keychain-swift" */,
 				70BCF7562B2C9A9F00D7AB7E /* XCRemoteSwiftPackageReference "Nuke" */,
 				701858AA2B511E1B000A9EC6 /* XCRemoteSwiftPackageReference "TMDb" */,
+				3926DE672B6D58F200037737 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = 7079602D2AEBA0A700AB748D /* Products */;
 			projectDirPath = "";
@@ -582,7 +580,6 @@
 				70BCF73E2B2B388100D7AB7E /* CinephileApp+TabBar.swift in Sources */,
 				70BCF74C2B2C36F000D7AB7E /* TimelineTab.swift in Sources */,
 				70525BAE2AF7635F006E7CD6 /* NotificationsView.swift in Sources */,
-				707405EE2B3D5C9400539526 /* SignupView.swift in Sources */,
 				70967F3E2B53C35E00EB4CD2 /* ToolbarTab.swift in Sources */,
 				701F56EE2B2EBBE10043B71B /* AccountSettingView.swift in Sources */,
 				3910A41F2B1EF52300EBE18A /* AddAccountView.swift in Sources */,
@@ -918,6 +915,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		3926DE672B6D58F200037737 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.8.1;
+			};
+		};
 		701858AA2B511E1B000A9EC6 /* XCRemoteSwiftPackageReference "TMDb" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/adamayoung/TMDb";
