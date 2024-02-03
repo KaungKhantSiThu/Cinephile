@@ -10,6 +10,7 @@ struct AddAccountView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.webAuthenticationSession) private var webAuthenticationSession
+    @Environment(Client.self) private var client: Client
 
     @Environment(AppAccountsManager.self) private var appAccountsManager
     @StateObject private var formViewModel = FormViewModel()
@@ -74,14 +75,26 @@ struct AddAccountView: View {
                                 Text(formViewModel.inlineErrorForPassword).foregroundColor(.red)
                             }
                             
-                            Button(action: {
-                                let accountData = RegisterModel(username: formViewModel.username, email: formViewModel.email, password: formViewModel.password)
-                                SignUpViewModel.shared.createData(reigsterModel: accountData)
-                            }) {
+                            Button{
+                                let accountData = AccountData(
+                                    username: formViewModel.username,
+                                    email: formViewModel.email,
+                                    password: formViewModel.password)
+                                
+                                Task {
+                                    do {
+                                        let token = try await client.registerAccount(data: accountData)
+                                        print(token)
+                                    } catch {
+                                        print("Printing error description")
+                                        print(error.localizedDescription)
+                                    }
+                                }
+                            } label: {
                                 RoundedRectangle(cornerRadius: 10)
                                     .frame(height: 60)
                                     .overlay(
-                                        Text("Sing Up")
+                                        Text("Sign Up")
                                             .foregroundColor(.white)
                                             .fontWeight(.bold)
                                     )

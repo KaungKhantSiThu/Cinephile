@@ -95,9 +95,6 @@
     "Email" : {
 
     },
-    "EMAIL" : {
-
-    },
     "Log out" : {
 
     },
@@ -105,9 +102,6 @@
 
     },
     "Password" : {
-
-    },
-    "PASSWORD" : {
 
     },
     "Remove" : {
@@ -410,6 +404,7 @@
       }
     },
     "Sing Up" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -539,9 +534,6 @@
       }
     },
     "Username" : {
-
-    },
-    "USERNAME" : {
 
     }
   },

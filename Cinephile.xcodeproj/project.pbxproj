@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3910A41F2B1EF52300EBE18A /* AddAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3910A41E2B1EF52300EBE18A /* AddAccountView.swift */; };
-		3926DE662B6D58E200037737 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3926DE652B6D58E200037737 /* SignUpViewModel.swift */; };
-		3926DE692B6D58FD00037737 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 3926DE682B6D58FD00037737 /* Alamofire */; };
 		39389BEA2B203ECD0087F64D /* FormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39389BE92B203ECD0087F64D /* FormViewModel.swift */; };
 		397998112B17A4CB00AB6594 /* season-detail.json in Resources */ = {isa = PBXBuildFile; fileRef = 397998102B17A4CB00AB6594 /* season-detail.json */; };
 		397998132B17A4EC00AB6594 /* episode-detail.json in Resources */ = {isa = PBXBuildFile; fileRef = 397998122B17A4EC00AB6594 /* episode-detail.json */; };
@@ -41,7 +39,6 @@
 		706768EC2B4BC2F4008ACBF8 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 706768EB2B4BC2F4008ACBF8 /* AVKit.framework */; };
 		706768EE2B4BC2FF008ACBF8 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 706768ED2B4BC2FF008ACBF8 /* QuickLook.framework */; };
 		707405EC2B3C169C00539526 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 707405EB2B3C169C00539526 /* Localizable.xcstrings */; };
-		707405EE2B3D5C9400539526 /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707405ED2B3D5C9400539526 /* SignupView.swift */; };
 		707960302AEBA0A700AB748D /* CinephileApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7079602F2AEBA0A700AB748D /* CinephileApp.swift */; };
 		707960342AEBA0A900AB748D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 707960332AEBA0A900AB748D /* Assets.xcassets */; };
 		707960372AEBA0A900AB748D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 707960362AEBA0A900AB748D /* Preview Assets.xcassets */; };
@@ -110,7 +107,6 @@
 
 /* Begin PBXFileReference section */
 		3910A41E2B1EF52300EBE18A /* AddAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAccountView.swift; sourceTree = "<group>"; };
-		3926DE652B6D58E200037737 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		39389BE92B203ECD0087F64D /* FormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewModel.swift; sourceTree = "<group>"; };
 		397998102B17A4CB00AB6594 /* season-detail.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "season-detail.json"; sourceTree = "<group>"; };
 		397998122B17A4EC00AB6594 /* episode-detail.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "episode-detail.json"; sourceTree = "<group>"; };
@@ -141,7 +137,6 @@
 		706768EB2B4BC2F4008ACBF8 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		706768ED2B4BC2FF008ACBF8 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
 		707405EB2B3C169C00539526 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
-		707405ED2B3D5C9400539526 /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 		7079602C2AEBA0A700AB748D /* Cinephile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cinephile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7079602F2AEBA0A700AB748D /* CinephileApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CinephileApp.swift; sourceTree = "<group>"; };
 		707960332AEBA0A900AB748D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -192,7 +187,6 @@
 				70967F482B53CC0200EB4CD2 /* Notifications in Frameworks */,
 				701F57012B2EF0610043B71B /* Environment in Frameworks */,
 				70BCF7462B2B536F00D7AB7E /* KeychainSwift in Frameworks */,
-				3926DE692B6D58FD00037737 /* Alamofire in Frameworks */,
 				70BCF75C2B2C9A9F00D7AB7E /* NukeUI in Frameworks */,
 				701F56FB2B2EF0570043B71B /* Account in Frameworks */,
 				701F57052B2EF0670043B71B /* Networking in Frameworks */,
@@ -225,7 +219,6 @@
 			isa = PBXGroup;
 			children = (
 				3910A41E2B1EF52300EBE18A /* AddAccountView.swift */,
-				707405ED2B3D5C9400539526 /* SignupView.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -302,7 +295,6 @@
 			children = (
 				39389BE92B203ECD0087F64D /* FormViewModel.swift */,
 				707960412AEBA5E200AB748D /* DiscoverMediaViewModel.swift */,
-				3926DE652B6D58E200037737 /* SignUpViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -469,7 +461,6 @@
 				70967F442B53CB5E00EB4CD2 /* Notifications */,
 				70967F472B53CC0200EB4CD2 /* Notifications */,
 				702BF58F2B610B430021C34D /* MediaClient */,
-				3926DE682B6D58FD00037737 /* Alamofire */,
 			);
 			productName = "TMDB Test";
 			productReference = 7079602C2AEBA0A700AB748D /* Cinephile.app */;
@@ -589,8 +580,6 @@
 				70BCF73E2B2B388100D7AB7E /* CinephileApp+TabBar.swift in Sources */,
 				70BCF74C2B2C36F000D7AB7E /* TimelineTab.swift in Sources */,
 				70525BAE2AF7635F006E7CD6 /* NotificationsView.swift in Sources */,
-				3926DE662B6D58E200037737 /* SignUpViewModel.swift in Sources */,
-				707405EE2B3D5C9400539526 /* SignupView.swift in Sources */,
 				70967F3E2B53C35E00EB4CD2 /* ToolbarTab.swift in Sources */,
 				701F56EE2B2EBBE10043B71B /* AccountSettingView.swift in Sources */,
 				3910A41F2B1EF52300EBE18A /* AddAccountView.swift in Sources */,
@@ -961,11 +950,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		3926DE682B6D58FD00037737 /* Alamofire */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3926DE672B6D58F200037737 /* XCRemoteSwiftPackageReference "Alamofire" */;
-			productName = Alamofire;
-		};
 		701858AB2B511E1B000A9EC6 /* TMDb */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 701858AA2B511E1B000A9EC6 /* XCRemoteSwiftPackageReference "TMDb" */;
