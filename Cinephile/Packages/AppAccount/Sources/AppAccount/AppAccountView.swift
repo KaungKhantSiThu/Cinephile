@@ -14,6 +14,7 @@ public struct AppAccountView: View {
     
     @Environment(RouterPath.self) private var routerPath
     @Environment(AppAccountsManager.self) private var appAccountsManager
+    @Environment(UserPreferences.self) private var preferences
     
     @State var viewModel: AppAccountViewModel
 
@@ -68,21 +69,21 @@ public struct AppAccountView: View {
                   .foregroundStyle(.white, .green)
                   .offset(x: 5, y: -5)
               } 
-//                else if viewModel.showBadge,
-//                        let token = viewModel.appAccount.oauthToken,
-//                        let notificationsCount = preferences.notificationsCount[token],
-//                        notificationsCount > 0
-//              {
-//                ZStack {
-//                  Circle()
-//                    .fill(.red)
-//                  Text(notificationsCount > 99 ? "99+" : String(notificationsCount))
-//                    .foregroundColor(.white)
-//                    .font(.system(size: 9))
-//                }
-//                .frame(width: 20, height: 20)
-//                .offset(x: 5, y: -5)
-//              }
+                else if viewModel.showBadge,
+                        let token = viewModel.appAccount.oauthToken,
+                        let notificationsCount = preferences.notificationsCount[token],
+                        notificationsCount > 0
+              {
+                ZStack {
+                  Circle()
+                    .fill(.red)
+                  Text(notificationsCount > 99 ? "99+" : String(notificationsCount))
+                    .foregroundColor(.white)
+                    .font(.system(size: 9))
+                }
+                .frame(width: 20, height: 20)
+                .offset(x: 5, y: -5)
+              }
             }
           } else {
             ProgressView()
@@ -95,11 +96,11 @@ public struct AppAccountView: View {
             if let account = viewModel.account {
               EmojiTextApp(.init(stringValue: account.safeDisplayName), emojis: account.emojis)
 //                //.foregroundColor(theme.labelColor)
-              Text("\(account.username)@\(viewModel.appAccount.server)")
-                .font(.scaledSubheadline)
-                .emojiSize(Font.scaledSubheadlineFont.emojiSize)
-                .emojiBaselineOffset(Font.scaledSubheadlineFont.emojiBaselineOffset)
-                .foregroundStyle(Color.secondary)
+//              Text("\(account.username)@\(viewModel.appAccount.server)")
+//                .font(.scaledSubheadline)
+//                .emojiSize(Font.scaledSubheadlineFont.emojiSize)
+//                .emojiBaselineOffset(Font.scaledSubheadlineFont.emojiBaselineOffset)
+//                .foregroundStyle(Color.secondary)
             }
           }
           if viewModel.isInNavigation {

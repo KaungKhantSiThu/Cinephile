@@ -20,7 +20,7 @@ struct StatusRowReplyView: View {
           } else if viewModel.isThread, accountId == viewModel.status.account.id {
             HStack(spacing: 2) {
               Image(systemName: "quote.opening")
-              Text("status.row.is-thread")
+                Text("status.row.is-thread", bundle: .module)
             }
 //            .accessibilityElement(children: .combine)
 //            .accessibilityLabel(
