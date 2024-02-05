@@ -4,6 +4,15 @@
     "#%@" : {
 
     },
+    "%@©2023 Cinephile" : {
+
+    },
+    "• [EmojiText](https://github.com/divadretlaw/EmojiText)\n\n• [HTML2Markdown](https://gitlab.com/mflint/HTML2Markdown)\n\n• [KeychainSwift](https://github.com/evgenyneu/keychain-swift)\n\n• [LRUCache](https://github.com/nicklockwood/LRUCache)\n\n• [Bodega](https://github.com/mergesort/Bodega)\n\n• [Nuke](https://github.com/kean/Nuke)\n\n• [SwiftSoup](https://github.com/scinfu/SwiftSoup.git)\n\n• [Atkinson Hyperlegible](https://github.com/googlefonts/atkinson-hyperlegible)\n\n• [OpenDyslexic](http://opendyslexic.org)\n\n• [SwiftUI-Introspect](https://github.com/siteline/SwiftUI-Introspect)\n\n• [RevenueCat](https://github.com/RevenueCat/purchases-ios)\n\n• [SFSafeSymbols](https://github.com/SFSafeSymbols/SFSafeSymbols)" : {
+
+    },
+    "About" : {
+
+    },
     "accessibility.tabs.timeline.add-account" : {
       "localizations" : {
         "en" : {
@@ -57,6 +66,9 @@
     "Accounts" : {
 
     },
+    "Acknowledgements" : {
+
+    },
     "action.cancel" : {
       "localizations" : {
         "en" : {
@@ -89,6 +101,9 @@
     "Confirm Password" : {
 
     },
+    "Destination View" : {
+
+    },
     "Done" : {
 
     },
@@ -98,10 +113,16 @@
     "Log out" : {
 
     },
+    "Lovingly designed and developed by \n Cinephile Team" : {
+
+    },
     "Notifications" : {
 
     },
     "Password" : {
+
+    },
+    "Privacy Terms" : {
 
     },
     "Remove" : {
@@ -133,6 +154,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Report"
+          }
+        }
+      }
+    },
+    "Sequel is made possible by these data sources" : {
+
+    },
+    "settings.about.built-with" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cinephile is built with the following Open Source software:"
+          }
+        }
+      }
+    },
+    "settings.about.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cinephile"
           }
         }
       }
@@ -389,6 +433,26 @@
         }
       }
     },
+    "settings.support.privacy-policy" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privacy Policy"
+          }
+        }
+      }
+    },
+    "settings.support.terms-of-use" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Terms"
+          }
+        }
+      }
+    },
     "Sign Up" : {
 
     },
@@ -533,7 +597,13 @@
         }
       }
     },
+    "User ID: 12345678901" : {
+
+    },
     "Username" : {
+
+    },
+    "version 1.0" : {
 
     }
   },
