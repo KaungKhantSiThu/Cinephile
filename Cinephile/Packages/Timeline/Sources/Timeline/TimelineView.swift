@@ -204,9 +204,39 @@ public struct TimelineView: View {
     @ViewBuilder
     private var entertainmentHeaderView: some View {
         if let entertainment = viewModel.entertainment {
-            headerView {
-                StatusEntertainmentView(entertainment: entertainment)
-            }
+            Section {
+                        VStack(alignment: .center, spacing: 5) {
+                            Text("Movie Name")
+                                .font(.title2)
+                                .bold()
+                            Text("Source")
+                                .font(.subheadline)
+                            Button {
+                                routerPath.navigate(to: .movieDetail(id: Int(entertainment.mediaId) ?? entertainment.id))
+                            } label: {
+                                Text("Details")
+                                    .bold()
+                                    .padding(.vertical, 2)
+                            }
+            #if os(iOS)
+                            .buttonStyle(.borderedProminent)
+                            .foregroundColor(.accentColor)
+            #elseif os(macOS)
+                            .buttonStyle(.bordered)
+            #endif
+                            .tint(.white)
+                            .padding(.top)
+                        }
+                        .foregroundColor(.white)
+                        .padding(10)
+                        .frame(maxWidth: .infinity)
+                    }
+            #if os(iOS)
+            .listRowBackground(Rectangle().fill(Color.accentColor.gradient))
+            #elseif os(macOS)
+            .background(Color.accentColor.gradient)
+            .cornerRadius(10)
+            #endif
         }
     }
     

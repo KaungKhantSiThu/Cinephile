@@ -323,10 +323,16 @@ extension StatusEditor {
                                     VStack {
                                         ForEach(value.popularMovies) { movie in
                                             MediaRow(movie: movie) {
+                                                var trackerGenres: [TrackerMedia.Genre] = []
+                                                if let genres = movie.genres {
+                                                    trackerGenres = genres.map { TrackerMedia.Genre(id: $0.id, name: $0.name)}
+                                                    print(trackerGenres)
+                                                }
                                                 viewModel.trackerMedia = TrackerMedia(
                                                     id: movie.id,
                                                     title: movie.title,
                                                     posterURL: movie.posterPath,
+                                                    genres: trackerGenres,
                                                     releasedDate: movie.releaseDate,
                                                     voteAverage: movie.voteAverage,
                                                     mediaType: .movie)

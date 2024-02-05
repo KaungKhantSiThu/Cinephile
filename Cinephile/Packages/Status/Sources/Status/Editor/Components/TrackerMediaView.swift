@@ -52,7 +52,6 @@ extension StatusEditor {
                         }
                         
                         if let genres = trackerMedia.genres, !genres.isEmpty {
-                            
                             Text(genres.map { $0.name }.joined(separator: ", "))
                         } else {
                             Text("No genres")

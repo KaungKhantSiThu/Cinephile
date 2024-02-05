@@ -35,17 +35,12 @@ public struct MovieDetailView: View {
                     
                     FlowLayout(alignment: .center) {
                         ForEach(genres) { genre in
-                            Label {
-                                Text(genre.name)
-                            } icon: {
-                                Image(systemName: "tag")
-                            }
-                            .labelStyle(.genre)
+                            Text(genre.name)
+                                .padding(10)
+                                .background(.ultraThickMaterial, in: RoundedRectangle(cornerRadius: 10.0))
                         }
                     }
                 }
-                
-                
                 
                 Divider()
                 

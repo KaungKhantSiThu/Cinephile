@@ -22,7 +22,8 @@ struct SelectTextView: View {
             Button {
               dismiss()
             } label: {
-              Text("action.done", bundle: .module).bold()
+              Text("action.done", bundle: .module)
+                    .bold()
             }
           }
         }
@@ -48,7 +49,7 @@ struct SelectableText: UIViewRepresentable {
     textView.isEditable = false
     textView.attributedText = attributedText
     textView.textColor = UIColor(Color.label)
-    textView.backgroundColor = UIColor(Theme.shared.primaryBackgroundColor)
+//    textView.backgroundColor = UIColor(Theme.shared.primaryBackgroundColor)
     return textView
   }
 
