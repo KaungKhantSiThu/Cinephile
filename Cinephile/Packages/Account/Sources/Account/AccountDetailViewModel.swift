@@ -26,10 +26,10 @@ private let logger = Logger(subsystem: "Account", category: "DetailViewModel")
     }
     
     enum Tab: Int {
-        case statuses, favorites, bookmarks, followedTags, postsAndReplies, media, lists
+        case statuses, favorites, bookmarks, postsAndReplies, boosts, media
         
         static var currentAccountTabs: [Tab] {
-            [.statuses, .favorites, .bookmarks, .followedTags, .lists]
+            [.statuses,.postsAndReplies, .favorites, .bookmarks]
         }
         
         static var accountTabs: [Tab] {
@@ -41,10 +41,9 @@ private let logger = Logger(subsystem: "Account", category: "DetailViewModel")
             case .statuses: "doc.richtext"
             case .favorites: "heart"
             case .bookmarks: "bookmark"
-            case .followedTags: "tag"
             case .postsAndReplies: "bubble.left.and.bubble.right"
+            case .boosts: "arrow.2.squarepath"
             case .media: "photo.on.rectangle.angled"
-            case .lists: "list.bullet"
             }
         }
         
@@ -53,10 +52,9 @@ private let logger = Logger(subsystem: "Account", category: "DetailViewModel")
             case .statuses: "accessibility.tabs.profile.picker.statuses"
             case .favorites: "accessibility.tabs.profile.picker.favorites"
             case .bookmarks: "accessibility.tabs.profile.picker.bookmarks"
-            case .followedTags: "accessibility.tabs.profile.picker.followed-tags"
             case .postsAndReplies: "accessibility.tabs.profile.picker.posts-and-replies"
+            case .boosts: "accessibility.tabs.profile.picker.boosts"
             case .media: "accessibility.tabs.profile.picker.media"
-            case .lists: "accessibility.tabs.profile.picker.lists"
             }
         }
     }
@@ -215,7 +213,7 @@ private let logger = Logger(subsystem: "Account", category: "DetailViewModel")
         guard let client else { return }
         do {
             switch selectedTab {
-            case .statuses, .postsAndReplies, .media:
+            case .statuses, .postsAndReplies, .boosts, .media:
                 guard let lastId = statuses.last?.id else { return }
                 tabState = .statuses(statusesState: .display(statuses: statuses, nextPageState: .loadingNextPage))
                 let newStatuses: [Status] =
@@ -243,8 +241,6 @@ private let logger = Logger(subsystem: "Account", category: "DetailViewModel")
                 StatusDataControllerProvider.shared.updateDataControllers(for: newBookmarks, client: client)
                 bookmarks.append(contentsOf: newBookmarks)
                 tabState = .statuses(statusesState: .display(statuses: bookmarks, nextPageState: .hasNextPage))
-            case .followedTags, .lists:
-                break
             }
         } catch {
             tabState = .statuses(statusesState: .error(error: error))
@@ -253,7 +249,7 @@ private let logger = Logger(subsystem: "Account", category: "DetailViewModel")
     
     private func reloadTabState() {
         switch selectedTab {
-        case .statuses, .postsAndReplies, .media:
+        case .statuses, .postsAndReplies, .boosts, .media:
             tabState = .statuses(statusesState: .display(statuses: statuses, nextPageState: statuses.count < 20 ? .none : .hasNextPage))
         case .favorites:
             tabState = .statuses(statusesState: .display(statuses: favorites,
@@ -261,10 +257,6 @@ private let logger = Logger(subsystem: "Account", category: "DetailViewModel")
         case .bookmarks:
             tabState = .statuses(statusesState: .display(statuses: bookmarks,
                                                          nextPageState: bookmarksNextPage != nil ? .hasNextPage : .none))
-        case .followedTags:
-            tabState = .followedTags
-        case .lists:
-            tabState = .lists
         }
     }
     

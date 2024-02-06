@@ -64,7 +64,6 @@ struct AvatarImage: View {
                     .stroke(.primary.opacity(0.25), lineWidth: 1)
                 }
             }
-            
             .clipShape(Circle())
             .overlay(
                 Circle()
