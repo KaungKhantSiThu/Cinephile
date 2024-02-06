@@ -7,15 +7,6 @@
     "@%@" : {
 
     },
-    "#%@" : {
-
-    },
-    "%@" : {
-
-    },
-    "%lld" : {
-
-    },
     "%lld followers" : {
       "localizations" : {
         "en" : {
@@ -54,6 +45,9 @@
         }
       }
     },
+    "accessibility.tabs.profile.picker.boosts" : {
+
+    },
     "accessibility.tabs.profile.picker.favorites" : {
       "localizations" : {
         "en" : {
@@ -65,6 +59,7 @@
       }
     },
     "accessibility.tabs.profile.picker.followed-tags" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -75,6 +70,7 @@
       }
     },
     "accessibility.tabs.profile.picker.lists" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -138,6 +134,7 @@
       }
     },
     "account.detail.featured-tags-n-posts %lld" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
