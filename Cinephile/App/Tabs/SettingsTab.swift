@@ -28,6 +28,8 @@ struct SettingsTab: View {
     
     @State private var routerPath = RouterPath()
     @State private var addAccountSheetPresented = false
+    @State private var aboutSheetPresented = false
+
     @State private var isEditingAccount = false
     
     @State private var cachedRemoved = false
@@ -106,6 +108,7 @@ struct SettingsTab: View {
                 editAccountButton
             }
             addAccountButton
+            addAboutButton
         }
     }
     
@@ -174,6 +177,17 @@ struct SettingsTab: View {
         }
         .sheet(isPresented: $addAccountSheetPresented) {
             AddAccountView()
+        }
+    }
+    
+    private var addAboutButton: some View {
+        Button {
+            aboutSheetPresented.toggle()
+        } label: {
+            Text("About")
+        }
+        .sheet(isPresented: $aboutSheetPresented) {
+            PerferenceView()
         }
     }
     
