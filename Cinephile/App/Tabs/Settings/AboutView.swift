@@ -40,9 +40,9 @@ struct AboutView: View {
       } footer: {
         Text("\(versionNumber)©2023 Cinephile")
       }
-      #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
-      #endif
+//      #if !os(visionOS)
+//      .listRowBackground(theme.primaryBackgroundColor)
+//      #endif
 
       Section {
         Text("""
@@ -60,15 +60,8 @@ struct AboutView: View {
 
         • [SwiftSoup](https://github.com/scinfu/SwiftSoup.git)
 
-        • [Atkinson Hyperlegible](https://github.com/googlefonts/atkinson-hyperlegible)
-
-        • [OpenDyslexic](http://opendyslexic.org)
-
         • [SwiftUI-Introspect](https://github.com/siteline/SwiftUI-Introspect)
 
-        • [RevenueCat](https://github.com/RevenueCat/purchases-ios)
-
-        • [SFSafeSymbols](https://github.com/SFSafeSymbols/SFSafeSymbols)
         """)
         .multilineTextAlignment(.leading)
         .font(.scaledSubheadline)
@@ -77,42 +70,42 @@ struct AboutView: View {
         Text("settings.about.built-with")
           .textCase(nil)
       }
-      #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
-      #endif
+//      #if !os(visionOS)
+//      .listRowBackground(theme.primaryBackgroundColor)
+//      #endif
     }
     .listStyle(.insetGrouped)
     .shadow(color: Color.black.opacity(0.1), radius: 3, x: 0, y: 1)
     #if !os(visionOS)
     .scrollContentBackground(.hidden)
-    .background(theme.primaryBackgroundColor)
+//    .background(theme.primaryBackgroundColor)
     #endif
-    .navigationTitle(Text("settings.about.title"))
+    .navigationTitle(Text("Acknoledgements"))
     .navigationBarTitleDisplayMode(.large)
     .environment(\.openURL, OpenURLAction { url in
       routerPath.handle(url: url)
     })
   }
 
-  @ViewBuilder
-  private var followAccountsSection: some View {
-    if let iceCubesAccount, let dimillianAccount {
-      Section {
-        AccountsListRow(viewModel: iceCubesAccount)
-        AccountsListRow(viewModel: dimillianAccount)
-      }
-      #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
-      #endif
-    } else {
-      Section {
-        ProgressView()
-      }
-      #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
-      #endif
-    }
-  }
+//  @ViewBuilder
+//  private var followAccountsSection: some View {
+//    if let iceCubesAccount, let dimillianAccount {
+//      Section {
+//        AccountsListRow(viewModel: iceCubesAccount)
+//        AccountsListRow(viewModel: dimillianAccount)
+//      }
+//      #if !os(visionOS)
+//      .listRowBackground(theme.primaryBackgroundColor)
+//      #endif
+//    } else {
+//      Section {
+//        ProgressView()
+//      }
+//      #if !os(visionOS)
+//      .listRowBackground(theme.primaryBackgroundColor)
+//      #endif
+//    }
+//  }
 
 //  private func fetchAccounts() async {
 //    await withThrowingTaskGroup(of: Void.self) { group in

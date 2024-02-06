@@ -108,7 +108,7 @@ struct SettingsTab: View {
                 editAccountButton
             }
             addAccountButton
-            addAboutButton
+            aboutButton
         }
     }
     
@@ -180,14 +180,14 @@ struct SettingsTab: View {
         }
     }
     
-    private var addAboutButton: some View {
+    private var aboutButton: some View {
         Button {
             aboutSheetPresented.toggle()
         } label: {
-            Text("About")
+            Label("About", systemImage: "info.circle")
         }
         .sheet(isPresented: $aboutSheetPresented) {
-            PerferenceView()
+            PreferenceView()
         }
     }
     

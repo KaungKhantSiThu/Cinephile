@@ -20,7 +20,7 @@
 		39AB4F3A2B10FAD4005F4B51 /* cast.json in Resources */ = {isa = PBXBuildFile; fileRef = 39AB4F382B10FAD4005F4B51 /* cast.json */; };
 		39AB4F3B2B10FAD4005F4B51 /* movie.json in Resources */ = {isa = PBXBuildFile; fileRef = 39AB4F392B10FAD4005F4B51 /* movie.json */; };
 		39AB4F3D2B10FAE2005F4B51 /* Extension+Previews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AB4F3C2B10FAE2005F4B51 /* Extension+Previews.swift */; };
-		39EFFCE52B713561009B0994 /* PerferenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EFFCE42B713561009B0994 /* PerferenceView.swift */; };
+		39EFFCE52B713561009B0994 /* PreferenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EFFCE42B713561009B0994 /* PreferenceView.swift */; };
 		7002F7162B1F5C99006DD407 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7002F7152B1F5C99006DD407 /* AppRouter.swift */; };
 		7002F72C2B2070F6006DD407 /* TrackerTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7002F72B2B2070F6006DD407 /* TrackerTab.swift */; };
 		700C9E282B32CDB30009038D /* CinephileApp+AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700C9E272B32CDB30009038D /* CinephileApp+AppDelegate.swift */; };
@@ -121,7 +121,7 @@
 		39AB4F382B10FAD4005F4B51 /* cast.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cast.json; sourceTree = "<group>"; };
 		39AB4F392B10FAD4005F4B51 /* movie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = movie.json; sourceTree = "<group>"; };
 		39AB4F3C2B10FAE2005F4B51 /* Extension+Previews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension+Previews.swift"; sourceTree = "<group>"; };
-		39EFFCE42B713561009B0994 /* PerferenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerferenceView.swift; sourceTree = "<group>"; };
+		39EFFCE42B713561009B0994 /* PreferenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceView.swift; sourceTree = "<group>"; };
 		7002F7152B1F5C99006DD407 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		7002F72B2B2070F6006DD407 /* TrackerTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerTab.swift; sourceTree = "<group>"; };
 		700C9E272B32CDB30009038D /* CinephileApp+AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CinephileApp+AppDelegate.swift"; sourceTree = "<group>"; };
@@ -233,7 +233,7 @@
 				70967F3F2B53C49F00EB4CD2 /* PushNotificationsView.swift */,
 				701F56ED2B2EBBE10043B71B /* AccountSettingView.swift */,
 				398EDB592B7096DE00F82976 /* AboutView.swift */,
-				39EFFCE42B713561009B0994 /* PerferenceView.swift */,
+				39EFFCE42B713561009B0994 /* PreferenceView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -589,7 +589,7 @@
 				70967F3E2B53C35E00EB4CD2 /* ToolbarTab.swift in Sources */,
 				701F56EE2B2EBBE10043B71B /* AccountSettingView.swift in Sources */,
 				3910A41F2B1EF52300EBE18A /* AddAccountView.swift in Sources */,
-				39EFFCE52B713561009B0994 /* PerferenceView.swift in Sources */,
+				39EFFCE52B713561009B0994 /* PreferenceView.swift in Sources */,
 				39389BEA2B203ECD0087F64D /* FormViewModel.swift in Sources */,
 				7094DFBA2B0BA318008DF25E /* API_Key.swift in Sources */,
 				7002F7162B1F5C99006DD407 /* AppRouter.swift in Sources */,

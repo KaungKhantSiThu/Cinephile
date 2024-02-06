@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct PerferenceView: View {
+struct PreferenceView: View {
     var body: some View {
         NavigationView {
             ZStack {
@@ -99,5 +99,5 @@ struct PerferenceView: View {
 }
 
 #Preview {
-    PerferenceView()
+    PreferenceView()
 }
