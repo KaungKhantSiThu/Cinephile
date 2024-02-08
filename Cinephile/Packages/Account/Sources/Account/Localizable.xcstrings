@@ -431,6 +431,7 @@
       }
     },
     "action.cancel" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
