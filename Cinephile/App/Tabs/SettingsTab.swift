@@ -45,6 +45,9 @@ struct SettingsTab: View {
                 accountsSection
                 otherSections
                 cacheSection
+                Section {
+                    aboutButton
+                }
             }
             .scrollContentBackground(.hidden)
             .toolbar {
@@ -108,7 +111,6 @@ struct SettingsTab: View {
                 editAccountButton
             }
             addAccountButton
-            aboutButton
         }
     }
     
@@ -121,13 +123,15 @@ struct SettingsTab: View {
                 ForEach(PreferredBrowser.allCases, id: \.rawValue) { browser in
                     switch browser {
                     case .inAppSafari:
-                        Text("settings.general.browser.in-app").tag(browser)
+                        Text("settings.general.browser.in-app")
+                            .tag(browser)
                     case .safari:
-                        Text("settings.general.browser.system").tag(browser)
+                        Text("settings.general.browser.system")
+                            .tag(browser)
                     }
                 }
             } label: {
-                Label("settings.general.browser", systemImage: "network")
+                Label("settings.general.browser", systemImage: "safari")
             }
             
             Toggle(isOn: $preferences.inAppBrowserReaderView) {
@@ -136,20 +140,21 @@ struct SettingsTab: View {
             .disabled(preferences.preferredBrowser != PreferredBrowser.inAppSafari)
             #endif
             
-            Toggle(isOn: $preferences.isSocialKeyboardEnabled) {
-                Label("settings.other.social-keyboard", systemImage: "keyboard")
-            }
+//            Toggle(isOn: $preferences.isSocialKeyboardEnabled) {
+//                Label("settings.other.social-keyboard", systemImage: "keyboard")
+//            }
 //            Toggle(isOn: $preferences.soundEffectEnabled) {
 //                Label("settings.other.sound-effect", systemImage: "hifispeaker")
 //            }
-            Toggle(isOn: $preferences.fastRefreshEnabled) {
-                Label("settings.other.fast-refresh", systemImage: "arrow.clockwise")
-            }
+//            Toggle(isOn: $preferences.fastRefreshEnabled) {
+//                Label("settings.other.fast-refresh", systemImage: "arrow.clockwise")
+//            }
         } header: {
             Text("settings.section.other")
-        } footer: {
-            Text("settings.section.other.footer")
-        }
+        } 
+//    footer: {
+//            Text("settings.section.other.footer")
+//        }
 //        .listRowBackground(theme.primaryBackgroundColor)
     }
     
@@ -159,11 +164,13 @@ struct SettingsTab: View {
                 Text("action.done")
                     .transition(.move(edge: .leading))
             } else {
-                Button("settings.cache-media.clear", role: .destructive) {
+                Button(role: .destructive) {
                     ImagePipeline.shared.cache.removeAll()
                     withAnimation {
                         cachedRemoved = true
                     }
+                } label: {
+                    Label("settings.cache-media.clear", systemImage: "trash")
                 }
             }
         }
@@ -173,7 +180,7 @@ struct SettingsTab: View {
         Button {
             addAccountSheetPresented.toggle()
         } label: {
-            Text("Add")
+            Label("Add", systemImage: "person.badge.plus")
         }
         .sheet(isPresented: $addAccountSheetPresented) {
             AddAccountView()
@@ -200,7 +207,7 @@ struct SettingsTab: View {
             if isEditingAccount {
                 Text("Done")
             } else {
-                Text("Log out")
+                Label("Log out", systemImage: "person.badge.minus")
             }
         }
     }

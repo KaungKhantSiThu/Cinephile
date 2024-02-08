@@ -11,23 +11,36 @@ import Environment
 
 public struct MediaTrackerView: View {
     @Environment(NetworkManager.self) private var networkManager: NetworkManager
+    @State private var viewModel = MediaTrackerViewModel()
     public init() {}
     
     public var body: some View {
-        VStack {
-            if networkManager.isConnected {
-                Text("View for Watchlist")
-            } else {
-                ContentUnavailableView("No connection", systemImage: "wifi.slash", description: Text("Connect to the internet and try again."))
+        ScrollView {
+            Picker("Movie Watchlist Picker", selection: $viewModel.selectedTab) {
+                ForEach(MediaTrackerViewModel.Tab.allCases) { tab in
+                    Text(tab.name)
+                        .tag(tab)
+                }
+            }
+            .pickerStyle(.segmented)
+            .padding(20)
+                
+            switch viewModel.selectedTab {
+            case .watchlist:
+                Text("Watchlist")
+            case .watched:
+                Text("Watched")
             }
         }
         .navigationTitle("Tracker")
-        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
 #Preview {
-    MediaTrackerView()
+    NavigationStack {
+        MediaTrackerView()
+            .environment(NetworkManager())
+    }
 }
 
 

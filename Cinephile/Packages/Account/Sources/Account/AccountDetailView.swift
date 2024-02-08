@@ -83,6 +83,7 @@ public struct AccountDetailView: View {
                 if viewModel.selectedTab == .statuses {
                   pinnedPostsView
                 }
+                
                 StatusesListView(fetcher: viewModel,
                                  client: client,
                                  routerPath: routerPath)
@@ -190,10 +191,10 @@ public struct AccountDetailView: View {
     
     @ToolbarContentBuilder
     private var toolbarContent: some ToolbarContent {
-        ToolbarItem(placement: .topBarLeading) {
-            Image(systemName: client.isAuth ? "checkmark.circle.fill" : "multiply.circle.fill")
-                .foregroundStyle(client.isAuth ? .green : .red)
-        }
+//        ToolbarItem(placement: .topBarLeading) {
+//            Image(systemName: client.isAuth ? "checkmark.circle.fill" : "multiply.circle.fill")
+//                .foregroundStyle(client.isAuth ? .green : .red)
+//        }
         
         ToolbarItem(placement: .topBarTrailing) {
             Button {
@@ -203,19 +204,6 @@ public struct AccountDetailView: View {
                     title: { Text("account.settings", bundle: .module) },
                     icon: { Image(systemName: "gear") }
                 )
-            }
-        }
-        
-        ToolbarItemGroup(placement: .topBarTrailing) {
-            if isCurrentUser {
-                Button {
-                    isEditingAccount = true
-                } label: {
-                    Label(
-                        title: { Text("account.edit.info", bundle: .module) },
-                        icon: { Image(systemName: "pencil") }
-                    )
-                }
             }
         }
         

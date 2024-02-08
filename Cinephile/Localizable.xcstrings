@@ -24,6 +24,7 @@
       }
     },
     "account.action.edit-filters" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -54,6 +55,7 @@
       }
     },
     "account.action.more" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -102,6 +104,9 @@
 
     },
     "Confirm Password" : {
+
+    },
+    "Delete cache" : {
 
     },
     "Destination View" : {
@@ -186,6 +191,7 @@
       }
     },
     "settings.account.action.delete-cache" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -268,6 +274,7 @@
       }
     },
     "settings.other.fast-refresh" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -278,6 +285,7 @@
       }
     },
     "settings.other.social-keyboard" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -428,6 +436,7 @@
       }
     },
     "settings.section.other.footer" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
