@@ -351,7 +351,7 @@ public struct EditAccountView: View {
       } header: {
           Text("account.edit.display-name", bundle: .module)
       }
-          .listRowBackground(theme.primaryBackgroundColor)
+//          .listRowBackground(theme.primaryBackgroundColor)
       Section {
           TextField(text: $viewModel.note, axis: .vertical) {
               Text("account.edit.about", bundle: .module)
@@ -360,7 +360,7 @@ public struct EditAccountView: View {
       } header: {
           Text("account.edit.about", bundle: .module)
       }
-      .listRowBackground(theme.primaryBackgroundColor)
+//      .listRowBackground(theme.primaryBackgroundColor)
   }
 
   private var postSettingsSection: some View {
@@ -434,7 +434,7 @@ public struct EditAccountView: View {
               } header: {
                   Text("account.edit.account-settings.section-title", bundle: .module)
               }
-              .listRowBackground(theme.primaryBackgroundColor)
+//              .listRowBackground(theme.primaryBackgroundColor)
   }
 
   private var fieldsSection: some View {
