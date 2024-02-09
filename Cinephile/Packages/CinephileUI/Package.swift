@@ -18,6 +18,7 @@ let package = Package(
     ],
     dependencies: [
         .package(name: "Models", path: "../Models"),
+        .package(name: "Networking", path: "../Networking"),
         .package(name: "Environment", path: "../Environment"),
         .package(url: "https://github.com/kean/Nuke", from: "12.0.0"),
         .package(url: "https://github.com/adamayoung/TMDb.git", from: "10.0.0"),
@@ -40,11 +41,13 @@ let package = Package(
         .target(
             name: "TrackerUI",
             dependencies: [
+                "Models",
+                "Networking",
                 "TMDb",
                 "Environment",
                 .product(name: "NukeUI", package: "Nuke"),
                 "YouTubePlayerKit",
-                .product(name: "MediaClient", package: "MediaClient")
+                "MediaClient"
             ]
         ),
         .testTarget(
