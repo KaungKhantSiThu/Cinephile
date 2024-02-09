@@ -13,5 +13,5 @@ public struct Entertainment: Codable, Identifiable, Hashable, Equatable, Sendabl
     public let domain: String
     public let mediaType: MediaType
     public let mediaId: String
-    
+    public let watchStatus: Bool
 }

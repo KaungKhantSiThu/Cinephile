@@ -14,13 +14,14 @@ public struct MediaTrackerView: View {
     public init() {}
     
     public var body: some View {
-        VStack {
-            if networkManager.isConnected {
-                Text("View for Watchlist")
-            } else {
-                ContentUnavailableView("No connection", systemImage: "wifi.slash", description: Text("Connect to the internet and try again."))
-            }
-        }
+//        VStack {
+//            if networkManager.isConnected {
+//                Text("View for Watchlist")
+//            } else {
+//                ContentUnavailableView("No connection", systemImage: "wifi.slash", description: Text("Connect to the internet and try again."))
+//            }
+//        }
+        WatchListView()
         .navigationTitle("Tracker")
         .navigationBarTitleDisplayMode(.inline)
     }
@@ -28,6 +29,7 @@ public struct MediaTrackerView: View {
 
 #Preview {
     MediaTrackerView()
+        .environment(NetworkManager())
 }
 
 

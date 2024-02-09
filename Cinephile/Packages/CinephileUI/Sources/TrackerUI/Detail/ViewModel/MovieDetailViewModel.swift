@@ -7,8 +7,8 @@
 
 import SwiftUI
 import MediaClient
-
-
+import Models
+import Networking
 
 @Observable class MovieDetailViewModel: LoadableObject {
     
@@ -17,8 +17,31 @@ import MediaClient
     
     
     let id: Movie.ID
-
+    
     private let loader = MovieLoader()
+    var client: Client?
+    
+    var watchlistError: String?
+    var showWatchlistErrorAlert: Bool = false
+    
+//    var addedToWatchlist: Bool {
+//        guard let client else { return false }
+//        Task {
+//            do {
+//                let watchlist: Watchlist = try await client.get(endpoint: Watchlists.get(id: self.id))
+//                return true
+//            } catch {
+//                if let error = error as? Models.ServerError {
+//                    watchlistError = error.error
+//                    showWatchlistErrorAlert = true
+//                    return false
+//                }
+//            }
+//        }
+//        return false
+//        
+//    }
+    
     
     init(id: Movie.ID) {
         self.id = id
@@ -44,10 +67,40 @@ import MediaClient
         async let videos = loader.loadVideos(withID: id)
         async let showWatchProvider = loader.loadShowWatchProvider(withID: id)
         async let recommendations = loader.loadRecommendations(withID: id)
-
+        
         return try await .init(movie: movie, castMembers: castMembers, videos: videos, showWatchProvider: showWatchProvider, recommendations: recommendations)
     }
-
+    
+    func addToWatchlist() async {
+        guard let client else { return }
+        var entertainmentId: Int?
+        //        var entertainment: Entertainment?
+        do {
+            let entertainments: [Entertainment] = try await client.post(endpoint: Entertainments.search(json: EntertainmentSearchData(mediaType: .movie, mediaId: String(self.id))))
+            if !entertainments.isEmpty, let result = entertainments.first {
+                
+                entertainmentId = result.id
+            } else {
+                let data: EntertainmentData = .init(
+                    domain: "themoviedb.org",
+                    mediaType: .movie,
+                    mediaId: String(self.id))
+                let entertainment: Entertainment = try await client.post(endpoint: Entertainments.post(json: data))
+                
+                entertainmentId = entertainment.id
+            }
+            if let entertainmentId {
+                let watchlist: Watchlist = try await client.post(endpoint: Watchlists.post(json: WatchlistData(entertainmentId: entertainmentId, watchStatus: .unwatched)))
+            }
+        } catch {
+            if let error = error as? Models.ServerError {
+                watchlistError = error.error
+                showWatchlistErrorAlert = true
+            }
+        }
+        
+    }
+    
 }
 
 extension MovieDetailViewModel {

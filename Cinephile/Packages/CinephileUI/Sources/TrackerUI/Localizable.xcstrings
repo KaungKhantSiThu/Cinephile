@@ -67,9 +67,6 @@
         }
       }
     },
-    "Connect to the internet and try again." : {
-
-    },
     "Days" : {
       "localizations" : {
         "en" : {
@@ -94,6 +91,7 @@
       }
     },
     "Hello, World!" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -115,9 +113,6 @@
           }
         }
       }
-    },
-    "No connection" : {
-
     },
     "No search Results" : {
       "localizations" : {
@@ -257,6 +252,7 @@
       }
     },
     "View for Watchlist" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
