@@ -1,12 +1,19 @@
 import SwiftUI
 import MediaClient
 import Environment
+import Networking
 
 @MainActor
 public struct MovieDetailView: View {
     @Environment(MediaNotificationManager.self) var notificationManager: MediaNotificationManager
+    @Environment(AppAccountsManager.self) private var appAccounts
+    @Environment(CurrentAccount.self) private var currentAccount
+    @Environment(Client.self) private var client
+    
     @State private var isMovieAdded = false
     @State private var viewModel: MovieDetailViewModel
+    @State private var isLoading = false
+    @State private var loaded = false
     
     public init(id: Movie.ID) {
         _viewModel = .init(wrappedValue: MovieDetailViewModel(id: id))
@@ -56,7 +63,33 @@ public struct MovieDetailView: View {
                 HStack(spacing: 30) {
                     Rating(voteCount: data.movie.voteCount ?? 0, voteAverage: data.movie.voteAverage ?? 0.0)
                     
-                    TrackerActionButton()
+                    Button {
+                        Task {
+                            isLoading = true
+                            
+                            if viewModel.inWatchlist {
+                                await viewModel.removeFromWatchlist()
+                            } else {
+                                await viewModel.addToWatchlist()
+                            }
+            //                try! await Task.sleep(nanoseconds: 1_000_000_000)
+                            isLoading = false
+                            
+                        }
+                        
+                        
+                    } label: {
+                        Label(viewModel.inWatchlist ? "Added" : "Watchlist", systemImage: viewModel.inWatchlist ? "checkmark.circle.fill" : "plus.circle.fill")
+                            .opacity(isLoading ? 0 : 1)
+                            .overlay {
+                                if isLoading {
+                                    ProgressView()
+                                }
+                            }
+                    }
+                    .disabled(isLoading)
+                    .tint(.red)
+                    .buttonStyle(.borderedProminent)
                     
 //                    Button {
 //                        // what if there isn't a released date and the user wanna just add it to watchlist
@@ -113,14 +146,36 @@ public struct MovieDetailView: View {
                 .padding([.leading, .trailing], 20)
             }
         }
+        .alert(
+            "status.error.posting.title",
+            isPresented: $viewModel.showWatchlistErrorAlert,
+            actions: {
+                Button {
+                    
+                } label: {
+                    Text("alert.button.ok", bundle: .module)
+                }
+            }, message: {
+                Text(viewModel.watchlistError ?? "")
+            }
+        )
+        .onAppear {
+            viewModel.client = client
+        }
+//        .onChange(of: appAccounts.currentClient) { _, newValue in
+//            currentAccount.setClient(client: newValue)
+//            viewModel.client = newValue
+//        }
+        
     }
 }
 
 
 
-#Preview {
-    return NavigationStack {
-        MovieDetailView(id: 550)
-            .environment(MediaNotificationManager())
-    }
-}
+//#Preview {
+//    return NavigationStack {
+//        MovieDetailView(id: 550)
+//            .environment(MediaNotificationManager())
+//            
+//    }
+//}

@@ -292,3 +292,7 @@ extension Movie {
     }
 
 }
+
+extension Movie {
+    public static let bulletTrain: Movie = Movie(id: 718_930, title: "Bullet Train", releaseDate: DateFormatter.theMovieDatabase.date(from: "2022-07-06"))
+}

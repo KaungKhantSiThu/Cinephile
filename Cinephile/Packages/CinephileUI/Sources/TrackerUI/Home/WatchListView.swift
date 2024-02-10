@@ -8,6 +8,7 @@
 import SwiftUI
 import Models
 import Networking
+import MediaClient
 
 struct WatchListView: View {
     @State private var viewModel = WatchListViewModel()
@@ -40,6 +41,7 @@ struct WatchListView: View {
     }
 }
 
-#Preview {
-    WatchListView()
-}
+//#Preview {
+//    WatchListView()
+//
+//}

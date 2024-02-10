@@ -42,6 +42,8 @@ import Networking
 //        
 //    }
     
+    var inWatchlist = false
+    
     
     init(id: Movie.ID) {
         self.id = id
@@ -54,6 +56,13 @@ import Networking
             do {
                 let data = try await fetchMovieDetailData()
                 self.posterImageURL = ImageService.shared.posterURL(for: data.movie.posterPath)
+                
+                if let _ = await isInWatchlist() {
+                    self.inWatchlist = true
+                } else {
+                    self.inWatchlist = false
+                }
+                
                 self.state = .loaded(data)
             } catch {
                 self.state = .failed(error)
@@ -71,16 +80,43 @@ import Networking
         return try await .init(movie: movie, castMembers: castMembers, videos: videos, showWatchProvider: showWatchProvider, recommendations: recommendations)
     }
     
+    enum ClientError: Error {
+        case notInitialized
+    }
+    
+    func isInWatchlist() async -> Entertainment? {
+        
+        do {
+            guard let client else { throw ClientError.notInitialized }
+            let entertainments: [Entertainment] = try await client.post(endpoint: Entertainments.search(json: EntertainmentSearchData(mediaType: .movie, mediaId: String(self.id))))
+            if !entertainments.isEmpty, let result = entertainments.first {
+                return result
+            } else {
+                return nil
+            }
+        } catch {
+            if let error = error as? Models.ServerError {
+                watchlistError = error.error
+                showWatchlistErrorAlert = true
+            }
+        }
+        return nil
+    }
+    
     func addToWatchlist() async {
         guard let client else { return }
         var entertainmentId: Int?
         //        var entertainment: Entertainment?
         do {
-            let entertainments: [Entertainment] = try await client.post(endpoint: Entertainments.search(json: EntertainmentSearchData(mediaType: .movie, mediaId: String(self.id))))
-            if !entertainments.isEmpty, let result = entertainments.first {
-                
-                entertainmentId = result.id
-            } else {
+            if let entertainment = await isInWatchlist() {
+                entertainmentId = entertainment.id
+            }
+//            let entertainments: [Entertainment] = try await client.post(endpoint: Entertainments.search(json: EntertainmentSearchData(mediaType: .movie, mediaId: String(self.id))))
+//            if !entertainments.isEmpty, let result = entertainments.first {
+//                
+//                entertainmentId = result.id
+//            } 
+            else {
                 let data: EntertainmentData = .init(
                     domain: "themoviedb.org",
                     mediaType: .movie,
@@ -99,6 +135,36 @@ import Networking
             }
         }
         
+    }
+    
+    func removeFromWatchlist() async {
+        guard let client else { return }
+        //        var entertainment: Entertainment?
+        do {
+            if let entertainment = await isInWatchlist() {
+                let response = try await client.delete(endpoint: Watchlists.delete(id: entertainment.id))
+            }
+//            let entertainments: [Entertainment] = try await client.post(endpoint: Entertainments.search(json: EntertainmentSearchData(mediaType: .movie, mediaId: String(self.id))))
+//            if !entertainments.isEmpty, let result = entertainments.first {
+//
+//                entertainmentId = result.id
+//            }
+//            else {
+//                let data: EntertainmentData = .init(
+//                    domain: "themoviedb.org",
+//                    mediaType: .movie,
+//                    mediaId: String(self.id))
+//                let entertainment: Entertainment = try await client.post(endpoint: Entertainments.post(json: data))
+//                
+//                entertainmentId = entertainment.id
+//            }
+
+        } catch {
+            if let error = error as? Models.ServerError {
+                watchlistError = error.error
+                showWatchlistErrorAlert = true
+            }
+        }
     }
     
 }
