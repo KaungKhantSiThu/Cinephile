@@ -11,7 +11,9 @@ struct ButtonsPreview: View {
     @State private var isOn: Bool = false
     var body: some View {
         VStack {
-            TrackerActionButton()
+            TrackerActionButton {
+                print("hello")
+            }
             
             Button {
                 isOn.toggle()
@@ -42,12 +44,13 @@ struct ButtonsPreview: View {
 struct TrackerActionButton: View {
     @State private var isLoading = false
     @State private var loaded = false
+    var action: () -> Void
     
     var body: some View {
         Button {
             Task {
                 isLoading = true
-                try! await Task.sleep(nanoseconds: 1_000_000_000)
+//                try! await Task.sleep(nanoseconds: 1_000_000_000)
                 isLoading = false
                 loaded.toggle()
             }

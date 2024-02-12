@@ -96,7 +96,7 @@ import os
         let url = try makeURL(endpoint: Accounts.createAccount(json: data))
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        request.setValue("Bearer x-t8FUzquP4JsihXzWhzsbAFN1k7zoysO-DdImGMcwM", forHTTPHeaderField: "Authorization")
+        request.setValue("Bearer 0UBnhoC9gDrLGNEXZ6Gvt9Mr-Mn_lRIyWryQdqM49z8", forHTTPHeaderField: "Authorization")
         let encoder = JSONEncoder()
         encoder.keyEncodingStrategy = .convertToSnakeCase
         encoder.outputFormatting = .sortedKeys
@@ -204,6 +204,10 @@ import os
         let (_, httpResponse) = try await urlSession.data(for: request)
         return httpResponse as? HTTPURLResponse
     }
+    
+//    public func patch<Entity: Decodable>(endpoint: Endpoint, forceVersion: Version? = nil) async throws -> Entity {
+//        try await makeEntityRequest(endpoint: endpoint, method: "PATCH", forceVersion: forceVersion)
+//    }
     
     public func put<Entity: Decodable>(endpoint: Endpoint, forceVersion: Version? = nil) async throws -> Entity {
         try await makeEntityRequest(endpoint: endpoint, method: "PUT", forceVersion: forceVersion)

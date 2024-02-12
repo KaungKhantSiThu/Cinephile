@@ -25,8 +25,10 @@ private let logger = Logger(subsystem: "Account", category: "DetailViewModel")
         case loading, loaded(account: Account), failed(error: Error)
     }
     
-    enum Tab: Int {
+    enum Tab: Hashable, CaseIterable, Identifiable {
         case statuses, favorites, bookmarks, postsAndReplies, boosts, media
+        
+        var id: Self { self }
         
         static var currentAccountTabs: [Tab] {
             [.statuses,.postsAndReplies, .favorites, .bookmarks]

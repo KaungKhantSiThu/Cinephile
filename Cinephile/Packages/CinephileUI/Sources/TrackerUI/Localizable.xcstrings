@@ -37,6 +37,9 @@
     "Added" : {
 
     },
+    "alert.button.ok" : {
+
+    },
     "all" : {
       "localizations" : {
         "en" : {
@@ -67,9 +70,6 @@
         }
       }
     },
-    "Connect to the internet and try again." : {
-
-    },
     "Days" : {
       "localizations" : {
         "en" : {
@@ -94,6 +94,7 @@
       }
     },
     "Hello, World!" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -115,9 +116,6 @@
           }
         }
       }
-    },
-    "No connection" : {
-
     },
     "No search Results" : {
       "localizations" : {
@@ -203,6 +201,9 @@
     "Season %lld" : {
 
     },
+    "status.error.posting.title" : {
+
+    },
     "Streaming is not available at the moment" : {
       "localizations" : {
         "en" : {
@@ -212,6 +213,9 @@
           }
         }
       }
+    },
+    "Tab" : {
+
     },
     "There was an error regarding %@" : {
 
@@ -257,6 +261,7 @@
       }
     },
     "View for Watchlist" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

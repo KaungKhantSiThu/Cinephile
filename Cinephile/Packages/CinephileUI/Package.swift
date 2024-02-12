@@ -40,6 +40,7 @@ let package = Package(
         .target(
             name: "TrackerUI",
             dependencies: [
+                "CinephileUI",
                 "TMDb",
                 "Environment",
                 .product(name: "NukeUI", package: "Nuke"),

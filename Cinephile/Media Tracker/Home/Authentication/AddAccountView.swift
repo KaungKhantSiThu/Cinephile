@@ -20,7 +20,7 @@ struct AddAccountView: View {
     @State private var isSigninIn  = false
     @State private var instanceFetchError: String?
     
-    private let instanceName: String = "cinephile-26be9689548e.herokuapp.com"
+//    private let instanceName: String = "cinephile-social.me"
 
 //    @StateObject private var formViewModel = FormViewModel()
     
@@ -120,7 +120,7 @@ struct AddAccountView: View {
                     }
                }
                 .task {
-                    let client = Client(server: instanceName)
+                    let client = Client(server: AppInfo.defaultServer)
                     do {
                         let instance: Instance = try await client.get(endpoint: Instances.instance)
                         withAnimation {
@@ -146,7 +146,7 @@ struct AddAccountView: View {
     }
     
     private func signIn() async {
-      signInClient = .init(server: instanceName)
+        signInClient = .init(server: AppInfo.defaultServer)
       if let oauthURL = try? await signInClient?.oauthURL(),
          let url = try? await webAuthenticationSession.authenticate(using: oauthURL,
                                                                    callbackURLScheme: AppInfo.scheme.replacingOccurrences(of: "://", with: "")) {

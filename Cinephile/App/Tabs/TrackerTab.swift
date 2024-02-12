@@ -34,9 +34,7 @@ struct TrackerTab: View {
                 .toolbar {
                     toolbarView
                 }
-                
                 .id(client.id)
-            
         }
         .onChange(of: $popToRootTab.wrappedValue) { _, newValue in
           if newValue == .tracker {
