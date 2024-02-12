@@ -41,7 +41,12 @@ struct WatchListView: View {
 ////                                .frame(width: 100)
 //                        }
                         ForEach(selectedTab == .unwatched ? viewModel.notWatch : viewModel.watched) { watchlist in
-                            MovieCover(id: Int(watchlist.entertainment.mediaId)!)
+                            if let id = Int(watchlist.entertainment.mediaId) {
+                                NavigationLink(value: RouterDestination.movieDetail(id: id)) {
+                                    MovieCover(id: id)
+                                }
+                                .buttonStyle(.plain)
+                            }
 //                                    .frame(width: 100)
                         }
 //                        Section(header: Text("Not Watch").font(.title)) {
