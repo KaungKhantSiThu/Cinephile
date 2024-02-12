@@ -15,20 +15,21 @@ public struct MediaCover: View {
     
 //    @State private var posterImage = URL(string: "https://picsum.photos/200/300")!
     public var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
+        VStack(alignment: .center, spacing: 5) {
             PosterImage(url: ImageService.shared.posterURL(for: posterPath))
             
-            VStack(alignment: .leading, spacing: 0) {
-                Text("\(title)")
-                    .fontWeight(.semibold)
-                    .lineLimit(1)
-                    .font(.caption)
-                    .foregroundStyle(.primary)
-                
-                Text(format(date: releaseDate))
-                    .font(.caption2)
-                    .foregroundStyle(.secondary)
-            }
+            Text(format(date: releaseDate))
+                .font(.caption)
+                .foregroundStyle(.primary)
+//            VStack(alignment: .leading, spacing: 0) {
+////                Text("\(title)")
+////                    .fontWeight(.semibold)
+////                    .lineLimit(1)
+////                    .font(.caption)
+////                    .foregroundStyle(.primary)
+//                
+//                
+//            }
         }
 //        .task {
 //            do {

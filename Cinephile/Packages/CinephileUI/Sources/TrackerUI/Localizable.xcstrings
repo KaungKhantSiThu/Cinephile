@@ -127,9 +127,6 @@
         }
       }
     },
-    "Not Watch" : {
-
-    },
     "people" : {
       "localizations" : {
         "en" : {
@@ -217,6 +214,9 @@
         }
       }
     },
+    "Tab" : {
+
+    },
     "There was an error regarding %@" : {
 
     },
@@ -270,9 +270,6 @@
           }
         }
       }
-    },
-    "Watched" : {
-
     },
     "Watchlist" : {
 
