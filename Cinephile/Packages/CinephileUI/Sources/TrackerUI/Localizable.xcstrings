@@ -127,6 +127,9 @@
         }
       }
     },
+    "Not Watch" : {
+
+    },
     "people" : {
       "localizations" : {
         "en" : {
@@ -267,6 +270,9 @@
           }
         }
       }
+    },
+    "Watched" : {
+
     },
     "Watchlist" : {
 

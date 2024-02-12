@@ -205,6 +205,10 @@ import os
         return httpResponse as? HTTPURLResponse
     }
     
+//    public func patch<Entity: Decodable>(endpoint: Endpoint, forceVersion: Version? = nil) async throws -> Entity {
+//        try await makeEntityRequest(endpoint: endpoint, method: "PATCH", forceVersion: forceVersion)
+//    }
+    
     public func put<Entity: Decodable>(endpoint: Endpoint, forceVersion: Version? = nil) async throws -> Entity {
         try await makeEntityRequest(endpoint: endpoint, method: "PUT", forceVersion: forceVersion)
     }

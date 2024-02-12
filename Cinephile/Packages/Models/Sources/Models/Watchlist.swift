@@ -11,3 +11,10 @@ public struct Watchlist: Identifiable, Codable, Equatable, Hashable {
 }
 
 
+public struct WatchStatusWrapper: Encodable, Sendable {
+    public let watchStatus: WatchStatus
+    
+    public init(watchStatus: WatchStatus) {
+        self.watchStatus = watchStatus
+    }
+}

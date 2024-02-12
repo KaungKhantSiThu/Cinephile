@@ -12,7 +12,7 @@ public enum Watchlists: Endpoint {
     case getAll
     case get(id: Int)
     case post(json: WatchlistData)
-    case patch(id: Int, status: WatchStatus)
+    case patch(id: Int, watchStatus: WatchStatusWrapper)
     case delete(id: Int)
 
     public func path() -> String {
@@ -34,8 +34,8 @@ public enum Watchlists: Endpoint {
         switch self {
         case .post(let json):
             json
-        case .patch(_, let status):
-            status
+        case .patch(_, let watchStatus):
+            watchStatus
         default: nil
         }
     }

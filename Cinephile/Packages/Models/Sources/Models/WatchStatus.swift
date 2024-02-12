@@ -15,3 +15,5 @@ public enum WatchStatus: String, Codable, Equatable, Hashable, CaseIterable, Sen
       lhs.rawValue == rhs.rawValue
     }
 }
+
+

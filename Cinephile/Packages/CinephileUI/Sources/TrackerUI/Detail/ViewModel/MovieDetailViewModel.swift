@@ -43,7 +43,10 @@ import Networking
 //    }
     
     var inWatchlist = false
-    
+    var hasWatched = false
+    private var isEntertainment = false
+    var entertainmentID: Entertainment.ID?
+    var entertainment: Entertainment?
     
     init(id: Movie.ID) {
         self.id = id
@@ -57,8 +60,11 @@ import Networking
                 let data = try await fetchMovieDetailData()
                 self.posterImageURL = ImageService.shared.posterURL(for: data.movie.posterPath)
                 
-                if let _ = await isInWatchlist() {
+                if let entertainment = await isInWatchlist() {
                     self.inWatchlist = true
+                    if let watchlist = entertainment.watchStatus, let watchStatus = watchlist.watchStatus {
+                        self.hasWatched = watchStatus == .watched
+                    }
                 } else {
                     self.inWatchlist = false
                 }
@@ -90,7 +96,12 @@ import Networking
             guard let client else { throw ClientError.notInitialized }
             let entertainments: [Entertainment] = try await client.post(endpoint: Entertainments.search(json: EntertainmentSearchData(mediaType: .movie, mediaId: String(self.id))))
             if !entertainments.isEmpty, let result = entertainments.first {
-                return result
+                self.isEntertainment = true
+                self.entertainmentID = result.id
+                self.entertainment = result
+                if result.watchStatus != nil {
+                    return result
+                }
             } else {
                 return nil
             }
@@ -103,20 +114,55 @@ import Networking
         return nil
     }
     
+    func markAsWatched() async {
+        guard let client else { return }
+        
+        do {
+            if let entertainment = self.entertainment, let watchlist = entertainment.watchStatus {
+                let response = try await client.patch(endpoint: Watchlists.patch(id: watchlist.id, watchStatus: WatchStatusWrapper(watchStatus: .watched)))
+                print(response!)
+                if response?.statusCode == 200 {
+                    self.hasWatched = true
+                }
+                print("Marked as watched")
+            }
+        } catch {
+            if let error = error as? Models.ServerError {
+                watchlistError = error.error
+                showWatchlistErrorAlert = true
+            }
+        }
+    }
+    
+    func markAsNotWatch() async {
+        guard let client else { return }
+        
+        do {
+            if let entertainment = self.entertainment, let watchlist = entertainment.watchStatus {
+                let response = try await client.patch(endpoint: Watchlists.patch(id: watchlist.id, watchStatus: WatchStatusWrapper(watchStatus: .unwatched)))
+                print(response!)
+                if response?.statusCode == 200 {
+                    self.hasWatched = false
+                }
+                print("Marked as not watch")
+            }
+        } catch {
+            if let error = error as? Models.ServerError {
+                watchlistError = error.error
+                showWatchlistErrorAlert = true
+            }
+        }
+    }
+    
     func addToWatchlist() async {
         guard let client else { return }
         var entertainmentId: Int?
         //        var entertainment: Entertainment?
         do {
-            if let entertainment = await isInWatchlist() {
-                entertainmentId = entertainment.id
-            }
-//            let entertainments: [Entertainment] = try await client.post(endpoint: Entertainments.search(json: EntertainmentSearchData(mediaType: .movie, mediaId: String(self.id))))
-//            if !entertainments.isEmpty, let result = entertainments.first {
-//                
-//                entertainmentId = result.id
-//            } 
-            else {
+            if let id = self.entertainmentID, isEntertainment {
+                entertainmentId = id
+            } else {
+                print("Creating entertainment with id: \(self.id)")
                 let data: EntertainmentData = .init(
                     domain: "themoviedb.org",
                     mediaType: .movie,
@@ -125,8 +171,10 @@ import Networking
                 
                 entertainmentId = entertainment.id
             }
+            
             if let entertainmentId {
-                let watchlist: Watchlist = try await client.post(endpoint: Watchlists.post(json: WatchlistData(entertainmentId: entertainmentId, watchStatus: .unwatched)))
+                let _: Watchlist = try await client.post(endpoint: Watchlists.post(json: WatchlistData(entertainmentId: entertainmentId, watchStatus: .unwatched)))
+                self.inWatchlist = true
             }
         } catch {
             if let error = error as? Models.ServerError {
@@ -141,23 +189,11 @@ import Networking
         guard let client else { return }
         //        var entertainment: Entertainment?
         do {
-            if let entertainment = await isInWatchlist() {
-                let response = try await client.delete(endpoint: Watchlists.delete(id: entertainment.id))
+            if let entertainment = self.entertainment, let watchlist = entertainment.watchStatus {
+//                let entertainment: Entertainment = try await client.get(endpoint: Entertainments.get(id: id))
+                let response = try await client.delete(endpoint: Watchlists.delete(id: watchlist.id))
+                self.inWatchlist = false
             }
-//            let entertainments: [Entertainment] = try await client.post(endpoint: Entertainments.search(json: EntertainmentSearchData(mediaType: .movie, mediaId: String(self.id))))
-//            if !entertainments.isEmpty, let result = entertainments.first {
-//
-//                entertainmentId = result.id
-//            }
-//            else {
-//                let data: EntertainmentData = .init(
-//                    domain: "themoviedb.org",
-//                    mediaType: .movie,
-//                    mediaId: String(self.id))
-//                let entertainment: Entertainment = try await client.post(endpoint: Entertainments.post(json: data))
-//                
-//                entertainmentId = entertainment.id
-//            }
 
         } catch {
             if let error = error as? Models.ServerError {
@@ -178,3 +214,5 @@ extension MovieDetailViewModel {
         var recommendations: [Movie]
     }
 }
+
+
