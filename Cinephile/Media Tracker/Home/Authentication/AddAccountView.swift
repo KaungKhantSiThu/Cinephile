@@ -20,7 +20,7 @@ struct AddAccountView: View {
     @State private var isSigninIn  = false
     @State private var instanceFetchError: String?
     
-//    private let instanceName: String = "cinephile-social.me"
+    private let instanceName: String = "cinephile-26be9689548e.herokuapp.com"
 
 //    @StateObject private var formViewModel = FormViewModel()
     
@@ -146,7 +146,7 @@ struct AddAccountView: View {
     }
     
     private func signIn() async {
-        signInClient = .init(server: AppInfo.defaultServer)
+        signInClient = .init(server: instanceName)
       if let oauthURL = try? await signInClient?.oauthURL(),
          let url = try? await webAuthenticationSession.authenticate(using: oauthURL,
                                                                    callbackURLScheme: AppInfo.scheme.replacingOccurrences(of: "://", with: "")) {
