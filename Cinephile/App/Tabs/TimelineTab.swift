@@ -66,7 +66,7 @@ struct TimelineTab: View {
                 if client.isAuth {
                     timeline = lastTimelineFilter
                 } else {
-                    timeline = .federated
+                    timeline = .local
                 }
             }
             //          Task {

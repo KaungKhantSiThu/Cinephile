@@ -12,7 +12,7 @@ private let logger = Logger(subsystem: "Timeline", category: "ViewModel")
 @Observable class TimelineViewModel {
     var scrollToIndex: Int?
     var statusesState: StatusesState = .loading
-    var timeline: TimelineFilter = .federated {
+    var timeline: TimelineFilter = .local {
         willSet {
             if timeline == .home && newValue != .resume {
                 saveMarker()
