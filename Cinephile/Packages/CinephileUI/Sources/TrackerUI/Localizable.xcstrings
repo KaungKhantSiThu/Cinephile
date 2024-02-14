@@ -137,6 +137,9 @@
         }
       }
     },
+    "Please log in to use this feature or tap %@ to explore the movies" : {
+
+    },
     "Popular Movies" : {
       "localizations" : {
         "en" : {
@@ -272,6 +275,9 @@
       }
     },
     "Watchlist" : {
+
+    },
+    "You are not loggined" : {
 
     }
   },

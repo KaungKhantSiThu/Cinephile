@@ -147,7 +147,7 @@ public class MediaNotificationManager: NSObject {
         
         let dismiss = UNNotificationAction(identifier: NotificationAction.dismiss.rawValue, title: "Dismiss")
         
-        let reminder = UNNotificationAction(identifier: NotificationAction.reminder.rawValue, title: "Reminder")
+//        let reminder = UNNotificationAction(identifier: NotificationAction.reminder.rawValue, title: "Reminder")
         
         let generalCategory = UNNotificationCategory(identifier: NotificationCateogry.trackerAlert.rawValue, actions: [dismiss], intentIdentifiers: [], options: [])
         
