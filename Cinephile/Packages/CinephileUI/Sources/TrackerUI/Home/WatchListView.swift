@@ -20,6 +20,9 @@ struct WatchListView: View {
     var body: some View {
         VStack(alignment: .center) {
             switch viewModel.state {
+            case .notLogin:
+                ContentUnavailableView("You are not loggined", systemImage: "exclamationmark.triangle", description: Text("Please log in to use this feature or tap \(Image(systemName: "magnifyingglass")) to explore the movies"))
+                    .symbolVariant(.fill)
             case .loading:
                 ProgressView()
             case .display:

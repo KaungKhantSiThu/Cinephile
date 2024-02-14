@@ -61,72 +61,77 @@ public struct MovieDetailView: View {
                 
                 Divider()
                 
+                
                 HStack(spacing: 30) {
                     Rating(voteCount: data.movie.voteCount ?? 0, voteAverage: data.movie.voteAverage ?? 0.0)
                     
-                    VStack {
-                        Button {
-                            Task {
-                                isLoading = true
-                                
-                                if viewModel.inWatchlist {
-                                    print("Removing \(data.movie.id) : \(data.movie.title) from watchlist")
-                                    await viewModel.removeFromWatchlist()
-                                } else {
-                                    print("Adding \(data.movie.id) : \(data.movie.title) to watchlist")
-                                    await viewModel.addToWatchlist()
-                                }
-                                try! await Task.sleep(nanoseconds: 1_000_000_000)
-                                isLoading = false
-                                
-                            }
-                            
-                            
-                        } label: {
-                            Image(systemName: viewModel.inWatchlist ? "checkmark.circle.fill" : "plus.circle.fill")
-                                .opacity(isLoading ? 0 : 1)
-                                .overlay {
-                                    if isLoading {
-                                        ProgressView()
-                                    }
-                                }
-                        }
-                        .disabled(isLoading)
-                        .tint(.red)
-                        .buttonStyle(.borderedProminent)
-                        
-                        if viewModel.inWatchlist {
+                    if viewModel.isLoggedin {
+                        VStack {
                             Button {
                                 Task {
-                                    isWatchStatusLoading = true
+                                    isLoading = true
                                     
-                                    if viewModel.hasWatched {
-                                        print("\(data.movie.id) : \(data.movie.title) is marked as watched")
-                                        await viewModel.markAsNotWatch()
+                                    if viewModel.inWatchlist {
+                                        print("Removing \(data.movie.id) : \(data.movie.title) from watchlist")
+                                        await viewModel.removeFromWatchlist()
                                     } else {
-                                        print("\(data.movie.id) : \(data.movie.title) is marked as Not watch")
-                                        await viewModel.markAsWatched()
+                                        print("Adding \(data.movie.id) : \(data.movie.title) to watchlist")
+                                        await viewModel.addToWatchlist()
                                     }
-                                    isWatchStatusLoading = false
+                                    try! await Task.sleep(nanoseconds: 1_000_000_000)
+                                    isLoading = false
                                     
                                 }
                                 
                                 
                             } label: {
-                                Image(systemName: "eye")
-                                    .symbolVariant(viewModel.hasWatched ? .none : .slash)
-                                    .opacity(isWatchStatusLoading ? 0 : 1)
+                                Image(systemName: viewModel.inWatchlist ? "checkmark.circle.fill" : "plus.circle.fill")
+                                    .opacity(isLoading ? 0 : 1)
                                     .overlay {
-                                        if isWatchStatusLoading {
+                                        if isLoading {
                                             ProgressView()
                                         }
                                     }
                             }
-                            .disabled(isWatchStatusLoading)
+                            .disabled(isLoading)
                             .tint(.red)
                             .buttonStyle(.borderedProminent)
+                            
+                            if viewModel.inWatchlist {
+                                Button {
+                                    Task {
+                                        isWatchStatusLoading = true
+                                        
+                                        if viewModel.hasWatched {
+                                            print("\(data.movie.id) : \(data.movie.title) is marked as watched")
+                                            await viewModel.markAsNotWatch()
+                                        } else {
+                                            print("\(data.movie.id) : \(data.movie.title) is marked as Not watch")
+                                            await viewModel.markAsWatched()
+                                        }
+                                        isWatchStatusLoading = false
+                                        
+                                    }
+                                    
+                                    
+                                } label: {
+                                    Image(systemName: "eye")
+                                        .symbolVariant(viewModel.hasWatched ? .none : .slash)
+                                        .opacity(isWatchStatusLoading ? 0 : 1)
+                                        .overlay {
+                                            if isWatchStatusLoading {
+                                                ProgressView()
+                                            }
+                                        }
+                                }
+                                .disabled(isWatchStatusLoading)
+                                .tint(.red)
+                                .buttonStyle(.borderedProminent)
+                            }
                         }
                     }
+                    
+                    
                     
 //                    Button {
 //                        // what if there isn't a released date and the user wanna just add it to watchlist

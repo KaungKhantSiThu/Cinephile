@@ -14,7 +14,7 @@ import Models
 class WatchListViewModel {
     var client: Client?
     enum State {
-        case loading, display(watchlists: [Watchlist]), error(error: Error)
+        case loading, display(watchlists: [Watchlist]), error(error: Error), notLogin
     }
 
     var state: State = .loading
@@ -36,7 +36,15 @@ class WatchListViewModel {
     private var watchlists: [Watchlist] = []
 
     func fetch() async {
-        guard let client else { return }
+        guard let client else {
+            return
+        }
+        
+        guard client.isAuth else {
+            state = .notLogin
+            return
+        }
+        
         do {
             let watchlists: [Watchlist] = try await client.get(endpoint: Watchlists.getAll)
             print(watchlists)
