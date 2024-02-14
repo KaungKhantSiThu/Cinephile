@@ -24,6 +24,8 @@ import Networking
     var watchlistError: String?
     var showWatchlistErrorAlert: Bool = false
     
+    var isLoggedin = false
+    
 //    var addedToWatchlist: Bool {
 //        guard let client else { return false }
 //        Task {
@@ -93,7 +95,12 @@ import Networking
     func isInWatchlist() async -> Entertainment? {
         
         do {
-            guard let client else { throw ClientError.notInitialized }
+            guard let client, client.isAuth else {
+                self.isLoggedin = false
+                throw ClientError.notInitialized
+            }
+            self.isLoggedin = true
+            
             let entertainments: [Entertainment] = try await client.post(endpoint: Entertainments.search(json: EntertainmentSearchData(mediaType: .movie, mediaId: String(self.id))))
             if !entertainments.isEmpty, let result = entertainments.first {
                 self.isEntertainment = true
@@ -191,7 +198,7 @@ import Networking
         do {
             if let entertainment = self.entertainment, let watchlist = entertainment.watchStatus {
 //                let entertainment: Entertainment = try await client.get(endpoint: Entertainments.get(id: id))
-                let response = try await client.delete(endpoint: Watchlists.delete(id: watchlist.id))
+                _ = try await client.delete(endpoint: Watchlists.delete(id: watchlist.id))
                 self.inWatchlist = false
             }
 
