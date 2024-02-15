@@ -14,11 +14,14 @@ struct AddAccountView: View {
 
     @Environment(AppAccountsManager.self) private var appAccountsManager
     @StateObject private var formViewModel = FormViewModel()
+    @State var isPresent = false
 
     @State private var signInClient: Client?
     @State private var instance: Instance?
     @State private var isSigninIn  = false
     @State private var instanceFetchError: String?
+    @State private var showAlert = false
+    @State private var alertMessage = ""
     
     private let instanceName: String = "cinephile-26be9689548e.herokuapp.com"
 
@@ -85,9 +88,18 @@ struct AddAccountView: View {
                                     do {
                                         let token = try await client.registerAccount(data: accountData)
                                         print(token)
+//                                        switch apiStatus {
+//                                            case 422:
+//                                                alertMessage = "Duplicate email. Please try again."
+//                                                showAlert = true
+//                                            case 200:
+//                                                alertMessage = "Reigster Successfully"
+//                                                showAlert = true
+//                                            case .failure(let error):
+//                                                Text("Error: \(error.localizedDescription)")
+//                                        }
                                     } catch {
-                                        print("Printing error description")
-                                        print(error.localizedDescription)
+                                        print(error)
                                     }
                                 }
                             } label: {
@@ -102,6 +114,9 @@ struct AddAccountView: View {
                             .frame(width: 300, height: 80)
                             .padding()
                             .disabled(!formViewModel.isValid)
+                            .alert(isPresented: $showAlert) {
+                                Alert(title: Text("Error"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+                            }
                             
                             Button(action: {
                                 withAnimation {
