@@ -39,13 +39,18 @@ struct AddAccountView: View {
                                 .bold()
                                 .padding()
                             
-                            TextField("Username", text: $formViewModel.username)
-                                .padding()
-                                .frame(width: 300, height: 50)
-                                .background(Color.black.opacity(0.05))
-                                .cornerRadius(10)
-                                .border(.red, width: CGFloat(0))
-                                .autocapitalization(.none)
+                            VStack {
+                                TextField("Username", text: $formViewModel.username)
+                                    .padding()
+                                    .frame(width: 300, height: 50)
+                                    .background(Color.black.opacity(0.05))
+                                    .cornerRadius(10)
+                                    .border(.red, width: CGFloat(0))
+                                    .autocapitalization(.none)
+                                Text(formViewModel.inlineErrorForUsername).foregroundColor(.red)
+
+                            }
+                            
                             
                             VStack {
                                 TextField("Email", text: $formViewModel.email)
@@ -94,8 +99,11 @@ struct AddAccountView: View {
 
                                     } catch {
                                         alertTitle = "Registration Failure"
-                                        alertMessage = error.localizedDescription
-                                        print(alertMessage)
+                                        if let error = error as? RegistrationError {
+                                            alertMessage = error.error
+                                        } else {
+                                            alertMessage = error.localizedDescription
+                                        }
                                         showAlert = true
                                     }
                                 }

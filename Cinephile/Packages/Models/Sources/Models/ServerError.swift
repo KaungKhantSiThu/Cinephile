@@ -13,3 +13,14 @@ public struct ServerError: Decodable, Error {
 }
 
 extension ServerError: Sendable {}
+
+
+public struct RegistrationError: Decodable, Error {
+  public let error: String
+
+    init(error: String) {
+        self.error = error
+    }
+}
+
+extension RegistrationError: Sendable {}

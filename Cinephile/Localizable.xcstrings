@@ -523,7 +523,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Local"
+            "value" : "Public"
           }
         }
       }
@@ -555,7 +555,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Home"
+            "value" : "Following"
           }
         }
       }
@@ -577,7 +577,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Local"
+            "value" : "Public"
           }
         }
       }
