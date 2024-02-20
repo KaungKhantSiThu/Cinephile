@@ -144,7 +144,8 @@ public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable
               isEntertainment: true,
               entertainments: [
                 .init(id: 1, domain: "themoviedb.org", mediaType: .movie, mediaId: "507086", watchStatus: nil),
-                .init(id: 2, domain: "themoviedb.org", mediaType: .tvSeries, mediaId: "90802", watchStatus: nil)
+                .init(id: 2, domain: "themoviedb.org", mediaType: .tvSeries, mediaId: "90802", watchStatus: nil),
+                .init(id: 3, domain: "themoviedb.org", mediaType: .movie, mediaId: "933131", watchStatus: nil)
               ]
         )
     }

@@ -14,8 +14,8 @@ import Networking
     
     private(set) var state: LoadingState<MovieDetail> = .idle
     private(set) var posterImageURL: URL = URL(string: "https://picsum.photos/200/300")!
-    
-    
+    private(set) var title: String = ""
+
     let id: Movie.ID
     
     private let loader = MovieLoader()
@@ -60,8 +60,9 @@ import Networking
         Task {
             do {
                 let data = try await fetchMovieDetailData()
-                self.posterImageURL = ImageService.shared.posterURL(for: data.movie.posterPath)
                 
+                self.posterImageURL = ImageService.shared.posterURL(for: data.movie.posterPath)
+                self.title = data.movie.title
                 if let entertainment = await isInWatchlist() {
                     self.inWatchlist = true
                     if let watchlist = entertainment.watchStatus, let watchStatus = watchlist.watchStatus {

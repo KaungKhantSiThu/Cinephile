@@ -39,20 +39,20 @@ public struct StatusRowView: View {
     
     public var body: some View {
         HStack(spacing: 0) {
-//            if !isCompact {
-//                HStack(spacing: 3) {
-//                    ForEach(0 ..< indentationLevel, id: \.self) { level in
-//                        Rectangle()
-//                            .fill(theme.tintColor)
-//                            .frame(width: 2)
-//                            .accessibilityHidden(true)
-//                            .opacity((indentationLevel == level + 1) ? 1 : 0.15)
-//                    }
-//                }
-//                if indentationLevel > 0 {
-//                    Spacer(minLength: 8)
-//                }
-//            }
+            //            if !isCompact {
+            //                HStack(spacing: 3) {
+            //                    ForEach(0 ..< indentationLevel, id: \.self) { level in
+            //                        Rectangle()
+            //                            .fill(theme.tintColor)
+            //                            .frame(width: 2)
+            //                            .accessibilityHidden(true)
+            //                            .opacity((indentationLevel == level + 1) ? 1 : 0.15)
+            //                    }
+            //                }
+            //                if indentationLevel > 0 {
+            //                    Spacer(minLength: 8)
+            //                }
+            //            }
             
             VStack(alignment: .leading) {
                 if viewModel.isFiltered, let filter = viewModel.filter {
@@ -69,18 +69,17 @@ public struct StatusRowView: View {
                             StatusRowReblogView(viewModel: viewModel)
                             StatusRowReplyView(viewModel: viewModel)
                         }
-//                        .padding(.leading, AvatarView.FrameConfiguration.status.width + .statusColumnsSpacing)
+                        //                        .padding(.leading, AvatarView.FrameConfiguration.status.width + .statusColumnsSpacing)
                     }
                     
                     HStack(alignment: .top, spacing: .statusColumnsSpacing) {
                         if !isCompact,
                            theme.avatarPosition == .leading
                         {
-                            Button {
-                                viewModel.navigateToAccountDetail(account: viewModel.finalStatus.account)
-                            } label: {
-                                AvatarView(viewModel.finalStatus.account.avatar)
-                            }
+                            AvatarView(viewModel.finalStatus.account.avatar)
+                                .onTapGesture {
+                                    viewModel.navigateToAccountDetail(account: viewModel.finalStatus.account)
+                                }
                         }
                         
                         VStack(alignment: .leading, spacing: .statusComponentSpacing) {
@@ -94,7 +93,7 @@ public struct StatusRowView: View {
                                     guard !isFocused else { return }
                                     viewModel.navigateToDetail()
                                 }
-
+                            
                             if !reasons.contains(.placeholder), viewModel.showActions, isFocused || theme.statusActionsDisplay != .none, !isInCaptureMode {
                                 StatusRowActionsView(viewModel: viewModel)
                                     .padding(.top, 8)

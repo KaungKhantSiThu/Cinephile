@@ -11,20 +11,25 @@ class FormViewModel: ObservableObject {
     @Published var birthOfDate = Date()
     @Published var inlineErrorForPassword = ""
     @Published var inlineErrorForEmail = ""
+    @Published var inlineErrorForUsername = ""
     
     @Published var isValid = false
     
     private var cancellables = Set<AnyCancellable>()
     
-//    private var isUserNameValid: AnyPublisher<Bool, Never> {
-//        $username
-//            .debounce(for: 0.8, scheduler: RunLoop.main)
-//            .removeDuplicates()
-//            .map {
-//                self.validateName(candidate: $0)
-//            }
-//            .eraseToAnyPublisher()
-//    }
+    private var isUserNameValidPublisher: AnyPublisher<UsernameStatus, Never> {
+        $username
+            .debounce(for: 0.8, scheduler: RunLoop.main)
+            .removeDuplicates()
+            .map {
+                if !self.validateName(candidate: $0) {
+                    return UsernameStatus.invalid
+                }
+                
+                return UsernameStatus.valid
+            }
+            .eraseToAnyPublisher()
+    }
     
     private var isEmailValidPublisher: AnyPublisher<EmailStatus, Never> {
         $email
@@ -59,7 +64,7 @@ class FormViewModel: ObservableObject {
         $password
             .debounce(for: 0.2, scheduler: RunLoop.main)
             .removeDuplicates()
-            .map{ $0.count >= 6 }
+            .map{ $0.count >= 8 }
             .eraseToAnyPublisher()
     }
     
@@ -96,7 +101,7 @@ class FormViewModel: ObservableObject {
     
     private var isFormValidPublisher: AnyPublisher<Bool, Never> {
         Publishers.CombineLatest(isPasswordValidPublisher, isEmailValidPublisher)
-            .map { $0 == .valid && $1 == .valid }
+            .map { $0 == .valid && $1 == .valid}
             .eraseToAnyPublisher()
     }
     
@@ -112,11 +117,11 @@ class FormViewModel: ObservableObject {
             .map { PasswordStatus in
                 switch PasswordStatus {
                 case .empty:
-                    return "Password cannot be empty"
+                    return "Passwords cannot be empty"
                 case .weakPassword:
-                    return "Password must be 6 characters"
+                    return "Passwords must be at least 8 characters"
                 case .repeatedPassword:
-                    return "Password do not match"
+                    return "Passwords do not match"
                 case .valid:
                     return ""
                 }
@@ -130,7 +135,7 @@ class FormViewModel: ObservableObject {
             .map { EmailStatus in
                 switch EmailStatus {
                 case .invalid:
-                    return "Email is Invalid"
+                    return "Email is invalid"
                 case .valid:
                     return ""
                 }
@@ -138,6 +143,19 @@ class FormViewModel: ObservableObject {
             .assign(to: \.inlineErrorForEmail, on: self)
             .store(in: &cancellables)
         
+        isUserNameValidPublisher
+            .dropFirst()
+            .receive(on: RunLoop.main)
+            .map { status in
+                switch status {
+                case .valid:
+                    return ""
+                case .invalid:
+                    return "Username is invalid"
+                }
+            }
+            .assign(to: \.inlineErrorForUsername, on: self)
+            .store(in: &cancellables)
     }
     
     private func validateEmail(candidate: String) -> Bool {
@@ -146,7 +164,7 @@ class FormViewModel: ObservableObject {
     }
     
     private func validateName(candidate: String) -> Bool {
-        let nameRegex = "(?<! )[-a-zA-Z' ]{2,26}"
+        let nameRegex = "(?<! )[-_a-zA-Z0-9]{2,26}"
         return NSPredicate(format: "SELF MATCHES %@", nameRegex).evaluate(with: candidate)
     }
 }
@@ -159,6 +177,11 @@ enum PasswordStatus {
 }
 
 enum EmailStatus {
+    case invalid
+    case valid
+}
+
+enum UsernameStatus {
     case invalid
     case valid
 }

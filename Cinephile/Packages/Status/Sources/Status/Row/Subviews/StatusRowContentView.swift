@@ -26,7 +26,7 @@ struct StatusRowContentView: View {
                 StatusPollView(poll: poll, status: viewModel.finalStatus)
             }
             
-            if let entertainment = viewModel.finalStatus.entertainments.first {
+            if let entertainment = viewModel.finalStatus.entertainments.first, !isCompact {
                 StatusEntertainmentView(entertainment: entertainment)
                     .padding(.top, 10)
                     .onTapGesture {

@@ -13,6 +13,9 @@
     "10" : {
 
     },
+    "Add" : {
+
+    },
     "Add Moive" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -127,6 +130,9 @@
         }
       }
     },
+    "Not watched" : {
+
+    },
     "people" : {
       "localizations" : {
         "en" : {
@@ -161,6 +167,9 @@
         }
       }
     },
+    "Posts" : {
+
+    },
     "Rating" : {
       "localizations" : {
         "en" : {
@@ -175,6 +184,9 @@
 
     },
     "Recommendations" : {
+
+    },
+    "Remove" : {
 
     },
     "Retry" : {
@@ -274,10 +286,25 @@
         }
       }
     },
+    "Watched" : {
+
+    },
+    "Watched is Empty" : {
+
+    },
     "Watchlist" : {
 
     },
+    "Watchlist is Empty" : {
+
+    },
     "You are not loggined" : {
+
+    },
+    "You can add movies to watchlist by tapping %@." : {
+
+    },
+    "You can mark movies as watched by tapping %@ inside Movie Detail Screen." : {
 
     }
   },

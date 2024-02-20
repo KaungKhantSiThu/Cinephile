@@ -22,6 +22,10 @@ struct AddAccountView: View {
     
     private let instanceName: String = "cinephile-26be9689548e.herokuapp.com"
 
+    @State private var showAlert: Bool = false
+    @State private var alertTitle: String = ""
+    @State private var alertMessage: String = ""
+
 //    @StateObject private var formViewModel = FormViewModel()
     
     var body: some View {
@@ -35,13 +39,18 @@ struct AddAccountView: View {
                                 .bold()
                                 .padding()
                             
-                            TextField("Username", text: $formViewModel.username)
-                                .padding()
-                                .frame(width: 300, height: 50)
-                                .background(Color.black.opacity(0.05))
-                                .cornerRadius(10)
-                                .border(.red, width: CGFloat(0))
-                                .autocapitalization(.none)
+                            VStack {
+                                TextField("Username", text: $formViewModel.username)
+                                    .padding()
+                                    .frame(width: 300, height: 50)
+                                    .background(Color.black.opacity(0.05))
+                                    .cornerRadius(10)
+                                    .border(.red, width: CGFloat(0))
+                                    .autocapitalization(.none)
+                                Text(formViewModel.inlineErrorForUsername).foregroundColor(.red)
+
+                            }
+                            
                             
                             VStack {
                                 TextField("Email", text: $formViewModel.email)
@@ -83,11 +92,19 @@ struct AddAccountView: View {
                                 
                                 Task {
                                     do {
-                                        let token = try await client.registerAccount(data: accountData)
-                                        print(token)
+                                        let _ = try await client.registerAccount(data: accountData)
+                                        alertTitle = "Registration Successful"
+                                        alertMessage = "Please check your email inbox or junk folder"
+                                        showAlert = true
+
                                     } catch {
-                                        print("Printing error description")
-                                        print(error.localizedDescription)
+                                        alertTitle = "Registration Failure"
+                                        if let error = error as? RegistrationError {
+                                            alertMessage = error.error
+                                        } else {
+                                            alertMessage = error.localizedDescription
+                                        }
+                                        showAlert = true
                                     }
                                 }
                             } label: {
@@ -140,6 +157,13 @@ struct AddAccountView: View {
                   default:
                     break
                   }
+                }
+                .alert(alertTitle, isPresented: $showAlert) {
+                    Button("OK") {
+                        // handle this
+                    }
+                } message: {
+                    Text(alertMessage)
                 }
         }
 

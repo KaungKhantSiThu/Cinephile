@@ -109,14 +109,13 @@ import os
         }
         
         let (data, httpResponse) = try await urlSession.data(for: request)
-        logResponseOnError(httpResponse: httpResponse, data: data)
+//        logResponseOnError(httpResponse: httpResponse, data: data)
         do {
             return try decoder.decode(OauthToken.self, from: data)
         } catch {
-            if var serverError = try? decoder.decode(ServerError.self, from: data) {
-                if let httpResponse = httpResponse as? HTTPURLResponse {
-                    serverError.httpCode = httpResponse.statusCode
-                }
+            print(data)
+            if let serverError = try? decoder.decode(RegistrationError.self, from: data) {
+                print(serverError)
                 throw serverError
             }
             throw error
