@@ -30,6 +30,9 @@
         }
       }
     },
+    "Click to view Movie Detail" : {
+
+    },
     "Details" : {
 
     },
@@ -170,9 +173,6 @@
     "Info" : {
 
     },
-    "Movie Name" : {
-
-    },
     "see-more" : {
       "localizations" : {
         "en" : {
@@ -182,9 +182,6 @@
           }
         }
       }
-    },
-    "Source" : {
-
     },
     "timeline.entertainment" : {
       "localizations" : {
@@ -211,7 +208,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Home"
+            "value" : "Following"
           }
         }
       }

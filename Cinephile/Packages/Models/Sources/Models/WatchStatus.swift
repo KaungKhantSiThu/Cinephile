@@ -21,6 +21,15 @@ public enum WatchStatus: String, Codable, Identifiable, Equatable, Hashable, Cas
             return "eye"
         }
     }
+    
+    public var name: String {
+        switch self {
+        case .unwatched:
+            "Watchlist"
+        case .watched:
+            "Watched"
+        }
+    }
     public static func == (lhs: WatchStatus, rhs: WatchStatus) -> Bool {
       lhs.rawValue == rhs.rawValue
     }

@@ -22,6 +22,10 @@ struct AddAccountView: View {
     
     private let instanceName: String = "cinephile-26be9689548e.herokuapp.com"
 
+    @State private var showAlert: Bool = false
+    @State private var alertTitle: String = ""
+    @State private var alertMessage: String = ""
+
 //    @StateObject private var formViewModel = FormViewModel()
     
     var body: some View {
@@ -83,11 +87,16 @@ struct AddAccountView: View {
                                 
                                 Task {
                                     do {
-                                        let token = try await client.registerAccount(data: accountData)
-                                        print(token)
+                                        let _ = try await client.registerAccount(data: accountData)
+                                        alertTitle = "Registration Successful"
+                                        alertMessage = "Please check your email inbox or junk folder"
+                                        showAlert = true
+
                                     } catch {
-                                        print("Printing error description")
-                                        print(error.localizedDescription)
+                                        alertTitle = "Registration Failure"
+                                        alertMessage = error.localizedDescription
+                                        print(alertMessage)
+                                        showAlert = true
                                     }
                                 }
                             } label: {
@@ -140,6 +149,13 @@ struct AddAccountView: View {
                   default:
                     break
                   }
+                }
+                .alert(alertTitle, isPresented: $showAlert) {
+                    Button("OK") {
+                        // handle this
+                    }
+                } message: {
+                    Text(alertMessage)
                 }
         }
 

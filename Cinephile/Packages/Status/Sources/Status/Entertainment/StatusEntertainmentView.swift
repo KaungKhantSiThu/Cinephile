@@ -34,19 +34,25 @@ public struct StatusEntertainmentView: View {
                     VStack(alignment: .leading, spacing: 8) {
                         
                         Text(trackerMedia.title)
-                            .font(.title3)
+                            .font(.headline)
                             .fontWeight(.bold)
-                            .lineLimit(2)
+                            .lineLimit(1)
                         
                         if let voteAverage = trackerMedia.voteAverage {
-                            PopularityBadge(score: Int(voteAverage * 10))
-                        } else {
-                            PopularityBadge(score: 0, textColor: .gray)
+                            Label {
+                                Text(voteAverage, format: .number.precision(.fractionLength(1)))
+                                    .bold()
+                            } icon: {
+                                Image(systemName: "star.fill")
+                                    .foregroundStyle(.yellow)
+                            }
+
                         }
                         
                         if let genres = trackerMedia.genres, !genres.isEmpty  {
                             Text(genres.map { $0.name }.joined(separator: ", "))
-                                .lineLimit(2)
+                                .font(.footnote)
+                                .lineLimit(1)
                         } else {
                             Text("No genres")
                         }
@@ -86,5 +92,5 @@ public struct StatusEntertainmentView: View {
 }
 
 #Preview {
-    StatusEntertainmentView(entertainment: Status.placeholder().entertainments[1])
+    StatusEntertainmentView(entertainment: Status.placeholder().entertainments[2])
 }

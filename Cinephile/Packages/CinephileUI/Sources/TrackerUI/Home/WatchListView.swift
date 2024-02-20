@@ -31,47 +31,31 @@ struct WatchListView: View {
                 } picker: {
                     Picker("Tab", selection: $selectedTab) {
                         ForEach(WatchStatus.allCases) { tab in
-                            Image(systemName: tab.imageName)
+                            Label(tab.name, systemImage: tab.imageName)
                         }
                     }
                     .padding()
                     .background(.background)
                     .pickerStyle(.segmented)
                 } contents: {
-                    LazyVGrid(columns: columns) {
-//                        ForEach(watchlists) { watchlist in
-//                            MovieCover(id: Int(watchlist.entertainment.mediaId)!)
-////                                .frame(width: 100)
-//                        }
-                        ForEach(selectedTab == .unwatched ? viewModel.notWatch : viewModel.watched) { watchlist in
-                            if let id = Int(watchlist.entertainment.mediaId) {
-                                NavigationLink(value: RouterDestination.movieDetail(id: id)) {
-                                    MovieCover(id: id)
+                    if viewModel.notWatch.isEmpty && selectedTab == .unwatched  {
+                        ContentUnavailableView("Watchlist is Empty", systemImage: "eye", description: Text("You can add movies to watchlist by tapping \(Image(systemName: "magnifyingglass"))."))
+                            .symbolVariant(.slash)
+                    } else if viewModel.watched.isEmpty && selectedTab == .watched {
+                        ContentUnavailableView("Watched is Empty", systemImage: "eye", description: Text("You can mark movies as watched by tapping \(Image(systemName: "eye")) inside Movie Detail Screen."))
+                    } else {
+                        LazyVGrid(columns: columns) {
+                            ForEach(selectedTab == .unwatched ? viewModel.notWatch : viewModel.watched) { watchlist in
+                                if let id = Int(watchlist.entertainment.mediaId) {
+                                    NavigationLink(value: RouterDestination.movieDetail(id: id)) {
+                                        MovieCover(id: id)
+                                    }
+                                    .buttonStyle(.plain)
                                 }
-                                .buttonStyle(.plain)
                             }
-//                                    .frame(width: 100)
                         }
-//                        Section(header: Text("Not Watch").font(.title)) {
-//                            ForEach(viewModel.notWatch) { watchlist in
-//                                MovieCover(id: Int(watchlist.entertainment.mediaId)!)
-////                                    .frame(width: 100)
-//                            }
-//                        }
-//
-//                        Section(header: Text("Watched").font(.title)) {
-//                            ForEach(viewModel.watched) { watchlist in
-//                                MovieCover(id: Int(watchlist.entertainment.mediaId)!)
-////                                    .frame(width: 100)
-//                            }
-//                        }
                     }
                 }
-
-//                ScrollView(.vertical) {
-//
-//                }
-//                .scrollIndicators(.hidden)
                 
             case .error(let error):
                 ErrorView(error: error) {

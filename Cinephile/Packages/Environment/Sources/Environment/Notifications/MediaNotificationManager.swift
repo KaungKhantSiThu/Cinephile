@@ -159,6 +159,7 @@ public class MediaNotificationManager: NSObject {
         //            }
         //        }
         do {
+            logger.info("Adding notification alert: \(name)")
             try await center.add(request)
         } catch {
             logger.error("Error adding notification request: \(error.localizedDescription)")

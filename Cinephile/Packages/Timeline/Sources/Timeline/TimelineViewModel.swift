@@ -55,6 +55,7 @@ private let logger = Logger(subsystem: "Timeline", category: "ViewModel")
     
     var entertainment: Entertainment?
     
+    
     // Internal source of truth for a timeline.
     private(set) var datasource = TimelineDatasource()
     private let cache = TimelineCache()

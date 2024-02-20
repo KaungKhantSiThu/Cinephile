@@ -9,15 +9,19 @@ public struct MovieDetailView: View {
 //    @Environment(AppAccountsManager.self) private var appAccounts
     @Environment(CurrentAccount.self) private var currentAccount
     @Environment(Client.self) private var client
+    @Environment(RouterPath.self) private var routerPath
+
     
     @State private var isMovieAdded = false
     @State private var viewModel: MovieDetailViewModel
     @State private var isLoading = false
     @State private var isWatchStatusLoading = false
     @State private var loaded = false
+    @State private var id: Movie.ID
     
     public init(id: Movie.ID) {
         _viewModel = .init(wrappedValue: MovieDetailViewModel(id: id))
+        _id = .init(wrappedValue: id)
     }
     
     public var body: some View {
@@ -76,6 +80,23 @@ public struct MovieDetailView: View {
                                         await viewModel.removeFromWatchlist()
                                     } else {
                                         print("Adding \(data.movie.id) : \(data.movie.title) to watchlist")
+                                        if let _ = data.movie.releaseDate {
+//                                            let _ = Calendar.current.dateComponents([.year, .month, .day], from: releaseDate)
+                                            Task {
+//                                                let mediaNotification = MediaNotification(
+//                                                    scheduleType: .time,
+//                                                    title: "Release Alert",
+//                                                    body: "\(data.movie.title) is out tomorrow",
+//                                                    imageURL: viewModel.posterImageURL,
+//                                                    userInfo: [
+//                                                        "id": data.movie.id,
+//                                                        "type": "movie"
+//                                                    ],
+//                                                    timeInterval: 5)
+//                                                await notificationManager.schedule(localNotification: mediaNotification)
+                                                await notificationManager.notificationAttachment(name: data.movie.title, url: viewModel.posterImageURL)
+                                            }
+                                        }
                                         await viewModel.addToWatchlist()
                                     }
                                     try! await Task.sleep(nanoseconds: 1_000_000_000)
@@ -85,7 +106,7 @@ public struct MovieDetailView: View {
                                 
                                 
                             } label: {
-                                Image(systemName: viewModel.inWatchlist ? "checkmark.circle.fill" : "plus.circle.fill")
+                                Label(viewModel.inWatchlist ? "Remove" : "Add", systemImage: viewModel.inWatchlist ? "trash.fill" : "plus.circle.fill")
                                     .opacity(isLoading ? 0 : 1)
                                     .overlay {
                                         if isLoading {
@@ -115,8 +136,8 @@ public struct MovieDetailView: View {
                                     
                                     
                                 } label: {
-                                    Image(systemName: "eye")
-                                        .symbolVariant(viewModel.hasWatched ? .none : .slash)
+                                    Label(viewModel.hasWatched ? "Watched" : "Not watched", systemImage: "eye")
+                                        .symbolVariant(viewModel.hasWatched ? .slash : .none)
                                         .opacity(isWatchStatusLoading ? 0 : 1)
                                         .overlay {
                                             if isWatchStatusLoading {
@@ -186,6 +207,20 @@ public struct MovieDetailView: View {
                     .scrollIndicators(.hidden)
                 }
                 .padding([.leading, .trailing], 20)
+            }
+        }
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    if let entertainmentID = viewModel.entertainmentID {
+                        routerPath.navigate(to: .media(id: entertainmentID, title: viewModel.title))
+                    }
+                    
+                } label: {
+                    Text("Posts")
+                        .bold()
+                        .padding(.vertical, 2)
+                }
             }
         }
         .alert(

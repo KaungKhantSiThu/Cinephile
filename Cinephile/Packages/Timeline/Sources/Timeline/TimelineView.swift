@@ -49,7 +49,7 @@ public struct TimelineView: View {
                 scrollToTopView
                 //          tagGroupHeaderView
                 tagHeaderView
-                entertainmentHeaderView
+//                entertainmentHeaderView
                 switch viewModel.timeline {
                 case .remoteLocal:
                     StatusesListView(fetcher: viewModel, client: client, routerPath: routerPath, isRemote: true)
@@ -206,10 +206,10 @@ public struct TimelineView: View {
         if let entertainment = viewModel.entertainment {
             Section {
                         VStack(alignment: .center, spacing: 5) {
-                            Text("Movie Name")
-                                .font(.title2)
-                                .bold()
-                            Text("Source")
+//                            Text("Movie Name")
+//                                .font(.title2)
+//                                .bold()
+                            Text("Click to view Movie Detail")
                                 .font(.subheadline)
                             Button {
                                 routerPath.navigate(to: .movieDetail(id: Int(entertainment.mediaId) ?? entertainment.id))

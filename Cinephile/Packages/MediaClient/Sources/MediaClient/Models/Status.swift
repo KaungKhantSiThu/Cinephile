@@ -3,6 +3,7 @@ import SwiftUI
 ///
 /// A model representing a show's status.
 ///
+
 public enum Status: String, Codable, Equatable, Hashable, Identifiable, CaseIterable {
 
     ///
