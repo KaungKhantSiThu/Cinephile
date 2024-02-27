@@ -36,7 +36,7 @@ public struct StatusEntertainmentView: View {
                         Text(trackerMedia.title)
                             .font(.headline)
                             .fontWeight(.bold)
-                            .lineLimit(1)
+                            .lineLimit(2)
                         
                         if let voteAverage = trackerMedia.voteAverage {
                             Label {
@@ -46,7 +46,6 @@ public struct StatusEntertainmentView: View {
                                 Image(systemName: "star.fill")
                                     .foregroundStyle(.yellow)
                             }
-
                         }
                         
                         if let genres = trackerMedia.genres, !genres.isEmpty  {

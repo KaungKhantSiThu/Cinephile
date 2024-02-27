@@ -18,6 +18,8 @@ public class MediaNotificationManager: NSObject {
     var isGranted = false
     var pendingRequests: [UNNotificationRequest] = []
     
+    public static var shared = MediaNotificationManager()
+    
     public override init() {
         super.init()
         notificationCenter.delegate = self
@@ -45,65 +47,60 @@ public class MediaNotificationManager: NSObject {
         }
     }
     
-    public func schedule(localNotification: MediaNotification) async {
-        let content = UNMutableNotificationContent()
-        content.title = localNotification.title
-        content.body = localNotification.body
-        if let subtitle = localNotification.subtitle {
-            content.subtitle = subtitle
-        }
-        
-        
-        if let imageURL = localNotification.imageURL {
-            do {
-                let (imageData, _) = try await URLSession.shared.data(from: imageURL)
-                if let attachment = UNNotificationAttachment.create(image: imageData, identifier: "imageAttachment") {
-                    content.attachments = [attachment]
-                }
-            } catch {
-                logger.error("Error Fetching Image Data: \(error.localizedDescription)")
-            }
-            
-        }
-        
-        if let userInfo = localNotification.userInfo {
-            content.userInfo = userInfo
-        }
-        
-        if let categoryIdentifier = localNotification.categoryIdentifier {
-            content.categoryIdentifier = categoryIdentifier
-        }
-        
-        content.sound = .default
-        
-        if localNotification.scheduleType == .time {
-            guard let timeInterval = localNotification.timeInterval else { return }
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: false)
-            let request = UNNotificationRequest(identifier: localNotification.id.uuidString, content: content, trigger: trigger)
-            do {
-                try await notificationCenter.add(request)
-            } catch {
-                logger.error("Error adding notification request: \(error.localizedDescription)")
-            }
-            
-        } else {
-            guard let dateComponents = localNotification.dateComponents else { return }
-            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
-            let request = UNNotificationRequest(identifier: localNotification.id.uuidString, content: content, trigger: trigger)
-            do {
-                try await notificationCenter.add(request)
-            } catch {
-                logger.error("Error adding notification request: \(error.localizedDescription)")
-            }
-        }
-        
-//        let dismiss = UNNotificationAction(identifier: NotificationAction.dismiss.rawValue, title: "Dismiss")
-//        let trackerCategory = UNNotificationCategory(identifier: NotificationCateogry.trackerAlert.rawValue, actions: [dismiss], intentIdentifiers: [], options: [])
+//    public func schedule(localNotification: MediaNotification) async {
+//        let content = UNMutableNotificationContent()
+//        content.title = localNotification.title
+//        content.body = localNotification.body
+//        if let subtitle = localNotification.subtitle {
+//            content.subtitle = subtitle
+//        }
 //        
-//        notificationCenter.setNotificationCategories([trackerCategory])
-        
-        await getPendingRequests()
-    }
+//        
+//        if let imageURL = localNotification.imageURL {
+//            do {
+//                let (imageData, _) = try await URLSession.shared.data(from: imageURL)
+//                if let attachment = UNNotificationAttachment.create(image: imageData, identifier: "imageAttachment") {
+//                    content.attachments = [attachment]
+//                }
+//            } catch {
+//                logger.error("Error Fetching Image Data: \(error.localizedDescription)")
+//            }
+//            
+//        }
+//        
+//        if let userInfo = localNotification.userInfo {
+//            content.userInfo = userInfo
+//        }
+//        
+//        if let categoryIdentifier = localNotification.categoryIdentifier {
+//            content.categoryIdentifier = categoryIdentifier
+//        }
+//        
+//        content.sound = .default
+//        
+//        if localNotification.scheduleType == .time {
+//            guard let timeInterval = localNotification.timeInterval else { return }
+//            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: false)
+//            let request = UNNotificationRequest(identifier: localNotification.id.uuidString, content: content, trigger: trigger)
+//            do {
+//                try await notificationCenter.add(request)
+//            } catch {
+//                logger.error("Error adding notification request: \(error.localizedDescription)")
+//            }
+//            
+//        } else {
+//            guard let dateComponents = localNotification.dateComponents else { return }
+//            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+//            let request = UNNotificationRequest(identifier: localNotification.id.uuidString, content: content, trigger: trigger)
+//            do {
+//                try await notificationCenter.add(request)
+//            } catch {
+//                logger.error("Error adding notification request: \(error.localizedDescription)")
+//            }
+//        }
+//        
+//        await getPendingRequests()
+//    }
     
     public func getPendingRequests() async {
         pendingRequests = await notificationCenter.pendingNotificationRequests()
@@ -124,10 +121,11 @@ public class MediaNotificationManager: NSObject {
         print("Pending: \(pendingRequests.count)")
     }
     
+    
     public func notificationAttachment(name: String, url: URL) async {
-        let center = UNUserNotificationCenter.current()
+//        let center = UNUserNotificationCenter.current()
         let content = UNMutableNotificationContent()
-        content.title = "Cinephile Release Alert"
+        content.title = "Movie Release Alert"
         content.body = "\(name) is out tomorrow "
         content.categoryIdentifier = NotificationCateogry.trackerAlert.rawValue
         do {
@@ -143,15 +141,15 @@ public class MediaNotificationManager: NSObject {
         
         
         
-        let request = UNNotificationRequest(identifier: "identifier", content: content, trigger: trigger)
+        let request = UNNotificationRequest(identifier: name, content: content, trigger: trigger)
         
-        let dismiss = UNNotificationAction(identifier: NotificationAction.dismiss.rawValue, title: "Dismiss")
+//        let dismiss = UNNotificationAction(identifier: NotificationAction.dismiss.rawValue, title: "Dismiss")
         
 //        let reminder = UNNotificationAction(identifier: NotificationAction.reminder.rawValue, title: "Reminder")
         
-        let generalCategory = UNNotificationCategory(identifier: NotificationCateogry.trackerAlert.rawValue, actions: [dismiss], intentIdentifiers: [], options: [])
-        
-        center.setNotificationCategories([generalCategory])
+//        let generalCategory = UNNotificationCategory(identifier: NotificationCateogry.trackerAlert.rawValue, actions: [dismiss], intentIdentifiers: [], options: [])
+//        
+//        center.setNotificationCategories([generalCategory])
         
         //        center.add(request) { error in
         //            if let error = error {
@@ -160,60 +158,62 @@ public class MediaNotificationManager: NSObject {
         //        }
         do {
             logger.info("Adding notification alert: \(name)")
-            try await center.add(request)
+            try await notificationCenter.add(request)
         } catch {
             logger.error("Error adding notification request: \(error.localizedDescription)")
         }
+        
+        await getPendingRequests()
     }
     
-    public func notificationAttachment(name: String, url: URL, scheduleAt date: Date) async {
-        let center = UNUserNotificationCenter.current()
-        let content = UNMutableNotificationContent()
-        content.title = "Release Alert"
-        content.body = "\(name) is out tomorrow"
-        content.categoryIdentifier = NotificationCateogry.trackerAlert.rawValue
-        do {
-            let (imageData, _) = try await URLSession.shared.data(from: url)
-            if let attachment = UNNotificationAttachment.create(image: imageData, identifier: "imageAttachment") {
-                content.attachments = [attachment]
-            }
-        } catch {
-            logger.error("Error Fetching Image Data: \(error.localizedDescription)")
-        }
-        
-        //        if let imageData = try? Data(contentsOf: url),
-        //        let attachment = UNNotificationAttachment.create(image: imageData, identifier: "imageAttachment") {
-        //            content.attachments = [attachment]
-        //        }
-        
-        //        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: date.timeIntervalSinceNow, repeats: false)
-        var dateComponents = Calendar.current.dateComponents([.year, .month, .day], from: date)
-        // set the hour in settings
-        dateComponents.hour = 12
-        
-        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
-        
-        let request = UNNotificationRequest(identifier: "identifier", content: content, trigger: trigger)
-        
-        let dismiss = UNNotificationAction(identifier: NotificationAction.dismiss.rawValue, title: "Dismiss")
-        
-        let reminder = UNNotificationAction(identifier: NotificationAction.reminder.rawValue, title: "Reminder")
-        
-        let trackerCategory = UNNotificationCategory(identifier: NotificationCateogry.trackerAlert.rawValue, actions: [dismiss, reminder], intentIdentifiers: [], options: [])
-        
-        center.setNotificationCategories([trackerCategory])
-        
-        //        center.add(request) { error in
-        //            if let error = error {
-        //                print(error)
-        //            }
-        //        }
-        do {
-            try await center.add(request)
-        } catch {
-            logger.error("Error adding notification request: \(error.localizedDescription)")
-        }
-    }
+//    public func notificationAttachment(name: String, url: URL, scheduleAt date: Date) async {
+//        let center = UNUserNotificationCenter.current()
+//        let content = UNMutableNotificationContent()
+//        content.title = "Release Alert"
+//        content.body = "\(name) is out tomorrow"
+//        content.categoryIdentifier = NotificationCateogry.trackerAlert.rawValue
+//        do {
+//            let (imageData, _) = try await URLSession.shared.data(from: url)
+//            if let attachment = UNNotificationAttachment.create(image: imageData, identifier: "imageAttachment") {
+//                content.attachments = [attachment]
+//            }
+//        } catch {
+//            logger.error("Error Fetching Image Data: \(error.localizedDescription)")
+//        }
+//        
+//        //        if let imageData = try? Data(contentsOf: url),
+//        //        let attachment = UNNotificationAttachment.create(image: imageData, identifier: "imageAttachment") {
+//        //            content.attachments = [attachment]
+//        //        }
+//        
+//        //        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: date.timeIntervalSinceNow, repeats: false)
+//        var dateComponents = Calendar.current.dateComponents([.year, .month, .day], from: date)
+//        // set the hour in settings
+//        dateComponents.hour = 12
+//        
+//        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+//        
+//        let request = UNNotificationRequest(identifier: "identifier", content: content, trigger: trigger)
+//        
+//        let dismiss = UNNotificationAction(identifier: NotificationAction.dismiss.rawValue, title: "Dismiss")
+//        
+//        let reminder = UNNotificationAction(identifier: NotificationAction.reminder.rawValue, title: "Reminder")
+//        
+//        let trackerCategory = UNNotificationCategory(identifier: NotificationCateogry.trackerAlert.rawValue, actions: [dismiss, reminder], intentIdentifiers: [], options: [])
+//        
+//        center.setNotificationCategories([trackerCategory])
+//        
+//        //        center.add(request) { error in
+//        //            if let error = error {
+//        //                print(error)
+//        //            }
+//        //        }
+//        do {
+//            try await center.add(request)
+//        } catch {
+//            logger.error("Error adding notification request: \(error.localizedDescription)")
+//        }
+//    }
 }
 
 public enum NotificationAction: String {
@@ -236,6 +236,7 @@ public extension UNNotificationAttachment {
         do {
             try imageData.write(to: imageFileURL)
             let imageAttachment = try UNNotificationAttachment(identifier: identifier, url: imageFileURL, options: nil)
+            print("successfully created notification image")
             return imageAttachment
         } catch {
             print("Error creating image attachment: \(error)")

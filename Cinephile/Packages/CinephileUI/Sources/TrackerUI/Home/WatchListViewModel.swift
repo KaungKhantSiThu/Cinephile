@@ -47,8 +47,7 @@ class WatchListViewModel {
         
         do {
             let watchlists: [Watchlist] = try await client.get(endpoint: Watchlists.getAll)
-            print(watchlists)
-            self.watchlists = watchlists
+            self.watchlists = watchlists.sorted(by: { $0.createdAt.asDate > $1.createdAt.asDate })
             state = .display(watchlists: watchlists)
         } catch {
             if let error = error as? ServerError, error.httpCode == 404 {

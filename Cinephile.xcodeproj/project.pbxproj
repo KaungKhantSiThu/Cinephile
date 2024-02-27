@@ -533,7 +533,6 @@
 				70BCF7442B2B536F00D7AB7E /* XCRemoteSwiftPackageReference "keychain-swift" */,
 				70BCF7562B2C9A9F00D7AB7E /* XCRemoteSwiftPackageReference "Nuke" */,
 				701858AA2B511E1B000A9EC6 /* XCRemoteSwiftPackageReference "TMDb" */,
-				3926DE672B6D58F200037737 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = 7079602D2AEBA0A700AB748D /* Products */;
 			projectDirPath = "";
@@ -835,6 +834,7 @@
 		70967F262B53C1A700EB4CD2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8HX35UD83V;
@@ -849,8 +849,9 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.kkst.Cinephile.CinephileNotifications;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kkst.Cinephile.CinephileNotifications1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -864,6 +865,7 @@
 		70967F272B53C1A700EB4CD2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8HX35UD83V;
@@ -878,8 +880,9 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.kkst.Cinephile.CinephileNotifications;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kkst.Cinephile.CinephileNotifications1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -923,14 +926,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		3926DE672B6D58F200037737 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Alamofire/Alamofire";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.8.1;
-			};
-		};
 		701858AA2B511E1B000A9EC6 /* XCRemoteSwiftPackageReference "TMDb" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/adamayoung/TMDb";

@@ -13,7 +13,7 @@ import Networking
 
 @main
 struct CinephileApp: App {
-    @State var notificationManager = MediaNotificationManager()
+    @State var notificationManager = MediaNotificationManager.shared
     
     @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate
     
@@ -41,10 +41,10 @@ struct CinephileApp: App {
         appAccountsManager.currentClient.isAuth ? Tab.loggedInTabs : Tab.loggedOutTabs
     }
     
-    init() {
-        let tmdbConfiguration = TMDbConfiguration(apiKey: TMDB_API_Key)
-        TMDb.configure(tmdbConfiguration)
-    }
+//    init() {
+//        let tmdbConfiguration = TMDbConfiguration(apiKey: TMDB_API_Key)
+//        TMDb.configure(tmdbConfiguration)
+//    }
     
     var body: some Scene {
         WindowGroup {

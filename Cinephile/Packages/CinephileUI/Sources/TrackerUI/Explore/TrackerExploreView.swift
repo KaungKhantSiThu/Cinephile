@@ -124,18 +124,18 @@ public struct TrackerExploreView: View {
             switch media {
             case .movie(let movie):
                 NavigationLink(value: RouterDestination.movieDetail(id: movie.id)) {
-                    MediaRow(movie: movie) {
+                    MediaRow(movie: movie, actionAvailable: false) {
                         print("$0.name")
                     }
                 }
             case .tvSeries(let series):
                 NavigationLink(value: RouterDestination.seriesDetail(id: series.id)) {
-                    MediaRow(tvSeries: series) {
+                    MediaRow(tvSeries: series, actionAvailable: false) {
                         print("$0.name")
                     }
                 }
             case .person(let person):
-                MediaRow(person: person) {
+                MediaRow(person: person, actionAvailable: false) {
                     print("$0.name")
                 }
             }

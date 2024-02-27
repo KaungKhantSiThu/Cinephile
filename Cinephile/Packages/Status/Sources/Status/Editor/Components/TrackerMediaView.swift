@@ -46,15 +46,17 @@ extension StatusEditor {
                             .lineLimit(2)
                         
                         if let voteAverage = trackerMedia.voteAverage {
-                            PopularityBadge(score: Int(voteAverage * 10))
-                        } else {
-                            PopularityBadge(score: 0, textColor: .gray)
+                            Label {
+                                Text(voteAverage, format: .number.precision(.fractionLength(1)))
+                                    .bold()
+                            } icon: {
+                                Image(systemName: "star.fill")
+                                    .foregroundStyle(.yellow)
+                            }
                         }
                         
                         if let genres = trackerMedia.genres, !genres.isEmpty {
                             Text(genres.map { $0.name }.joined(separator: ", "))
-                        } else {
-                            Text("No genres")
                         }
                         
                         Text(trackerMedia.releasedDate ?? Date.now, format: .dateTime.year().month())

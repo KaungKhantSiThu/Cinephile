@@ -13,9 +13,6 @@
     "10" : {
 
     },
-    "Add" : {
-
-    },
     "Add Moive" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -36,6 +33,9 @@
           }
         }
       }
+    },
+    "Add to Watchlist" : {
+
     },
     "Added" : {
 
@@ -110,6 +110,9 @@
     "Kelvin Gao" : {
 
     },
+    "Mark as Watched" : {
+
+    },
     "movie" : {
       "localizations" : {
         "en" : {
@@ -129,9 +132,6 @@
           }
         }
       }
-    },
-    "Not watched" : {
-
     },
     "people" : {
       "localizations" : {
@@ -186,7 +186,7 @@
     "Recommendations" : {
 
     },
-    "Remove" : {
+    "Remove from Watchlist" : {
 
     },
     "Retry" : {
@@ -255,6 +255,9 @@
         }
       }
     },
+    "Unmark as Watched" : {
+
+    },
     "Upcoming Movies" : {
       "localizations" : {
         "en" : {
@@ -285,9 +288,6 @@
           }
         }
       }
-    },
-    "Watched" : {
-
     },
     "Watched is Empty" : {
 

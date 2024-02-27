@@ -8,6 +8,8 @@ public struct Watchlist: Identifiable, Codable, Equatable, Hashable {
     
     public let entertainment: Entertainment
     
+    public let createdAt: ServerDate
+    
 }
 
 

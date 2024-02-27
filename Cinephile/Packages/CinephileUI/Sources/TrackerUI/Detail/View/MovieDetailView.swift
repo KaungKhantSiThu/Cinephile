@@ -66,118 +66,93 @@ public struct MovieDetailView: View {
                 Divider()
                 
                 
-                HStack(spacing: 30) {
-                    Rating(voteCount: data.movie.voteCount ?? 0, voteAverage: data.movie.voteAverage ?? 0.0)
-                    
-                    if viewModel.isLoggedin {
-                        VStack {
-                            Button {
-                                Task {
-                                    isLoading = true
-                                    
-                                    if viewModel.inWatchlist {
-                                        print("Removing \(data.movie.id) : \(data.movie.title) from watchlist")
-                                        await viewModel.removeFromWatchlist()
-                                    } else {
-                                        print("Adding \(data.movie.id) : \(data.movie.title) to watchlist")
-                                        if let _ = data.movie.releaseDate {
-//                                            let _ = Calendar.current.dateComponents([.year, .month, .day], from: releaseDate)
-                                            Task {
-//                                                let mediaNotification = MediaNotification(
-//                                                    scheduleType: .time,
-//                                                    title: "Release Alert",
-//                                                    body: "\(data.movie.title) is out tomorrow",
-//                                                    imageURL: viewModel.posterImageURL,
-//                                                    userInfo: [
-//                                                        "id": data.movie.id,
-//                                                        "type": "movie"
-//                                                    ],
-//                                                    timeInterval: 5)
-//                                                await notificationManager.schedule(localNotification: mediaNotification)
-                                                await notificationManager.notificationAttachment(name: data.movie.title, url: viewModel.posterImageURL)
-                                            }
-                                        }
-                                        await viewModel.addToWatchlist()
-                                    }
-                                    try! await Task.sleep(nanoseconds: 1_000_000_000)
-                                    isLoading = false
-                                    
-                                }
-                                
-                                
-                            } label: {
-                                Label(viewModel.inWatchlist ? "Remove" : "Add", systemImage: viewModel.inWatchlist ? "trash.fill" : "plus.circle.fill")
-                                    .opacity(isLoading ? 0 : 1)
-                                    .overlay {
-                                        if isLoading {
-                                            ProgressView()
-                                        }
-                                    }
-                            }
-                            .disabled(isLoading)
-                            .tint(.red)
-                            .buttonStyle(.borderedProminent)
-                            
-                            if viewModel.inWatchlist {
+                Grid {
+                    GridRow {
+                        Rating(voteCount: data.movie.voteCount ?? 0, voteAverage: data.movie.voteAverage ?? 0.0)
+                        if viewModel.isLoggedin {
+                            VStack {
                                 Button {
                                     Task {
-                                        isWatchStatusLoading = true
+                                        isLoading = true
                                         
-                                        if viewModel.hasWatched {
-                                            print("\(data.movie.id) : \(data.movie.title) is marked as watched")
-                                            await viewModel.markAsNotWatch()
+                                        if viewModel.inWatchlist {
+                                            print("Removing \(data.movie.id) : \(data.movie.title) from watchlist")
+                                            await viewModel.removeFromWatchlist()
                                         } else {
-                                            print("\(data.movie.id) : \(data.movie.title) is marked as Not watch")
-                                            await viewModel.markAsWatched()
+                                            print("Adding \(data.movie.id) : \(data.movie.title) to watchlist")
+                                            if let _ = data.movie.releaseDate {
+        //                                            let _ = Calendar.current.dateComponents([.year, .month, .day], from: releaseDate)
+                                                Task {
+                                                    await notificationManager.notificationAttachment(name: data.movie.title, url: viewModel.posterImageURL)
+                                                }
+                                            }
+                                            await viewModel.addToWatchlist()
                                         }
-                                        isWatchStatusLoading = false
+                                        try! await Task.sleep(nanoseconds: 1_000_000_000)
+                                        isLoading = false
                                         
                                     }
                                     
                                     
                                 } label: {
-                                    Label(viewModel.hasWatched ? "Watched" : "Not watched", systemImage: "eye")
-                                        .symbolVariant(viewModel.hasWatched ? .slash : .none)
-                                        .opacity(isWatchStatusLoading ? 0 : 1)
+                                    Image(systemName: viewModel.inWatchlist ? "trash.fill" : "plus.circle.fill")
+                                        .opacity(isLoading ? 0 : 1)
                                         .overlay {
-                                            if isWatchStatusLoading {
+                                            if isLoading {
                                                 ProgressView()
                                             }
                                         }
                                 }
-                                .disabled(isWatchStatusLoading)
+                                .disabled(isLoading)
                                 .tint(.red)
                                 .buttonStyle(.borderedProminent)
+                                
+                                if viewModel.inWatchlist {
+                                    Button {
+                                        Task {
+                                            isWatchStatusLoading = true
+                                            
+                                            if viewModel.hasWatched {
+                                                print("\(data.movie.id) : \(data.movie.title) is marked as watched")
+                                                await viewModel.markAsNotWatch()
+                                            } else {
+                                                print("\(data.movie.id) : \(data.movie.title) is marked as Not watch")
+                                                await viewModel.markAsWatched()
+                                            }
+                                            isWatchStatusLoading = false
+                                            
+                                        }
+                                        
+                                        
+                                    } label: {
+                                        Image(systemName: "eye")
+                                            .symbolVariant(viewModel.hasWatched ? .slash : .none)
+                                            .opacity(isWatchStatusLoading ? 0 : 1)
+                                            .overlay {
+                                                if isWatchStatusLoading {
+                                                    ProgressView()
+                                                }
+                                            }
+                                    }
+                                    .disabled(isWatchStatusLoading)
+                                    .tint(.red)
+                                    .buttonStyle(.borderedProminent)
+                                }
                             }
+                            
+                            VStack(alignment: .trailing, spacing: 20) {
+                                Text(viewModel.inWatchlist ? "Remove from Watchlist" : "Add to Watchlist")
+                                if viewModel.inWatchlist {
+                                    Text(viewModel.hasWatched ? "Unmark as Watched" : "Mark as Watched")
+                                }
+                            }
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                            .gridCellAnchor(.center)
                         }
                     }
                     
-                    
-                    
-//                    Button {
-//                        // what if there isn't a released date and the user wanna just add it to watchlist
-//                        
-//                        if let releaseDate = data.movie.releaseDate {
-//                            let _ = Calendar.current.dateComponents([.year, .month, .day], from: releaseDate)
-//                            Task {
-//                                let mediaNotification = MediaNotification(
-//                                    scheduleType: .time,
-//                                    title: "Release Alert",
-//                                    body: "\(data.movie.title) is out tomorrow",
-//                                    imageURL: viewModel.posterImageURL,
-//                                    userInfo: [
-//                                        "id": data.movie.id,
-//                                        "type": "movie"
-//                                    ],
-//                                    timeInterval: 5)
-//                                await notificationManager.schedule(localNotification: mediaNotification)
-//                            }
-//                        }
-//                    } label: {
-//                        Label("Watchlist", systemImage: "plus.circle.fill")
-//                    }
-//                    .tint(.accentColor)
-//                    .buttonStyle(.borderedProminent)
+            
                 }
                                 
                 Text(data.movie.overview ?? "No overview")
