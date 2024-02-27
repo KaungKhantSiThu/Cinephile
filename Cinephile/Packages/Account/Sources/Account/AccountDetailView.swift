@@ -190,10 +190,10 @@ public struct AccountDetailView: View {
     
     @ToolbarContentBuilder
     private var toolbarContent: some ToolbarContent {
-        ToolbarItem(placement: .topBarLeading) {
-            Image(systemName: client.isAuth ? "checkmark.circle.fill" : "multiply.circle.fill")
-                .foregroundStyle(client.isAuth ? .green : .red)
-        }
+//        ToolbarItem(placement: .topBarLeading) {
+//            Image(systemName: client.isAuth ? "checkmark.circle.fill" : "multiply.circle.fill")
+//                .foregroundStyle(client.isAuth ? .green : .red)
+//        }
         
         ToolbarItem(placement: .topBarTrailing) {
             Button {
@@ -283,6 +283,6 @@ extension View {
     func applyAccountDetailsRowStyle(theme: Theme) -> some View {
         listRowInsets(.init())
             .listRowSeparator(.hidden)
-            .listRowBackground(theme.primaryBackgroundColor)
+//            .listRowBackground(theme.primaryBackgroundColor)
     }
 }

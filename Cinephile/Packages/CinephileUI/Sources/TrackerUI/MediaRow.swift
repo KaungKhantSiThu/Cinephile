@@ -14,10 +14,10 @@ public struct MediaRow: View {
     let releaseDate: Date?
     let posterPath: URL?
     let type: MediaType
-    
-//    @State private var posterImage = URL(string: "https://picsum.photos/200/300")!
-     
+         
     var action: () -> Void
+    
+    let actionAvailable: Bool
     
     public var body: some View {
         HStack {
@@ -39,54 +39,52 @@ public struct MediaRow: View {
             
             Spacer()
             
-            Button {
-                action()
-            } label: {
-                Image(systemName: "plus.circle.fill")
-                    .resizable()
-                    .symbolRenderingMode(.multicolor)
-                    .frame(width: 30, height: 30)
+            if actionAvailable {
+                Button {
+                    action()
+                } label: {
+                    Image(systemName: "plus.circle.fill")
+                        .resizable()
+                        .symbolRenderingMode(.multicolor)
+                        .frame(width: 30, height: 30)
+                }
+                .padding(.trailing, 10)
+                .disabled(type == .person)
+                .opacity( type == .person ? 0 : 1)
             }
-            .padding(.trailing, 10)
-            .disabled(type == .person)
-            .opacity( type == .person ? 0 : 1)
+            
         }
         .padding()
         .frame(height: 150)
-//        .task {
-//            do {
-//                posterImage = try await ImageLoaderS.generate(from: posterPath)
-//            } catch {
-//                print("poster URL is nil")
-//            }
-//        }
     }
 }
 
 public extension MediaRow {
-    init(movie: Movie, action: @escaping () -> Void) {
+    init(movie: Movie, actionAvailable: Bool = true, action: @escaping () -> Void) {
         self.name = movie.title
         self.posterPath = movie.posterPath
         self.releaseDate = movie.releaseDate
         self.type = .movie
         self.action = action
+        self.actionAvailable = actionAvailable
     }
     
-    init(tvSeries: TVSeries, action: @escaping () -> Void) {
+    init(tvSeries: TVSeries,actionAvailable: Bool = true, action: @escaping () -> Void) {
         self.name = tvSeries.name
         self.posterPath = tvSeries.posterPath
         self.releaseDate = tvSeries.firstAirDate
         self.type = .tvSeries
         self.action = action
-
+        self.actionAvailable = actionAvailable
     }
     
-    init(person: Person, action: @escaping () -> Void) {
+    init(person: Person, actionAvailable: Bool = true, action: @escaping () -> Void) {
         self.name = person.name
         self.posterPath = person.profilePath
         self.releaseDate = person.birthday
         self.type = .person
         self.action = action
+        self.actionAvailable = actionAvailable
     }
 }
 
@@ -99,9 +97,9 @@ public extension MediaRow {
 }
 
 
-#Preview(traits: .sizeThatFitsLayout) {
-    MediaRow(name: "Some Movie", releaseDate: .now, posterPath: nil, type: .movie) {
-        print("Hello")
-    }
-}
+//#Preview(traits: .sizeThatFitsLayout) {
+//    MediaRow(name: "Some Movie", releaseDate: .now, posterPath: nil, type: .movie) {
+//        print("Hello")
+//    }
+//}
 
