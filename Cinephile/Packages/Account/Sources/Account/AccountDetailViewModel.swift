@@ -26,16 +26,16 @@ private let logger = Logger(subsystem: "Account", category: "DetailViewModel")
     }
     
     enum Tab: Hashable, CaseIterable, Identifiable {
-        case statuses, favorites, bookmarks, postsAndReplies, boosts, media
+        case statuses, favorites, bookmarks, replies, boosts, media
         
         var id: Self { self }
         
         static var currentAccountTabs: [Tab] {
-            [.statuses,.postsAndReplies, .favorites, .bookmarks]
+            [.statuses,.replies, .favorites, .bookmarks]
         }
         
         static var accountTabs: [Tab] {
-            [.statuses, .postsAndReplies, .media]
+            [.statuses, .replies, .media]
         }
         
         var iconName: String {
@@ -43,7 +43,7 @@ private let logger = Logger(subsystem: "Account", category: "DetailViewModel")
             case .statuses: "doc.richtext"
             case .favorites: "heart"
             case .bookmarks: "bookmark"
-            case .postsAndReplies: "bubble.left.and.bubble.right"
+            case .replies: "bubble.left.and.bubble.right"
             case .boosts: "arrow.2.squarepath"
             case .media: "photo.on.rectangle.angled"
             }
@@ -54,7 +54,7 @@ private let logger = Logger(subsystem: "Account", category: "DetailViewModel")
             case .statuses: "accessibility.tabs.profile.picker.statuses"
             case .favorites: "accessibility.tabs.profile.picker.favorites"
             case .bookmarks: "accessibility.tabs.profile.picker.bookmarks"
-            case .postsAndReplies: "accessibility.tabs.profile.picker.posts-and-replies"
+            case .replies: "accessibility.tabs.profile.picker.posts-and-replies"
             case .boosts: "accessibility.tabs.profile.picker.boosts"
             case .media: "accessibility.tabs.profile.picker.media"
             }
@@ -95,7 +95,7 @@ private let logger = Logger(subsystem: "Account", category: "DetailViewModel")
     var selectedTab = Tab.statuses {
         didSet {
             switch selectedTab {
-            case .statuses, .postsAndReplies, .media:
+            case .statuses, .replies, .media:
                 tabTask?.cancel()
                 tabTask = Task {
                     await fetchNewestStatuses(pullToRefresh: false)
@@ -146,11 +146,6 @@ private let logger = Logger(subsystem: "Account", category: "DetailViewModel")
             featuredTags = data.featuredTags
             featuredTags.sort { $0.statusesCountInt > $1.statusesCountInt }
             relationship = data.relationships.first
-            if let relationship = relationship {
-                logger.log("Relationship exists")
-            } else{
-                logger.log("Relationship does not exist")
-            }
             
         } catch {
             if let account {
@@ -190,12 +185,14 @@ private let logger = Logger(subsystem: "Account", category: "DetailViewModel")
         guard let client else { return }
         do {
             tabState = .statuses(statusesState: .loading)
+            boosts = []
             statuses =
             try await client.get(endpoint: Accounts.statuses(id: id,
                                                              sinceId: nil,
                                                              tag: nil,
-                                                             onlyMedia: selectedTab == .media ? true : nil,
-                                                             excludeReplies: selectedTab == .statuses && !isCurrentUser ? true : nil,
+                                                             onlyMedia: selectedTab == .media,
+                                                             excludeReplies: selectedTab == .replies,
+                                                             excludeReblogs: selectedTab == .boosts,
                                                              pinned: nil))
             StatusDataControllerProvider.shared.updateDataControllers(for: statuses, client: client)
             if selectedTab == .boosts {
@@ -206,8 +203,9 @@ private let logger = Logger(subsystem: "Account", category: "DetailViewModel")
                 try await client.get(endpoint: Accounts.statuses(id: id,
                                                                  sinceId: nil,
                                                                  tag: nil,
-                                                                 onlyMedia: nil,
-                                                                 excludeReplies: nil,
+                                                                 onlyMedia: false,
+                                                                 excludeReplies: false,
+                                                                 excludeReblogs: false,
                                                                  pinned: true))
                 StatusDataControllerProvider.shared.updateDataControllers(for: pinned, client: client)
             }
@@ -227,15 +225,16 @@ private let logger = Logger(subsystem: "Account", category: "DetailViewModel")
         guard let client else { return }
         do {
             switch selectedTab {
-            case .statuses, .postsAndReplies, .boosts, .media:
+            case .statuses, .replies, .boosts, .media:
                 guard let lastId = statuses.last?.id else { return }
                 tabState = .statuses(statusesState: .display(statuses: statuses, nextPageState: .loadingNextPage))
                 let newStatuses: [Status] =
                 try await client.get(endpoint: Accounts.statuses(id: id,
                                                                  sinceId: lastId,
                                                                  tag: nil,
-                                                                 onlyMedia: selectedTab == .media ? true : nil,
-                                                                 excludeReplies: selectedTab == .statuses && !isCurrentUser ? true : nil,
+                                                                 onlyMedia: selectedTab == .media,
+                                                                 excludeReplies: selectedTab != .replies,
+                                                                 excludeReblogs: selectedTab != .boosts,
                                                                  pinned: nil))
                 statuses.append(contentsOf: newStatuses)
                 if selectedTab == .boosts {
@@ -243,8 +242,13 @@ private let logger = Logger(subsystem: "Account", category: "DetailViewModel")
                   boosts.append(contentsOf: newBoosts)
                 }
                 StatusDataControllerProvider.shared.updateDataControllers(for: newStatuses, client: client)
-                tabState = .statuses(statusesState: .display(statuses: statuses,
-                                                             nextPageState: newStatuses.count < 20 ? .none : .hasNextPage))
+                if selectedTab == .boosts {
+                    tabState = .statuses(statusesState: .display(statuses: boosts, nextPageState: newStatuses.count < 20 ? .none : .hasNextPage))
+                } else {
+                    tabState = .statuses(statusesState: .display(statuses: statuses,
+                                                                 nextPageState: newStatuses.count < 20 ? .none : .hasNextPage))
+                }
+                
                 
             case .favorites:
                 guard let nextPageId = favoritesNextPage?.maxId else { return }
@@ -268,8 +272,10 @@ private let logger = Logger(subsystem: "Account", category: "DetailViewModel")
     
     private func reloadTabState() {
         switch selectedTab {
-        case .statuses, .postsAndReplies, .boosts, .media:
+        case .statuses, .replies, .media:
             tabState = .statuses(statusesState: .display(statuses: statuses, nextPageState: statuses.count < 20 ? .none : .hasNextPage))
+        case .boosts:
+            tabState = .statuses(statusesState: .display(statuses: boosts, nextPageState: statuses.count < 20 ? .none : .hasNextPage))
         case .favorites:
             tabState = .statuses(statusesState: .display(statuses: favorites,
                                                          nextPageState: favoritesNextPage != nil ? .hasNextPage : .none))
@@ -281,9 +287,11 @@ private let logger = Logger(subsystem: "Account", category: "DetailViewModel")
     
     func handleEvent(event: any StreamEvent, currentAccount: CurrentAccount) {
         if let event = event as? StreamEventUpdate {
-            if event.status.account.id == currentAccount.account?.id, selectedTab == .statuses {
-                statuses.insert(event.status, at: 0)
-                statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
+            if event.status.account.id == currentAccount.account?.id {
+                if (event.status.inReplyToId == nil && selectedTab == .statuses) || (event.status.inReplyToId == nil && selectedTab == .replies) {
+                    statuses.insert(event.status, at: 0)
+                    statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
+                }
             }
         } else if let event = event as? StreamEventDelete {
             statuses.removeAll(where: { $0.id == event.status })

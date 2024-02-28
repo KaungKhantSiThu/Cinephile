@@ -40,15 +40,15 @@ extension StatusEditor {
                     ScrollView(.horizontal) {
                         HStack(alignment: .center, spacing: 16) {
                             Menu {
-                                Button {
-                                    isPhotosPickerPresented = true
-                                } label: {
-                                    Label {
-                                        Text("status.editor.photo-library", bundle: .module)
-                                    } icon: {
-                                        Image(systemName: "photo")
-                                    }
-                                }
+//                                Button {
+//                                    isPhotosPickerPresented = true
+//                                } label: {
+//                                    Label {
+//                                        Text("status.editor.photo-library", bundle: .module)
+//                                    } icon: {
+//                                        Image(systemName: "photo")
+//                                    }
+//                                }
                                 
 #if !targetEnvironment(macCatalyst)
                                 Button {
