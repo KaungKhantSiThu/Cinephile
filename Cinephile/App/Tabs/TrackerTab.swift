@@ -61,9 +61,8 @@ struct TrackerTab: View {
             Button {
                 routerPath.navigate(to: .trackerSearchView)
             } label: {
-                Image(systemName: "magnifyingglass")
+                Image(systemName: "magnifyingglass.circle.fill")
                     .symbolRenderingMode(.hierarchical)
-                    .foregroundStyle(.gray)
             }
         }
         

@@ -901,6 +901,7 @@
       }
     },
     "status.editor.browse-file" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -911,6 +912,7 @@
       }
     },
     "status.editor.camera-picker" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1031,6 +1033,7 @@
       }
     },
     "status.editor.photo-library" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

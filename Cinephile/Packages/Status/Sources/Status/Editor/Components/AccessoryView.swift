@@ -39,7 +39,7 @@ extension StatusEditor {
                 HStack {
                     ScrollView(.horizontal) {
                         HStack(alignment: .center, spacing: 16) {
-                            Menu {
+//                            Menu {
 //                                Button {
 //                                    isPhotosPickerPresented = true
 //                                } label: {
@@ -50,62 +50,62 @@ extension StatusEditor {
 //                                    }
 //                                }
                                 
-#if !targetEnvironment(macCatalyst)
-                                Button {
-                                    isCameraPickerPresented = true
-                                } label: {
-                                    Label {
-                                        Text("status.editor.camera-picker", bundle: .module)
-                                    } icon: {
-                                        Image(systemName: "camera")
-                                    }
-                                }
-#endif
-                                Button {
-                                    isFileImporterPresented = true
-                                } label: {
-                                    Label {
-                                        Text("status.editor.browse-file", bundle: .module)
-                                    } icon: {
-                                        Image(systemName: "folder")
-                                    }
-                                }
+//#if !targetEnvironment(macCatalyst)
+//                                Button {
+//                                    isCameraPickerPresented = true
+//                                } label: {
+//                                    Label {
+//                                        Text("status.editor.camera-picker", bundle: .module)
+//                                    } icon: {
+//                                        Image(systemName: "camera")
+//                                    }
+//                                }
+//#endif
+//                                Button {
+//                                    isFileImporterPresented = true
+//                                } label: {
+//                                    Label {
+//                                        Text("status.editor.browse-file", bundle: .module)
+//                                    } icon: {
+//                                        Image(systemName: "folder")
+//                                    }
+//                                }
                                 
                                 //              Button {
                                 //                isGIFPickerPresented = true
                                 //              } label: {
                                 //                Label("GIPHY", systemImage: "party.popper")
                                 //              }
-                            } label: {
-                                if viewModel.isMediasLoading {
-                                    ProgressView()
-                                } else {
-                                    Image(systemName: "photo.on.rectangle.angled")
-                                }
-                            }
-                            .photosPicker(isPresented: $isPhotosPickerPresented,
-                                          selection: $viewModel.mediaPickers,
-                                          maxSelectionCount: 4,
-                                          matching: .any(of: [.images, .videos]),
-                                          photoLibrary: .shared())
-                            .fileImporter(isPresented: $isFileImporterPresented,
-                                          allowedContentTypes: [.image, .video],
-                                          allowsMultipleSelection: true)
-                            { result in
-                                if let urls = try? result.get() {
-                                    viewModel.processURLs(urls: urls)
-                                }
-                            }
-                            .fullScreenCover(isPresented: $isCameraPickerPresented, content: {
-                                CameraPickerView(selectedImage: .init(get: {
-                                    nil
-                                }, set: { image in
-                                    if let image {
-                                        viewModel.processCameraPhoto(image: image)
-                                    }
-                                }))
-                                .background(.black)
-                            })
+//                            } label: {
+//                                if viewModel.isMediasLoading {
+//                                    ProgressView()
+//                                } else {
+//                                    Image(systemName: "photo.on.rectangle.angled")
+//                                }
+//                            }
+//                            .photosPicker(isPresented: $isPhotosPickerPresented,
+//                                          selection: $viewModel.mediaPickers,
+//                                          maxSelectionCount: 4,
+//                                          matching: .any(of: [.images, .videos]),
+//                                          photoLibrary: .shared())
+//                            .fileImporter(isPresented: $isFileImporterPresented,
+//                                          allowedContentTypes: [.image, .video],
+//                                          allowsMultipleSelection: true)
+//                            { result in
+//                                if let urls = try? result.get() {
+//                                    viewModel.processURLs(urls: urls)
+//                                }
+//                            }
+//                            .fullScreenCover(isPresented: $isCameraPickerPresented, content: {
+//                                CameraPickerView(selectedImage: .init(get: {
+//                                    nil
+//                                }, set: { image in
+//                                    if let image {
+//                                        viewModel.processCameraPhoto(image: image)
+//                                    }
+//                                }))
+//                                .background(.black)
+//                            })
                             //            .sheet(isPresented: $isGIFPickerPresented, content: {
                             //              GifPickerView { url in
                             //                GPHCache.shared.downloadAssetData(url) { data, _ in
@@ -119,7 +119,7 @@ extension StatusEditor {
                             //              .presentationDetents([.medium, .large])
                             //            })
                             //            .accessibilityLabel("accessibility.editor.button.attach-photo")
-                            .disabled(viewModel.showPoll)
+//                            .disabled(viewModel.showPoll)
                             
                             Button {
                                 withAnimation {
@@ -315,9 +315,8 @@ extension StatusEditor {
                         case .loading:
                             ProgressView()
                         case .failed(let error):
-                            ContentUnavailableView("Fetching data failed", systemImage: "magnifyingglass", description: Text("Error: \(error.localizedDescription)"))
+                            ContentUnavailableView("Fetching data failed", systemImage: "magnifyingglass.circle.fill", description: Text("Error: \(error.localizedDescription)"))
                                 .symbolRenderingMode(.hierarchical)
-                                .foregroundStyle(.gray)
                                 .symbolVariant(.slash)
                         case .loaded(let value):
                             Section {

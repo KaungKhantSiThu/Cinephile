@@ -255,9 +255,8 @@ struct TimelineTab: View {
                     //            HapticManager.shared.fireHaptic(.buttonPress)
 #endif
                 } label: {
-                    Image(systemName: "magnifyingglass")
+                    Image(systemName: "magnifyingglass.circle.fill")
                         .symbolRenderingMode(.hierarchical)
-                        .foregroundStyle(.gray)
                 }
             }
             

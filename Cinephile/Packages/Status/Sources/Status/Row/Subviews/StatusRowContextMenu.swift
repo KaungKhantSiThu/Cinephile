@@ -302,7 +302,7 @@ struct StatusRowContextMenu: View {
                         } label: {
                             Label(
                                 title: { Text("status.action.unblock", bundle: .module) },
-                                icon: { Image(systemName: "person.crop.circle.badge.exclamationmark") }
+                                icon: { Image(systemName: "slash.circle.fill") }
                             )
                         }
                     } else {
@@ -319,7 +319,7 @@ struct StatusRowContextMenu: View {
                             Label {
                                 Text("status.action.block", bundle: .module)
                             } icon: {
-                                Image(systemName: "person.crop.circle.badge.xmark")
+                                Image(systemName: "slash.circle.fill")
                             }
                             
                             

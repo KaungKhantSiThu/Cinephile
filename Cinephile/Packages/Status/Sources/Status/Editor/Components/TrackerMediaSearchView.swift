@@ -31,9 +31,8 @@ extension StatusEditor {
                         case .loading:
                             ProgressView()
                         case .failed(let error):
-                            ContentUnavailableView("Fetching data failed", systemImage: "magnifyingglass", description: Text("Error: \(error.localizedDescription)", bundle: .module))
+                            ContentUnavailableView("Fetching data failed", systemImage: "magnifyingglass.circle.fill", description: Text("Error: \(error.localizedDescription)", bundle: .module))
                                 .symbolRenderingMode(.hierarchical)
-                                .foregroundStyle(.gray)
                                 .symbolVariant(.slash)
                         case .loaded(let value):
                             Section {

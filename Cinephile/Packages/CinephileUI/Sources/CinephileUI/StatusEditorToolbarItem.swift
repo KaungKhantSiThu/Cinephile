@@ -45,13 +45,6 @@ public struct StatusEditorToolbarItem: ToolbarContent {
       } label: {
         Image(systemName: "plus.circle.fill")
               .symbolRenderingMode(.hierarchical)
-              .foregroundStyle(.gray)
-          .accessibilityLabel("accessibility.tabs.timeline.new-post.label")
-          .accessibilityInputLabels([
-            LocalizedStringKey("accessibility.tabs.timeline.new-post.label"),
-            LocalizedStringKey("accessibility.tabs.timeline.new-post.inputLabel1"),
-            LocalizedStringKey("accessibility.tabs.timeline.new-post.inputLabel2"),
-          ])
       }
     }
   }

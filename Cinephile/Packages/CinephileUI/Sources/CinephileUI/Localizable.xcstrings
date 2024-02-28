@@ -11,6 +11,7 @@
 
     },
     "accessibility.tabs.timeline.new-post.inputLabel1" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -21,6 +22,7 @@
       }
     },
     "accessibility.tabs.timeline.new-post.inputLabel2" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -31,6 +33,7 @@
       }
     },
     "accessibility.tabs.timeline.new-post.label" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
