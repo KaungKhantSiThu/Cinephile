@@ -115,7 +115,7 @@ private let logger = Logger(subsystem: "Timeline", category: "ViewModel")
     private func fetchTag(id: String) async {
         guard let client else { return }
         do {
-            tag = try await client.get(endpoint: Tags.tag(id: id))
+            let tag: Tag = try await client.get(endpoint: Tags.tag(id: id))
             withAnimation {
                 self.tag = tag
             }
@@ -125,7 +125,7 @@ private let logger = Logger(subsystem: "Timeline", category: "ViewModel")
     private func fetchEntertainment(id: Int) async {
         guard let client else { return }
         do {
-            entertainment = try await client.get(endpoint: Entertainments.get(id: id))
+            let entertainment: Entertainment = try await client.get(endpoint: Entertainments.get(id: id))
             withAnimation {
                 self.entertainment = entertainment
             }
