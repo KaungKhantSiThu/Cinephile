@@ -142,21 +142,22 @@ struct SettingsTab: View {
 //            Toggle(isOn: $preferences.soundEffectEnabled) {
 //                Label("settings.other.sound-effect", systemImage: "hifispeaker")
 //            }
-            Toggle(isOn: $preferences.fastRefreshEnabled) {
-                Label("settings.other.fast-refresh", systemImage: "arrow.clockwise")
-            }
+//            Toggle(isOn: $preferences.fastRefreshEnabled) {
+//                Label("settings.other.fast-refresh", systemImage: "arrow.clockwise")
+//            }
         } header: {
             Text("settings.section.other")
-        } footer: {
-            Text("settings.section.other.footer")
-        }
+        } 
+//    footer: {
+//            Text("settings.section.other.footer")
+//        }
 //        .listRowBackground(theme.primaryBackgroundColor)
     }
     
     private var cacheSection: some View {
         Section("settings.section.cache") {
             if cachedRemoved {
-                Text("action.done")
+                Text("Cache removed")
                     .transition(.move(edge: .leading))
             } else {
                 Button("settings.cache-media.clear", role: .destructive) {

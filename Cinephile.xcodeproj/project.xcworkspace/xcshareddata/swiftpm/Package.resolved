@@ -10,6 +10,15 @@
       }
     },
     {
+      "identity" : "buttonkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Dean151/ButtonKit.git",
+      "state" : {
+        "revision" : "3f8756a3418dfaced28407a402363e46a6db50fc",
+        "version" : "0.2.0"
+      }
+    },
+    {
       "identity" : "emojitext",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/divadretlaw/EmojiText.git",

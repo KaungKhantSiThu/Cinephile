@@ -16,7 +16,7 @@ public struct TagRowView: View {
       VStack(alignment: .leading) {
         Text("#\(tag.name)", bundle: .module)
           .font(.scaledHeadline)
-        Text("design.tag.n-posts-from-n-participants \(tag.totalUses) \(tag.totalAccounts)")
+          Text("design.tag.n-posts-from-n-participants \(tag.totalUses) \(tag.totalAccounts)", bundle: .module)
           .font(.scaledFootnote)
           .foregroundStyle(.secondary)
       }

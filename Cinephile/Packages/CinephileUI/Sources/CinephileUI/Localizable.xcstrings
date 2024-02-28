@@ -127,8 +127,8 @@
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "design.tag.n-posts-from-n-participants %1$lld %2$lld"
+            "state" : "translated",
+            "value" : "%1$lld posts from %2$lld participants"
           }
         }
       }

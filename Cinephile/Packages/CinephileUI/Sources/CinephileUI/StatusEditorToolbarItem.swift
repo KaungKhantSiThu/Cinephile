@@ -43,7 +43,9 @@ public struct StatusEditorToolbarItem: ToolbarContent {
           #endif
         }
       } label: {
-        Image(systemName: "square.and.pencil")
+        Image(systemName: "plus.circle.fill")
+              .symbolRenderingMode(.hierarchical)
+              .foregroundStyle(.gray)
           .accessibilityLabel("accessibility.tabs.timeline.new-post.label")
           .accessibilityInputLabels([
             LocalizedStringKey("accessibility.tabs.timeline.new-post.label"),

@@ -46,6 +46,7 @@
 		707960372AEBA0A900AB748D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 707960362AEBA0A900AB748D /* Preview Assets.xcassets */; };
 		708B802A2B31E85100D72A35 /* Timeline in Frameworks */ = {isa = PBXBuildFile; productRef = 708B80292B31E85100D72A35 /* Timeline */; };
 		708B802C2B31E8AF00D72A35 /* SafariRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708B802B2B31E8AF00D72A35 /* SafariRouter.swift */; };
+		7094AC712B8F579A00B0DF25 /* ButtonKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7094AC702B8F579A00B0DF25 /* ButtonKit */; };
 		7094DFBA2B0BA318008DF25E /* API_Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7094DFB92B0BA318008DF25E /* API_Key.swift */; };
 		70967F242B53C1A700EB4CD2 /* CinephileNotifications.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 70967F1D2B53C1A700EB4CD2 /* CinephileNotifications.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		70967F2A2B53C1F300EB4CD2 /* Account in Frameworks */ = {isa = PBXBuildFile; productRef = 70967F292B53C1F300EB4CD2 /* Account */; };
@@ -176,6 +177,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7094AC712B8F579A00B0DF25 /* ButtonKit in Frameworks */,
 				701858AC2B511E1B000A9EC6 /* TMDb in Frameworks */,
 				70F610C32B302A62006D9A4C /* TrackerUI in Frameworks */,
 				701F57032B2EF0640043B71B /* Models in Frameworks */,
@@ -467,6 +469,7 @@
 				70967F442B53CB5E00EB4CD2 /* Notifications */,
 				70967F472B53CC0200EB4CD2 /* Notifications */,
 				702BF58F2B610B430021C34D /* MediaClient */,
+				7094AC702B8F579A00B0DF25 /* ButtonKit */,
 			);
 			productName = "TMDB Test";
 			productReference = 7079602C2AEBA0A700AB748D /* Cinephile.app */;
@@ -533,6 +536,7 @@
 				70BCF7442B2B536F00D7AB7E /* XCRemoteSwiftPackageReference "keychain-swift" */,
 				70BCF7562B2C9A9F00D7AB7E /* XCRemoteSwiftPackageReference "Nuke" */,
 				701858AA2B511E1B000A9EC6 /* XCRemoteSwiftPackageReference "TMDb" */,
+				7094AC6F2B8F579A00B0DF25 /* XCRemoteSwiftPackageReference "ButtonKit" */,
 			);
 			productRefGroup = 7079602D2AEBA0A700AB748D /* Products */;
 			projectDirPath = "";
@@ -934,6 +938,14 @@
 				minimumVersion = 10.2.0;
 			};
 		};
+		7094AC6F2B8F579A00B0DF25 /* XCRemoteSwiftPackageReference "ButtonKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Dean151/ButtonKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.0;
+			};
+		};
 		70BCF7442B2B536F00D7AB7E /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/evgenyneu/keychain-swift.git";
@@ -993,6 +1005,11 @@
 		708B80292B31E85100D72A35 /* Timeline */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Timeline;
+		};
+		7094AC702B8F579A00B0DF25 /* ButtonKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7094AC6F2B8F579A00B0DF25 /* XCRemoteSwiftPackageReference "ButtonKit" */;
+			productName = ButtonKit;
 		};
 		70967F292B53C1F300EB4CD2 /* Account */ = {
 			isa = XCSwiftPackageProductDependency;

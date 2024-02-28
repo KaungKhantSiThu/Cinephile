@@ -316,6 +316,8 @@ extension StatusEditor {
                             ProgressView()
                         case .failed(let error):
                             ContentUnavailableView("Fetching data failed", systemImage: "magnifyingglass", description: Text("Error: \(error.localizedDescription)"))
+                                .symbolRenderingMode(.hierarchical)
+                                .foregroundStyle(.gray)
                                 .symbolVariant(.slash)
                         case .loaded(let value):
                             Section {

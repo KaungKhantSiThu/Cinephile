@@ -20,7 +20,8 @@ let package = Package(
         .package(name: "Environment", path: "../Environment"),
         .package(name: "Networking", path: "../Networking"),
         .package(name: "CinephileUI", path: "../CinephileUI"),
-        .package(name: "Status", path: "../Status")
+        .package(name: "Status", path: "../Status"),
+        .package(url: "https://github.com/Dean151/ButtonKit", from: "0.1.1"),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -32,7 +33,8 @@ let package = Package(
                 .product(name: "Environment", package: "Environment"),
                 .product(name: "Networking", package: "Networking"),
                 .product(name: "CinephileUI", package: "CinephileUI"),
-                .product(name: "Status", package: "Status")
+                .product(name: "Status", package: "Status"),
+                .product(name: "ButtonKit", package: "ButtonKit"),
             ]
         )
     ]

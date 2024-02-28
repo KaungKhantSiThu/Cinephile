@@ -113,6 +113,12 @@
     "accessibility.tabs.profile.post-count.hint" : {
 
     },
+    "account.action.notify-disable" : {
+
+    },
+    "account.action.reboosts-show" : {
+
+    },
     "account.boosted-by" : {
       "localizations" : {
         "en" : {
@@ -237,9 +243,6 @@
         }
       }
     },
-    "account.edit.info" : {
-
-    },
     "account.edit.metadata-name-placeholder" : {
       "localizations" : {
         "en" : {
@@ -351,6 +354,7 @@
       }
     },
     "account.follow.follow" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -361,6 +365,7 @@
       }
     },
     "account.follow.following" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -371,6 +376,7 @@
       }
     },
     "account.follow.requested" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -461,6 +467,39 @@
         }
       }
     },
+    "block" : {
+
+    },
+    "Block %@" : {
+
+    },
+    "Block User" : {
+
+    },
+    "Do you want to block this user?" : {
+
+    },
+    "Enable Notifications" : {
+
+    },
+    "follow" : {
+
+    },
+    "following" : {
+
+    },
+    "Hide Reboost" : {
+
+    },
+    "mention" : {
+
+    },
+    "Note" : {
+
+    },
+    "requested" : {
+
+    },
     "status.visibility.direct" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -504,6 +543,9 @@
           }
         }
       }
+    },
+    "unblock" : {
+
     }
   },
   "version" : "1.0"

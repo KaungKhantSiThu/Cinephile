@@ -76,7 +76,7 @@ public struct ExploreView: View {
                       prompt: Text("explore.search.prompt", bundle: .module))
           .searchScopes($viewModel.searchScope) {
             ForEach(ExploreViewModel.SearchScope.allCases, id: \.self) { scope in
-                Text(scope.localizedString)
+                Text(scope.localizedString, bundle: .module)
             }
           }
           .task(id: viewModel.searchQuery) {
@@ -102,21 +102,21 @@ public struct ExploreView: View {
         Button {
           routerPath.navigate(to: RouterDestination.tagsList(tags: viewModel.trendingTags))
         } label: {
-            Text("explore.section.trending.tags", bundle: .module)
+            Text("Trending Tags", bundle: .module)
         }
         .buttonStyle(.bordered)
           
         Button {
           routerPath.navigate(to: RouterDestination.accountsList(accounts: viewModel.suggestedAccounts))
         } label: {
-            Text("explore.section.suggested-users", bundle: .module)
+            Text("Suggested Users", bundle: .module)
         }
         .buttonStyle(.bordered)
           
         Button {
           routerPath.navigate(to: RouterDestination.trendingTimeline)
         } label: {
-            Text("explore.section.trending.posts", bundle: .module)
+            Text("Trending Posts", bundle: .module)
         }
         .buttonStyle(.bordered)
       }
@@ -149,7 +149,7 @@ var loadingView: some View {
           }
         }
       } header: {
-          Text("explore.section.users", bundle: .module)
+          Text("Users", bundle: .module)
       }
     }
       
@@ -161,7 +161,7 @@ var loadingView: some View {
             .padding(.vertical, 4)
         }
       } header: {
-          Text("explore.section.tags", bundle: .module)
+          Text("Tags", bundle: .module)
       }
     }
     if !results.statuses.isEmpty, viewModel.searchScope == .all || viewModel.searchScope == .posts {
@@ -172,7 +172,7 @@ var loadingView: some View {
             .padding(.vertical, 8)
         }
       } header: {
-          Text("explore.section.posts", bundle: .module)
+          Text("Posts", bundle: .module)
       }
     }
   }
@@ -188,12 +188,12 @@ var loadingView: some View {
         }
       }
       NavigationLink(value: RouterDestination.accountsList(accounts: viewModel.suggestedAccounts)) {
-        Text("see-more")
+        Text("see more")
           .foregroundColor(theme.tintColor)
       }
 //      .listRowBackground(theme.primaryBackgroundColor)
     } header: {
-        Text("explore.section.suggested-users", bundle: .module)
+        Text("Suggested Users", bundle: .module)
     }
   }
 
@@ -207,12 +207,12 @@ var loadingView: some View {
           .padding(.vertical, 4)
       }
       NavigationLink(value: RouterDestination.tagsList(tags: viewModel.trendingTags)) {
-          Text("see-more")
+          Text("see more")
           .foregroundColor(theme.tintColor)
       }
 //      .listRowBackground(theme.primaryBackgroundColor)
     } header: {
-        Text("explore.section.trending.tags", bundle: .module)
+        Text("Trending Tags", bundle: .module)
     }
   }
 

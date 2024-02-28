@@ -48,7 +48,7 @@ struct NotificationsTab: View {
                   Image(systemName: "bell")
                 }
               }
-              ToolbarTab(routerPath: $routerPath)
+//              ToolbarTab(routerPath: $routerPath)
             }
 //            .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
             .id(client.id)

@@ -21,7 +21,9 @@ struct NavigationSheet<Content: View>: View {
             Button {
               dismiss()
             } label: {
-              Image(systemName: "xmark.circle")
+              Image(systemName: "xmark.circle.fill")
+                    .symbolRenderingMode(.hierarchical)
+                    .foregroundStyle(.gray)
             }
           }
         }

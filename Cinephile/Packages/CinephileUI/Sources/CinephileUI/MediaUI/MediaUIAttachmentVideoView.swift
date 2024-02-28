@@ -136,7 +136,9 @@ public struct MediaUIAttachmentVideoView: View {
                     .toolbar {
                         ToolbarItem(placement: .topBarLeading) {
                             Button { isFullScreen.toggle() } label: {
-                                Image(systemName: "xmark.circle")
+                                Image(systemName: "xmark.circle.fill")
+                                    .symbolRenderingMode(.hierarchical)
+                                    .foregroundStyle(.gray)
                             }
                         }
                         QuickLookToolbarItem(itemUrl: viewModel.url)

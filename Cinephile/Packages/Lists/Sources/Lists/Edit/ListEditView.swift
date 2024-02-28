@@ -51,7 +51,7 @@ public struct ListEditView: View {
               Button {
                 viewModel.searchUserQuery = ""
               } label: {
-                Image(systemName: "xmark.circle")
+                Image(systemName: "xmark.circle.fill")
               }
             }
           }

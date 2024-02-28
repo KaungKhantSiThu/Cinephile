@@ -17,6 +17,7 @@ public struct AccountDetailView: View {
     @Environment(\.openURL) private var openURL
     @Environment(\.redactionReasons) private var reasons
     
+    @Environment(StreamWatcher.self) private var watcher
     @Environment(CurrentAccount.self) private var currentAccount
     @Environment(CurrentInstance.self) private var currentInstance
     @Environment(UserPreferences.self) private var preferences
@@ -27,6 +28,8 @@ public struct AccountDetailView: View {
     
     @State private var viewModel: AccountDetailViewModel
     @State private var isCurrentUser: Bool = false
+    @State private var showBlockConfirmation: Bool = false
+
     
     @State private var isEditingAccount: Bool = false
     
@@ -50,6 +53,7 @@ public struct AccountDetailView: View {
     public var body: some View {
         ScrollViewReader { proxy in
             List {
+                ScrollToView()
                 HStack {
                     Spacer()
                     headerView(proxy: proxy)
@@ -107,6 +111,7 @@ public struct AccountDetailView: View {
             let viewModel = viewModel
             Task {
                 await withTaskGroup(of: Void.self) { group in
+                    group.addTask { await viewModel.fetchAccount() }
                     group.addTask {
                         if await viewModel.statuses.isEmpty {
                             await viewModel.fetchNewestStatuses(pullToRefresh: false)
@@ -122,6 +127,13 @@ public struct AccountDetailView: View {
             await viewModel.fetchAccount()
             await viewModel.fetchNewestStatuses(pullToRefresh: true)
         }
+        .onChange(of: watcher.latestEvent?.id) {
+          if let latestEvent = watcher.latestEvent,
+             viewModel.id == currentAccount.account?.id
+          {
+            viewModel.handleEvent(event: latestEvent, currentAccount: currentAccount)
+          }
+        }
         .onChange(of: isEditingAccount) { _, newValue in
             if !newValue {
                 Task {
@@ -130,6 +142,14 @@ public struct AccountDetailView: View {
                 }
             }
         }
+//        .onChange(of: routerPath.presentedSheet) { oldValue, newValue in
+//          if oldValue == .accountEditInfo || newValue == .accountEditInfo {
+//            Task {
+//              await viewModel.fetchAccount()
+//              await preferences.refreshServerPreferences()
+//            }
+//          }
+//        }
         .sheet(isPresented: $isEditingAccount, content: {
             EditAccountView()
         })
@@ -137,6 +157,19 @@ public struct AccountDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             toolbarContent
+        }
+        .confirmationDialog("Block User", isPresented: $showBlockConfirmation) {
+          if let account = viewModel.account {
+            Button("Block \(account.username)", role: .destructive) {
+              Task {
+                do {
+                  viewModel.relationship = try await client.post(endpoint: Accounts.block(id: account.id))
+                } catch {}
+              }
+            }
+          }
+        } message: {
+          Text("Do you want to block this user?")
         }
     }
     
@@ -161,7 +194,10 @@ public struct AccountDetailView: View {
         if !viewModel.pinned.isEmpty {
             Label(
                 title: { Text("account.post.pinned", bundle: .module) },
-                icon: { Image(systemName: "pin.fill") }
+                icon: { 
+                    Image(systemName: "pin.fill")
+                        .foregroundStyle(.yellow)
+                }
             )
             .accessibilityAddTraits(.isHeader)
             .font(.scaledFootnote)
@@ -194,30 +230,36 @@ public struct AccountDetailView: View {
 //            Image(systemName: client.isAuth ? "checkmark.circle.fill" : "multiply.circle.fill")
 //                .foregroundStyle(client.isAuth ? .green : .red)
 //        }
-        
-        ToolbarItem(placement: .topBarTrailing) {
-            Button {
-                routerPath.presentedSheet = .settings
-            } label: {
-                Label(
-                    title: { Text("account.settings", bundle: .module) },
-                    icon: { Image(systemName: "gear") }
-                )
-            }
-        }
-        
         ToolbarItemGroup(placement: .topBarTrailing) {
-            if isCurrentUser {
+            Menu {
+              AccountDetailContextMenu(showBlockConfirmation: $showBlockConfirmation, viewModel: viewModel)
+                
                 Button {
-                    isEditingAccount = true
+                    routerPath.presentedSheet = .settings
                 } label: {
                     Label(
-                        title: { Text("account.edit.info", bundle: .module) },
-                        icon: { Image(systemName: "pencil") }
+                        title: { Text("account.settings", bundle: .module) },
+                        icon: { Image(systemName: "gear") }
                     )
                 }
+                
+            } label: {
+              Image(systemName: "ellipsis.circle")
             }
         }
+        
+//        ToolbarItemGroup(placement: .topBarTrailing) {
+//            if isCurrentUser {
+//                Button {
+//                    isEditingAccount = true
+//                } label: {
+//                    Label(
+//                        title: { Text("account.edit.info", bundle: .module) },
+//                        icon: { Image("profile.edit") }
+//                    )
+//                }
+//            }
+//        }
         
     }
     

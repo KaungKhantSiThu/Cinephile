@@ -98,7 +98,9 @@ private struct DismissToolbarItem: ToolbarContent {
                 Label {
                     Text("quicklook.action.dismiss", bundle: .module)
                 } icon: {
-                    Image(systemName: "xmark.circle")
+                    Image(systemName: "xmark.circle.fill")
+                        .symbolRenderingMode(.hierarchical)
+                        .foregroundStyle(.gray)
                 }
                 
             }

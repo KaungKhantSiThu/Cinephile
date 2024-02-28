@@ -27,6 +27,8 @@ public struct TrackerExploreView: View {
                     ProgressView()
                 case .failed(let error):
                     ContentUnavailableView("No search Results", systemImage: "magnifyingglass", description: Text("Error: \(error.localizedDescription)"))
+                        .symbolRenderingMode(.hierarchical)
+                        .foregroundStyle(.gray)
                         .symbolVariant(.slash)
                 case .loaded(let value):
                     Section {

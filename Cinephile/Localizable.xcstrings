@@ -83,6 +83,7 @@
       }
     },
     "action.done" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -96,6 +97,9 @@
 
     },
     "Already have an account? Login" : {
+
+    },
+    "Cache removed" : {
 
     },
     "Cinephile" : {
@@ -271,6 +275,7 @@
       }
     },
     "settings.other.fast-refresh" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -431,6 +436,7 @@
       }
     },
     "settings.section.other.footer" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

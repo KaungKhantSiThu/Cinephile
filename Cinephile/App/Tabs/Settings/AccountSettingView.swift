@@ -39,7 +39,7 @@ struct AccountSettingsView: View {
         Button {
           isEditingAccount = true
         } label: {
-          Label("account.action.edit-info", systemImage: "pencil")
+            Label("account.action.edit-info", image: "profile.edit")
             .frame(maxWidth: .infinity, alignment: .leading)
             .contentShape(Rectangle())
         }

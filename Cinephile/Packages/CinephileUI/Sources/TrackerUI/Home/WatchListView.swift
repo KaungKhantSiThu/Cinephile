@@ -22,6 +22,8 @@ struct WatchListView: View {
             switch viewModel.state {
             case .notLogin:
                 ContentUnavailableView("You are not loggined", systemImage: "exclamationmark.triangle", description: Text("Please log in to use this feature or tap \(Image(systemName: "magnifyingglass")) to explore the movies"))
+                    .symbolRenderingMode(.hierarchical)
+                    .foregroundStyle(.gray)
                     .symbolVariant(.fill)
             case .loading:
                 ProgressView()
@@ -40,6 +42,8 @@ struct WatchListView: View {
                 } contents: {
                     if viewModel.notWatch.isEmpty && selectedTab == .unwatched  {
                         ContentUnavailableView("Watchlist is Empty", systemImage: "eye", description: Text("You can add movies to watchlist by tapping \(Image(systemName: "magnifyingglass"))."))
+                            .symbolRenderingMode(.hierarchical)
+                                        .foregroundStyle(.gray)
                             .symbolVariant(.slash)
                     } else if viewModel.watched.isEmpty && selectedTab == .watched {
                         ContentUnavailableView("Watched is Empty", systemImage: "eye", description: Text("You can mark movies as watched by tapping \(Image(systemName: "eye")) inside Movie Detail Screen."))

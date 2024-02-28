@@ -3,6 +3,9 @@ import Environment
 import Models
 import NukeUI
 import CinephileUI
+import OSLog
+
+private let logger = Logger(subsystem: "AccountDetail", category: "HeaderViewModel")
 
 @MainActor
 struct AccountDetailHeaderView: View {
@@ -40,14 +43,33 @@ struct AccountDetailHeaderView: View {
     
     private var accountAvatarView: some View {
         HStack(alignment: .top) {
-            AvatarView(account.avatar, config: .account)
-//                .frame(width: 20, height: 20)
+            ZStack(alignment: .topTrailing) {
+                AvatarView(account.avatar, config: .account)
+                if account.bot {
+                    Image(systemName: "poweroutlet.type.b.fill")
+                        .offset(x: 5, y: -5)
+                }
+                if account.locked {
+                    Image(systemName: "lock.fill")
+                        .offset(x: 5, y: -5)
+                }
+                if viewModel.relationship?.blocking == true {
+                    Image(systemName: "slash.circle.fill")
+                        .foregroundStyle(.red)
+                        .offset(x: 5, y: -5)                }
+                if viewModel.relationship?.muting == true {
+                    Image(systemName: "speaker.slash.fill")
+                        .offset(x: 5, y: -5)
+                }
+            }
+            
+            //                .frame(width: 20, height: 20)
                 .padding(.trailing, 10)
-//            if viewModel.isCurrentUser, isSupporter {
-//                Image(systemName: "checkmark.seal.fill")
-//                    .resizable()
-//                    .frame(width: 25, height: 25)
-//            }
+            //            if viewModel.isCurrentUser, isSupporter {
+            //                Image(systemName: "checkmark.seal.fill")
+            //                    .resizable()
+            //                    .frame(width: 25, height: 25)
+            //            }
             
             VStack(alignment: .leading) {
                 Text(account.safeDisplayName)
@@ -75,37 +97,71 @@ struct AccountDetailHeaderView: View {
     }
     
     private var accountInfoView: some View {
-        HStack(spacing: 30) {
-            Button {
-                withAnimation {
-                    scrollViewProxy?.scrollTo("status", anchor: .top)
+        VStack {
+            HStack(spacing: 30) {
+                Button {
+                    withAnimation {
+                        scrollViewProxy?.scrollTo("status", anchor: .top)
+                    }
+                } label: {
+                    makeCustomInfoLabel(title: "account.posts", count: account.statusesCount ?? 0)
                 }
-            } label: {
-                makeCustomInfoLabel(title: "account.posts", count: account.statusesCount ?? 0)
+                .accessibilityHint("accessibility.tabs.profile.post-count.hint")
+                .buttonStyle(.borderless)
+                
+                Button {
+                    routerPath.navigate(to: .following(id: account.id))
+                } label: {
+                    makeCustomInfoLabel(title: "account.following", count: account.followingCount ?? 0)
+                }
+                .accessibilityHint("accessibility.tabs.profile.following-count.hint")
+                .buttonStyle(.borderless)
+                
+                
+                Button {
+                    routerPath.navigate(to: .followers(id: account.id))
+                } label: {
+                    makeCustomInfoLabel(
+                        title: "account.followers",
+                        count: account.followersCount ?? 0,
+                        needsBadge: currentAccount.account?.id == account.id && !currentAccount.followRequests.isEmpty
+                    )
+                }
+                .buttonStyle(.borderless)
             }
-            .accessibilityHint("accessibility.tabs.profile.post-count.hint")
-            .buttonStyle(.borderless)
             
-            Button {
-                routerPath.navigate(to: .following(id: account.id))
-            } label: {
-                makeCustomInfoLabel(title: "account.following", count: account.followingCount ?? 0)
+            if let note = viewModel.relationship?.note, !note.isEmpty, !viewModel.isCurrentUser {
+                makeNoteView(note)
             }
-            .accessibilityHint("accessibility.tabs.profile.following-count.hint")
-            .buttonStyle(.borderless)
             
             
-            Button {
-                routerPath.navigate(to: .followers(id: account.id))
-            } label: {
-                makeCustomInfoLabel(
-                    title: "account.followers",
-                    count: account.followersCount ?? 0,
-                    needsBadge: currentAccount.account?.id == account.id && !currentAccount.followRequests.isEmpty
+            if let relationship = viewModel.relationship, !viewModel.isCurrentUser {
+                FollowButton(viewModel: .init(accountId: account.id,
+                                              relationship: relationship,
+                                              shouldDisplayNotify: true,
+                                              relationshipUpdated: { relationship in
+                    viewModel.relationship = relationship
+                }))
+            } else if !viewModel.isCurrentUser {
+                ProgressView()
+            }
+        }
+        
+    }
+    
+    @ViewBuilder
+    private func makeNoteView(_ note: String) -> some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text("Note")
+                .foregroundStyle(.secondary)
+            Text(note)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(8)
+                .cornerRadius(4)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 4)
+                        .stroke(.gray.opacity(0.35), lineWidth: 1)
                 )
-            }
-            .accessibilityHint("accessibility.tabs.profile.follower-count.hint")
-            .buttonStyle(.borderless)
         }
     }
     
@@ -129,9 +185,9 @@ struct AccountDetailHeaderView: View {
                 }
             
         }
-//        .accessibilityElement(children: .ignore)
-//        .accessibilityLabel(title)
-//        .accessibilityValue("\(count)")
+        //        .accessibilityElement(children: .ignore)
+        //        .accessibilityLabel(title)
+        //        .accessibilityValue("\(count)")
     }
 }
 

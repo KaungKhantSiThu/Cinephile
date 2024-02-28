@@ -101,6 +101,7 @@
       }
     },
     "explore.section.posts" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -111,6 +112,7 @@
       }
     },
     "explore.section.suggested-users" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -121,6 +123,7 @@
       }
     },
     "explore.section.tags" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -141,6 +144,7 @@
       }
     },
     "explore.section.trending.posts" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -161,6 +165,7 @@
       }
     },
     "explore.section.users" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -173,7 +178,14 @@
     "Info" : {
 
     },
+    "Posts" : {
+
+    },
+    "see more" : {
+
+    },
     "see-more" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -182,6 +194,12 @@
           }
         }
       }
+    },
+    "Suggested Users" : {
+
+    },
+    "Tags" : {
+
     },
     "timeline.entertainment" : {
       "localizations" : {
@@ -262,6 +280,15 @@
           }
         }
       }
+    },
+    "Trending Posts" : {
+
+    },
+    "Trending Tags" : {
+
+    },
+    "Users" : {
+
     }
   },
   "version" : "1.0"

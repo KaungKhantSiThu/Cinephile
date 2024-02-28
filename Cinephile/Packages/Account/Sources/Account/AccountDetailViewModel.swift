@@ -113,6 +113,9 @@ private let logger = Logger(subsystem: "Account", category: "DetailViewModel")
     
     private(set) var statuses: [Status] = []
     
+    var boosts: [Status] = []
+
+    
     /// When coming from a URL like a mention tap in a status.
     init(id: Account.ID) {
         self.id = id
@@ -143,6 +146,12 @@ private let logger = Logger(subsystem: "Account", category: "DetailViewModel")
             featuredTags = data.featuredTags
             featuredTags.sort { $0.statusesCountInt > $1.statusesCountInt }
             relationship = data.relationships.first
+            if let relationship = relationship {
+                logger.log("Relationship exists")
+            } else{
+                logger.log("Relationship does not exist")
+            }
+            
         } catch {
             if let account {
                 state = .loaded(account: account)
@@ -189,6 +198,9 @@ private let logger = Logger(subsystem: "Account", category: "DetailViewModel")
                                                              excludeReplies: selectedTab == .statuses && !isCurrentUser ? true : nil,
                                                              pinned: nil))
             StatusDataControllerProvider.shared.updateDataControllers(for: statuses, client: client)
+            if selectedTab == .boosts {
+                boosts = statuses.filter { $0.reblog != nil }
+            }
             if selectedTab == .statuses {
                 pinned =
                 try await client.get(endpoint: Accounts.statuses(id: id,
@@ -226,9 +238,14 @@ private let logger = Logger(subsystem: "Account", category: "DetailViewModel")
                                                                  excludeReplies: selectedTab == .statuses && !isCurrentUser ? true : nil,
                                                                  pinned: nil))
                 statuses.append(contentsOf: newStatuses)
+                if selectedTab == .boosts {
+                  let newBoosts = statuses.filter { $0.reblog != nil }
+                  boosts.append(contentsOf: newBoosts)
+                }
                 StatusDataControllerProvider.shared.updateDataControllers(for: newStatuses, client: client)
                 tabState = .statuses(statusesState: .display(statuses: statuses,
                                                              nextPageState: newStatuses.count < 20 ? .none : .hasNextPage))
+                
             case .favorites:
                 guard let nextPageId = favoritesNextPage?.maxId else { return }
                 let newFavorites: [Status]

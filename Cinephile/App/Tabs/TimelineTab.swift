@@ -257,6 +257,8 @@ struct TimelineTab: View {
 #endif
                 } label: {
                     Image(systemName: "magnifyingglass")
+                        .symbolRenderingMode(.hierarchical)
+                        .foregroundStyle(.gray)
                 }
             }
             
