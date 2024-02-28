@@ -94,7 +94,7 @@ struct AddAccountView: View {
                                     do {
                                         let _ = try await client.registerAccount(data: accountData)
                                         alertTitle = "Registration Successful"
-                                        alertMessage = "Please check your email inbox or junk folder"
+                                        alertMessage = "Please check your email inbox or spam folder"
                                         showAlert = true
 
                                     } catch {
