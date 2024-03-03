@@ -110,6 +110,12 @@
     "Kelvin Gao" : {
 
     },
+    "Mark as unwatch" : {
+
+    },
+    "Mark as watched" : {
+
+    },
     "Mark as Watched" : {
 
     },
@@ -184,6 +190,9 @@
 
     },
     "Recommendations" : {
+
+    },
+    "Remove" : {
 
     },
     "Remove from Watchlist" : {

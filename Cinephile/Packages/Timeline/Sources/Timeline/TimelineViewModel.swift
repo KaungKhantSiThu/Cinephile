@@ -55,6 +55,7 @@ private let logger = Logger(subsystem: "Timeline", category: "ViewModel")
     
     var entertainment: Entertainment?
     
+    var genre: Genre?
     
     // Internal source of truth for a timeline.
     private(set) var datasource = TimelineDatasource()
@@ -118,6 +119,16 @@ private let logger = Logger(subsystem: "Timeline", category: "ViewModel")
             let tag: Tag = try await client.get(endpoint: Tags.tag(id: id))
             withAnimation {
                 self.tag = tag
+            }
+        } catch { }
+    }
+    
+    private func fetchGenre(id: Int) async {
+        guard let client else { return }
+        do {
+            let genre: Genre = try await client.get(endpoint: Tags.tag(id: id))
+            withAnimation {
+                self.genre = genre
             }
         } catch { }
     }

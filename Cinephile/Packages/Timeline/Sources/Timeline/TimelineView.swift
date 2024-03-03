@@ -202,6 +202,41 @@ public struct TimelineView: View {
     }
     
     @ViewBuilder
+    private var genreHeaderView: some View {
+        if let genre = viewModel.genre {
+            headerView {
+                HStack {
+                    
+//                    VStack(alignment: .leading, spacing: 4) {
+//                        Text("Action")
+//                            .font(.scaledHeadline)
+//                        Text("timeline.n-recent-from-n-participants \(tag.totalUses) \(tag.totalAccounts)", bundle: .module)
+//                            .font(.scaledFootnote)
+//                            .foregroundStyle(.secondary)
+//                    }
+//                    .accessibilityElement(children: .combine)
+                    Text(genre.name)
+                        .font(.scaledHeadline)
+                    Spacer()
+                    
+                    Button {
+                        Task {
+                            if genre.following {
+                                viewModel.genre = await account.unfollowGenre(id: genre.id)
+                            } else {
+                                viewModel.genre = await account.followGenre(id: genre.id)
+                            }
+                        }
+                    } label: {
+                        Text(genre.following ? "account.follow.following" : "account.follow.follow", bundle: .module)
+                    }
+                    .buttonStyle(.bordered)
+                }
+            }
+        }
+    }
+    
+    @ViewBuilder
     private var entertainmentHeaderView: some View {
         if let entertainment = viewModel.entertainment {
             Section {
@@ -371,3 +406,4 @@ public struct TimelineView: View {
             }
     }
 }
+

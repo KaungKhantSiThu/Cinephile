@@ -41,7 +41,7 @@ struct TimelineTab: View {
     init(popToRootTab: Binding<Tab>, timeline: TimelineFilter? = nil) {
         canFilterTimeline = timeline == nil
         _popToRootTab = popToRootTab
-        _timeline = .init(initialValue: timeline ?? .home)
+        _timeline = .init(initialValue: timeline ?? .local)
     }
     
     var body: some View {
