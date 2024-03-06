@@ -81,8 +81,6 @@ public struct MovieDetailView: View {
                                             await viewModel.removeFromWatchlist()
                                         } else {
                                             print("Adding \(data.movie.id) : \(data.movie.title) to watchlist")
-                                            
-                                            await notificationManager.notificationAttachment(name: data.movie.title, url: viewModel.posterImageURL, schdule: 5)
 
                                             if let releaseDate = data.movie.releaseDate {
                                                 let calendar = Date()
