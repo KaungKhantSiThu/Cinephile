@@ -139,8 +139,6 @@ public class MediaNotificationManager: NSObject {
         
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: schdule, repeats: false)
         
-        
-        
         let request = UNNotificationRequest(identifier: name, content: content, trigger: trigger)
 
         do {
@@ -151,6 +149,12 @@ public class MediaNotificationManager: NSObject {
         }
         
         await getPendingRequests()
+    }
+    
+    public func removeNotification(withIdentifier identifier: String) {
+        let center = UNUserNotificationCenter.current()
+        center.removePendingNotificationRequests(withIdentifiers: [identifier])
+        print("Notification with identifier \(identifier) removed.")
     }
     
 //    public func notificationAttachment(name: String, url: URL, scheduleAt date: Date) async {
