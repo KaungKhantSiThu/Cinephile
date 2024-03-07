@@ -81,15 +81,25 @@ public struct MovieDetailView: View {
                                         
                                         if viewModel.inWatchlist {
                                             print("Removing \(data.movie.id) : \(data.movie.title) from watchlist")
+                                            notificationManager.removeNotification(withIdentifier: data.movie.title)
                                             await viewModel.removeFromWatchlist()
                                         } else {
                                             print("Adding \(data.movie.id) : \(data.movie.title) to watchlist")
-                                            if let _ = data.movie.releaseDate {
-        //                                            let _ = Calendar.current.dateComponents([.year, .month, .day], from: releaseDate)
-                                                Task {
-                                                    await notificationManager.notificationAttachment(name: data.movie.title, url: viewModel.posterImageURL)
+
+                                            if let releaseDate = data.movie.releaseDate {
+                                                let calendar = Date()
+                                                
+                                                if let oneDayLater = Calendar.current.date(byAdding: .day, value: 1, to: Date()) {
+                                                    if releaseDate > oneDayLater {
+                                                        let timeInterval = oneDayLater.timeIntervalSince(calendar)
+
+                                                        Task {
+                                                            await notificationManager.notificationAttachment(name: data.movie.title, url: viewModel.posterImageURL, schdule: timeInterval)
+                                                        }
+                                                    }
                                                 }
                                             }
+                                            
                                             await viewModel.addToWatchlist()
                                         }
                                         try! await Task.sleep(nanoseconds: 1_000_000_000)

@@ -122,12 +122,12 @@ public class MediaNotificationManager: NSObject {
     }
     
     
-    public func notificationAttachment(name: String, url: URL) async {
-//        let center = UNUserNotificationCenter.current()
+    public func notificationAttachment(name: String, url: URL, schdule: TimeInterval) async {
         let content = UNMutableNotificationContent()
         content.title = "Movie Release Alert"
         content.body = "\(name) is out tomorrow "
         content.categoryIdentifier = NotificationCateogry.trackerAlert.rawValue
+
         do {
             let (imageData, _) = try await URLSession.shared.data(from: url)
             if let attachment = UNNotificationAttachment.create(image: imageData, identifier: "imageAttachment") {
@@ -137,25 +137,10 @@ public class MediaNotificationManager: NSObject {
             logger.error("Error Fetching Image Data: \(error.localizedDescription)")
         }
         
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-        
-        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: schdule, repeats: false)
         
         let request = UNNotificationRequest(identifier: name, content: content, trigger: trigger)
-        
-//        let dismiss = UNNotificationAction(identifier: NotificationAction.dismiss.rawValue, title: "Dismiss")
-        
-//        let reminder = UNNotificationAction(identifier: NotificationAction.reminder.rawValue, title: "Reminder")
-        
-//        let generalCategory = UNNotificationCategory(identifier: NotificationCateogry.trackerAlert.rawValue, actions: [dismiss], intentIdentifiers: [], options: [])
-//        
-//        center.setNotificationCategories([generalCategory])
-        
-        //        center.add(request) { error in
-        //            if let error = error {
-        //                print(error)
-        //            }
-        //        }
+
         do {
             logger.info("Adding notification alert: \(name)")
             try await notificationCenter.add(request)
@@ -164,6 +149,12 @@ public class MediaNotificationManager: NSObject {
         }
         
         await getPendingRequests()
+    }
+    
+    public func removeNotification(withIdentifier identifier: String) {
+        let center = UNUserNotificationCenter.current()
+        center.removePendingNotificationRequests(withIdentifiers: [identifier])
+        print("Notification with identifier \(identifier) removed.")
     }
     
 //    public func notificationAttachment(name: String, url: URL, scheduleAt date: Date) async {
