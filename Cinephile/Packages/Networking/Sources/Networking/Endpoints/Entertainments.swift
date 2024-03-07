@@ -48,11 +48,23 @@ public struct EntertainmentData: Encodable, Sendable {
     public let domain: String
     public let mediaType: MediaType
     public let mediaId: String
+    public let genres: [GenreData]
     
-    public init(domain: String, mediaType: MediaType, mediaId: String) {
+    public init(domain: String, mediaType: MediaType, mediaId: String, genres: [GenreData]) {
         self.domain = domain
         self.mediaType = mediaType
         self.mediaId = mediaId
+        self.genres = genres
+    }
+    
+    public struct GenreData: Encodable, Sendable {
+        public let genreId: Int
+        public let name: String
+        
+        public init(genreId: Int, name: String) {
+            self.genreId = genreId
+            self.name = name
+        }
     }
 }
 

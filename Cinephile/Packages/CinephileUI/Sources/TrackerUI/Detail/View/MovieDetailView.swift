@@ -47,9 +47,13 @@ public struct MovieDetailView: View {
                     
                     FlowLayout(alignment: .center) {
                         ForEach(genres) { genre in
-                            Text(genre.name)
-                                .padding(10)
-                                .background(.ultraThickMaterial, in: RoundedRectangle(cornerRadius: 10.0))
+                            Button {
+                                routerPath.navigate(to: .genre(id: genre.id, title: genre.name))
+                            } label: {
+                                Text(genre.name)
+                                    .padding(10)
+                                    .background(.ultraThickMaterial, in: RoundedRectangle(cornerRadius: 10.0))
+                            }
                         }
                     }
                 }

@@ -162,6 +162,7 @@ import Networking
         }
     }
     
+    
     func addToWatchlist() async {
         guard let client else { return }
         var entertainmentId: Int?
@@ -174,7 +175,7 @@ import Networking
                 let data: EntertainmentData = .init(
                     domain: "themoviedb.org",
                     mediaType: .movie,
-                    mediaId: String(self.id))
+                    mediaId: String(self.id), genres: [])
                 let entertainment: Entertainment = try await client.post(endpoint: Entertainments.post(json: data))
                 
                 entertainmentId = entertainment.id
@@ -210,7 +211,6 @@ import Networking
             }
         }
     }
-    
 }
 
 extension MovieDetailViewModel {

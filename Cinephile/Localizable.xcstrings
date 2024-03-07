@@ -556,6 +556,17 @@
         }
       }
     },
+    "timeline.forYou" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "For You"
+          }
+        }
+      }
+    },
     "timeline.home" : {
       "extractionState" : "manual",
       "localizations" : {

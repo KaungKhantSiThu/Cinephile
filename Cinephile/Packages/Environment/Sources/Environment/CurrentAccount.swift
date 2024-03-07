@@ -77,14 +77,6 @@ import Observation
         Self.accountsCache[client.id] = account
     }
     
-//    public func fetchLists() async {
-//        guard let client, client.isAuth else { return }
-//        do {
-//            lists = try await client.get(endpoint: Lists.lists)
-//        } catch {
-//            lists = []
-//        }
-//    }
     
     public func fetchFollowedTags() async {
         guard let client, client.isAuth else { return }
@@ -95,14 +87,14 @@ import Observation
         }
     }
     
-//    public func deleteList(list: Models.List) async {
-//        guard let client else { return }
-//        lists.removeAll(where: { $0.id == list.id })
-//        let response = try? await client.delete(endpoint: Lists.list(id: list.id))
-//        if response?.statusCode != 200 {
-//            lists.append(list)
-//        }
-//    }
+    public func fetchFollowedGenres() async {
+        guard let client, client.isAuth else { return }
+        do {
+            genres = try await client.get(endpoint: Genres.followedGenres)
+        } catch {
+            genres = []
+        }
+    }
     
     public func followTag(id: String) async -> Tag? {
         guard let client else { return nil }

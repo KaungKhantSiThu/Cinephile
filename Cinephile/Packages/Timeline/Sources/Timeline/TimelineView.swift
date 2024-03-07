@@ -48,6 +48,7 @@ public struct TimelineView: View {
             List {
                 scrollToTopView
                 //          tagGroupHeaderView
+                genreHeaderView
                 tagHeaderView
 //                entertainmentHeaderView
                 switch viewModel.timeline {
@@ -207,28 +208,27 @@ public struct TimelineView: View {
             headerView {
                 HStack {
                     
-//                    VStack(alignment: .leading, spacing: 4) {
-//                        Text("Action")
-//                            .font(.scaledHeadline)
-//                        Text("timeline.n-recent-from-n-participants \(tag.totalUses) \(tag.totalAccounts)", bundle: .module)
-//                            .font(.scaledFootnote)
-//                            .foregroundStyle(.secondary)
-//                    }
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(genre.name)
+                            .font(.scaledHeadline)
+                        Text("\(genre.participantCount) users is following")
+                            .font(.scaledFootnote)
+                            .foregroundStyle(.secondary)
+                    }
 //                    .accessibilityElement(children: .combine)
-                    Text(genre.name)
-                        .font(.scaledHeadline)
+                    
                     Spacer()
                     
                     Button {
                         Task {
-                            if genre.following {
-                                viewModel.genre = await account.unfollowGenre(id: genre.id)
+                            if genre.isFollowed {
+                                viewModel.genre = await account.unfollowGenre(id: genre.genreId)
                             } else {
-                                viewModel.genre = await account.followGenre(id: genre.id)
+                                viewModel.genre = await account.followGenre(id: genre.genreId)
                             }
                         }
                     } label: {
-                        Text(genre.following ? "account.follow.following" : "account.follow.follow", bundle: .module)
+                        Text(genre.isFollowed ? "account.follow.following" : "account.follow.follow", bundle: .module)
                     }
                     .buttonStyle(.bordered)
                 }

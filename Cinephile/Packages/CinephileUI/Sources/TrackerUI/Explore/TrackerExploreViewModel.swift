@@ -90,6 +90,10 @@ private var logger = Logger(subsystem: "TrackerExploreView", category: "ViewMode
         )
     }
     
+    public func fetchDetail(id: Movie.ID) async throws -> Movie {
+            return try await APIService.shared.get(endpoint: MoviesEndpoint.details(movieID: id))
+    }
+    
     public func search() async throws {
         guard !self.searchText.isEmpty else { return }
         do {

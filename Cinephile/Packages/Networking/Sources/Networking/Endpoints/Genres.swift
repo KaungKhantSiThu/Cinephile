@@ -11,15 +11,18 @@ public enum Genres: Endpoint {
   case genre(id: Int)
   case follow(id: Int)
   case unfollow(id: Int)
+    case followedGenres
 
   public func path() -> String {
     switch self {
     case let .genre(id):
-      "tags/\(id)/"
+      "cinephile/genres/\(id)/"
     case let .follow(id):
-      "tags/\(id)/follow"
+      "cinephile/genres/\(id)/follow"
     case let .unfollow(id):
-      "tags/\(id)/unfollow"
+      "cinephile/genres/\(id)/unfollow"
+    case .followedGenres:
+        "cinephile/followed_genres"
     }
   }
 

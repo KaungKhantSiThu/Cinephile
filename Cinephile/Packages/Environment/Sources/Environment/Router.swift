@@ -94,6 +94,7 @@ public enum RouterDestination: Hashable {
     case trendingLinks(cards: [Card])
     case tagsList(tags: [Tag])
     case media(id: Int, title: String)
+    case genre(id: Int, title: String)
 }
 
 @MainActor

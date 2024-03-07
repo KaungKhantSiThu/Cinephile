@@ -7,21 +7,20 @@
 
 import Foundation
 
-public struct Genre: Codable, Identifiable, Equatable, Hashable {
-
-  public func hash(into hasher: inout Hasher) {
-    hasher.combine(id)
-  }
-
-  public static func == (lhs: Genre, rhs: Genre) -> Bool {
-    lhs.id == rhs.id
-  }
-
-  public var id: Int
-
-  public let name: String
-  public let following: Bool
+public struct Genre: Codable, Identifiable, Equatable, Hashable, Sendable {
     
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    public static func == (lhs: Genre, rhs: Genre) -> Bool {
+        lhs.id == rhs.id
+    }
+    
+    public var id: Int
+    public let genreId: Int
+    public let name: String
+    public let isFollowed: Bool
+    public let participantCount: Int
 }
-
 

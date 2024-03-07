@@ -41,7 +41,7 @@ struct TimelineTab: View {
     init(popToRootTab: Binding<Tab>, timeline: TimelineFilter? = nil) {
         canFilterTimeline = timeline == nil
         _popToRootTab = popToRootTab
-        _timeline = .init(initialValue: timeline ?? .local)
+        _timeline = .init(initialValue: timeline ?? .home)
     }
     
     var body: some View {
@@ -108,8 +108,8 @@ struct TimelineTab: View {
         .onReceive(NotificationCenter.default.publisher(for: .refreshTimeline)) { _ in
             timeline = .latest
         }
-        .onReceive(NotificationCenter.default.publisher(for: .trendingTimeline)) { _ in
-            timeline = .trending
+        .onReceive(NotificationCenter.default.publisher(for: .forYouTimeline)) { _ in
+            timeline = .forYou
         }
         .onReceive(NotificationCenter.default.publisher(for: .localTimeline)) { _ in
             timeline = .local

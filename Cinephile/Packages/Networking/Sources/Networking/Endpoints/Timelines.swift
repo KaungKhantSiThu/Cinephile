@@ -5,7 +5,8 @@ public enum Timelines: Endpoint {
     case home(sinceId: String?, maxId: String?, minId: String?)
     case list(listId: String, sinceId: String?, maxId: String?, minId: String?)
     case hashtag(tag: String, additional: [String]?, maxId: String?)
-    case entertainment(entertainmentId: Int?, mediaType: MediaType?, sinceId: String?, maxId: String?, minId: String?, onlyMedia: Bool?, withReplies: Bool?, onlyEntertainment: Bool, local: Bool)
+    case entertainment(genreId: Int?, entertainmentId: Int?, mediaType: MediaType?, sinceId: String?, maxId: String?, minId: String?, onlyMedia: Bool?, withReplies: Bool?, onlyEntertainment: Bool, local: Bool)
+    case forYou(sinceId: String?, maxId: String?, minId: String?)
     
     public func path() -> String {
         switch self {
@@ -19,6 +20,8 @@ public enum Timelines: Endpoint {
             "timelines/tag/\(tag)"
         case .entertainment:
             "timelines/cinephile/entertainment"
+        case .forYou:
+            "timelines/cinephile/for_you"
         }
     }
     
@@ -37,8 +40,12 @@ public enum Timelines: Endpoint {
             params.append(contentsOf: (additional ?? [])
                 .map { URLQueryItem(name: "any[]", value: $0) })
             return params
-        case let .entertainment(entertainmentId, mediaType, sinceId, maxId, minId, onlyMedia, withReplies, onlyEntertainment, local):
+        case let .entertainment(genreId, entertainmentId, mediaType, sinceId, maxId, minId, onlyMedia, withReplies, onlyEntertainment, local):
             var params = makePaginationParam(sinceId: sinceId, maxId: maxId, minId: minId) ?? []
+            
+            if let genreId {
+                params.append(.init(name: "genre_id", value: String(genreId)))
+            }
             if let entertainmentId {
                 params.append(.init(name: "entertainment_id", value: String(entertainmentId)))
             }
@@ -54,6 +61,8 @@ public enum Timelines: Endpoint {
                 params.append(.init(name: "media_type", value: mediaType.rawValue))
             }
             return params
+        case let .forYou(sinceId, maxId, minId):
+            return makePaginationParam(sinceId: sinceId, maxId: maxId, minId: minId)
         }
     }
 }

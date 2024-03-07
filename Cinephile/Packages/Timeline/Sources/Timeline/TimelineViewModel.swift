@@ -42,6 +42,8 @@ private let logger = Logger(subsystem: "Timeline", category: "ViewModel")
                     
                 case let .media(id, _):
                     await fetchEntertainment(id: id)
+                case let .genre(id, _):
+                    await fetchGenre(id: id)
                 default:
                     break
                 }
@@ -126,7 +128,7 @@ private let logger = Logger(subsystem: "Timeline", category: "ViewModel")
     private func fetchGenre(id: Int) async {
         guard let client else { return }
         do {
-            let genre: Genre = try await client.get(endpoint: Tags.tag(id: id))
+            let genre: Genre = try await client.get(endpoint: Genres.genre(id: id))
             withAnimation {
                 self.genre = genre
             }

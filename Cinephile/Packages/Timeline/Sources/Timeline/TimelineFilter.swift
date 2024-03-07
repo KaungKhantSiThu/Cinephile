@@ -40,6 +40,8 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable {
     case resume
     case entertainment
     case media(id: Int, title: String)
+    case genre(id: Int, title: String)
+    case forYou
     
     public var id: String {
         title
@@ -53,7 +55,7 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable {
         if !client.isAuth {
             return [.local, .trending, .entertainment]
         }
-        return [.home, .local, .trending, .entertainment]
+        return [.forYou, .home, .local, .trending, .entertainment]
     }
     
     public var supportNewestPagination: Bool {
@@ -93,6 +95,10 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable {
             "Entertainment"
         case let .media(_, title):
             "\(title)"
+        case let .genre(_ , title):
+            "\(title)"
+        case .forYou:
+            "For You"
         }
     }
     
@@ -122,6 +128,10 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable {
             "timeline.entertainment"
         case let .media(_, title):
             "\(title)"
+        case let .genre(_, title):
+            "\(title)"
+        case .forYou:
+            "timeline.forYou"
         }
     }
     
@@ -151,6 +161,10 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable {
             "movieclapper"
         case .media:
             "movieclapper"
+        case .genre:
+            "movieclapper"
+        case .forYou:
+            "figure.arms.open"
         }
     }
     
@@ -192,8 +206,11 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable {
             //            } else {
             //                return Timelines.hashtag(tag: "", additional: tags, maxId: maxId, minId: minId)
             //            }
-        case .entertainment: return Timelines.entertainment(entertainmentId: entertainmentId, mediaType: mediaType, sinceId: sinceId, maxId: maxId, minId: minId, onlyMedia: nil, withReplies: nil, onlyEntertainment: true, local: true)
-        case let .media(id, _): return Timelines.entertainment(entertainmentId: id, mediaType: mediaType, sinceId: sinceId, maxId: maxId, minId: minId, onlyMedia: nil, withReplies: nil, onlyEntertainment: true, local: true)
+        case .entertainment: return Timelines.entertainment(genreId: nil, entertainmentId: entertainmentId, mediaType: mediaType, sinceId: sinceId, maxId: maxId, minId: minId, onlyMedia: nil, withReplies: nil, onlyEntertainment: true, local: true)
+        case let .media(id, _): return Timelines.entertainment(genreId: nil, entertainmentId: id, mediaType: mediaType, sinceId: sinceId, maxId: maxId, minId: minId, onlyMedia: nil, withReplies: nil, onlyEntertainment: true, local: true)
+        case let .genre(id, _): return Timelines.entertainment(genreId: id, entertainmentId: nil, mediaType: mediaType, sinceId: sinceId, maxId: maxId, minId: minId, onlyMedia: nil, withReplies: nil, onlyEntertainment: true, local: true)
+        case .forYou:
+            return Timelines.forYou(sinceId: sinceId, maxId: maxId, minId: minId)
         }
     }
 }
@@ -212,6 +229,8 @@ extension TimelineFilter: Codable {
         case resume
         case entertainment
         case media
+        case genre
+        case forYou
     }
     
     public init(from decoder: Decoder) throws {
@@ -266,6 +285,11 @@ extension TimelineFilter: Codable {
             let id = try nestedContainer.decode(Int.self)
             let title = try nestedContainer.decode(String.self)
             self = .media(id: id, title: title)
+        case .genre:
+            var nestedContainer = try container.nestedUnkeyedContainer(forKey: .genre)
+            let id = try nestedContainer.decode(Int.self)
+            let title = try nestedContainer.decode(String.self)
+            self = .genre(id: id, title: title)
         default:
             throw DecodingError.dataCorrupted(
                 DecodingError.Context(
@@ -311,6 +335,12 @@ extension TimelineFilter: Codable {
             var nestedContainer = container.nestedUnkeyedContainer(forKey: .media)
             try nestedContainer.encode(id)
             try nestedContainer.encode(title)
+        case let .genre(id, title):
+            var nestedContainer = container.nestedUnkeyedContainer(forKey: .genre)
+            try nestedContainer.encode(id)
+            try nestedContainer.encode(title)
+        case .forYou:
+            try container.encode(CodingKeys.forYou.rawValue, forKey: .forYou)
         }
     }
 }

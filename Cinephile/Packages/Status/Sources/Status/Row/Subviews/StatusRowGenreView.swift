@@ -16,10 +16,11 @@ struct StatusRowGenreView: View {
 //    if let genre = viewModel.finalStatus.content.links.first(where: { link in
 //      link.type == .hashtag && currentAccount.genres.contains(where: { $0.name.lowercased() == link.name.lowercased() })
 //    }) {
-      Text("\(Image(systemName: "movieclapper"))\("genre.name")")
+      if let genre = viewModel.finalStatus.entertainments.first?.genres.first(where: { genre in currentAccount.genres.contains(where: { $0.name.lowercased() == genre.name.lowercased() })}) {
+      Text("\(Image(systemName: "movieclapper"))\(genre.name)")
         .font(.scaledFootnote)
         .foregroundStyle(.secondary)
         .fontWeight(.semibold)
-//    }
+    }
   }
 }
