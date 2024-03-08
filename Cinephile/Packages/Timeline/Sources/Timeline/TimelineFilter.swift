@@ -53,9 +53,9 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable {
     
     public static func availableTimeline(client: Client) -> [TimelineFilter] {
         if !client.isAuth {
-            return [.local, .trending, .entertainment]
+            return [.local, .entertainment]
         }
-        return [.forYou, .home, .local, .trending, .entertainment]
+        return [.forYou, .home, .local, .entertainment]
     }
     
     public var supportNewestPagination: Bool {

@@ -157,6 +157,18 @@ struct TimelineTab: View {
             }
         }
         
+        if !currentAccount.genres.isEmpty {
+            Menu("Genres") {
+                ForEach(currentAccount.sortedGenres) { genre in
+                    Button {
+                        timeline = .genre(id: genre.genreId, title: genre.name)
+                    } label: {
+                        Text("\(genre.name)")
+                    }
+                }
+            }
+        }
+        
         Menu("timeline.filter.local") {
             ForEach(localTimelines) { remoteLocal in
                 Button {

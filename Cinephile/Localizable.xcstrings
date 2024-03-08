@@ -4,6 +4,9 @@
     "#%@" : {
 
     },
+    "%@" : {
+
+    },
     "%@©2023 Cinephile" : {
 
     },
@@ -103,6 +106,9 @@
     "Cache removed" : {
 
     },
+    "Checked" : {
+
+    },
     "Cinephile" : {
 
     },
@@ -116,6 +122,12 @@
 
     },
     "Email" : {
+
+    },
+    "Genres" : {
+
+    },
+    "I have read and agree to Cinephile rules and privacy policy" : {
 
     },
     "Log out" : {
@@ -621,6 +633,9 @@
           }
         }
       }
+    },
+    "Unchecked" : {
+
     },
     "User ID: 12345678901" : {
 

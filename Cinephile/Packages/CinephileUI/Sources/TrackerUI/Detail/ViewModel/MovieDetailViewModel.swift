@@ -50,8 +50,15 @@ import Networking
     var entertainmentID: Entertainment.ID?
     var entertainment: Entertainment?
     
+    var isReleased = false
+    
     init(id: Movie.ID) {
         self.id = id
+    }
+    
+    func isDateInPast(_ date: Date) -> Bool {
+        let currentDate = Date()
+        return date < currentDate
     }
     
     @MainActor
@@ -63,6 +70,9 @@ import Networking
                 
                 self.posterImageURL = ImageService.shared.posterURL(for: data.movie.posterPath)
                 self.title = data.movie.title
+                if let releasedDate = data.movie.releaseDate {
+                    self.isReleased = isDateInPast(releasedDate)
+                }
                 if let entertainment = await isInWatchlist() {
                     self.inWatchlist = true
                     if let watchlist = entertainment.watchStatus, let watchStatus = watchlist.watchStatus {

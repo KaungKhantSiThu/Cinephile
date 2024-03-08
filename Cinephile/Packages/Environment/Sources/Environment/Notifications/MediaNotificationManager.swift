@@ -122,7 +122,7 @@ public class MediaNotificationManager: NSObject {
     }
     
     
-    public func notificationAttachment(name: String, url: URL, schdule: TimeInterval) async {
+    public func notificationAttachment(name: String, url: URL, schedule: TimeInterval) async {
         let content = UNMutableNotificationContent()
         content.title = "Movie Release Alert"
         content.body = "\(name) is out tomorrow "
@@ -137,7 +137,7 @@ public class MediaNotificationManager: NSObject {
             logger.error("Error Fetching Image Data: \(error.localizedDescription)")
         }
         
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: schdule, repeats: false)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: schedule, repeats: false)
         
         let request = UNNotificationRequest(identifier: name, content: content, trigger: trigger)
 

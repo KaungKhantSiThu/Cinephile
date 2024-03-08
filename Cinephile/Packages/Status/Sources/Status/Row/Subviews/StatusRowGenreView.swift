@@ -17,7 +17,7 @@ struct StatusRowGenreView: View {
 //      link.type == .hashtag && currentAccount.genres.contains(where: { $0.name.lowercased() == link.name.lowercased() })
 //    }) {
       if let genre = viewModel.finalStatus.entertainments.first?.genres.first(where: { genre in currentAccount.genres.contains(where: { $0.name.lowercased() == genre.name.lowercased() })}) {
-      Text("\(Image(systemName: "movieclapper"))\(genre.name)")
+      Text("\(Image(systemName: "movieclapper")) \(genre.name)")
         .font(.scaledFootnote)
         .foregroundStyle(.secondary)
         .fontWeight(.semibold)

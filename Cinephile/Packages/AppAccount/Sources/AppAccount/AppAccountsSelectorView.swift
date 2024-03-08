@@ -23,13 +23,13 @@ public struct AppAccountsSelectorView: View {
   private let accountCreationEnabled: Bool
   private let avatarConfig: AvatarView.FrameConfiguration
 
-//  private var showNotificationBadge: Bool {
-//    accountsViewModel
-//      .filter { $0.account?.id != currentAccount.account?.id }
-//      .compactMap(\.appAccount.oauthToken)
-//      .map { preferences.notificationsCount[$0] ?? 0 }
-//      .reduce(0, +) > 0
-//  }
+  private var showNotificationBadge: Bool {
+    accountsViewModel
+      .filter { $0.account?.id != currentAccount.account?.id }
+      .compactMap(\.appAccount.oauthToken)
+      .map { preferences.notificationsCount[$0] ?? 0 }
+      .reduce(0, +) > 0
+  }
 
   private var preferredHeight: CGFloat {
     var baseHeight: CGFloat = 220
@@ -86,8 +86,8 @@ public struct AppAccountsSelectorView: View {
           .allowsHitTesting(false)
       }
     }.overlay(alignment: .topTrailing) {
-//      if !currentAccount.followRequests.isEmpty || showNotificationBadge, accountCreationEnabled {
-        if !currentAccount.followRequests.isEmpty, accountCreationEnabled {
+      if !currentAccount.followRequests.isEmpty || showNotificationBadge, accountCreationEnabled {
+//        if !currentAccount.followRequests.isEmpty, accountCreationEnabled {
 
         Circle()
           .fill(Color.red)

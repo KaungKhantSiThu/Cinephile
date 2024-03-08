@@ -36,6 +36,10 @@ import Observation
         tags.sorted { $0.name.lowercased() < $1.name.lowercased() }
     }
     
+    public var sortedGenres: [Genre] {
+        genres.sorted { $0.name.lowercased() < $1.name.lowercased() }
+    }
+    
     private init() {}
     
     public func setClient(client: Client) {
@@ -51,6 +55,7 @@ import Observation
             group.addTask { await self.fetchCurrentAccount() }
             group.addTask { await self.fetchConnections() }
             group.addTask { await self.fetchFollowedTags() }
+            group.addTask { await self.fetchFollowedGenres() }
             group.addTask { await self.fetchFollowerRequests() }
         }
     }

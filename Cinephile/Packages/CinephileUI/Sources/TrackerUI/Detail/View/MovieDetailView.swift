@@ -86,19 +86,20 @@ public struct MovieDetailView: View {
                                         } else {
                                             print("Adding \(data.movie.id) : \(data.movie.title) to watchlist")
 
-                                            if let releaseDate = data.movie.releaseDate {
-                                                let calendar = Date()
+//                                            if let releaseDate = data.movie.releaseDate {
+//                                                let calendar = Date()
                                                 
-                                                if let oneDayLater = Calendar.current.date(byAdding: .day, value: 1, to: Date()) {
-                                                    if releaseDate > oneDayLater {
-                                                        let timeInterval = oneDayLater.timeIntervalSince(calendar)
-
-                                                        Task {
-                                                            await notificationManager.notificationAttachment(name: data.movie.title, url: viewModel.posterImageURL, schdule: timeInterval)
-                                                        }
-                                                    }
-                                                }
+//                                                if let oneDayLater = Calendar.current.date(byAdding: .day, value: 1, to: Date()) {
+//                                                    if releaseDate > oneDayLater {
+//                                                        let timeInterval = oneDayLater.timeIntervalSince(calendar)
+                                            if !viewModel.isReleased {
+                                                print("Scheduling notification")
+                                                await notificationManager.notificationAttachment(name: data.movie.title, url: viewModel.posterImageURL, schedule: 5)
                                             }
+                                            
+//                                                    }
+//                                                }
+//                                            }
                                             
                                             await viewModel.addToWatchlist()
                                         }
@@ -148,8 +149,8 @@ public struct MovieDetailView: View {
                                                 }
                                             }
                                     }
-                                    .disabled(isWatchStatusLoading)
-                                    .tint(.red)
+                                    .disabled(isWatchStatusLoading || !viewModel.isReleased)
+                                    .tint(viewModel.isReleased ? .red : .gray)
                                     .buttonStyle(.borderedProminent)
                                 }
                             }
