@@ -4,6 +4,7 @@ import Models
 import SafariServices
 import AuthenticationServices
 import AppAccount
+import Environment
 
 @MainActor
 struct AddAccountView: View {
@@ -11,7 +12,8 @@ struct AddAccountView: View {
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.webAuthenticationSession) private var webAuthenticationSession
     @Environment(Client.self) private var client: Client
-    
+    @Environment(PushNotificationsService.self) private var pushNotifications
+    @Environment(RouterPath.self) private var routerPath
     @Environment(AppAccountsManager.self) private var appAccountsManager
     @StateObject private var formViewModel = FormViewModel()
     
@@ -240,7 +242,8 @@ struct AddAccountView: View {
               await pushNotifications.updateSubscriptions(forceCreate: true)
             }
             isSigninIn = false
-            dismiss()
+//            dismiss()
+            routerPath.presentedSheet = .genresPicker
         } catch {
             isSigninIn = false
         }

@@ -7,9 +7,6 @@
     "%@" : {
 
     },
-    "%@©2023 Cinephile" : {
-
-    },
     "• [EmojiText](https://github.com/divadretlaw/EmojiText)\n\n• [HTML2Markdown](https://gitlab.com/mflint/HTML2Markdown)\n\n• [KeychainSwift](https://github.com/evgenyneu/keychain-swift)\n\n• [LRUCache](https://github.com/nicklockwood/LRUCache)\n\n• [Bodega](https://github.com/mergesort/Bodega)\n\n• [Nuke](https://github.com/kean/Nuke)\n\n• [SwiftSoup](https://github.com/scinfu/SwiftSoup.git)\n\n• [SwiftUI-Introspect](https://github.com/siteline/SwiftUI-Introspect)\n" : {
 
     },
@@ -103,6 +100,9 @@
     "Already have an account? Login" : {
 
     },
+    "Built with the following open-sourced repositories" : {
+
+    },
     "Cache removed" : {
 
     },
@@ -115,7 +115,7 @@
     "Confirm Password" : {
 
     },
-    "Destination View" : {
+    "Designed and developed with love \n by Cinephile Team" : {
 
     },
     "Done" : {
@@ -133,9 +133,6 @@
     "Log out" : {
 
     },
-    "Lovingly designed and developed by \n Cinephile Team" : {
-
-    },
     "Notifications" : {
 
     },
@@ -145,7 +142,7 @@
     "Password" : {
 
     },
-    "Privacy Terms" : {
+    "Pick Genres" : {
 
     },
     "Remove" : {
@@ -181,10 +178,14 @@
         }
       }
     },
+    "Save" : {
+
+    },
     "Sequel is made possible by these data sources" : {
 
     },
     "settings.about.built-with" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -460,6 +461,7 @@
       }
     },
     "settings.support.privacy-policy" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -470,6 +472,7 @@
       }
     },
     "settings.support.terms-of-use" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -503,6 +506,12 @@
           }
         }
       }
+    },
+    "Tap the genres you like so that we can personalize the posts for you" : {
+
+    },
+    "Tell us what you like" : {
+
     },
     "timeline.entertainment" : {
       "extractionState" : "manual",
@@ -643,7 +652,7 @@
     "Username" : {
 
     },
-    "version 1.0" : {
+    "Version 1.0" : {
 
     }
   },

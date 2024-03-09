@@ -159,6 +159,12 @@ struct TimelineTab: View {
         
         if !currentAccount.genres.isEmpty {
             Menu("Genres") {
+                Button {
+                    routerPath.presentedSheet = .genresPicker
+                } label: {
+                    Label("Pick Genres", systemImage: "theatermasks")
+                }
+                
                 ForEach(currentAccount.sortedGenres) { genre in
                     Button {
                         timeline = .genre(id: genre.genreId, title: genre.name)

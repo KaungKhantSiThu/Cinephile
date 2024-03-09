@@ -29,6 +29,7 @@ public enum SheetDestination: Identifiable {
     case report(status: Models.Status)
     case shareImage(image: UIImage, status: Models.Status)
 //    case editTagGroup(tagGroup: TagGroup, onSaved: ((TagGroup) -> Void)?)
+    case genresPicker
 
     
     public var id: String {
@@ -57,6 +58,8 @@ public enum SheetDestination: Identifiable {
             "report"
         case .shareImage:
             "shareImage"
+        case .genresPicker:
+            "genresPicker"
         }
     }
     

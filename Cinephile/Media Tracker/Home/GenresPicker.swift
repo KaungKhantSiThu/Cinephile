@@ -8,6 +8,8 @@
 import SwiftUI
 import TrackerUI
 import MediaClient
+import Environment
+
 
 extension Genre {
     static let all: [Genre] = [
@@ -33,24 +35,57 @@ extension Genre {
     ]
 }
 
+@MainActor
 struct GenresPicker: View {
-    @State private var selectedGenres: [Int] = [28, 12]
+    @State private var selectedGenres: [Int] = []
+    @State private var genres: [Genre] = Genre.all
+    @Environment(CurrentAccount.self) private var currentAccount
+    @Environment(\.dismiss) private var dismiss
+
     var body: some View {
-        VStack {
-            FlowLayout {
-                ForEach(Genre.all) { genre in
-                    Toggle(isOn: self.binding(for: genre)) {
-                        Text(genre.name)
+        NavigationStack {
+            VStack {
+                Text("Tell us what you like")
+                    .font(.largeTitle)
+                    .bold()
+                Text("Tap the genres you like so that we can personalize the posts for you")
+                    .font(.body)
+                FlowLayout(alignment: .leading) {
+                    ForEach(Genre.all) { genre in
+                        Toggle(isOn: self.binding(for: genre)) {
+                            Text(genre.name)
+                        }
+                        .toggleStyle(GenreToggleStyle())
                     }
-                    .toggleStyle(GenreToggleStyle())
                 }
             }
-            
-            HStack {
-                Text("Selected Genres")
-                Text(selectedGenres.map(String.init).joined(separator: ","))
+            .padding()
+            .task {
+                do {
+                    let response: GenresResponse = try await APIService.shared.get(endpoint: GenresEndpoint.movie)
+                    self.genres = response.genres
+//                    print(genres)
+                    let followedGenres = currentAccount.genres.map { $0.genreId }
+                    print(followedGenres)
+                    withAnimation {
+                        selectedGenres = followedGenres
+                    }
+                } catch {
+                    print(error.localizedDescription)
+                }
             }
-            
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        print(selectedGenres.map(String.init).joined(separator: ", "))
+                        dismiss()
+                    } label: {
+                        Text("Save")
+                    }
+                    .tint(.red)
+                    .buttonStyle(.bordered)
+                }
+            }
         }
     }
     
@@ -70,40 +105,27 @@ struct GenresPicker: View {
             }
         )
     }
+    
+    struct GenresResponse: Codable {
+        let genres: [Genre]
+    }
 }
 
 struct GenreToggleStyle: ToggleStyle {
     func makeBody(configuration: Configuration) -> some View {
-//        HStack {
-//            Button(action: { configuration.isOn.toggle() }){
-//                Image(systemName: configuration.isOn ? "checkmark.square.fill" : "checkmark.square")
-//                    .foregroundStyle(configuration.isOn ? Color.accentColor : .secondary)
-//                    .accessibility(label: Text(configuration.isOn ? "Checked" : "Unchecked"))
-//                    .imageScale(.large)
-//            }
-//
-//            Spacer()
-//
-//            configuration.label
-//        }
         Button {
             configuration.isOn.toggle()
         } label: {
             configuration.label
         }
-        
             .padding()
             .foregroundStyle(.primary)
             //                    .frame(width: 300, height: 50)
             .background(Color.red.opacity(configuration.isOn ? 0.3 : 0))
-            .cornerRadius(10) /// make the background rounded
+            .cornerRadius(20) /// make the background rounded
             .overlay( /// apply a rounded border
-                RoundedRectangle(cornerRadius: 10)
+                RoundedRectangle(cornerRadius: 20)
                     .stroke(.red, lineWidth: 2)
             )
     }
-}
-
-#Preview {
-    GenresPicker()
 }

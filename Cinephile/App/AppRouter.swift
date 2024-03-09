@@ -123,6 +123,8 @@ extension View {
                     } else {
                         EmptyView()
                     }
+                case .genresPicker:
+                    GenresPicker()
                 }
             }
             .withEnvironments()

@@ -1,42 +1,37 @@
 
 import SwiftUI
+import CinephileUI
 
 struct StatusRowReplyView: View {
-  let viewModel: StatusRowViewModel
-
-  var body: some View {
-    Group {
-      if let accountId = viewModel.status.inReplyToAccountId {
+    let viewModel: StatusRowViewModel
+    
+    var body: some View {
         Group {
-          if let mention = viewModel.status.mentions.first(where: { $0.id == accountId }) {
-            HStack(spacing: 2) {
-              Image(systemName: "arrow.left.arrow.right")
-              Text("status.row.was-reply \(mention.username)", bundle: .module)
+            if let accountId = viewModel.status.inReplyToAccountId {
+                Group {
+                    if let mention = viewModel.status.mentions.first(where: { $0.id == accountId }) {
+                        HStack(spacing: 5) {
+                            Image(systemName: "arrow.left.arrow.right")
+                            Text("Replied to")
+                            Text(mention.username)
+                            
+                        }
+                    } else if viewModel.isThread, accountId == viewModel.status.account.id {
+                        HStack(spacing: 2) {
+                            Image(systemName: "quote.opening")
+                            Text("status.row.is-thread", bundle: .module)
+                        }
+                    }
+                }
+                .onTapGesture {
+                    viewModel.goToParent()
+                }
             }
-//            .accessibilityElement(children: .combine)
-//            .accessibilityLabel(
-//              Text("status.row.was-reply \(mention.username)")
-//            )
-          } else if viewModel.isThread, accountId == viewModel.status.account.id {
-            HStack(spacing: 2) {
-              Image(systemName: "quote.opening")
-                Text("status.row.is-thread", bundle: .module)
-            }
-//            .accessibilityElement(children: .combine)
-//            .accessibilityLabel(
-//              Text("status.row.is-thread")
-//            )
-          }
         }
-        .onTapGesture {
-          viewModel.goToParent()
-        }
-      }
+        .font(.scaledFootnote)
+        .foregroundStyle(.secondary)
+        .fontWeight(.semibold)
     }
-    .font(.scaledFootnote)
-    .foregroundStyle(.secondary)
-    .fontWeight(.semibold)
-  }
 }
 
 #Preview(traits: .sizeThatFitsLayout) {

@@ -210,6 +210,10 @@ import SwiftUI
         }
     }
     
+    func goToTag(name: String) {
+        routerPath.navigate(to: .hashTag(tag: name, accountId: nil))
+    }
+    
     func loadAuthorRelationship() async {
         let relationships: [Relationship]? = try? await client.get(endpoint: Accounts.relationships(ids: [status.reblog?.account.id ?? status.account.id]))
         authorRelationship = relationships?.first

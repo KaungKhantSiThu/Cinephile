@@ -30,5 +30,20 @@ final class MovieIntegrationTests: XCTestCase {
         XCTAssertEqual(movie.id, movieID)
         XCTAssertEqual(movie.title, "Barbie")
     }
+    
+    func testGenres() async throws {
+        let response: GenresResponse
+        do {
+            response = try await APIService.shared.get(endpoint: GenresEndpoint.movie)
+        } catch {
+            throw error
+        }
+        
+        XCTAssertEqual(!response.genres.isEmpty, true)
+    }
+    
+    struct GenresResponse: Codable {
+        let genres: [Genre]
+    }
 
 }

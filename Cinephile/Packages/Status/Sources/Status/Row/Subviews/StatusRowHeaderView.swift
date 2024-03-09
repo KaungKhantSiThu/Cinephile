@@ -31,16 +31,16 @@ struct StatusRowHeaderView: View {
             let content = viewModel.status.reblog?.content.asSafeMarkdownAttributedString ?? viewModel.status.content.asSafeMarkdownAttributedString
             SelectTextView(content: content)
         }
-        .accessibilityElement(children: .combine)
-        .accessibilityLabel(Text("\(viewModel.finalStatus.account.safeDisplayName)") + Text(", ") + Text(viewModel.finalStatus.createdAt.relativeFormatted))
-        .accessibilityAction {
-            viewModel.navigateToAccountDetail(account: viewModel.finalStatus.account)
-        }
-        .accessibilityActions {
-            if isFocused {
-                StatusRowContextMenu(viewModel: viewModel, showTextForSelection: $showTextForSelection)
-            }
-        }
+//        .accessibilityElement(children: .combine)
+//        .accessibilityLabel(Text("\(viewModel.finalStatus.account.safeDisplayName)") + Text(", ") + Text(viewModel.finalStatus.createdAt.relativeFormatted))
+//        .accessibilityAction {
+//            viewModel.navigateToAccountDetail(account: viewModel.finalStatus.account)
+//        }
+//        .accessibilityActions {
+//            if isFocused {
+//                StatusRowContextMenu(viewModel: viewModel, showTextForSelection: $showTextForSelection)
+//            }
+//        }
     }
     
     @ViewBuilder
