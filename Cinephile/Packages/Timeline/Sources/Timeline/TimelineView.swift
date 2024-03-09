@@ -48,6 +48,7 @@ public struct TimelineView: View {
             List {
                 scrollToTopView
                 //          tagGroupHeaderView
+                genreHeaderView
                 tagHeaderView
 //                entertainmentHeaderView
                 switch viewModel.timeline {
@@ -194,6 +195,40 @@ public struct TimelineView: View {
                         }
                     } label: {
                         Text(tag.following ? "account.follow.following" : "account.follow.follow", bundle: .module)
+                    }
+                    .buttonStyle(.bordered)
+                }
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private var genreHeaderView: some View {
+        if let genre = viewModel.genre {
+            headerView {
+                HStack {
+                    
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(genre.name)
+                            .font(.scaledHeadline)
+                        Text("\(genre.participantCount) users is following")
+                            .font(.scaledFootnote)
+                            .foregroundStyle(.secondary)
+                    }
+//                    .accessibilityElement(children: .combine)
+                    
+                    Spacer()
+                    
+                    Button {
+                        Task {
+                            if genre.isFollowed {
+                                viewModel.genre = await account.unfollowGenre(id: genre.genreId)
+                            } else {
+                                viewModel.genre = await account.followGenre(id: genre.genreId)
+                            }
+                        }
+                    } label: {
+                        Text(genre.isFollowed ? "account.follow.following" : "account.follow.follow", bundle: .module)
                     }
                     .buttonStyle(.bordered)
                 }
@@ -371,3 +406,4 @@ public struct TimelineView: View {
             }
     }
 }
+

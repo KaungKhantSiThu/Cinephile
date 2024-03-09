@@ -83,6 +83,11 @@ extension View {
                              selectedTagGroup: .constant(nil),
                              scrollToTopSignal: .constant(0),
                              canFilterTimeline: false)
+            case let .genre(id, title):
+                TimelineView(timeline: .constant(.genre(id: id, title: title)),
+                             selectedTagGroup: .constant(nil),
+                             scrollToTopSignal: .constant(0),
+                             canFilterTimeline: false)
 
             }
         }
@@ -118,6 +123,8 @@ extension View {
                     } else {
                         EmptyView()
                     }
+                case .genresPicker:
+                    GenresPicker()
                 }
             }
             .withEnvironments()

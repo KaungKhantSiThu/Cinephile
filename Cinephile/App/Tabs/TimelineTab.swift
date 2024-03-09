@@ -108,8 +108,8 @@ struct TimelineTab: View {
         .onReceive(NotificationCenter.default.publisher(for: .refreshTimeline)) { _ in
             timeline = .latest
         }
-        .onReceive(NotificationCenter.default.publisher(for: .trendingTimeline)) { _ in
-            timeline = .trending
+        .onReceive(NotificationCenter.default.publisher(for: .forYouTimeline)) { _ in
+            timeline = .forYou
         }
         .onReceive(NotificationCenter.default.publisher(for: .localTimeline)) { _ in
             timeline = .local
@@ -152,6 +152,24 @@ struct TimelineTab: View {
                         timeline = .hashtag(tag: tag.name, accountId: nil)
                     } label: {
                         Label("#\(tag.name)", systemImage: "number")
+                    }
+                }
+            }
+        }
+        
+        if !currentAccount.genres.isEmpty {
+            Menu("Genres") {
+                Button {
+                    routerPath.presentedSheet = .genresPicker
+                } label: {
+                    Label("Pick Genres", systemImage: "theatermasks")
+                }
+                
+                ForEach(currentAccount.sortedGenres) { genre in
+                    Button {
+                        timeline = .genre(id: genre.genreId, title: genre.name)
+                    } label: {
+                        Text("\(genre.name)")
                     }
                 }
             }

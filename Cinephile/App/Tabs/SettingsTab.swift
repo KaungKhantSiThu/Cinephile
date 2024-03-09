@@ -24,7 +24,8 @@ struct SettingsTab: View {
     @Environment(Client.self) private var client
     @Environment(CurrentInstance.self) private var currentInstance
     @Environment(AppAccountsManager.self) private var appAccountsManager
-    @Environment(Theme.self) private var theme
+    @Environment(PushNotificationsService.self) private var pushNotifications
+
     
     @State private var routerPath = RouterPath()
     @State private var addAccountSheetPresented = false
@@ -208,11 +209,11 @@ struct SettingsTab: View {
     
     private func logoutAccount(account: AppAccount) async {
         if let token = account.oauthToken
-        //            ,let sub = pushNotifications.subscriptions.first(where: { $0.account.token == token })
+                    ,let sub = pushNotifications.subscriptions.first(where: { $0.account.token == token })
         {
             let client = Client(server: account.server, oauthToken: token)
             await timelineCache.clearCache(for: client.id)
-            //        await sub.deleteSubscription()
+                    await sub.deleteSubscription()
             appAccountsManager.delete(account: account)
         }
     }

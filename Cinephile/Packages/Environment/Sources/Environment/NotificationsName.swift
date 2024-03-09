@@ -8,4 +8,5 @@ public extension Notification.Name {
     static let federatedTimeline = Notification.Name("federatedTimeline")
     static let localTimeline = Notification.Name("localTimeline")
     static let entertainmentTimeline = Notification.Name("entertainmentTimeline")
+    static let forYouTimeline = Notification.Name("forYouTimeline")
 }

@@ -50,8 +50,15 @@ import Networking
     var entertainmentID: Entertainment.ID?
     var entertainment: Entertainment?
     
+    var isReleased = false
+    
     init(id: Movie.ID) {
         self.id = id
+    }
+    
+    func isDateInPast(_ date: Date) -> Bool {
+        let currentDate = Date()
+        return date < currentDate
     }
     
     @MainActor
@@ -63,6 +70,9 @@ import Networking
                 
                 self.posterImageURL = ImageService.shared.posterURL(for: data.movie.posterPath)
                 self.title = data.movie.title
+                if let releasedDate = data.movie.releaseDate {
+                    self.isReleased = isDateInPast(releasedDate)
+                }
                 if let entertainment = await isInWatchlist() {
                     self.inWatchlist = true
                     if let watchlist = entertainment.watchStatus, let watchStatus = watchlist.watchStatus {
@@ -162,6 +172,7 @@ import Networking
         }
     }
     
+    
     func addToWatchlist() async {
         guard let client else { return }
         var entertainmentId: Int?
@@ -174,7 +185,7 @@ import Networking
                 let data: EntertainmentData = .init(
                     domain: "themoviedb.org",
                     mediaType: .movie,
-                    mediaId: String(self.id))
+                    mediaId: String(self.id), genres: [])
                 let entertainment: Entertainment = try await client.post(endpoint: Entertainments.post(json: data))
                 
                 entertainmentId = entertainment.id
@@ -210,7 +221,6 @@ import Networking
             }
         }
     }
-    
 }
 
 extension MovieDetailViewModel {

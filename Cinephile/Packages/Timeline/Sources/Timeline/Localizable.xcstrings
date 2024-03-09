@@ -10,6 +10,9 @@
     "%lld" : {
 
     },
+    "%lld users is following" : {
+
+    },
     "account.follow.follow" : {
       "localizations" : {
         "en" : {
@@ -221,6 +224,16 @@
         }
       }
     },
+    "timeline.forYou" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "For You"
+          }
+        }
+      }
+    },
     "timeline.home" : {
       "localizations" : {
         "en" : {
@@ -276,7 +289,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "o"
+            "value" : "Trending"
           }
         }
       }

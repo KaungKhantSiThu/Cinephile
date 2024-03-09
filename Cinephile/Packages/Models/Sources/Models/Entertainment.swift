@@ -14,6 +14,7 @@ public struct Entertainment: Codable, Identifiable, Hashable, Equatable, Sendabl
     public let mediaType: MediaType
     public let mediaId: String
     public let watchStatus: Watchlist?
+    public let genres: [Genre]
     
     public struct Watchlist: Codable, Identifiable, Hashable, Equatable, Sendable {
         /*

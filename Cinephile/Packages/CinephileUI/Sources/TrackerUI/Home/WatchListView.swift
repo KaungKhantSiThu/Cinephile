@@ -51,6 +51,35 @@ struct WatchListView: View {
                                 if let id = Int(watchlist.entertainment.mediaId) {
                                     NavigationLink(value: RouterDestination.movieDetail(id: id)) {
                                         MovieCover(id: id)
+                                            .contextMenu {
+                                                if selectedTab == .unwatched {
+                                                    Button(action: {
+                                                        Task {
+                                                            await viewModel.markAsWatched(id: watchlist.id)
+                                                        }
+                                                    }, label: {
+                                                        Label("Mark as watched", systemImage: "eye")
+                                                    })
+                                                } else {
+                                                    Button(action: {
+                                                        Task {
+                                                            await viewModel.markAsUnWatch(id: watchlist.id)
+                                                        }
+                                                    }, label: {
+                                                        Label("Mark as unwatch", systemImage: "eye")
+                                                            .symbolVariant(.slash)
+                                                    })
+                                                }
+                                                
+                                                
+                                                Button(role: .destructive, action: {
+                                                    Task {
+                                                        await viewModel.removeFromWatchlist(id: watchlist.id)
+                                                    }
+                                                }, label: {
+                                                    Label("Remove", systemImage: "trash")
+                                                })
+                                            }
                                     }
                                     .buttonStyle(.plain)
                                 }

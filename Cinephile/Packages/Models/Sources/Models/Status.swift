@@ -143,9 +143,8 @@ public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable
               language: language,
               isEntertainment: true,
               entertainments: [
-                .init(id: 1, domain: "themoviedb.org", mediaType: .movie, mediaId: "507086", watchStatus: nil),
-                .init(id: 2, domain: "themoviedb.org", mediaType: .tvSeries, mediaId: "90802", watchStatus: nil),
-                .init(id: 3, domain: "themoviedb.org", mediaType: .movie, mediaId: "933131", watchStatus: nil)
+                .init(id: 1, domain: "themoviedb.org", mediaType: .movie, mediaId: "507086", watchStatus: nil,
+                      genres: [.init(id: 1, genreId: 1, name: "Action", isFollowed: true, participantCount: 10)])
               ]
         )
     }
@@ -187,7 +186,7 @@ public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable
                          language: reblog.language,
                          isEntertainment: true,
                          entertainments: [
-                            .init(id: 1, domain: "themoviedb.org", mediaType: .movie, mediaId: "507086", watchStatus: nil)
+                            .init(id: 1, domain: "themoviedb.org", mediaType: .movie, mediaId: "507086", watchStatus: nil, genres: [.init(id: 1, genreId: 1, name: "Action", isFollowed: true, participantCount: 10)])
                          ])
         }
         return nil

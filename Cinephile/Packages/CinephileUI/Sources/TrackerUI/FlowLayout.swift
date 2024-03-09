@@ -7,11 +7,16 @@
 
 import SwiftUI
 
-struct FlowLayout: Layout {
-    var alignment: Alignment = .center
-    var spacing: CGFloat?
+public struct FlowLayout: Layout {
+    public var alignment: Alignment = .center
+    public var spacing: CGFloat?
     
-    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout Void) -> CGSize {
+    public init(alignment: Alignment = .center, spacing: CGFloat? = nil) {
+        self.alignment = alignment
+        self.spacing = spacing
+    }
+    
+    public func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout Void) -> CGSize {
         let result = FlowResult(
             in: proposal.replacingUnspecifiedDimensions().width,
             subviews: subviews,
@@ -21,7 +26,7 @@ struct FlowLayout: Layout {
         return result.bounds
     }
     
-    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout Void) {
+    public func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout Void) {
         let result = FlowResult(
             in: proposal.replacingUnspecifiedDimensions().width,
             subviews: subviews,
@@ -40,7 +45,7 @@ struct FlowLayout: Layout {
         }
     }
     
-    struct FlowResult {
+    public struct FlowResult {
         var bounds = CGSize.zero
         var rows = [Row]()
         
@@ -50,7 +55,7 @@ struct FlowLayout: Layout {
             var frame: CGRect
         }
         
-        init(in maxPossibleWidth: Double, subviews: Subviews, alignment: Alignment, spacing: CGFloat?) {
+        public init(in maxPossibleWidth: Double, subviews: Subviews, alignment: Alignment, spacing: CGFloat?) {
             var itemsInRow = 0
             var remainingWidth = maxPossibleWidth.isFinite ? maxPossibleWidth : .greatestFiniteMagnitude
             var rowMinY = 0.0

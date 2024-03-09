@@ -65,6 +65,7 @@ public struct StatusRowView: View {
                 } else {
                     if !isCompact && context != .detail {
                         Group {
+                            StatusRowGenreView(viewModel: viewModel)
                             StatusRowTagView(viewModel: viewModel)
                             StatusRowReblogView(viewModel: viewModel)
                             StatusRowReplyView(viewModel: viewModel)
@@ -112,7 +113,7 @@ public struct StatusRowView: View {
                     }
                 }
             }
-            .padding(EdgeInsets(top: isCompact ? 6 : 12, leading: 0, bottom: isFocused ? 12 : 6, trailing: 0))
+            .padding(EdgeInsets(top: isCompact ? 6 : 12, leading: 0, bottom: isFocused ? 6 : 12, trailing: 0))
         }
         .onAppear {
             viewModel.markSeen()

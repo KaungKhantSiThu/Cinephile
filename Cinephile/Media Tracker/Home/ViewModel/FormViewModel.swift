@@ -9,6 +9,7 @@ class FormViewModel: ObservableObject {
     @Published var password = ""
     @Published var confirmPassword = ""
     @Published var birthOfDate = Date()
+    @Published var agreement = false
     @Published var inlineErrorForPassword = ""
     @Published var inlineErrorForEmail = ""
     @Published var inlineErrorForUsername = ""
@@ -16,6 +17,8 @@ class FormViewModel: ObservableObject {
     @Published var isValid = false
     
     private var cancellables = Set<AnyCancellable>()
+    
+    
     
     private var isUserNameValidPublisher: AnyPublisher<UsernameStatus, Never> {
         $username
@@ -85,6 +88,13 @@ class FormViewModel: ObservableObject {
             .eraseToAnyPublisher()
     }
     
+    private var agreementPublisher: AnyPublisher<Bool, Never> {
+        $agreement
+            .debounce(for: 0.8, scheduler: RunLoop.main)
+            .removeDuplicates()
+            .eraseToAnyPublisher()
+    }
+    
 //    private var isEmailNameValidPublisher: AnyPublisher<NameEmailStatus, Never> {
 //        Publishers.CombineLatest(isEmailValid, isUserNameValid)
 //            .map {
@@ -100,8 +110,8 @@ class FormViewModel: ObservableObject {
 //    }
     
     private var isFormValidPublisher: AnyPublisher<Bool, Never> {
-        Publishers.CombineLatest(isPasswordValidPublisher, isEmailValidPublisher)
-            .map { $0 == .valid && $1 == .valid}
+        Publishers.CombineLatest3(isPasswordValidPublisher, isEmailValidPublisher, agreementPublisher)
+            .map { $0 == .valid && $1 == .valid && $2 == true}
             .eraseToAnyPublisher()
     }
     

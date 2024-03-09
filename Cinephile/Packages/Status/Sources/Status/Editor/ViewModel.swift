@@ -206,6 +206,14 @@ extension StatusEditor {
             }
         }
         
+        func transformType(from genres: [TrackerMedia.Genre]?) -> [EntertainmentData.GenreData] {
+            if let genres = genres {
+                return genres.map { EntertainmentData.GenreData(genreId: $0.id, name: $0.name) }
+            } else {
+                return []
+            }
+        }
+        
         func postStatus() async -> Status? {
             guard let client else { return nil }
             do {
@@ -232,19 +240,21 @@ extension StatusEditor {
                 }
                 
                 if let trackerMedia = self.trackerMedia {
-                    
                     logger.info("Tracker Media attached")
-                    
+                    let transformedGenres = transformType(from: trackerMedia.genres)
                     let data: EntertainmentData = .init(
                         domain: "themoviedb.org",
                         mediaType: trackerMedia.mediaType,
-                        mediaId: String(trackerMedia.id))
+                        mediaId: String(trackerMedia.id),
+                        genres: transformedGenres
+                    )
                     
                     logger.log("Checking if Tracker Media: \(trackerMedia.id) is already in the database")
                     let entertainments: [Entertainment] = try await client.post(endpoint: Entertainments.search(json: EntertainmentSearchData(mediaType: trackerMedia.mediaType, mediaId: String(trackerMedia.id))))
                     
                     if !entertainments.isEmpty, let result = entertainments.first {
                         logger.log("Tracker Media is already in the database")
+                        let entertainment: Entertainment = try await client.put(endpoint: Entertainments.post(json: data))
                         self.entertainmentId = result.id
                     } else {
                         logger.log("Creating Tracker Media in the database")

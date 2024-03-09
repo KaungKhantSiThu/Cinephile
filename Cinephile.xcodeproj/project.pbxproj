@@ -44,6 +44,8 @@
 		707960302AEBA0A700AB748D /* CinephileApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7079602F2AEBA0A700AB748D /* CinephileApp.swift */; };
 		707960342AEBA0A900AB748D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 707960332AEBA0A900AB748D /* Assets.xcassets */; };
 		707960372AEBA0A900AB748D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 707960362AEBA0A900AB748D /* Preview Assets.xcassets */; };
+		7085A60D2B9B04AA00D65451 /* CheckboxToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7085A60C2B9B04AA00D65451 /* CheckboxToggleStyle.swift */; };
+		7085A6132B9B488800D65451 /* GenresPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7085A6122B9B488800D65451 /* GenresPicker.swift */; };
 		708B802A2B31E85100D72A35 /* Timeline in Frameworks */ = {isa = PBXBuildFile; productRef = 708B80292B31E85100D72A35 /* Timeline */; };
 		708B802C2B31E8AF00D72A35 /* SafariRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708B802B2B31E8AF00D72A35 /* SafariRouter.swift */; };
 		7094AC712B8F579A00B0DF25 /* ButtonKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7094AC702B8F579A00B0DF25 /* ButtonKit */; };
@@ -65,7 +67,6 @@
 		70967F422B53C4F100EB4CD2 /* NavigationSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70967F412B53C4F100EB4CD2 /* NavigationSheet.swift */; };
 		70967F452B53CB5E00EB4CD2 /* Notifications in Frameworks */ = {isa = PBXBuildFile; productRef = 70967F442B53CB5E00EB4CD2 /* Notifications */; };
 		70967F482B53CC0200EB4CD2 /* Notifications in Frameworks */ = {isa = PBXBuildFile; productRef = 70967F472B53CC0200EB4CD2 /* Notifications */; };
-		709704A02B31FA290037F272 /* Lists in Frameworks */ = {isa = PBXBuildFile; productRef = 7097049F2B31FA290037F272 /* Lists */; };
 		709704A22B31FA7C0037F272 /* EditTagGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709704A12B31FA7C0037F272 /* EditTagGroupView.swift */; };
 		709704A42B31FB1A0037F272 /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709704A32B31FB1A0037F272 /* ReportView.swift */; };
 		70BCF73E2B2B388100D7AB7E /* CinephileApp+TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BCF73D2B2B388100D7AB7E /* CinephileApp+TabBar.swift */; };
@@ -147,6 +148,8 @@
 		707960332AEBA0A900AB748D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		707960362AEBA0A900AB748D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		707960412AEBA5E200AB748D /* DiscoverMediaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverMediaViewModel.swift; sourceTree = "<group>"; };
+		7085A60C2B9B04AA00D65451 /* CheckboxToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxToggleStyle.swift; sourceTree = "<group>"; };
+		7085A6122B9B488800D65451 /* GenresPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresPicker.swift; sourceTree = "<group>"; };
 		708B801E2B31DC0500D72A35 /* Timeline */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Timeline; path = Cinephile/Packages/Timeline; sourceTree = "<group>"; };
 		708B802B2B31E8AF00D72A35 /* SafariRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafariRouter.swift; sourceTree = "<group>"; };
 		7094DFB92B0BA318008DF25E /* API_Key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API_Key.swift; sourceTree = "<group>"; };
@@ -158,7 +161,6 @@
 		70967F3F2B53C49F00EB4CD2 /* PushNotificationsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationsView.swift; sourceTree = "<group>"; };
 		70967F412B53C4F100EB4CD2 /* NavigationSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationSheet.swift; sourceTree = "<group>"; };
 		70967F492B53CC7500EB4CD2 /* Notifications */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Notifications; path = Cinephile/Packages/Notifications; sourceTree = "<group>"; };
-		7097049E2B31F97B0037F272 /* Lists */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Lists; path = Cinephile/Packages/Lists; sourceTree = "<group>"; };
 		709704A12B31FA7C0037F272 /* EditTagGroupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTagGroupView.swift; sourceTree = "<group>"; };
 		709704A32B31FB1A0037F272 /* ReportView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
 		70BCF73D2B2B388100D7AB7E /* CinephileApp+TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CinephileApp+TabBar.swift"; sourceTree = "<group>"; };
@@ -182,7 +184,6 @@
 				70F610C32B302A62006D9A4C /* TrackerUI in Frameworks */,
 				701F57032B2EF0640043B71B /* Models in Frameworks */,
 				70BCF7582B2C9A9F00D7AB7E /* Nuke in Frameworks */,
-				709704A02B31FA290037F272 /* Lists in Frameworks */,
 				70E2E1C92B314A7400EC1180 /* Status in Frameworks */,
 				702BF5902B610B430021C34D /* MediaClient in Frameworks */,
 				706768EC2B4BC2F4008ACBF8 /* AVKit.framework in Frameworks */,
@@ -225,6 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				3910A41E2B1EF52300EBE18A /* AddAccountView.swift */,
+				7085A60C2B9B04AA00D65451 /* CheckboxToggleStyle.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -261,7 +263,7 @@
 			children = (
 				3910A41B2B1EF49D00EBE18A /* Authentication */,
 				703AEDEB2B0CFE2D00E9ED76 /* ViewModel */,
-				703AEDEA2B0CFE2300E9ED76 /* View */,
+				7085A6122B9B488800D65451 /* GenresPicker.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -291,13 +293,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		703AEDEA2B0CFE2300E9ED76 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		703AEDEB2B0CFE2D00E9ED76 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -320,7 +315,6 @@
 			children = (
 				7013700B2B5CF45C0054B2CA /* MediaClient */,
 				70967F492B53CC7500EB4CD2 /* Notifications */,
-				7097049E2B31F97B0037F272 /* Lists */,
 				708B801E2B31DC0500D72A35 /* Timeline */,
 				70E2E1C72B31492400EC1180 /* Status */,
 				701F56F92B2EF00C0043B71B /* CinephileUI */,
@@ -464,7 +458,6 @@
 				70F610C22B302A62006D9A4C /* TrackerUI */,
 				70E2E1C82B314A7400EC1180 /* Status */,
 				708B80292B31E85100D72A35 /* Timeline */,
-				7097049F2B31FA290037F272 /* Lists */,
 				701858AB2B511E1B000A9EC6 /* TMDb */,
 				70967F442B53CB5E00EB4CD2 /* Notifications */,
 				70967F472B53CC0200EB4CD2 /* Notifications */,
@@ -594,10 +587,12 @@
 				3910A41F2B1EF52300EBE18A /* AddAccountView.swift in Sources */,
 				39EFFCE52B713561009B0994 /* PreferenceView.swift in Sources */,
 				39389BEA2B203ECD0087F64D /* FormViewModel.swift in Sources */,
+				7085A6132B9B488800D65451 /* GenresPicker.swift in Sources */,
 				7094DFBA2B0BA318008DF25E /* API_Key.swift in Sources */,
 				7002F7162B1F5C99006DD407 /* AppRouter.swift in Sources */,
 				700C9E282B32CDB30009038D /* CinephileApp+AppDelegate.swift in Sources */,
 				70BCF7532B2C37C300D7AB7E /* SettingsTab.swift in Sources */,
+				7085A60D2B9B04AA00D65451 /* CheckboxToggleStyle.swift in Sources */,
 				7002F72C2B2070F6006DD407 /* TrackerTab.swift in Sources */,
 				70BCF7502B2C378B00D7AB7E /* ProfileTab.swift in Sources */,
 				709704A22B31FA7C0037F272 /* EditTagGroupView.swift in Sources */,
@@ -785,7 +780,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.kkst.Cinephile;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kkst.CinephileSocial;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -823,7 +818,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.kkst.Cinephile;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kkst.CinephileSocial;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -853,7 +848,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.kkst.Cinephile.CinephileNotifications1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kkst.CinephileSocial.CinephileNotifications;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -884,7 +879,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.kkst.Cinephile.CinephileNotifications1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kkst.CinephileSocial.CinephileNotifications;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -1055,10 +1050,6 @@
 		70967F472B53CC0200EB4CD2 /* Notifications */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Notifications;
-		};
-		7097049F2B31FA290037F272 /* Lists */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Lists;
 		};
 		70BCF7452B2B536F00D7AB7E /* KeychainSwift */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -14,6 +14,9 @@ struct StatusRowTagView: View {
         .font(.scaledFootnote)
         .foregroundStyle(.secondary)
         .fontWeight(.semibold)
+        .onTapGesture {
+            viewModel.goToTag(name: tag.title)
+        }
     }
   }
 }

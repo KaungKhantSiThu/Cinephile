@@ -39,28 +39,28 @@ extension StatusEditor {
                 HStack {
                     ScrollView(.horizontal) {
                         HStack(alignment: .center, spacing: 16) {
-//                            Menu {
-//                                Button {
-//                                    isPhotosPickerPresented = true
-//                                } label: {
-//                                    Label {
-//                                        Text("status.editor.photo-library", bundle: .module)
-//                                    } icon: {
-//                                        Image(systemName: "photo")
-//                                    }
-//                                }
+                            Menu {
+                                Button {
+                                    isPhotosPickerPresented = true
+                                } label: {
+                                    Label {
+                                        Text("status.editor.photo-library", bundle: .module)
+                                    } icon: {
+                                        Image(systemName: "photo")
+                                    }
+                                }
                                 
-//#if !targetEnvironment(macCatalyst)
-//                                Button {
-//                                    isCameraPickerPresented = true
-//                                } label: {
-//                                    Label {
-//                                        Text("status.editor.camera-picker", bundle: .module)
-//                                    } icon: {
-//                                        Image(systemName: "camera")
-//                                    }
-//                                }
-//#endif
+#if !targetEnvironment(macCatalyst)
+                                Button {
+                                    isCameraPickerPresented = true
+                                } label: {
+                                    Label {
+                                        Text("status.editor.camera-picker", bundle: .module)
+                                    } icon: {
+                                        Image(systemName: "camera")
+                                    }
+                                }
+#endif
 //                                Button {
 //                                    isFileImporterPresented = true
 //                                } label: {
@@ -76,36 +76,36 @@ extension StatusEditor {
                                 //              } label: {
                                 //                Label("GIPHY", systemImage: "party.popper")
                                 //              }
-//                            } label: {
-//                                if viewModel.isMediasLoading {
-//                                    ProgressView()
-//                                } else {
-//                                    Image(systemName: "photo.on.rectangle.angled")
-//                                }
-//                            }
-//                            .photosPicker(isPresented: $isPhotosPickerPresented,
-//                                          selection: $viewModel.mediaPickers,
-//                                          maxSelectionCount: 4,
-//                                          matching: .any(of: [.images, .videos]),
-//                                          photoLibrary: .shared())
-//                            .fileImporter(isPresented: $isFileImporterPresented,
-//                                          allowedContentTypes: [.image, .video],
-//                                          allowsMultipleSelection: true)
-//                            { result in
-//                                if let urls = try? result.get() {
-//                                    viewModel.processURLs(urls: urls)
-//                                }
-//                            }
-//                            .fullScreenCover(isPresented: $isCameraPickerPresented, content: {
-//                                CameraPickerView(selectedImage: .init(get: {
-//                                    nil
-//                                }, set: { image in
-//                                    if let image {
-//                                        viewModel.processCameraPhoto(image: image)
-//                                    }
-//                                }))
-//                                .background(.black)
-//                            })
+                            } label: {
+                                if viewModel.isMediasLoading {
+                                    ProgressView()
+                                } else {
+                                    Image(systemName: "photo.on.rectangle.angled")
+                                }
+                            }
+                            .photosPicker(isPresented: $isPhotosPickerPresented,
+                                          selection: $viewModel.mediaPickers,
+                                          maxSelectionCount: 4,
+                                          matching: .any(of: [.images, .videos]),
+                                          photoLibrary: .shared())
+                            .fileImporter(isPresented: $isFileImporterPresented,
+                                          allowedContentTypes: [.image, .video],
+                                          allowsMultipleSelection: true)
+                            { result in
+                                if let urls = try? result.get() {
+                                    viewModel.processURLs(urls: urls)
+                                }
+                            }
+                            .fullScreenCover(isPresented: $isCameraPickerPresented, content: {
+                                CameraPickerView(selectedImage: .init(get: {
+                                    nil
+                                }, set: { image in
+                                    if let image {
+                                        viewModel.processCameraPhoto(image: image)
+                                    }
+                                }))
+                                .background(.black)
+                            })
                             //            .sheet(isPresented: $isGIFPickerPresented, content: {
                             //              GifPickerView { url in
                             //                GPHCache.shared.downloadAssetData(url) { data, _ in
@@ -302,6 +302,7 @@ extension StatusEditor {
                 }
             }
         }
+
         
         private var trackerMediaSheet: some View {
             NavigationStack {
@@ -324,21 +325,32 @@ extension StatusEditor {
                                     VStack {
                                         ForEach(value.popularMovies) { movie in
                                             MediaRow(movie: movie) {
-                                                var trackerGenres: [TrackerMedia.Genre] = []
-                                                if let genres = movie.genres {
-                                                    trackerGenres = genres.map { TrackerMedia.Genre(id: $0.id, name: $0.name)}
-                                                    print(trackerGenres)
-                                                }
-                                                viewModel.trackerMedia = TrackerMedia(
-                                                    id: movie.id,
-                                                    title: movie.title,
-                                                    posterURL: movie.posterPath,
-                                                    genres: trackerGenres,
-                                                    releasedDate: movie.releaseDate,
-                                                    voteAverage: movie.voteAverage,
-                                                    mediaType: .movie)
                                                 
-                                                isTrackerMediaPickerSheetDisplay = false
+                                                Task {
+                                                    var trackerGenres: [TrackerMedia.Genre] = []
+                                                    do {
+                                                        let movie = try await model.fetchDetail(id: movie.id)
+                                                        if let genres = movie.genres {
+                                                            trackerGenres = genres.map { TrackerMedia.Genre(id: $0.id, name: $0.name)}
+                                                        }
+                                                    } catch {
+                                                        trackerGenres = []
+                                                    }
+                                                    
+                                                    print("Genres: \(trackerGenres)")
+                                                    
+                                                    viewModel.trackerMedia = TrackerMedia(
+                                                        id: movie.id,
+                                                        title: movie.title,
+                                                        posterURL: movie.posterPath,
+                                                        genres: trackerGenres,
+                                                        releasedDate: movie.releaseDate,
+                                                        voteAverage: movie.voteAverage,
+                                                        mediaType: .movie)
+                                                    
+                                                    isTrackerMediaPickerSheetDisplay = false
+                                                }
+                                                
                                             }
                                         }
                                     }
@@ -382,14 +394,30 @@ extension StatusEditor {
                             switch media {
                             case .movie(let movie):
                                 MediaRow(movie: movie) {
-                                    viewModel.trackerMedia = TrackerMedia(
-                                        id: movie.id,
-                                        title: movie.title,
-                                        posterURL: movie.posterPath,
-                                        releasedDate: movie.releaseDate,
-                                        voteAverage: movie.voteAverage,
-                                        mediaType: .movie)
-                                    isTrackerMediaPickerSheetDisplay = false
+                                    Task {
+                                        var trackerGenres: [TrackerMedia.Genre] = []
+                                        do {
+                                            let movie = try await model.fetchDetail(id: movie.id)
+                                            if let genres = movie.genres {
+                                                trackerGenres = genres.map { TrackerMedia.Genre(id: $0.id, name: $0.name)}
+                                            }
+                                        } catch {
+                                            trackerGenres = []
+                                        }
+                                        
+                                        print("Genres: \(trackerGenres)")
+                                        
+                                        viewModel.trackerMedia = TrackerMedia(
+                                            id: movie.id,
+                                            title: movie.title,
+                                            posterURL: movie.posterPath,
+                                            genres: trackerGenres,
+                                            releasedDate: movie.releaseDate,
+                                            voteAverage: movie.voteAverage,
+                                            mediaType: .movie)
+                                        
+                                        isTrackerMediaPickerSheetDisplay = false
+                                    }
                                 }
                             case .tvSeries(let series):
                                 MediaRow(tvSeries: series) {
@@ -525,3 +553,4 @@ extension StatusEditor {
         }
     }
 }
+

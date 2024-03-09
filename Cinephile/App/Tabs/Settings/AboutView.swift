@@ -11,38 +11,9 @@ import Status
 @MainActor
 struct AboutView: View {
   @Environment(RouterPath.self) private var routerPath
-  @Environment(Theme.self) private var theme
-  @Environment(Client.self) private var client
-    
-  @State private var dimillianAccount: AccountsListRowViewModel?
-  @State private var iceCubesAccount: AccountsListRowViewModel?
-
-  let versionNumber: String
-
-  init() {
-    if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
-      versionNumber = version + " "
-    } else {
-      versionNumber = ""
-    }
-  }
 
   var body: some View {
     List {
-      Section {
-        Link(destination: URL(string: "https://github.com/Dimillian/IceCubesApp/blob/main/PRIVACY.MD")!) {
-          Label("settings.support.privacy-policy", systemImage: "lock")
-        }
-
-        Link(destination: URL(string: "https://github.com/Dimillian/IceCubesApp/blob/main/TERMS.MD")!) {
-          Label("settings.support.terms-of-use", systemImage: "checkmark.shield")
-        }
-      } footer: {
-        Text("\(versionNumber)©2023 Cinephile")
-      }
-//      #if !os(visionOS)
-//      .listRowBackground(theme.primaryBackgroundColor)
-//      #endif
 
       Section {
         Text("""
@@ -67,7 +38,7 @@ struct AboutView: View {
         .font(.scaledSubheadline)
         .foregroundStyle(.secondary)
       } header: {
-        Text("settings.about.built-with")
+        Text("Built with the following open-sourced repositories")
           .textCase(nil)
       }
 //      #if !os(visionOS)
@@ -76,10 +47,8 @@ struct AboutView: View {
     }
     .listStyle(.insetGrouped)
     .shadow(color: Color.black.opacity(0.1), radius: 3, x: 0, y: 1)
-    #if !os(visionOS)
     .scrollContentBackground(.hidden)
 //    .background(theme.primaryBackgroundColor)
-    #endif
     .navigationTitle(Text("Acknoledgements"))
     .navigationBarTitleDisplayMode(.large)
     .environment(\.openURL, OpenURLAction { url in
@@ -134,7 +103,7 @@ struct AboutView: View {
 struct AboutView_Previews: PreviewProvider {
   static var previews: some View {
     AboutView()
-//      .environment(Theme.shared)
+      .environment(RouterPath())
   }
 }
 

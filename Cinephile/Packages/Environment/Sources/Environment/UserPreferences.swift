@@ -68,6 +68,8 @@ import SwiftUI
         
         @AppStorage("show_account_popover") public var showAccountPopover: Bool = true
         
+        @AppStorage("show_genres_picker") public var showGenresPicker: Bool = false
+        
         init() {}
     }
     
@@ -338,6 +340,12 @@ import SwiftUI
         }
     }
     
+    public var showGenresPicker: Bool {
+        didSet {
+            storage.showGenresPicker = showGenresPicker
+        }
+    }
+    
     public enum SwipeActionsIconStyle: String, CaseIterable {
         case iconWithText, iconOnly
         
@@ -508,7 +516,7 @@ import SwiftUI
         maxReplyIndentation = storage.maxReplyIndentation
         showReplyIndentation = storage.showReplyIndentation
         showAccountPopover = storage.showAccountPopover
-        
+        showGenresPicker = storage.showGenresPicker
     }
 }
 
