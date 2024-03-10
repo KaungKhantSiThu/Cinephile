@@ -10,6 +10,19 @@
     "%lld" : {
 
     },
+    "%lld posts from %lld participants" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld posts from %2$lld participants"
+          }
+        }
+      }
+    },
+    "%lld users is following" : {
+
+    },
     "accessibility.tabs.timeline.new-post.inputLabel1" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -127,6 +140,7 @@
       }
     },
     "design.tag.n-posts-from-n-participants %lld %lld" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

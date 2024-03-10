@@ -1,12 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "#%@" : {
-
-    },
-    "%@" : {
-
-    },
     "• [EmojiText](https://github.com/divadretlaw/EmojiText)\n\n• [HTML2Markdown](https://gitlab.com/mflint/HTML2Markdown)\n\n• [KeychainSwift](https://github.com/evgenyneu/keychain-swift)\n\n• [LRUCache](https://github.com/nicklockwood/LRUCache)\n\n• [Bodega](https://github.com/mergesort/Bodega)\n\n• [Nuke](https://github.com/kean/Nuke)\n\n• [SwiftSoup](https://github.com/scinfu/SwiftSoup.git)\n\n• [SwiftUI-Introspect](https://github.com/siteline/SwiftUI-Introspect)\n" : {
 
     },
@@ -122,9 +116,6 @@
 
     },
     "Email" : {
-
-    },
-    "Genres" : {
 
     },
     "I have read and agree to Cinephile rules and privacy policy" : {
@@ -568,6 +559,7 @@
       }
     },
     "timeline.filter.tags" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

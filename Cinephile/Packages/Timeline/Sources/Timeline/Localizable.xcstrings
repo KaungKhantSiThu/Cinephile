@@ -158,6 +158,7 @@
       }
     },
     "explore.section.trending.tags" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -177,6 +178,9 @@
           }
         }
       }
+    },
+    "Genres" : {
+
     },
     "Info" : {
 

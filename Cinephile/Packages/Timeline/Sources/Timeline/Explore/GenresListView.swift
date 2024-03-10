@@ -3,30 +3,25 @@ import Models
 import SwiftUI
 import Account
 
-public struct TagsListView: View {
+public struct GenresListView: View {
     
-    let tags: [Tag]
+    let genres: [Genre]
     
     
-    public init(tags: [Tag]) {
-        self.tags = tags
+    public init(genres: [Genre]) {
+        self.genres = genres
     }
     
     public var body: some View {
         List {
-            ForEach(tags) { tag in
-                TagsRowView(tag: tag)
+            ForEach(genres) { genre in
+                GenresRowView(genre: genre)
                     .padding(.vertical, 4)
             }
         }
         .scrollContentBackground(.hidden)
         .listStyle(.plain)
-        .navigationTitle("Tags")
+        .navigationTitle("Genres")
         .navigationBarTitleDisplayMode(.inline)
     }
-}
-
-#Preview {
-    TagsListView(tags: .preview)
-        .environment(Theme.shared)
 }

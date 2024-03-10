@@ -29,9 +29,6 @@
         }
       }
     },
-    "accessibility.tabs.profile.following-count.hint" : {
-
-    },
     "accessibility.tabs.profile.picker.bookmarks" : {
       "localizations" : {
         "en" : {
@@ -106,9 +103,6 @@
           }
         }
       }
-    },
-    "accessibility.tabs.profile.post-count.hint" : {
-
     },
     "account.action.notify-disable" : {
 
@@ -414,6 +408,7 @@
       }
     },
     "account.posts" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -476,6 +471,9 @@
     "Do you want to block this user?" : {
 
     },
+    "Edit Profile" : {
+
+    },
     "Enable Notifications" : {
 
     },
@@ -483,6 +481,9 @@
 
     },
     "following" : {
+
+    },
+    "Genres" : {
 
     },
     "Hide Reboost" : {
@@ -540,6 +541,9 @@
           }
         }
       }
+    },
+    "Tags" : {
+
     },
     "unblock" : {
 

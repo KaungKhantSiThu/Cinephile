@@ -445,6 +445,9 @@
     "Quote-%@" : {
 
     },
+    "Replied to" : {
+
+    },
     "Reply-%@" : {
       "localizations" : {
         "en" : {
@@ -1294,6 +1297,7 @@
       }
     },
     "status.row.was-reply %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

@@ -142,14 +142,6 @@ public struct AccountDetailView: View {
                 }
             }
         }
-//        .onChange(of: routerPath.presentedSheet) { oldValue, newValue in
-//          if oldValue == .accountEditInfo || newValue == .accountEditInfo {
-//            Task {
-//              await viewModel.fetchAccount()
-//              await preferences.refreshServerPreferences()
-//            }
-//          }
-//        }
         .sheet(isPresented: $isEditingAccount, content: {
             EditAccountView()
         })
@@ -177,10 +169,11 @@ public struct AccountDetailView: View {
     private func headerView(proxy: ScrollViewProxy?) -> some View {
         switch viewModel.state {
         case .loading:
-            AccountDetailHeaderView(viewModel: viewModel, account: .placeholder(), scrollViewProxy: proxy)
+            AccountDetailHeaderView(isEditingAccount: $isEditingAccount, viewModel: viewModel, account: .placeholder(), scrollViewProxy: proxy)
                 .redacted(reason: .placeholder)
         case .loaded(let account):
             AccountDetailHeaderView(
+                isEditingAccount: $isEditingAccount,
                 viewModel: viewModel,
                 account: account,
                 scrollViewProxy: proxy)

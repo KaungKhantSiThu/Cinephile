@@ -47,9 +47,8 @@ public struct TimelineView: View {
         ScrollViewReader { proxy in
             List {
                 scrollToTopView
-                //          tagGroupHeaderView
-                genreHeaderView
-                tagHeaderView
+                TimelineGenreHeaderView(genre: $viewModel.genre)
+                TimelineTagHeaderView(tag: $viewModel.tag)
 //                entertainmentHeaderView
                 switch viewModel.timeline {
                 case .remoteLocal:
@@ -167,83 +166,12 @@ public struct TimelineView: View {
         }
     }
     
-    @ViewBuilder
-    private var tagHeaderView: some View {
-        if let tag = viewModel.tag {
-            headerView {
-                HStack {
-                    TagChartView(tag: tag)
-                        .padding(.top, 12)
-                    
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text("#\(tag.name)", bundle: .module, comment: "Tag name")
-                            .font(.scaledHeadline)
-                        Text("timeline.n-recent-from-n-participants \(tag.totalUses) \(tag.totalAccounts)", bundle: .module)
-                            .font(.scaledFootnote)
-                            .foregroundStyle(.secondary)
-                    }
-//                    .accessibilityElement(children: .combine)
-                    Spacer()
-                    
-                    Button {
-                        Task {
-                            if tag.following {
-                                viewModel.tag = await account.unfollowTag(id: tag.name)
-                            } else {
-                                viewModel.tag = await account.followTag(id: tag.name)
-                            }
-                        }
-                    } label: {
-                        Text(tag.following ? "account.follow.following" : "account.follow.follow", bundle: .module)
-                    }
-                    .buttonStyle(.bordered)
-                }
-            }
-        }
-    }
-    
-    @ViewBuilder
-    private var genreHeaderView: some View {
-        if let genre = viewModel.genre {
-            headerView {
-                HStack {
-                    
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text(genre.name)
-                            .font(.scaledHeadline)
-                        Text("\(genre.participantCount) users is following")
-                            .font(.scaledFootnote)
-                            .foregroundStyle(.secondary)
-                    }
-//                    .accessibilityElement(children: .combine)
-                    
-                    Spacer()
-                    
-                    Button {
-                        Task {
-                            if genre.isFollowed {
-                                viewModel.genre = await account.unfollowGenre(id: genre.genreId)
-                            } else {
-                                viewModel.genre = await account.followGenre(id: genre.genreId)
-                            }
-                        }
-                    } label: {
-                        Text(genre.isFollowed ? "account.follow.following" : "account.follow.follow", bundle: .module)
-                    }
-                    .buttonStyle(.bordered)
-                }
-            }
-        }
-    }
     
     @ViewBuilder
     private var entertainmentHeaderView: some View {
         if let entertainment = viewModel.entertainment {
             Section {
                         VStack(alignment: .center, spacing: 5) {
-//                            Text("Movie Name")
-//                                .font(.title2)
-//                                .bold()
                             Text("Click to view Movie Detail")
                                 .font(.subheadline)
                             Button {
@@ -274,36 +202,6 @@ public struct TimelineView: View {
             #endif
         }
     }
-    
-    //  @ViewBuilder
-    //  private var tagGroupHeaderView: some View {
-    //    if let group = selectedTagGroup {
-    //      headerView {
-    //        HStack {
-    //          ScrollView(.horizontal) {
-    //            HStack(spacing: 4) {
-    //              ForEach(group.tags, id: \.self) { tag in
-    //                Button {
-    //                    routerPath.navigate(to: .hashTag(tag: tag, accountId: nil))
-    //                } label: {
-    //                  Text("#\(tag)")
-    //                    .font(.scaledHeadline)
-    //                }
-    //                .buttonStyle(.plain)
-    //              }
-    //            }
-    //          }
-    //          .scrollIndicators(.hidden)
-    ////          Button("status.action.edit") {
-    ////            routerPath.presentedSheet = .editTagGroup(tagGroup: group, onSaved: { group in
-    ////              viewModel.timeline = .tagGroup(title: group.title, tags: group.tags)
-    ////            })
-    ////          }
-    ////          .buttonStyle(.bordered)
-    //        }
-    //      }
-    //    }
-    //  }
     
     @ViewBuilder
     private func headerView(
@@ -341,59 +239,8 @@ public struct TimelineView: View {
                         .font(.headline)
                 }
             }
-            
-            //      .accessibilityRepresentation {
-            //        switch timeline {
-            //        case let .remoteLocal(_, filter):
-            //          if canFilterTimeline {
-            //            Menu(filter.localizedTitle()) {}
-            //          } else {
-            //            Text(filter.localizedTitle(), bundle: .module)
-            //          }
-            //        default:
-            //          if canFilterTimeline {
-            //            Menu(timeline.localizedTitle()) {}
-            //          } else {
-            //            Text(timeline.localizedTitle(), bundle: .module)
-            //          }
-            //        }
-            //      }
-            //      .accessibilityAddTraits(.isHeader)
-            //      .accessibilityRemoveTraits(.isButton)
-            //      .accessibilityRespondsToUserInteraction(canFilterTimeline)
         }
     }
-    
-    //  @ToolbarContentBuilder
-    //  private var toolbarTagGroupButton: some ToolbarContent {
-    //    ToolbarItem(placement: .topBarTrailing) {
-    //      switch timeline {
-    //      case let .hashtag(tag, _):
-    //        if !tagGroups.isEmpty {
-    //          Menu {
-    //            Section("tag-groups.edit.section.title") {
-    //              ForEach(tagGroups) { group in
-    //                Button {
-    //                  if group.tags.contains(tag) {
-    //                    group.tags.removeAll(where: { $0 == tag })
-    //                  } else {
-    //                    group.tags.append(tag)
-    //                  }
-    //                } label: {
-    //                  Label(group.title,
-    //                        systemImage: group.tags.contains(tag) ? "checkmark.rectangle.fill" : "checkmark.rectangle")
-    //                }
-    //              }
-    //            }
-    //          } label: {
-    //            Image(systemName: "ellipsis")
-    //          }
-    //        }
-    //      default:
-    //        EmptyView()
-    //      }
-    //    }
-    //  }
     
     private var scrollToTopView: some View {
         ScrollToView()

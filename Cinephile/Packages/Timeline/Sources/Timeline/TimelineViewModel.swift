@@ -28,6 +28,7 @@ private let logger = Logger(subsystem: "Timeline", category: "ViewModel")
                     await reset()
                     pendingStatusesObserver.pendingStatuses = []
                     tag = nil
+                    genre = nil
                 }
                 
                 guard !Task.isCancelled else {

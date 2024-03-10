@@ -156,7 +156,7 @@ var loadingView: some View {
     if !results.hashtags.isEmpty, viewModel.searchScope == .all || viewModel.searchScope == .hashtags {
       Section {
         ForEach(results.hashtags) { tag in
-          TagRowView(tag: tag)
+          TagsRowView(tag: tag)
 //            .listRowBackground(theme.primaryBackgroundColor)
             .padding(.vertical, 4)
         }
@@ -202,7 +202,7 @@ var loadingView: some View {
       ForEach(viewModel.trendingTags
         .prefix(upTo: viewModel.trendingTags.count > 5 ? 5 : viewModel.trendingTags.count))
       { tag in
-        TagRowView(tag: tag)
+        TagsRowView(tag: tag)
 //          .listRowBackground(theme.primaryBackgroundColor)
           .padding(.vertical, 4)
       }

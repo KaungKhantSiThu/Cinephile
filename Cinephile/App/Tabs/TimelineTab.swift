@@ -56,7 +56,7 @@ struct TimelineTab: View {
             .toolbar {
                 toolbarView
             }
-//            .toolbarBackground(Color.primary.opacity(0.50), for: .navigationBar)
+            //            .toolbarBackground(Color.primary.opacity(0.50), for: .navigationBar)
             .id(client.id)
         }
         .onAppear {
@@ -145,35 +145,29 @@ struct TimelineTab: View {
         }
         
         
-        if !currentAccount.tags.isEmpty {
-            Menu("timeline.filter.tags") {
-                ForEach(currentAccount.sortedTags) { tag in
-                    Button {
-                        timeline = .hashtag(tag: tag.name, accountId: nil)
-                    } label: {
-                        Label("#\(tag.name)", systemImage: "number")
-                    }
-                }
-            }
-        }
-        
-        if !currentAccount.genres.isEmpty {
-            Menu("Genres") {
-                Button {
-                    routerPath.presentedSheet = .genresPicker
-                } label: {
-                    Label("Pick Genres", systemImage: "theatermasks")
-                }
-                
-                ForEach(currentAccount.sortedGenres) { genre in
-                    Button {
-                        timeline = .genre(id: genre.genreId, title: genre.name)
-                    } label: {
-                        Text("\(genre.name)")
-                    }
-                }
-            }
-        }
+//        if !currentAccount.tags.isEmpty {
+//            Menu("timeline.filter.tags") {
+//                ForEach(currentAccount.sortedTags) { tag in
+//                    Button {
+//                        timeline = .hashtag(tag: tag.name, accountId: nil)
+//                    } label: {
+//                        Label("#\(tag.name)", systemImage: "number")
+//                    }
+//                }
+//            }
+//        }
+//        
+//        if !currentAccount.genres.isEmpty {
+//            Menu("Genres") {
+//                ForEach(currentAccount.sortedGenres) { genre in
+//                    Button {
+//                        timeline = .genre(id: genre.genreId, title: genre.name)
+//                    } label: {
+//                        Text("\(genre.name)")
+//                    }
+//                }
+//            }
+//        }
         
         Menu("timeline.filter.local") {
             ForEach(localTimelines) { remoteLocal in
@@ -221,15 +215,20 @@ struct TimelineTab: View {
             } label: {
                 Label(TimelineFilter.latest.localizedTitle(), systemImage: TimelineFilter.latest.iconName())
             }
-            if timeline == .home {
-                Button {
-                    timeline = .resume
-                } label: {
-                    VStack {
-                        Label(TimelineFilter.resume.localizedTitle(),
-                              systemImage: TimelineFilter.resume.iconName())
-                    }
-                }
+//            if timeline == .home {
+//                Button {
+//                    timeline = .resume
+//                } label: {
+//                    VStack {
+//                        Label(TimelineFilter.resume.localizedTitle(),
+//                              systemImage: TimelineFilter.resume.iconName())
+//                    }
+//                }
+//            }
+            Button {
+                routerPath.presentedSheet = .genresPicker
+            } label: {
+                Label("Pick Genres", systemImage: "theatermasks")
             }
             Divider()
         }
@@ -285,15 +284,6 @@ struct TimelineTab: View {
         }
         
         switch timeline {
-            //      case .list:
-            //        ToolbarItem {
-            //          Button {
-            ////            routerPath.presentedSheet = .listEdit(list: list)
-            //              print("ListEdit")
-            //          } label: {
-            //            Image(systemName: "list.bullet")
-            //          }
-            //        }
         case let .remoteLocal(server, _):
             ToolbarItem {
                 Menu {

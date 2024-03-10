@@ -38,18 +38,6 @@ public enum SheetDestination: Identifiable {
             "addAccount"
         case .newStatusEditor, .editStatusEditor, .replyToStatusEditor, .quoteStatusEditor, .mentionStatusEditor:
             "statusEditor"
-//        case .editTagGroup:
-//            "editTagGroup"
-//        case .listCreate:
-//            "listCreate"
-//        case .listEdit:
-//            "listEdit"
-//        case .listAddAccount:
-//            "listAddAccount"
-//        case .addRemoteLocalTimeline:
-//            "addRemoteLocalTimeline"
-//        case .addTagGroup:
-//            "addTagGroup"
         case .statusEditHistory:
             "statusEditHistory"
         case .settings, .accountPushNotficationsSettings:
@@ -96,6 +84,7 @@ public enum RouterDestination: Hashable {
     case trendingTimeline
     case trendingLinks(cards: [Card])
     case tagsList(tags: [Tag])
+    case genresList(genres: [Models.Genre])
     case media(id: Int, title: String)
     case genre(id: Int, title: String)
 }

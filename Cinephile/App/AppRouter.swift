@@ -52,11 +52,6 @@ extension View {
                              selectedTagGroup: .constant(nil),
                              scrollToTopSignal: .constant(0),
                              canFilterTimeline: false)
-                //            case .list(list: let list):
-                //                TimelineView(timeline: .constant(.list(list: list)),
-                //                             selectedTagGroup: .constant(nil),
-                //                             scrollToTopSignal: .constant(0),
-                //                             canFilterTimeline: false)
             case .followers(id: let id):
                 AccountsListView(mode: .followers(accountId: id))
             case .following(id: let id):
@@ -75,9 +70,8 @@ extension View {
             case .trendingLinks(cards: _):
                 //                CardsListView(cards: cards)
                 EmptyView()
-            case .tagsList(tags: _):
-                //                TagsListView(tags: tags)
-                EmptyView()
+            case let .tagsList(tags):
+                  TagsListView(tags: tags)
             case let .media(id, title):
                 TimelineView(timeline: .constant(.media(id: id, title: title)),
                              selectedTagGroup: .constant(nil),
@@ -89,6 +83,8 @@ extension View {
                              scrollToTopSignal: .constant(0),
                              canFilterTimeline: false)
 
+            case let .genresList(genres):
+                GenresListView(genres: genres)
             }
         }
     }

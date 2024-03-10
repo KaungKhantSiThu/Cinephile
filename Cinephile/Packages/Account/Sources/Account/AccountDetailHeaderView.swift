@@ -17,9 +17,18 @@ struct AccountDetailHeaderView: View {
     @Environment(QuickLook.self) private var quickLook
     @Environment(\.isSupporter) private var isSupporter: Bool
     
+    @Binding var isEditingAccount: Bool
+    
     let viewModel: AccountDetailViewModel
     let account: Account
     let scrollViewProxy: ScrollViewProxy?
+    
+    init(isEditingAccount: Binding<Bool>, viewModel: AccountDetailViewModel, account: Account, scrollViewProxy: ScrollViewProxy?) {
+        self._isEditingAccount = isEditingAccount
+        self.viewModel = viewModel
+        self.account = account
+        self.scrollViewProxy = scrollViewProxy
+    }
     
     var body: some View {
         VStack(spacing: 20) {
@@ -98,37 +107,65 @@ struct AccountDetailHeaderView: View {
     
     private var accountInfoView: some View {
         VStack {
-            HStack(spacing: 30) {
+            HStack {
                 Button {
                     withAnimation {
                         scrollViewProxy?.scrollTo("status", anchor: .top)
                     }
                 } label: {
-                    makeCustomInfoLabel(title: "account.posts", count: account.statusesCount ?? 0)
+                    Attribute(title: "Posts", count: account.statusesCount ?? 0)
                 }
-                .accessibilityHint("accessibility.tabs.profile.post-count.hint")
-                .buttonStyle(.borderless)
+                .buttonStyle(.plain)
                 
+                Spacer()
                 Button {
-                    routerPath.navigate(to: .following(id: account.id))
+                    withAnimation {
+                        routerPath.navigate(to: .following(id: account.id))                    }
                 } label: {
-                    makeCustomInfoLabel(title: "account.following", count: account.followingCount ?? 0)
+                    Attribute(title: "Following", count: account.followingCount ?? 0)
                 }
-                .accessibilityHint("accessibility.tabs.profile.following-count.hint")
-                .buttonStyle(.borderless)
-                
-                
+                .buttonStyle(.plain)
+                Spacer()
                 Button {
-                    routerPath.navigate(to: .followers(id: account.id))
+                    withAnimation {
+                        routerPath.navigate(to: .followers(id: account.id))                    }
                 } label: {
-                    makeCustomInfoLabel(
-                        title: "account.followers",
-                        count: account.followersCount ?? 0,
-                        needsBadge: currentAccount.account?.id == account.id && !currentAccount.followRequests.isEmpty
-                    )
+                    Attribute(title: "Following", count: account.followersCount ?? 0)
                 }
-                .buttonStyle(.borderless)
+                .buttonStyle(.plain)
             }
+            .padding()
+            
+            HStack {
+                Spacer()
+                
+                Button {
+                    routerPath.navigate(to: .tagsList(tags: currentAccount.tags))
+                } label: {
+                    Attribute(title: "Tags", count: currentAccount.tags.count)
+                }
+                .buttonStyle(.plain)
+                
+                Spacer()
+                
+                Button {
+                    routerPath.navigate(to: .genresList(genres: currentAccount.genres))
+                } label: {
+                    Attribute(title: "Genres", count: currentAccount.genres.count)
+                }
+                .buttonStyle(.plain)
+                
+                Spacer()
+            }
+            .padding()
+            
+            Button {
+              isEditingAccount = true
+            } label: {
+                Text("Edit Profile")
+            }
+            .buttonStyle(.borderedProminent)
+
             
             if let note = viewModel.relationship?.note, !note.isEmpty, !viewModel.isCurrentUser {
                 makeNoteView(note)
@@ -145,8 +182,23 @@ struct AccountDetailHeaderView: View {
             } else if !viewModel.isCurrentUser {
                 ProgressView()
             }
+            
         }
-        
+    }
+    
+    struct Attribute: View {
+        let title: String
+        let count: Int
+        var body: some View {
+            VStack {
+                Text(title)
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                Text(count, format: .number.notation(.compactName))
+                    .font(.title)
+                    .bold()
+            }
+        }
     }
     
     @ViewBuilder
@@ -170,6 +222,7 @@ struct AccountDetailHeaderView: View {
             Text(title, bundle: .module)
                 .font(.scaledCaption)
                 .foregroundStyle(.secondary)
+                
             
             Text(count, format: .number.notation(.compactName))
                 .font(.title)
@@ -193,7 +246,7 @@ struct AccountDetailHeaderView: View {
 
 #Preview(traits: .sizeThatFitsLayout) {
     AccountDetailHeaderView(
-        viewModel: .init(account: .placeholder()),
+        isEditingAccount: .constant(false), viewModel: .init(account: .placeholder()),
         account: .placeholder(),
         scrollViewProxy: nil)
     .environment(RouterPath())
