@@ -64,7 +64,6 @@ struct GenresPicker: View {
                 do {
                     let response: GenresResponse = try await APIService.shared.get(endpoint: GenresEndpoint.movie)
                     self.genres = response.genres
-//                    print(genres)
                     let followedGenres = currentAccount.genres.map { $0.genreId }
                     print(followedGenres)
                     withAnimation {
@@ -77,7 +76,10 @@ struct GenresPicker: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        print(selectedGenres.map(String.init).joined(separator: ", "))
+                        Task {
+                            let updatedGenres = await currentAccount.updateGenres(ids: selectedGenres)
+                        }
+//                        print(selectedGenres)
                         dismiss()
                     } label: {
                         Text("Save")
