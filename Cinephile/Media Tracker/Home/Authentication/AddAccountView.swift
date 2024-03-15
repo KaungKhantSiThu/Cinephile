@@ -15,6 +15,7 @@ struct AddAccountView: View {
     @Environment(PushNotificationsService.self) private var pushNotifications
     @Environment(RouterPath.self) private var routerPath
     @Environment(AppAccountsManager.self) private var appAccountsManager
+    @Environment(UserPreferences.self) private var preferences
     @StateObject private var formViewModel = FormViewModel()
     
     @State private var signInClient: Client?
@@ -30,9 +31,9 @@ struct AddAccountView: View {
     
     //    @StateObject private var formViewModel = FormViewModel()
     enum FocusedField {
-            case username, email, password, confirm
-        }
-
+        case username, email, password, confirm
+    }
+    
     @FocusState private var focusedField: FocusedField?
     
     var body: some View {
@@ -56,7 +57,7 @@ struct AddAccountView: View {
                         )
                         .autocapitalization(.none)
                         .focused($focusedField, equals: .username)
-
+                    
                     Text(formViewModel.inlineErrorForUsername)
                         .foregroundColor(.red)
                 }
@@ -76,7 +77,7 @@ struct AddAccountView: View {
                         )
                         .autocapitalization(.none)
                         .focused($focusedField, equals: .email)
-
+                    
                     
                     Text(formViewModel.inlineErrorForEmail).foregroundColor(.red)
                 }
@@ -93,7 +94,7 @@ struct AddAccountView: View {
                                 .stroke(.indigo, lineWidth: focusedField == .password ? 2:  0)
                         )                        .autocapitalization(.none)
                         .focused($focusedField, equals: .password)
-
+                    
                     
                     SecureField("Confirm Password", text: $formViewModel.confirmPassword)
                         .padding()
@@ -105,7 +106,7 @@ struct AddAccountView: View {
                                 .stroke(.indigo, lineWidth: focusedField == .confirm ? 2:  0)
                         )                        .autocapitalization(.none)
                         .focused($focusedField, equals: .confirm)
-
+                    
                     
                     Text(formViewModel.inlineErrorForPassword).foregroundColor(.red)
                     
@@ -208,7 +209,7 @@ struct AddAccountView: View {
                             .foregroundStyle(Color.gray)
                             .frame(width: 40, height: 40)
                     }
-
+                    
                 }
             }
         }
@@ -238,12 +239,14 @@ struct AddAccountView: View {
                                                        accountName: "\(account.acct)@\(client.server)",
                                                        oauthToken: oauthToken))
             Task {
-              pushNotifications.setAccounts(accounts: appAccountsManager.pushAccounts)
-              await pushNotifications.updateSubscriptions(forceCreate: true)
+                pushNotifications.setAccounts(accounts: appAccountsManager.pushAccounts)
+                await pushNotifications.updateSubscriptions(forceCreate: true)
             }
             isSigninIn = false
-//            dismiss()
-            routerPath.presentedSheet = .genresPicker
+            //            dismiss()
+//            if preferences.showGenresPicker {
+                routerPath.presentedSheet = .genresPicker
+//            }
         } catch {
             isSigninIn = false
         }

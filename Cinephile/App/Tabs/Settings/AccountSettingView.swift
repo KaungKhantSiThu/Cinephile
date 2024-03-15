@@ -18,7 +18,7 @@ struct AccountSettingsView: View {
   @Environment(\.dismiss) private var dismiss
   @Environment(\.openURL) private var openURL
 
-//  @Environment(PushNotificationsService.self) private var pushNotifications
+  @Environment(PushNotificationsService.self) private var pushNotifications
   @Environment(CurrentAccount.self) private var currentAccount
   @Environment(CurrentInstance.self) private var currentInstance
   @Environment(Theme.self) private var theme
@@ -45,24 +45,23 @@ struct AccountSettingsView: View {
         }
         .buttonStyle(.plain)
 
-        if currentInstance.isFiltersSupported {
-          Button {
-            isEditingFilters = true
-          } label: {
-            Label("account.action.edit-filters", systemImage: "line.3.horizontal.decrease.circle")
-              .frame(maxWidth: .infinity, alignment: .leading)
-              .contentShape(Rectangle())
-          }
-          .buttonStyle(.plain)
-        }
-//        if let subscription = pushNotifications.subscriptions.first(where: { $0.account.token == appAccount.oauthToken }) {
-//          NavigationLink(destination: PushNotificationsView(subscription: subscription)) {
-//            Label("settings.general.push-notifications", systemImage: "bell.and.waves.left.and.right")
+//        if currentInstance.isFiltersSupported {
+//          Button {
+//            isEditingFilters = true
+//          } label: {
+//            Label("account.action.edit-filters", systemImage: "line.3.horizontal.decrease.circle")
+//              .frame(maxWidth: .infinity, alignment: .leading)
+//              .contentShape(Rectangle())
 //          }
+//          .buttonStyle(.plain)
 //        }
+        if let subscription = pushNotifications.subscriptions.first(where: { $0.account.token == appAccount.oauthToken }) {
+          NavigationLink(destination: PushNotificationsView(subscription: subscription)) {
+            Label("Push Notifications", systemImage: "bell.and.waves.left.and.right")
+          }
+        }
       }
-      //.listRowBackground(theme.primaryBackgroundColor)
-
+//      .listRowBackground(Color.primaryBackground)
       Section {
         Label("settings.account.cached-posts-\(String(cachedPostsCount))", systemImage: "internaldrive")
         Button("settings.account.action.delete-cache", role: .destructive) {
@@ -72,26 +71,25 @@ struct AccountSettingsView: View {
           }
         }
       }
-      //.listRowBackground(theme.primaryBackgroundColor)
+//      .listRowBackground(Color.primaryBackground)
 
-      Section {
-        Button {
-          openURL(URL(string: "https://\(client.server)/settings/profile")!)
-        } label: {
-          Text("account.action.more")
-        }
-      }
-      //.listRowBackground(theme.primaryBackgroundColor)
-
+//      Section {
+//        Button {
+//          openURL(URL(string: "https://\(client.server)/settings/profile")!)
+//        } label: {
+//          Text("account.action.more")
+//        }
+//      }
+//      .listRowBackground(Color.primaryBackground)
       Section {
         Button(role: .destructive) {
           if let token = appAccount.oauthToken {
             Task {
               let client = Client(server: appAccount.server, oauthToken: token)
               await timelineCache.clearCache(for: client.id)
-//              if let sub = pushNotifications.subscriptions.first(where: { $0.account.token == token }) {
-//                await sub.deleteSubscription()
-//              }
+              if let sub = pushNotifications.subscriptions.first(where: { $0.account.token == token }) {
+                await sub.deleteSubscription()
+              }
               appAccountsManager.delete(account: appAccount)
               dismiss()
             }
@@ -101,14 +99,11 @@ struct AccountSettingsView: View {
             .frame(maxWidth: .infinity)
         }
       }
-      //.listRowBackground(theme.primaryBackgroundColor)
+//      .listRowBackground(Color.primaryBackground)
     }
     .sheet(isPresented: $isEditingAccount, content: {
       EditAccountView()
     })
-//    .sheet(isPresented: $isEditingFilters, content: {
-//      FiltersListView()
-//    })
     .toolbar {
       ToolbarItem(placement: .principal) {
         HStack {
@@ -123,7 +118,7 @@ struct AccountSettingsView: View {
     }
     .navigationTitle(account.safeDisplayName)
     .scrollContentBackground(.hidden)
-//    .background(theme.secondaryBackgroundColor)
+//    .background(Color.secondaryBackground)
   }
 }
 

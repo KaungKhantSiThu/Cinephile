@@ -145,6 +145,73 @@ import Observation
         }
     }
     
+    public func updateGenres(ids: [Genre.ID]) async -> [Genre]? {
+        
+        var removedGenres: [Genre.ID] = []
+        var addedGenres: [Genre.ID] = []
+        
+        // Find removed genres
+        for genre in self.genres {
+            if !ids.contains(where: { $0 == genre.genreId }) {
+                removedGenres.append(genre.genreId)
+            }
+        }
+
+        // Find added genres
+        for id in ids {
+            if !genres.contains(where: { $0.genreId == id }) {
+                addedGenres.append(id)
+            }
+        }
+        
+//        print("Removed genres:")
+//        for id in removedGenres {
+//            print(id)
+//        }
+//
+//        print("Added genres:")
+//        for id in addedGenres {
+//            print(id)
+//        }
+        
+        if !addedGenres.isEmpty {
+            let _ = await followGenres(ids: addedGenres)
+        }
+        
+        if !removedGenres.isEmpty {
+            let _ = await unfollowGenres(ids: removedGenres)
+        }
+        
+        // the followed genres list didn't change
+        return genres
+    }
+    
+    public func followGenres(ids: [Genre.ID]) async -> [Genre]? {
+        guard let client else { return nil }
+        do {
+            let array: [Genre] = try await client.post(endpoint: Genres.followGenres(json: GenreIDData(genreIds: ids)))
+            genres.append(contentsOf: array)
+            return array
+        } catch {
+            return nil
+        }
+    }
+    
+    public func unfollowGenres(ids: [Genre.ID]) async -> [Genre]? {
+        guard let client else { return nil }
+        do {
+            let array: [Genre] = try await client.post(endpoint: Genres.unfollowGenres(json: GenreIDData(genreIds: ids)))
+            genres = genres.filter { genre in
+                !array.contains {
+                    $0.id == genre.id
+                }
+            }
+            return array
+        } catch {
+            return nil
+        }
+    }
+    
     
     public func fetchFollowerRequests() async {
         guard let client else { return }

@@ -19,6 +19,7 @@
       }
     },
     "account.action.edit-filters" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -49,6 +50,7 @@
       }
     },
     "account.action.more" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -134,6 +136,9 @@
 
     },
     "Pick Genres" : {
+
+    },
+    "Push Notifications" : {
 
     },
     "Remove" : {
