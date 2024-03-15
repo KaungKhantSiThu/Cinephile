@@ -59,6 +59,7 @@ public struct TrackerMedia: Codable, Equatable, Hashable, Identifiable {
     public let releasedDate: Date?
     public let voteAverage: Double?
     public let mediaType: MediaType
+    public let overview: String?
     
     public init(
         id: Int,
@@ -68,7 +69,8 @@ public struct TrackerMedia: Codable, Equatable, Hashable, Identifiable {
         genres: [Genre]? = nil,
         releasedDate: Date? = nil,
         voteAverage: Double? = nil,
-        mediaType: MediaType
+        mediaType: MediaType,
+        overview: String? = nil
     ) {
         self.id = id
         self.title = title
@@ -78,6 +80,7 @@ public struct TrackerMedia: Codable, Equatable, Hashable, Identifiable {
         self.releasedDate = releasedDate
         self.voteAverage = voteAverage
         self.mediaType = mediaType
+        self.overview = overview
     }
 }
 

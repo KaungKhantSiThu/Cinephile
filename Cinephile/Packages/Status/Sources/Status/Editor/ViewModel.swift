@@ -246,6 +246,8 @@ extension StatusEditor {
                         domain: "themoviedb.org",
                         mediaType: trackerMedia.mediaType,
                         mediaId: String(trackerMedia.id),
+                        name: trackerMedia.title,
+                        overview: trackerMedia.overview ?? "Overview is not available",
                         genres: transformedGenres
                     )
                     
@@ -254,7 +256,15 @@ extension StatusEditor {
                     
                     if !entertainments.isEmpty, let result = entertainments.first {
                         logger.log("Tracker Media is already in the database")
-                        let entertainment: Entertainment = try await client.put(endpoint: Entertainments.post(json: data))
+                        let data: EntertainmentPutData = .init(
+                            domain: "themoviedb.org",
+                            mediaType: trackerMedia.mediaType,
+                            mediaId: String(trackerMedia.id),
+                            name: trackerMedia.title,
+                            overview: trackerMedia.overview ?? "Overview is not available",
+                            genreIds: transformedGenres.map { $0.genreId }
+                        )
+                        let _: Entertainment = try await client.put(endpoint: Entertainments.put(id: result.id, json: data))
                         self.entertainmentId = result.id
                     } else {
                         logger.log("Creating Tracker Media in the database")

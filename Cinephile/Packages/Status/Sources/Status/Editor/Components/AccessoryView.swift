@@ -414,7 +414,8 @@ extension StatusEditor {
                                             genres: trackerGenres,
                                             releasedDate: movie.releaseDate,
                                             voteAverage: movie.voteAverage,
-                                            mediaType: .movie)
+                                            mediaType: .movie,
+                                            overview: movie.overview)
                                         
                                         isTrackerMediaPickerSheetDisplay = false
                                     }

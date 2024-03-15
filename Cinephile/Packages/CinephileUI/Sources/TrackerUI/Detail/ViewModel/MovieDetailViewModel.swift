@@ -185,7 +185,11 @@ import Networking
                 let data: EntertainmentData = .init(
                     domain: "themoviedb.org",
                     mediaType: .movie,
-                    mediaId: String(self.id), genres: [])
+                    mediaId: String(self.id), 
+                    name: self.title,
+                    overview: "",
+                    genres: []
+                )
                 let entertainment: Entertainment = try await client.post(endpoint: Entertainments.post(json: data))
                 
                 entertainmentId = entertainment.id
