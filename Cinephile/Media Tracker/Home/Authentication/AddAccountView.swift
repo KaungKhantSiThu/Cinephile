@@ -23,8 +23,8 @@ struct AddAccountView: View {
     @State private var isSigninIn  = false
     @State private var instanceFetchError: String?
     
-    private let instanceName: String = "cinephile-26be9689548e.herokuapp.com"
-    
+    private let instanceName: String = "cinephile-social.me"
+
     @State private var showAlert: Bool = false
     @State private var alertTitle: String = ""
     @State private var alertMessage: String = ""

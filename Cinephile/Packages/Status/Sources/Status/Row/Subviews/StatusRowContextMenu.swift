@@ -31,7 +31,6 @@ struct StatusRowContextMenu: View {
                 } icon: {
                     Image(systemName: "lock.rotation")
                 }
-                
             }
             
             return Label {
@@ -56,40 +55,7 @@ struct StatusRowContextMenu: View {
     }
     
     var body: some View {
-        if !viewModel.isRemote {
-            
-            //        Button {
-            //            Task {
-            //                await statusDataController.toggleFavorite(remoteStatus: nil)
-            //            }
-            //        } label: {
-            //            Label {
-            //                Text(statusDataController.isFavorited ? "status.action.unfavorite" : "status.action.favorite", bundle: .module)
-            //            } icon: {
-            //                Image(systemName: "star")
-            //            }
-            //        }
-            //
-            //        Button {
-            //            Task {
-            //                await statusDataController.toggleReblog(remoteStatus: nil)
-            //            }
-            //        } label: {
-            //            boostLabel
-            //        }
-            //        .disabled(viewModel.status.visibility == .direct || viewModel.status.visibility == .priv && viewModel.status.account.id != account.account?.id)
-            //
-            //        Button {
-            //            Task {
-            //                await statusDataController.toggleBookmark(remoteStatus: nil)
-            //            }
-            //        } label: {
-            //            Label {
-            //                Text(statusDataController.isBookmarked ? "status.action.unbookmark" : "status.action.bookmark", bundle: .module)
-            //            } icon: {
-            //                Image(systemName: "bookmark")
-            //            }
-            //        }
+        if !viewModel.isRemote, client.isAuth {
             
             Button {
 #if targetEnvironment(macCatalyst)
@@ -143,51 +109,19 @@ struct StatusRowContextMenu: View {
                         Image(systemName: "link")
                     }
                 }
-                
-//                Button {
-//                    let view = HStack {
-//                        StatusRowView(viewModel: viewModel)
-//                            .padding(16)
-//                    }
-//                        .environment(\.isInCaptureMode, true)
-//                        .environment(Theme.shared)
-//                        .environment(preferences)
-//                        .environment(account)
-//                        .environment(currentInstance)
-//                        .environment(SceneDelegate())
-//                        .environment(quickLook)
-//                        .environment(viewModel.client)
-//                        .preferredColorScheme(Theme.shared.selectedScheme == .dark ? .dark : .light)
-//                        .foregroundColor(Theme.shared.labelColor)
-//                    //          .background(Theme.shared.primaryBackgroundColor)
-//                        .frame(width: sceneDelegate.windowWidth - 12)
-//                        .tint(Theme.shared.tintColor)
-//                    let renderer = ImageRenderer(content: view)
-//                    renderer.scale = displayScale
-//                    renderer.isOpaque = false
-//                    if let image = renderer.uiImage {
-//                        viewModel.routerPath.presentedSheet = .shareImage(image: image, status: viewModel.status)
-//                    }
-//                } label: {
-//                    Label {
-//                        Text("status.action.share-image", bundle: .module)
-//                    } icon: {
-//                        Image(systemName: "photo")
-//                    }
-//                }
             }
         } label: {
             Text("status.action.share-title", bundle: .module)
         }
         
-//        if let url = URL(string: viewModel.status.reblog?.url ?? viewModel.status.url ?? "") {
-//            Button { UIApplication.shared.open(url) } label: {
-//                Label(
-//                    title: { Text("status.action.view-in-browser", bundle: .module) },
-//                    icon: { Image(systemName: "safari") }
-//                )
-//            }
-//        }
+        //        if let url = URL(string: viewModel.status.reblog?.url ?? viewModel.status.url ?? "") {
+        //            Button { UIApplication.shared.open(url) } label: {
+        //                Label(
+        //                    title: { Text("status.action.view-in-browser", bundle: .module) },
+        //                    icon: { Image(systemName: "safari") }
+        //                )
+        //            }
+        //        }
         
         Button {
             UIPasteboard.general.string = viewModel.status.reblog?.content.asRawText ?? viewModel.status.content.asRawText
@@ -207,14 +141,14 @@ struct StatusRowContextMenu: View {
             )
         }
         
-//        Button {
-//            UIPasteboard.general.string = viewModel.status.reblog?.url ?? viewModel.status.url
-//        } label: {
-//            Label(
-//                title: { Text("status.action.copy-link", bundle: .module) },
-//                icon: { Image(systemName: "link") }
-//            )
-//        }
+        //        Button {
+        //            UIPasteboard.general.string = viewModel.status.reblog?.url ?? viewModel.status.url
+        //        } label: {
+        //            Label(
+        //                title: { Text("status.action.copy-link", bundle: .module) },
+        //                icon: { Image(systemName: "link") }
+        //            )
+        //        }
         
         //    if let lang = preferences.serverPreferences?.postLanguage ?? Locale.current.language.languageCode?.identifier {
         //      Button {
@@ -270,7 +204,7 @@ struct StatusRowContextMenu: View {
                 )
             }
         } else {
-            if !viewModel.isRemote {
+            if !viewModel.isRemote, client.isAuth {
                 Section(viewModel.status.reblog?.account.acct ?? viewModel.status.account.acct) {
                     Button {
                         viewModel.routerPath.presentedSheet = .mentionStatusEditor(account: viewModel.status.reblog?.account ?? viewModel.status.account, visibility: .pub)

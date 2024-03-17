@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  Client.swift
 //
 //
 //  Created by Kaung Khant Si Thu on 13/12/2023.
@@ -109,7 +109,7 @@ import os
         }
         
         let (data, httpResponse) = try await urlSession.data(for: request)
-//        logResponseOnError(httpResponse: httpResponse, data: data)
+        logResponseOnError(httpResponse: httpResponse, data: data)
         do {
             return try decoder.decode(OauthToken.self, from: data)
         } catch {
@@ -343,106 +343,3 @@ import os
 }
 
 extension Client: Sendable {}
-
-//public final class CinephileClient: APIClient {
-//
-//    private let httpClient: HTTPClient
-//    private let serialiser: Serialiser
-//    private let version: String = "v1"
-//
-//    private struct Critical: Sendable {
-//      /// Only used as a transitionary app while in the oauth flow.
-//      var oauthApp: InstanceApp?
-//      var oauthToken: OauthToken?
-//      var connections: Set<String> = []
-//    }
-//
-//    private let critical: OSAllocatedUnfairLock<Critical>
-//
-//    public var connections: Set<String> {
-//      critical.withLock { $0.connections }
-//    }
-//
-//    init(httpClient: HTTPClient, serialiser: Serialiser, oauthToken: OauthToken? = nil) {
-//        self.httpClient = httpClient
-//        self.serialiser = serialiser
-//        self.critical = .init(initialState: Critical(oauthToken: oauthToken, connections: ["example.mastodon.com"]))
-//    }
-//
-//    public func addConnections(_ connections: [String]) {
-//      critical.withLock {
-//        $0.connections.formUnion(connections)
-//      }
-//    }
-//
-//    public func hasConnection(with url: URL) -> Bool {
-//      guard let host = url.host else { return false }
-//      return critical.withLock {
-//        if let rootHost = host.split(separator: ".", maxSplits: 1).last {
-//          // Sometimes the connection is with the root host instead of a subdomain
-//          // eg. Mastodon runs on mastdon.domain.com but the connection is with domain.com
-//          $0.connections.contains(host) || $0.connections.contains(String(rootHost))
-//        } else {
-//          $0.connections.contains(host)
-//        }
-//      }
-//    }
-//
-//    func get<Response: Decodable>(path: URL) async throws -> Response {
-//        let url = urlFromPath(path)
-//        let headers = [
-//            "Content-Type": "application/json"
-//        ]
-//
-//        let response: HTTPResponse
-//
-//        do {
-//            response = try await httpClient.get(url: url, headers: headers)
-//        } catch {
-//            throw CinephileClientError.network(error)
-//        }
-//
-//        try await validate(response: response)
-//
-//        guard let data = response.data else { throw CinephileClientError.unknown }
-//
-//        let decodedResponse: Response
-//
-//        do {
-//            decodedResponse = try await serialiser.decode(Response.self, from: data)
-//        } catch let error {
-//            throw CinephileClientError.decode(error)
-//        }
-//
-//        return decodedResponse
-//    }
-//
-//
-//}
-
-//extension CinephileClient {
-//    private func urlFromPath(_ path: URL) -> URL {
-//        guard var urlComponents = URLComponents(url: path, resolvingAgainstBaseURL: true) else {
-//            return path
-//        }
-//
-//        urlComponents.scheme = baseURL.scheme
-//        urlComponents.host = baseURL.host
-//        urlComponents.path = "\(baseURL.path)/\(version)\(urlComponents.path)"
-//
-//        return urlComponents.url!
-//    }
-//
-//    private func validate(response: HTTPResponse) async throws {
-//        let statusCode = response.statusCode
-//        if (200...299).contains(statusCode) {
-//            return
-//        }
-//
-//        guard let data = response.data else { throw CinephileClientError(statusCode: statusCode, message: nil) }
-//
-//        let errorResponse = try? await serialiser.decode(String.self, from: data)
-//
-//        throw CinephileClientError(statusCode: statusCode, message: errorResponse)
-//    }
-//}

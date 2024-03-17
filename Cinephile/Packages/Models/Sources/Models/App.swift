@@ -8,7 +8,7 @@
 import Foundation
 
 public enum AppInfo {
-  public static let appStoreAppId = "6444915884"
+//  public static let appStoreAppId = "6444915884"
   public static let clientName = "Cinephile"
   public static let scheme = "cinephileapp://"
   public static let scopes = "read write follow push"

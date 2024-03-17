@@ -72,9 +72,9 @@ struct TimelineTab: View {
             //          Task {
             //            await currentAccount.fetchLists()
             //          }
-            if !client.isAuth {
-                routerPath.presentedSheet = .addAccount
-            }
+//            if !client.isAuth {
+//                routerPath.presentedSheet = .addAccount
+//            }
         }
         .onChange(of: client.isAuth) {
             resetTimelineFilter()
@@ -143,31 +143,6 @@ struct TimelineTab: View {
                 }
             }
         }
-        
-        
-//        if !currentAccount.tags.isEmpty {
-//            Menu("timeline.filter.tags") {
-//                ForEach(currentAccount.sortedTags) { tag in
-//                    Button {
-//                        timeline = .hashtag(tag: tag.name, accountId: nil)
-//                    } label: {
-//                        Label("#\(tag.name)", systemImage: "number")
-//                    }
-//                }
-//            }
-//        }
-//        
-//        if !currentAccount.genres.isEmpty {
-//            Menu("Genres") {
-//                ForEach(currentAccount.sortedGenres) { genre in
-//                    Button {
-//                        timeline = .genre(id: genre.genreId, title: genre.name)
-//                    } label: {
-//                        Text("\(genre.name)")
-//                    }
-//                }
-//            }
-//        }
         
         Menu("timeline.filter.local") {
             ForEach(localTimelines) { remoteLocal in
@@ -278,7 +253,7 @@ struct TimelineTab: View {
             }
             
         } else {
-            ToolbarItem(placement: .navigationBarTrailing) {
+            ToolbarItem(placement: .topBarLeading) {
                 addAccountButton
             }
         }

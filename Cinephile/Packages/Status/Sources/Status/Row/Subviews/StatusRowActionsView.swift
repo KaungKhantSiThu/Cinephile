@@ -10,6 +10,7 @@ struct StatusRowActionsView: View {
     @Environment(CurrentAccount.self) private var currentAccount
     @Environment(StatusDataController.self) private var statusDataController
     @Environment(UserPreferences.self) private var userPreferences
+    @Environment(Client.self) private var client
     
     @Environment(\.openWindow) private var openWindow
     @Environment(\.isStatusFocused) private var isFocused
@@ -133,7 +134,7 @@ struct StatusRowActionsView: View {
     }
     
     var body: some View {
-        VStack(spacing: 12) {
+//        VStack(spacing: 12) {
             HStack {
                 ForEach(Action.allCases, id: \.self) { action in
                     if action == .share {
@@ -162,11 +163,13 @@ struct StatusRowActionsView: View {
                         }
                     } else {
                         actionButton(action: action)
+                            .disabled(!client.isAuth)
                         Spacer()
                     }
                 }
             }
-        }
+            
+//        }
     }
     
     private func actionButton(action: Action) -> some View {
