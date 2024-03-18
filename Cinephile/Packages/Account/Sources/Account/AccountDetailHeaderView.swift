@@ -36,18 +36,6 @@ struct AccountDetailHeaderView: View {
             accountInfoView
                 .padding(.leading, 15)
         }
-        //        VStack(alignment: .leading) {
-        //            accountAvatarView
-        //            VStack(alignment: .leading) {
-        //                Text(account.safeDisplayName)
-        //                    .font(.title)
-        //                    .foregroundStyle(.primary)
-        //                Text("@\(account.acct)")
-        //                    .font(.subheadline)
-        //                    .foregroundStyle(.secondary)
-        //            }
-        ////                .padding(.top, 10)
-        //        }
     }
     
     private var accountAvatarView: some View {
@@ -136,36 +124,38 @@ struct AccountDetailHeaderView: View {
             }
             .padding()
             
-            HStack {
-                Spacer()
-                
-                Button {
-                    routerPath.navigate(to: .tagsList(tags: currentAccount.tags))
-                } label: {
-                    Attribute(title: "Tags", count: currentAccount.tags.count)
-                }
-                .buttonStyle(.plain)
-                
-                Spacer()
-                
-                Button {
-                    routerPath.navigate(to: .genresList(genres: currentAccount.genres))
-                } label: {
-                    Attribute(title: "Genres", count: currentAccount.genres.count)
-                }
-                .buttonStyle(.plain)
-                
-                Spacer()
-            }
-            .padding()
             
-            Button {
-              isEditingAccount = true
-            } label: {
-                Text("Edit Profile")
+            if viewModel.isCurrentUser {
+                HStack {
+                    Spacer()
+                    
+                    Button {
+                        routerPath.navigate(to: .tagsList(tags: currentAccount.tags))
+                    } label: {
+                        Attribute(title: "Tags", count: currentAccount.tags.count)
+                    }
+                    .buttonStyle(.plain)
+                    
+                    Spacer()
+                    
+                    Button {
+                        routerPath.navigate(to: .genresList(genres: currentAccount.genres))
+                    } label: {
+                        Attribute(title: "Genres", count: currentAccount.genres.count)
+                    }
+                    .buttonStyle(.plain)
+                    
+                    Spacer()
+                }
+                .padding()
+                
+                Button {
+                  isEditingAccount = true
+                } label: {
+                    Text("Edit Profile")
+                }
+                .buttonStyle(.borderedProminent)
             }
-            .buttonStyle(.borderedProminent)
-
             
             if let note = viewModel.relationship?.note, !note.isEmpty, !viewModel.isCurrentUser {
                 makeNoteView(note)
