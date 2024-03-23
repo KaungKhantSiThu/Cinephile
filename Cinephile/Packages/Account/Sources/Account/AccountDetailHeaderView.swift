@@ -118,7 +118,7 @@ struct AccountDetailHeaderView: View {
                     withAnimation {
                         routerPath.navigate(to: .followers(id: account.id))                    }
                 } label: {
-                    Attribute(title: "Following", count: account.followersCount ?? 0)
+                    Attribute(title: "Followers", count: account.followersCount ?? 0)
                 }
                 .buttonStyle(.plain)
             }

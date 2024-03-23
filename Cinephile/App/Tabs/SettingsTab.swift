@@ -131,15 +131,15 @@ struct SettingsTab: View {
                 Label("settings.general.browser", systemImage: "network")
             }
             
-            Toggle(isOn: $preferences.inAppBrowserReaderView) {
-                Label("settings.general.browser.in-app.readerview", systemImage: "doc.plaintext")
-            }
-            .disabled(preferences.preferredBrowser != PreferredBrowser.inAppSafari)
+//            Toggle(isOn: $preferences.inAppBrowserReaderView) {
+//                Label("settings.general.browser.in-app.readerview", systemImage: "doc.plaintext")
+//            }
+//            .disabled(preferences.preferredBrowser != PreferredBrowser.inAppSafari)
             #endif
             
-            Toggle(isOn: $preferences.isSocialKeyboardEnabled) {
-                Label("settings.other.social-keyboard", systemImage: "keyboard")
-            }
+//            Toggle(isOn: $preferences.isSocialKeyboardEnabled) {
+//                Label("settings.other.social-keyboard", systemImage: "keyboard")
+//            }
 //            Toggle(isOn: $preferences.soundEffectEnabled) {
 //                Label("settings.other.sound-effect", systemImage: "hifispeaker")
 //            }

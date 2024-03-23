@@ -259,6 +259,7 @@
       }
     },
     "settings.general.browser.in-app.readerview" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -296,6 +297,7 @@
       }
     },
     "settings.other.social-keyboard" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -509,6 +511,9 @@
     "Tell us what you like" : {
 
     },
+    "This product uses the TMDB API but is not endorsed or certified by TMDB." : {
+
+    },
     "timeline.entertainment" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -641,9 +646,6 @@
       }
     },
     "Unchecked" : {
-
-    },
-    "User ID: 12345678901" : {
 
     },
     "Username" : {

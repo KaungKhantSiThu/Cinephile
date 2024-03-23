@@ -25,54 +25,6 @@ struct PreferenceView: View {
                         .padding()
                                         
                     VStack {
-//                        NavigationLink(destination: Text("Destination View")) {
-//                           ZStack {
-//                               RoundedRectangle(cornerRadius: 10)
-//                                   .fill(Color.gray)
-//                                   .frame(height: 50)
-//                                   .shadow(color: Color.gray.opacity(0.5), radius: 5, x: 0, y: 2)
-//                               
-//                               HStack {
-//                                   Spacer()
-//                                   Text("Privacy Terms")
-//                                       .foregroundColor(.white)
-//                                       .font(.headline)
-//                                   
-//                                   Spacer()
-//                                   
-//                                   Image(systemName: "arrow.right.circle.fill")
-//                                       .foregroundColor(.white)
-//                                       .font(.system(size: 20))
-//                               }
-//                               .padding()
-//                           }
-//                        }
-//                        .padding([.leading, .trailing], 50)
-//
-//                        NavigationLink(destination: AboutView()) {
-//                            ZStack {
-//                                RoundedRectangle(cornerRadius: 10)
-//                                    .fill(Color.gray)
-//                                    .frame(height: 50)
-//                                    .shadow(color: Color.gray.opacity(0.5), radius: 5, x: 0, y: 2)
-//                                
-//                                HStack {
-//                                    Spacer()
-//                                    
-//                                    Text("Acknowledgements")
-//                                        .foregroundColor(.white)
-//                                        .font(.headline)
-//                                    
-//                                    Spacer()
-//                                    
-//                                    Image(systemName: "arrow.right.circle.fill")
-//                                        .foregroundColor(.white)
-//                                        .font(.system(size: 20))
-//                                }
-//                                .padding()
-//                            }
-//                        }
-//                        .padding([.leading, .trailing], 50)
                         
                         NavigationLink {
                             AboutView()
@@ -85,15 +37,15 @@ struct PreferenceView: View {
                         VStack {
                             Text("Sequel is made possible by these data sources")
                                 .foregroundColor(.secondary)
-                                .font(.system(size: 13))
+                                .font(.caption2)
                             
                             Image("tmdb_logo")
                                 .resizable()
                                 .frame(width: 30, height: 20)
                             
-                            Text("User ID: 12345678901")
+                            Text("This product uses the TMDB API but is not endorsed or certified by TMDB.")
                                 .foregroundColor(.secondary)
-                                .font(.system(size: 13))
+                                .font(.caption2)
                         }
                         .padding(.top, 50)
                     }
