@@ -77,7 +77,7 @@ struct GenresPicker: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         Task {
-                            let updatedGenres = await currentAccount.updateGenres(ids: selectedGenres)
+                            _ = await currentAccount.updateGenres(ids: selectedGenres)
                         }
 //                        print(selectedGenres)
                         dismiss()

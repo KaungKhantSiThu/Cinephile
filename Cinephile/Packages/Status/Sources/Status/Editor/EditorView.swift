@@ -79,6 +79,8 @@ extension StatusEditor {
                             .font(.scaledFootnote)
                             .foregroundStyle(.secondary)
                     }
+                    
+                    Spacer()
                 }
                 .padding(.horizontal, .layoutPadding)
             }

@@ -11,11 +11,11 @@ public extension Models.Visibility {
     case .pub:
       "globe.americas"
     case .unlisted:
-      "lock.open"
+      "moon"
     case .priv:
       "lock"
     case .direct:
-      "tray.full"
+      "at"
     }
   }
 

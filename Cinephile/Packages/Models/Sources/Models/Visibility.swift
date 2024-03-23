@@ -8,12 +8,12 @@
 import Foundation
 
 public enum Visibility: String, Codable, CaseIterable, Hashable, Equatable, Sendable {
-  case pub = "public"
-  case unlisted
-  case priv = "private"
-  case direct
+    case pub = "public"
+    case unlisted
+    case priv = "private"
+    case direct
     
-  public static func == (lhs: Visibility, rhs: Visibility) -> Bool {
-      lhs.rawValue == rhs.rawValue
+    public static func == (lhs: Visibility, rhs: Visibility) -> Bool {
+        lhs.rawValue == rhs.rawValue
     }
 }

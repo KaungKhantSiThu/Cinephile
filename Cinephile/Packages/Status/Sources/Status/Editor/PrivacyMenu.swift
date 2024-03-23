@@ -24,9 +24,9 @@ extension StatusEditor {
               } icon: {
                   Image(systemName: visibility.iconName)
               }
-              .accessibilityLabel("accessibility.editor.privacy.label")
-              .accessibilityValue(visibility.title)
-              .accessibilityHint("accessibility.editor.privacy.hint")
+//              .accessibilityLabel("accessibility.editor.privacy.label")
+//              .accessibilityValue(visibility.title)
+//              .accessibilityHint("accessibility.editor.privacy.hint")
             Image(systemName: "chevron.down")
           }
           .font(.scaledFootnote)

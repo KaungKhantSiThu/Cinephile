@@ -504,7 +504,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "direct"
+            "value" : "Specific"
           }
         }
       }
@@ -515,7 +515,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Follower"
+            "value" : "Followers"
           }
         }
       }
@@ -537,7 +537,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Unlisted"
+            "value" : "Quiet Public"
           }
         }
       }

@@ -99,12 +99,6 @@
     "accessibility.editor.button.spoiler" : {
 
     },
-    "accessibility.editor.privacy.hint" : {
-
-    },
-    "accessibility.editor.privacy.label" : {
-
-    },
     "accessibility.image.alt-text-%@" : {
 
     },
@@ -1218,7 +1212,14 @@
       }
     },
     "status.poll.hide-results" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hide results"
+          }
+        }
+      }
     },
     "status.poll.n-votes %lld" : {
       "localizations" : {
@@ -1267,7 +1268,14 @@
       }
     },
     "status.poll.show-results" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show results"
+          }
+        }
+      }
     },
     "status.post-from-%@" : {
       "localizations" : {
@@ -1365,7 +1373,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Private"
+            "value" : "Specific"
           }
         }
       }
@@ -1375,7 +1383,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Follower"
+            "value" : "Followers"
           }
         }
       }
@@ -1385,7 +1393,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Everyone"
+            "value" : "Public"
           }
         }
       }
@@ -1395,7 +1403,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Unlisted"
+            "value" : "Quiet Public"
           }
         }
       }
