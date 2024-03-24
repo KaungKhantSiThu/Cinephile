@@ -95,22 +95,8 @@ class FormViewModel: ObservableObject {
             .eraseToAnyPublisher()
     }
     
-//    private var isEmailNameValidPublisher: AnyPublisher<NameEmailStatus, Never> {
-//        Publishers.CombineLatest(isEmailValid, isUserNameValid)
-//            .map {
-//                if !$0 {
-//                    return NameEmailStatus.emailInvalid
-//                }
-//                if !$1 {
-//                    return NameEmailStatus.nameInvalid
-//                }
-//                return NameEmailStatus.valid
-//            }
-//            .eraseToAnyPublisher()
-//    }
-    
     private var isFormValidPublisher: AnyPublisher<Bool, Never> {
-        Publishers.CombineLatest3(isPasswordValidPublisher, isEmailValidPublisher, agreementPublisher)
+        Publishers.CombineLatest3(isEmailValidPublisher, isPasswordValidPublisher, agreementPublisher)
             .map { $0 == .valid && $1 == .valid && $2 == true}
             .eraseToAnyPublisher()
     }
@@ -192,6 +178,11 @@ enum EmailStatus {
 }
 
 enum UsernameStatus {
+    case invalid
+    case valid
+}
+
+enum NameEmailStatus {
     case invalid
     case valid
 }
