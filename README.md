@@ -9,7 +9,8 @@ An iOS Social Network app with media tracking features
 | UIKit  | Redis  | iTunes  |
 |   | Sidekiq  |   |
 
-38s long screen recording of the app
+![Cinephile](https://github.com/KaungKhantSiThu/Cinephile/assets/64033794/5ee37ad9-a1b9-4157-bcf1-93e0cc2649e1)
 
-https://github.com/KaungKhantSiThu/Cinephile/assets/64033794/3c420aa7-d68f-4ebf-8f25-d8394acd46e7
+https://github.com/KaungKhantSiThu/Cinephile/assets/64033794/c070fc1f-1ce4-4fb7-ad5c-cb13debd66ce
+
 
